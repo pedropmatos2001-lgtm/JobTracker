@@ -171,6 +171,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
     for u in [u for u, m in silent.items() if date.fromisoformat(m["first_seen"]).toordinal() < cutoff]:
         silent.pop(u)
 
+    only_for = {}                              # vaga -> perfis a que se destina (None = todos)
     # 1) recolher — uma fonte avariada nunca derruba as outras
     # Tempo máximo da execução (o GitHub cancela o workflow no limite e aí nada fica guardado):
     # passado o tempo, o que falta fica para a execução seguinte e o que já se fez é publicado.
@@ -213,6 +214,10 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)
+            if src.get("profiles"):          # fonte só para alguns perfis (ex.: ONG e organizações internacionais)
+                only_for.setdefault(j.uid, set()).update(src["profiles"])
+            else:
+                only_for[j.uid] = None           # também vem de uma fonte geral: vale para todos
 
     # 2) só o que ainda não vimos (pelo endereço e pela dupla empresa+título, entre fontes)
     # Cada vaga guarda que perfis já a avaliaram ("ev"). Um perfil acrescentado depois avalia as vagas que
@@ -223,10 +228,16 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         return set(meta.get("ev") or [first_id])
     seen_keys = {m["k"] for m in state["seen"].values() if m.get("k")}
     new_jobs, todo = [], {}
+    def allowed(u, pids):
+        o = only_for.get(u)
+        return [p for p in pids if o is None or p in o]
+    def not_for(u):                          # perfis a que esta vaga nunca se destina: contam como já avaliados
+        o = only_for.get(u)
+        return set() if o is None else set(all_ids) - o
     for u, j in all_jobs.items():
         if u in state["seen"]:
             old = state["seen"][u]
-            missing = [pid for pid in all_ids if pid not in evaluated(old)]
+            missing = allowed(u, [pid for pid in all_ids if pid not in evaluated(old)])
             if missing and old.get("why") not in ("fechada", "duplicada noutra fonte"):
                 todo[u] = missing
                 new_jobs.append(j)
@@ -237,7 +248,9 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             continue
         if k:
             seen_keys.add(k)
-        todo[u] = all_ids
+        todo[u] = allowed(u, all_ids)
+        if not todo[u]:
+            continue
         new_jobs.append(j)
     # as mais prometedoras pelo título primeiro: o limite de páginas de detalhe gasta-se onde vale a pena
     title_rx = []
@@ -255,7 +268,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         mine = [p for p in profiles if p["id"] in todo[j.uid]]
         first_seen = (old or {}).get("first_seen") or (silent.get(j.uid) or {}).get("first_seen") or today.isoformat()
         meta = {**(old or {}), "first_seen": first_seen, "k": dedupe_key(j),
-                "ev": sorted(evaluated(old) | set(todo[j.uid])) if old else list(todo[j.uid])}
+                "ev": sorted((evaluated(old) if old else set()) | set(todo[j.uid]) | not_for(j.uid))}
         whys = [cheap_filter(j, p["cfg"], today) for p in mine]
         if all(whys):                          # não interessa a nenhum perfil (dos que faltam)
             state["seen"][j.uid] = {**meta, "why": meta.get("why") if old else whys[0]}

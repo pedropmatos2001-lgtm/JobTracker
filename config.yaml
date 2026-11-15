@@ -6,10 +6,12 @@
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
 min_salary_eur: 30000          # Pedro: só muda por pelo menos 30 000 € brutos por ano (conta quando a vaga publica o salário)
 # Empresas que nunca interessam ao Pedro: já trabalha na Deloitte (GPS), e mudar para outra Big4 não é subir.
-company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b|hospitality|hotel|resort"
-company_exclude_label: "Deloitte, EY, PwC, KPMG e hotelaria"
+company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b|\\bStrategy ?&|hospitality|hotel|hot[ée]is|hoteleir|pousadas?\\b|resort"
+company_exclude_label: "Deloitte, EY, PwC (incl. Strategy&), KPMG e hotelaria"
 
 min_score: 5               # pontuação mínima (um tema forte no título ou dois temas no texto chegam)
+require_theme: true        # sem nenhum tema forte não passa (bónus de empresa + "manager" já não chegam)
+theme_focus: true          # e o tema tem de estar no título, ou haver dois temas (uma menção solta a "sustentabilidade" não chega)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
 max_age_days: 30           # ignora vagas publicadas há mais tempo (muitas ficam abertas um mês)
 max_detail_fetches: 300    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
@@ -34,15 +36,19 @@ title_exclude:
   - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
   # perfis técnicos / de TI (o teu perfil é transformação, processos, ESG, PMO, fundos):
   # engenheiros de tecnologia saem; engenheiros do ambiente, energia e sustentabilidade ficam
-  - "(software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|infrastructure|infraestrutura"
+  - "(software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes)"
   - "\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors"
   # tecnologia, IA e dados não são o teu perfil (negócio, operações, ambiente):
-  - "\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|\\bdata\\b|dados\\b|analytics|\\bBI\\b|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa"
-  - "accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|commercial excellence|content operations|hospitality|hotel"
+  - "\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital"
+  - "(?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel"
+  # ambiente e segurança / HSE não é o perfil do Pedro
+  - "seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention"
+  # funções administrativas, não qualificadas, de saúde, frota, logística e sistemas de gestão: nunca
+  - "(?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b"
   - "product (manager|owner|ops|development)|product management"
   - "\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar"
-  - "account manager|business development|comercial|customer (service|support)|apoio ao cliente|speaker"
-  - "t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|technician|manuten[çc][ãa]o|operador|operator"
+  - "account manager|key account|\\bKAM\\b|business development|comercial|commercial (manager|director|lead|analyst|specialist|officer|executive|coordinator)|customer (service|support|success)|apoio ao cliente|speaker"
+  - "t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|(?<!environmental )(?<!sustainability )technician|manuten[çc][ãa]o|operador|operator"
   - "sales|vendas|account executive|recruiter|driver|motorista|assistente"
 
 senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
@@ -54,20 +60,19 @@ keywords:
     # foco: negócio e operações — processos, organização, modelo operativo
     - {label: "Processos e melhoria contínua", examples: ["melhoria contínua", "lean", "BPMN", "process excellence"], pattern: "process (re-?)?engineering|reengenharia|process (excellence|improvement|optimi[sz]ation|manager|owner)|operational excellence|excel[êe]ncia operacional|melhoria (cont[íi]nua|de processos)|otimiza[çc][ãa]o de processos|\\blean\\b|six sigma|bpmn?\\b"}
     - {label: "Modelo operativo e organização", examples: ["modelo operativo", "desenho organizacional", "reestruturação", "change management"], pattern: "operating model|modelo operativo|target operating|organi[sz]ational (design|effectiveness|transformation|development)|desenho organizacional|reestrutura[çc][ãa]o|reorganiza|business transformation|transforma[çc][ãa]o (organizacional|do neg[óo]cio)|change management|gest[ãa]o da mudan[çc]a"}
-    - {label: "Gestão de operações", examples: ["operations manager", "business operations", "eficiência operacional", "gestão de ativos"], pattern: "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|asset management|gest[ãa]o de ativos"}
+    - {label: "Gestão de operações", examples: ["operations manager", "business operations", "eficiência operacional", "gestão de ativos"], pattern: "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|(physical|infrastructure|network|utility|engineering) asset management|asset management (plan|strategy|system)|\\biso 55000|gest[ãa]o de ativos (f[íi]sicos|de rede|de infraestruturas)"}
     # setor: sustentabilidade, ambiente e clima
     - {label: "Sustentabilidade e ESG", examples: ["ESG", "CSRD", "descarbonização", "economia circular"], pattern: "\\bcsrd\\b|\\besg\\b|\\bgri\\b|\\btcfd\\b|\\bghg\\b|sustainability|sustentabilidade|sustainable (development|finance|business|solutions|transition|operations)|decarboni[sz]|descarboniza|circular economy|economia circular|net[- ]zero|carbon (footprint|neutral|accounting|management|reduction|emissions)|pegada de carbono|neutralidade carb[óo]nica|taxonomia europeia|eu taxonomy|\\bESRS\\b|\\bCSDDD\\b"}
-    - {label: "Clima e ambiente", examples: ["alterações climáticas", "ambiente", "emissões", "biodiversidade"], pattern: "climate (change|action|risk|adaptation|mitigation|strategy|policy|finance)|alterações clim[áa]ticas|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|adapta[çc][ãa]o clim[áa]tica|environmental (management|impact|assessment|compliance|consult|policy|performance|reporting|sustainability|strategy|manager|specialist|engineer|science)|gest[ãa]o ambiental|impacte ambiental|licenciamento ambiental|consultor[a]? ambiental|t[ée]cnic[oa] (de|superior de) ambiente|ambiente e (clima|sustentabilidade|energia|territ[óo]rio)|meio ambiente|biodivers|natural capital|capital natural|nature[- ]positive|emiss(ions|[õo]es) (de|of|reduction|redu[çc][ãa]o)|iso 14001|\\blca\\b|life cycle assessment|an[áa]lise de ciclo de vida"}
+    - {label: "Clima e ambiente", title_pattern: "\\bambiente\\b|\\benvironment(al)?\\b|\\bambiental\\b|\\bclima\\b|\\bclimate\\b", examples: ["alterações climáticas", "ambiente", "emissões", "biodiversidade"], pattern: "climate (change|action|risk|adaptation|mitigation|strategy|policy|finance)|alterações clim[áa]ticas|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|adapta[çc][ãa]o clim[áa]tica|environmental (management|impact|assessment|compliance|consult|policy|performance|reporting|sustainability|strategy|manager|specialist|engineer|science)|gest[ãa]o ambiental|impacte ambiental|licenciamento ambiental|consultor[a]? ambiental|t[ée]cnic[oa] (de|superior de) ambiente|ambiente e (clima|sustentabilidade|energia|territ[óo]rio)|meio ambiente|biodivers|natural capital|capital natural|nature[- ]positive|emiss(ions|[õo]es) (de|of|reduction|redu[çc][ãa]o)|iso 14001|\\blca\\b|life cycle assessment|an[áa]lise de ciclo de vida"}
     # ambiente + tecnologia, smart cities e mobilidade
     - {label: "Smart cities e mobilidade", examples: ["smart cities", "mobilidade", "transporte público", "GIS"], pattern: "smart cit|cidades? inteligentes?|urban (mobility|planning|analytics)|mobilidade|e-?mobility|transporte p[úu]blico|ferrovi|cleantech|climate tech|greentech|environmental (data|technology)|\\bgis\\b|geospatial|georreferenc"}
     - {label: "Utilities: energia, água e resíduos", examples: ["utilities", "transição energética", "água e saneamento", "resíduos"], pattern: "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"}
     - {label: "PMO e programas", examples: ["PMO", "program manager", "transformation office"], pattern: "pmo|program(me)? manage|transformation (manager|lead|office)"}
-    - {label: "Fundos europeus", examples: ["fundos europeus", "PRR", "Portugal 2030", "Horizon Europe"], pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
-    - {label: "Consultoria ao setor público", examples: ["Government & Public Services", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
+    - {label: "Fundos europeus", title_pattern: "\\bfundos\\b|\\bfunding\\b|\\bgrants?\\b|\\bincentivos\\b|candidaturas", examples: ["fundos europeus", "PRR", "Portugal 2030", "Horizon Europe"], pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
+    - {label: "Consultoria ao setor público", examples: ["Government & Public Services", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\(GPS\\)|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica"}
+    - {label: "Consultoria de gestão e estratégia", examples: ["consultor de gestão", "management consultant", "strategy & operations"], pattern: "management consult|strategy consult|consultor[a]? (s[ée]nior )?(de |em )?(gest[ãa]o|estrat[ée]gi|organiza)|consultoria (de|em) (gest[ãa]o|estrat[ée]gia|organiza)|strategy (and|&) operations|estrat[ée]gia e opera[çc][õo]es"}
     - {label: "CCDR e modernização administrativa", examples: ["CCDR", "desenvolvimento regional", "modernização administrativa"], pattern: "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"}
-  medium:                  # +1 cada (tecnologia e IA contam, mas como complemento)
-    - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|genai|generative ai|ia generativa"
-    - "digital transformation|transforma[çc][ãa]o digital|automation|automatiza"
+  medium:                  # +1 cada (tecnologia e IA já não somam: o Pedro não quer funções de tecnologia)
     - "strategy|estrat[ée]gia"
     - "kpi|performance management|indicadores|power bi"
     - "stakeholder"
@@ -75,11 +80,17 @@ keywords:
   negative:                # -3 cada
     - "(sales|on|plus|\\+) commissions?\\b|commission[- ]based|comiss[õo]es (de vendas|sobre vendas)|comiss[ãa]o de vendas|cold call|sales quota"
     - "call center|contact center"
+    # tecnologia na descrição (o título pode não o dizer: "Project Manager", "Process Consultant", "PMO")
+    - "software (development|engineering|implementation|solutions|platform)|desenvolvimento de software|implementa[çc][ãa]o de (software|sistemas|solu[çc][õo]es digitais)|\\bSAP\\b|S/?4 ?HANA|\\bERP\\b|\\bpython\\b|\\bsql\\b|programming|programa[çc][ãa]o"
+    - "cloud|data (pipelines?|engineering|migration)|migra[çc][ãa]o de dados|machine learning|artificial intelligence|intelig[êe]ncia artificial|generative ai|\\bgenai\\b|\\bRPA\\b|low[- ]?code|\\bIoT\\b|telematics|telem[áa]tica|\\bSaaS\\b|sistemas de informa[çc][ãa]o|information systems|arquitetura tecnol|cyber|ciberseguran"
+    # banca de operações e logística
+    - "back[- ]?office|\\bKYC\\b|\\bAML\\b|payments processing|(?<!reverse )logistics|log[íi]stica(?! inversa)|last[- ]mile|[úu]ltima milha|estafeta|warehouse|armaz[ée]ns?\\b|picking"
+    - "\\bBig ?(4|Four)\\b"
 
 # Empresas e setores que preferes (utilities, energia, água, resíduos): +4 pelo nome da empresa ou título.
 sector_bonus:                # empresa ou título de utilities, energia, água, resíduos, ambiente e sustentabilidade
   points: 4
-  pattern: "\\bEDP\\b|E-REDES|\\bGalp\\b|\\bREN\\b|Redes Energ[ée]ticas|Iberdrola|Endesa|Engie|Greenvolt|Lightsource|Hyperion|Voltalia|Ørsted|Orsted|[ÁA]guas de Portugal|\\bAdP\\b|\\bEPAL\\b|[ÁA]guas do|Indaqua|\\bBe Water|\\bLIPOR\\b|Valorsul|\\bEGF\\b|\\bSUMA\\b|Ambiente|\\bERSAR\\b|\\bERSE\\b|\\bADENE\\b|Floene|Goldenergy|Tejo Energia|utilit|\\benerg|ambiental|environmental|sustainab|sustentab|\\bESG\\b|climat|clim[áa]tic|descarboniz|decarboni|economia circular|circular economy|\\bnature\\b|natureza|biodivers|natural capital|capital natural|\\bLCA\\b|life cycle"
+  pattern: "\\bEDP\\b|E-REDES|\\bGalp\\b|\\bREN\\b|Redes Energ[ée]ticas|Iberdrola|Endesa|Engie|Greenvolt|Lightsource|Hyperion|Voltalia|Ørsted|Orsted|[ÁA]guas de Portugal|\\bAdP\\b|\\bEPAL\\b|[ÁA]guas do|Indaqua|\\bBe Water|\\bLIPOR\\b|Valorsul|\\bEGF\\b|\\bSUMA\\b|Ambiente|\\bERSAR\\b|\\bERSE\\b|\\bADENE\\b|Floene|Goldenergy|Tejo Energia|utilit|\\benerg|ambiental|environmental|sustainab|sustentab|\\bESG\\b|\\bclimate\\b|clim[áa]tic|descarboniz|decarboni|economia circular|circular economy|\\bnature\\b|natureza|biodivers|natural capital|capital natural|\\bLCA\\b|life cycle"
 
 # --- empresas-alvo do Pedro -------------------------------------------------
 # Lista mínima de empresas que o tracker tem de cobrir. Duas coisas acontecem:
@@ -222,7 +233,7 @@ profiles:
     email_env: EMAIL_TO_MARIA
     profile_env: CANDIDATE_PROFILE_MARIA
     rules:
-      sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      sector_bonus: {points: 1}                   # o bónus de utilities é só do Pedro; empresas-alvo da Maria só +1 (contexto, não prioridade)
       min_salary_eur: 0                           # a Maria não tem salário mínimo
       company_exclude: ""                         # a exclusão das Big4 é só do Pedro
       company_exclude_label: ""
@@ -253,13 +264,17 @@ profiles:
             - {name: "CEDRU", match: "\\bCEDRU\\b"}
             - "Ecorys"
             - {name: "Vinces", match: "\\bVinces\\b"}
+            - {name: "Leadership Business Consulting", match: "Leadership Business Consulting"}
+            - {name: "SPI", match: "\\bSPI\\b|Sociedade Portuguesa de Inova"}
+            - {name: "INOVA+", match: "INOVA ?\\+"}
+            - "Civitta"
       target_role_titles: "business analyst|analista de neg[óo]cio|\\banalyst\\b|analista|associate|consultant|consultor[a]?"
       target_role_label: "Consultoria de gestão e estratégia"
       require_theme: true                         # só passam vagas com pelo menos um dos temas abaixo
       theme_focus: true                           # e o tema tem de estar no título, ou haver dois temas diferentes
       min_score: 4                                # com require_theme, basta um tema forte e algum contexto
       years: {min: 0, stretch_from: 4, max: 5}   # cerca de 3 anos de experiência
-      senior_title: "head of|director|diretor|principal\\b|vp\\b|chief"
+      senior_title: "head of|director|diretor|principal\\b|vp\\b|chief|s[ée]nior|\\bsr\\.?\\s"
       senior_bonus: -3                            # cargos muito acima perdem pontos
       title_exclude:
         - "candidatura espont[âa]nea|spontaneous application"
@@ -268,40 +283,45 @@ profiles:
         - "\\bSAP\\b|salesforce|dynamics 365|servicenow"
         - "business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center"
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
-        - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
+        - "\\bincentiv|\\bSIFIDE\\b|\\bRFAI\\b|tax (consultant|advisor|manager)"
         - "\\btax\\b|fiscal|impostos|\\biva\\b|\\bvat\\b|transfer pricing|pre[çc]os de transfer|contabil|accounting|accountant|auditor|\\baudit\\b|auditoria|assurance|payroll|processamento salarial|actuar|tesouraria|treasury"
         - "\\bIT\\b|\\bSAP\\b|\\bERP\\b|\\bCRM\\b|cyber|ciberseguran|data engineer|cloud|infrastructure|infraestrutura|servicenow|oracle|microsoft dynamics|d365"
+        # funções administrativas, não qualificadas, de saúde, frota, logística e sistemas de gestão: nunca
+        - "administrativ|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|cl[íi]nica|hospital|farm[áa]cia|enfermag|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager"
         # nada de tecnologia para a Maria: IA, dados, digital, automação, sistemas
-        - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b|dados\\b|analytics|\\bBI\\b|power bi|digital|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery)"
+        - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
+        - "^(?!.*(assistant|assistente|advis|assessor|parlament|office)).*\\bMEP\\b"   # MEP de construção (AVAC/eletricidade), não eurodeputado
         - "turismo|modelador|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label|ai training|ai trainer|treino de ia"
       keywords:
         strong_cap: 14
+        medium_cap: 3                              # contexto conta pouco: a prioridade vem dos temas
         strong:
           - {label: "Políticas públicas", points: 5, examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
           - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
-          - {label: "Avaliação e monitorização de políticas", points: 5, examples: ["monitoring & evaluation", "avaliação de impacto", "policy appraisal", "análise de políticas"], pattern: "monitoring (and|&) evaluation|\\bM&E\\b|\\bMEAL\\b|impact evaluation|avalia[çc][ãa]o de impacto|policy (appraisal|evaluation|assessment)|avalia[çc][ãa]o de pol[íi]ticas|programme evaluation|avalia[çc][ãa]o de programas|evidence[- ]based polic|pol[íi]ticas baseadas em evid[êe]ncia|\\bPlanAPP\\b|prospetiva|foresight"}
-          - {label: "Desenvolvimento e políticas de emprego", points: 5, examples: ["desenvolvimento internacional", "políticas de emprego", "OIT", "economia do desenvolvimento"], pattern: "development econom|economia do desenvolvimento|labou?r market polic|pol[íi]ticas (ativas )?de emprego|mercado de trabalho|informal (labou?r|economy|employment)|economia informal|\\bILO\\b|\\bOIT\\b|social protection|prote[çc][ãa]o social|poverty reduction|redu[çc][ãa]o da pobreza|\\bSDGs?\\b|\\bODS\\b|sustainable development goals|objetivos de desenvolvimento sustent[áa]vel"}
-          - {label: "Consultoria de gestão e estratégia", points: 2, examples: ["consultora de gestão", "strategy consultant", "business consultant", "transformação organizacional"], pattern: "(management|business|strategy|strategic|transformation|organi[sz]ational|operations|governance|risk|change|process|sustainability|esg|public sector|policy) (consult|advisory|advisor)|consultor[a]? (j[úu]nior |s[ée]nior )?(de |em )?(gest[ãa]o|neg[óo]cio|estrat[ée]gi|organiza|processos|transforma|sustentabilidade|risco|governa)|consultoria (de|em) (gest[ãa]o|estrat[ée]gia|neg[óo]cio|organiza)|\\b(junior |senior )?consultant\\b|\\bconsultor[a]?\\b|management consulting|consulting (projects?|firm|clients|engagements)|projetos de consultoria|strategy (and|&) operations"}
-          - {label: "Assessoria política e parlamentar", points: 5, examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament"}
-          - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
+          - {label: "Avaliação e monitorização de políticas", points: 5, examples: ["monitoring & evaluation", "avaliação de impacto", "policy appraisal", "análise de políticas"], pattern: "monitoring (and|&) evaluation|\\bM&E\\b|\\bMEAL\\b|impact evaluation|avalia[çc][ãa]o de impacto|policy (appraisal|evaluation|assessment)|avalia[çc][ãa]o de pol[íi]ticas|programme evaluation|avalia[çc][ãa]o de programas|evidence[- ]based polic|pol[íi]ticas baseadas em evid[êe]ncia|\\bPlanAPP\\b|prospetiva|foresight|evaluation (consultant|officer|specialist|expert|analyst)|avaliador[a]? de (pol[íi]ticas|programas|projetos)"}
+          - {label: "Desenvolvimento e políticas de emprego", points: 5, examples: ["desenvolvimento internacional", "políticas de emprego", "OIT", "economia do desenvolvimento"], pattern: "development econom|economia do desenvolvimento|labou?r market polic|employment (and social )?polic|social polic|decent work|trabalho digno|pol[íi]ticas (ativas )?de emprego|mercado de trabalho|informal (labou?r|economy|employment)|economia informal|\\bILO\\b|\\bOIT\\b|social protection|prote[çc][ãa]o social|poverty reduction|redu[çc][ãa]o da pobreza|\\bSDGs?\\b|\\bODS\\b|sustainable development goals|objetivos de desenvolvimento sustent[áa]vel"}
+          - {label: "Consultoria de gestão e estratégia", points: 2, examples: ["consultora de gestão", "strategy consultant", "business consultant", "transformação organizacional"], pattern: "(management|business|strategy|strategic|transformation|organi[sz]ational|operations|governance|change|process|sustainability|esg|public sector|policy|evaluation) (consult|advisory|advisor)|consultor[a]? (j[úu]nior |s[ée]nior )?(de |em )?(gest[ãa]o|neg[óo]cio|estrat[ée]gi|organiza|processos|transforma|sustentabilidade|risco|governa)|consultoria (de|em) (gest[ãa]o|estrat[ée]gia|neg[óo]cio|organiza)|(junior|associate) consultant|consultor[a]? j[úu]nior|consulting (analyst|associate)|management consulting|consulting (projects?|firm|clients|engagements)|projetos de consultoria|strategy (and|&) operations"}
+          - {label: "Assessoria política e parlamentar", points: 6, examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant|communication)|comunica[çc][ãa]o pol[íi]tica|assessoria pol[íi]tica|assessor[a]? de comunica[çc][ãa]o pol|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament|assistant to (an? |the )?MEPs?\\b|\\bMEP'?s? (assistant|office|adviser|advisor)|accredited parliamentary|acompanhamento legislativo|processo legislativo|legislative (monitoring|developments|process|affairs|agenda)|agenda legislativa"}
+          - {label: "Liberdades, justiça e Estado de direito", points: 6, examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|igualdade e n[ãa]o[- ]discrimina|equality and non-discrimination|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b|\\badvocacy\\b"}
-          - {label: "Assuntos europeus", points: 5, examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|\\bEU (institutions|policy|policies|legislation|law)\\b|institui[çc][õo]es europeias|pol[íi]ticas europeias|legisla[çc][ãa]o europeia|member of the european parliament|eurodeputad"}
+          - {label: "Assuntos europeus", points: 6, examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|\\bEU (institutions|policy|policies|legislation|law)\\b|institui[çc][õo]es europeias|pol[íi]ticas europeias|legisla[çc][ãa]o europeia|member of the european parliament|eurodeputad"}
           - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Horizon Europe", "concursos da Comissão Europeia", "gestão de candidaturas"], pattern: "eu[- ]funded|funded by the (eu|european union)|financiad[oa]s? pel[ao] (ue|uni[ãa]o europeia)|projetos? europeus?|european projects?|eu projects?|horizon europe|horizonte europa|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|creative europe|europa criativa|gestor[a]? de projetos? europeus?|eu project (manager|officer|coordinator)|grant (manager|management|writer|writing)|proposal (writer|writing|manager)|candidaturas? a (programas|projetos|fundos) europeus|eu tenders?|tenders? (for|of) the european commission|framework contracts?|contratos?[- ]quadro|europeaid|technical assistance|assist[êe]ncia t[ée]cnica|directorate[- ]general|\\bDG [A-Z]{2,6}\\b|eu institutions? (clients?|practice|team)|european institutions|institui[çc][õo]es europeias|fundos europeus|fundos estruturais|structural funds|\\bPRR\\b|portugal 2030|cohesion polic|pol[íi]tica de coes[ãa]o|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional|projetos de coopera[çc][ãa]o|cooperation projects|t[ée]cnic[oa] de coopera[çc][ãa]o"}
-          - {label: "Direitos humanos", examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
+          - {label: "Direitos humanos", points: 5, examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
           - {label: "Infância e juventude", examples: ["proteção de crianças", "juventude", "UNICEF", "CPCJ"], pattern: "child protection|children'?s rights|direitos da crian[çc]a|prote[çc][ãa]o (de|das) (crian[çc]as|menores)|prote[çc][ãa]o (à|da) inf[âa]ncia|crian[çc]as e jovens em risco|crian[çc]as em risco|safeguarding children|child welfare|\\bunicef|\\bCPCJ|youth (policy|participation|rights)|pol[íi]ticas de juventude|associa[çc][ãa]o juvenil"}
-          - {label: "Igualdade de género", examples: ["igualdade de género", "violência doméstica", "direitos das mulheres"], pattern: "gender equality|igualdade de g[ée]nero|gender mainstreaming|women'?s rights|direitos das mulheres|women'?s empowerment|empoderamento|viol[êe]ncia dom[ée]stica|domestic violence|gender-based violence|viol[êe]ncia de g[ée]nero|\\bCIG\\b|\\bUN Women"}
-          - {label: "Inclusão e proteção", examples: ["refugiados", "migrantes", "inclusão social", "apoio a vítimas"], pattern: "refugiad|refugee|asylum|asilo|migrantes|migrants|integra[çc][ãa]o de migrantes|tr[áa]fico de seres humanos|human trafficking|exclus[ãa]o social|inclus[ãa]o social|social inclusion|pobreza|poverty|sem-abrigo|homeless|v[íi]timas de|victims of|\\bAPAV|\\bACNUR|\\bUNHCR|\\bOIM\\b|\\bAIMA\\b"}
+          - {label: "Igualdade de género", examples: ["igualdade de género", "violência doméstica", "direitos das mulheres"], pattern: "gender equality|igualdade de g[ée]nero|gender mainstreaming|women'?s rights|direitos das mulheres|women'?s empowerment|empoderamento|viol[êe]ncia dom[ée]stica|domestic violence|gender-based violence|viol[êe]ncia de g[ée]nero|\\bCIG\\b|\\bUN Women|gender[- ]responsive|responsiv[oa] ao g[ée]nero|plano municipal para a igualdade"}
+          - {label: "Inclusão e proteção", points: 5, examples: ["refugiados", "migrantes", "inclusão social", "apoio a vítimas"], pattern: "refugiad|refugee|asylum|asilo|migrantes|migrants|integra[çc][ãa]o de migrantes|tr[áa]fico de seres humanos|human trafficking|exclus[ãa]o social|inclus[ãa]o social|social inclusion|pobreza|poverty|sem-abrigo|homeless|v[íi]timas de|victims of|\\bAPAV|\\bACNUR|\\bUNHCR|\\bOIM\\b|\\bAIMA\\b"}
         medium:
-          - "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"                               # setor público: contexto, sozinho não chega
-          - "research|investiga[çc][ãa]o|analyst|analista|project officer|gestor de projeto|project manager"
+          - "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlament|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"                               # setor público: contexto, sozinho não chega
+          - "research|investiga[çc][ãa]o|project officer|programme officer|program officer|gestor[a]? de projeto|project manager"   # "analyst" sozinho não é contexto
           - "stakeholder|advocacy|sensibiliza[çc][ãa]o"
           - "fundos europeus|eu funds|grant agreement|candidaturas a programas europeus"
           - "ong\\b|ngo\\b|non-profit|sem fins lucrativos|funda[çc][ãa]o"
-          - "power bi|stata|excel"
+          - "\\bstata\\b|\\bspss\\b|econometr|nvivo|m[ée]todos (quantitativos|qualitativos)|mixed methods"
         negative:
           - "(sales|on|plus|\\+) commissions?\\b|commission[- ]based|comiss[õo]es (de vendas|sobre vendas)|comiss[ãa]o de vendas|cold call|sales quota"
           - "call center|contact center"
+          - "sistemas? de incentivos|incentivos (do|ao|às|as) (portugal 2030|prr|empresas|investimento)|candidaturas? a incentivos|\\bRFAI\\b|\\bSI ?I&D|vale (inova[çc][ãa]o|i&dt)"
           - "incentivos? (fiscais|financeiros|ao investimento)|benef[íi]cios fiscais|tax incentive|\\bSIFIDE\\b|r&d tax|cr[ée]dito fiscal|consultor[a]? de incentivos|incentive consult"
           - "software (development|engineering)|programming|programa[çc][ãa]o|\\bpython\\b|\\bjava\\b|\\bsql\\b|cloud (platform|migration|architecture)|\\bSAP\\b|data engineering|machine learning|artificial intelligence|intelig[êe]ncia artificial|\\bIT (systems|solutions|consulting)\\b"
 
@@ -434,6 +454,7 @@ sources:
   # relevantes, por isso leem até 100 resultados por termo e os últimos 30 dias.
   - type: linkedin
     name: "LinkedIn (ambiente e sustentabilidade)"
+    profiles: [pedro]                # só para o Pedro
     location: Portugal
     hours: 720
     max_per_query: 100
@@ -452,6 +473,7 @@ sources:
   # Núcleo da Maria: política, assuntos europeus, direitos e projetos europeus. Até 100 resultados e 30 dias.
   - type: linkedin
     name: "LinkedIn (política e assuntos europeus)"
+    profiles: [maria]                # só para a Maria
     location: Portugal
     hours: 720
     max_per_query: 100
@@ -482,6 +504,7 @@ sources:
   # remoto quando a vaga diz Europa/UE/Portugal; vagas remotas presas a outro país ficam de fora.
   - type: linkedin
     name: "LinkedIn (remoto UE)"
+    profiles: [maria]                # só para a Maria
     location: "European Union"
     remote: true
     hours: 168
@@ -543,17 +566,19 @@ sources:
   # missões no terreno (médicos, farmacêuticos, logística) ou voluntariado: essas saem logo pelo título.
   - type: ongd
     name: "Plataforma ONGD"
+    profiles: [maria]                # só para a Maria
     title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
   # Agências da UE com sede em Lisboa: poucas vagas por ano, mas são instituições europeias.
   # Desligada: o site da EUDA recusa pedidos automáticos (HTTP 403). Não se contorna; ver à mão em euda.europa.eu/about/jobs_en.
   - type: eu_agency
     enabled: false
     name: "EUDA (agência europeia, Lisboa)"
+    profiles: [maria]                # só para a Maria
     company: "EUDA"
     layout: euda
     url: "https://www.euda.europa.eu/about/jobs_en"
   - type: eu_agency
-    name: "EMSA (agência europeia, Lisboa)"
+    name: "EMSA (agência europeia, Lisboa)"   # para os dois: tem vagas de descarbonização dos transportes
     company: "EMSA"
     layout: emsa
     url: "https://www.emsa.europa.eu/jobs/vacancies.html"
@@ -563,6 +588,7 @@ sources:
   # (OIM Lisboa, AKDN, KAICIID, ILO, MSF…). Página simples: as ligações /vacancies/<n> são as vagas.
   - type: page_watch
     name: "UNjobs (Portugal)"
+    profiles: [maria]                # só para a Maria
     url: "https://unjobs.org/duty_stations/portugal"
     url_regex: "/vacancies/\\d"
     link_regex: "."
@@ -571,6 +597,7 @@ sources:
   # Universidade das Nações Unidas (UNU-EGOV, Guimarães): Recruitee com domínio próprio, só ofertas em Portugal.
   - type: recruitee
     name: "UNU (Guimarães)"
+    profiles: [maria]                # só para a Maria
     company: "unu"
     host: "careers.unu.edu"
     country: "PT"
@@ -580,6 +607,7 @@ sources:
   - type: rss
     enabled: false
     name: "ReliefWeb (remoto)"
+    profiles: [maria]                # só para a Maria
     url: "https://reliefweb.int/jobs/rss.xml?view=unspecified-location"
     location: "Remote"
     remote: true
@@ -587,6 +615,7 @@ sources:
   # EuroBrussels: assuntos europeus, public affairs e ONG em Bruxelas; aqui só a lista de vagas remotas.
   - type: page_watch
     name: "EuroBrussels (remoto)"
+    profiles: [maria]                # só para a Maria
     url: "https://www.eurobrussels.com/jobs/remote"
     url_regex: "/job_display/\\d+"
     link_regex: "."

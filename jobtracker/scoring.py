@@ -159,7 +159,10 @@ BOILERPLATE = re.compile(
     r"inclusive (workplace|culture|environment)|we('| a)re committed to|we celebrate|we welcome applications|"
     r"reasonable accommodation|veteran|disabilit|igualdade de oportunidades|independentemente d|sem discrimina|"
     r"diversidade|inclus(ivo|iva|ão) (e|no) (ambiente|local)|privacy|privacidade|personal data|dados pessoais|"
-    r"benefits|benef[íi]cios|we offer|oferecemos|parental leave|licen[çc]a parental|"
+    r"benefits (package|include)|employee benefits|(pacote|plano) de benef[íi]cios|benef[íi]cios (sociais|flex[íi]veis|de sa[úu]de|"
+    r"competitivos|para colaboradores)|health insurance|seguro de sa[úu]de|what we offer|o que oferecemos|we offer( you)?\s*[:\-]|"
+    r"oferecemos\s*[:\-]|we offer (you )?(a |an )?(competitive|attractive|flexible|hybrid|great)|oferecemos (um |uma )?(pacote|sal[áa]rio|"
+    r"remunera|seguro|forma[çc][ãa]o|integra[çc][ãa]o|possibilidade|contrato|progress|regime|hor[áa]rio)|parental leave|licen[çc]a parental|"
     r"cofinanciad|co-financiad|co-funded by|cofinanced", re.I)
 
 
@@ -209,13 +212,17 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     for item in kw.get("strong", []):
         pat = pat_of(item)
         rx = re.compile(pat, re.I)
-        if rx.search(theme_text):
+        # `title_pattern` (opcional): palavras que no título bastam para o tema, mas no texto seriam genéricas
+        # ("Engenheiro do Ambiente", "Innovation Consultant Environment"), sem as procurar na descrição.
+        trx = re.compile(item["title_pattern"], re.I) if isinstance(item, dict) and item.get("title_pattern") else None
+        in_title = bool(rx.search(job.title) or (trx and trx.search(job.title)))
+        if rx.search(theme_text) or in_title:
             pts = item.get("points", 3) if isinstance(item, dict) else 3     # temas prioritários valem mais
             strong_pts += pts
             n_themes += 1
             if len({m.group(0).lower() for m in rx.finditer(theme_text)}) >= 2:
                 deep_theme = True                     # o mesmo tema com várias provas diferentes
-            if rx.search(job.title):
+            if in_title:
                 strong_pts += 2
                 title_theme = True
             v.reasons.append(f"+ {label_of(item) or pat}")
@@ -276,7 +283,7 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     v.score = score
     if cfg.get("require_theme") and not strong_pts:
         v.include = False
-        v.excluded_by = "sem nenhum dos temas do perfil"
+        v.excluded_by = f"sem nenhum dos temas do perfil (pontuação {score})"
         return v
     # Foco: um tema solto numa frase do anúncio (rodapé "cofinanciado por…", "foresight", "assistance") não chega.
     # A vaga tem de ter um tema no título ou pelo menos dois temas diferentes na descrição.
