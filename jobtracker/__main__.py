@@ -2,8 +2,10 @@
 import argparse
 import json
 import os
+import re
 import sys
-from datetime import date
+import unicodedata
+from datetime import date, datetime, timezone
 
 import requests
 import yaml
@@ -16,8 +18,21 @@ from .models import Job
 from .scoring import cheap_filter, evaluate
 
 
+def dedupe_key(job):
+    """Empresa + título normalizados: a mesma vaga no LinkedIn, no Indeed e no site da empresa conta uma vez."""
+    def norm(x):
+        x = unicodedata.normalize("NFKD", x or "").encode("ascii", "ignore").decode().lower()
+        x = re.sub(r"\(.*?\)", " ", x)                    # "EDP (Porto)" -> "edp"
+        x = re.sub(r"\b(m/f|h/m|f/m|m/w|all genders?)\b", " ", x)
+        x = re.sub(r"\b(s\.?a|lda|unipessoal|sgps|group|grupo|portugal)\b", " ", x)
+        return " ".join(re.sub(r"[^a-z0-9]+", " ", x).split())
+    c, t = norm(job.company), norm(job.title)
+    return f"{c}|{t}" if c and t else ""
+
+
 def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=None,
-        send=None, dry_run=False, judge_fn=None, kit_fn=None, candidate_text=None):
+        send=None, dry_run=False, judge_fn=None, kit_fn=None, candidate_text=None, main_run=True):
+    """main_run=False nas execuções extra do dia (ex.: à tarde): não repete "estou vivo" nem o radar."""
     session = session or requests.Session()
     fetch = fetch or (lambda src: sources.fetch_source(src, session, env))
     detail = detail or (lambda job: sources.fetch_detail(job, session))
@@ -53,8 +68,9 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
     for src in cfg.get("sources", []):
         name = src.get("name") or src.get("type")
         h = state["health"].setdefault(name, {"fail_streak": 0, "last_ok": ""})
+        ctx = {**src, "_known": state["seen"].keys(), "_cursor": state["cursors"].get(name)}
         try:
-            jobs = fetch(src)
+            jobs = fetch(ctx)
         except sources.SourceSkipped as e:
             report.append(f"{name}: ignorada ({e})")
             continue
@@ -65,32 +81,64 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                 health_alerts.append(f"{name}: {h['fail_streak']} falhas seguidas ({e})")
             continue
         h["fail_streak"], h["last_ok"] = 0, today.isoformat()
-        report.append(f"{name}: ok, {len(jobs)} vagas")
+        if getattr(jobs, "cursor", None) is not None:
+            state["cursors"][name] = jobs.cursor
+        note = getattr(jobs, "note", "")
+        report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)
 
-    # 2) só o que ainda não vimos
-    new_jobs = [j for u, j in all_jobs.items() if u not in state["seen"]]
+    # 2) só o que ainda não vimos (pelo endereço e pela dupla empresa+título, entre fontes)
+    seen_keys = {m["k"] for m in state["seen"].values() if m.get("k")}
+    new_jobs = []
+    for u, j in all_jobs.items():
+        if u in state["seen"]:
+            continue
+        k = dedupe_key(j)
+        if k and k in seen_keys:
+            state["seen"][u] = {"first_seen": today.isoformat(), "why": "duplicada noutra fonte", "k": k}
+            continue
+        if k:
+            seen_keys.add(k)
+        new_jobs.append(j)
+    # as mais prometedoras pelo título primeiro: o limite de páginas de detalhe gasta-se onde vale a pena
+    kw = cfg.get("keywords", {})
+    title_rx = [re.compile(p, re.I) for p in kw.get("strong", []) + kw.get("medium", [])]
+    title_rx.append(re.compile(cfg.get("senior_title", "senior|manager|lead"), re.I))
+    new_jobs.sort(key=lambda j: -sum(1 for rx in title_rx if rx.search(j.title or "")))
     stats = {"seen": len(all_jobs), "new": len(new_jobs), "passed": 0}
+    li_fail = 0                                # falhas seguidas no detalhe do LinkedIn
 
     # 3) filtro barato -> detalhe (descrição completa, confirma que está aberta) -> pontuação
     matches, budget = [], cfg.get("max_detail_fetches", 60)
     for j in new_jobs:
-        meta = {"first_seen": today.isoformat()}
+        meta = {"first_seen": today.isoformat(), "k": dedupe_key(j)}
         why = cheap_filter(j, cfg, today)
         if why:
             state["seen"][j.uid] = {**meta, "why": why}
             continue
-        if sources.needs_detail(j):
+        is_li = "linkedin_id" in (j.extra or {})
+        if sources.needs_detail(j) and is_li and li_fail >= 3:
+            j.partial = True                  # LinkedIn está a limitar: avalia só pelo cartão (título)
+        elif sources.needs_detail(j):
             if budget <= 0:
-                continue                      # fica por ver; tenta amanhã
+                continue                      # fica por ver; tenta na próxima execução
             budget -= 1
             orig = j
             try:
                 j = detail(orig)
             except Exception as e:
-                report.append(f"detalhe falhou ({orig.company}): {e}")
-                continue                      # tenta amanhã
+                if not is_li:
+                    report.append(f"detalhe falhou ({orig.company}): {e}")
+                    continue                  # tenta na próxima execução
+                li_fail += 1
+                if li_fail == 3:
+                    report.append(f"LinkedIn a limitar o detalhe ({e}): restantes avaliadas só pelo título")
+                j = orig
+                j.partial = True
+            else:
+                if is_li:
+                    li_fail = 0
             if j is None:                     # a fonte diz que já fechou
                 state["seen"][orig.uid] = {**meta, "why": "fechada"}
                 continue
@@ -111,10 +159,13 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             if jd:
                 state["seen"][j.uid]["fit"] = jd["fit"]
             matches.append({"job": j, "verdict": v, "judge": jd})
+            # a página só leva dados públicos da vaga; as notas do juiz ficam fora se o repositório for público
+            entry = {**j.to_dict(), "score": v.score, "flags": v.flags[:4], "first_seen": today.isoformat()}
             if not pub:
-                state["matches"].append({**j.to_dict(), "score": v.score, "flags": v.flags,
-                                         "reasons": v.reasons[:6], "first_seen": today.isoformat(),
-                                         "judge": jd})
+                entry.update({"reasons": v.reasons[:6], "judge": jd})
+            elif jd:
+                entry["fit"] = jd["fit"]
+            state["matches"].append(entry)
     stats["passed"] = len(matches)
 
     # 4) avisar
@@ -152,14 +203,15 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                 m["kit"] = f"docs/kits/{name}"
             made += 1
 
-    heartbeat = not matches and today.weekday() == cfg.get("heartbeat_weekday", 0)
-    title, body = notify.build_message(top, health_alerts, stats)
+    heartbeat = main_run and not matches and today.weekday() == cfg.get("heartbeat_weekday", 0)
+    title, body = notify.build_message(top, health_alerts, stats, total=len(matches),
+                                       page_url=cfg.get("click_url"))
     if heartbeat or health_alerts:
         body += "\n\nEstado das fontes:\n" + "\n".join(f"- {r}" for r in report)
     channels = []
     if (matches or health_alerts or heartbeat) and not dry_run:
         channels = send(title, body, cfg.get("click_url"))
-    if not dry_run and today.weekday() == cfg.get("radar_weekday", 4):
+    if main_run and not dry_run and today.weekday() == cfg.get("radar_weekday", 4):
         rt, rb = notify.build_radar(state["matches"], today)
         if rb:
             send(rt, rb, cfg.get("click_url"))
@@ -193,8 +245,11 @@ def main(argv=None):
     kw = {}
     if a.offline:
         jobs = load_fixture(a.offline)
-        kw = {"fetch": lambda src: jobs if src is cfg["sources"][0] else [], "detail": lambda j: j}
-    res = run(cfg, os.environ, date.today(), a.state, a.docs, dry_run=a.dry_run, **kw)
+        first = cfg["sources"][0]["name"]
+        kw = {"fetch": lambda src: jobs if src.get("name") == first else [], "detail": lambda j: j}
+    # a primeira execução do dia (manhã) é a principal; a da tarde só avisa de vagas novas
+    main_run = datetime.now(timezone.utc).hour < 12 or bool(os.environ.get("FORCE_MAIN_RUN"))
+    res = run(cfg, os.environ, date.today(), a.state, a.docs, dry_run=a.dry_run, main_run=main_run, **kw)
 
     print("\n".join(res["report"]))
     print(f"\n{res['stats']}")

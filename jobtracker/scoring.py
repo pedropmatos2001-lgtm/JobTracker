@@ -81,11 +81,15 @@ def _rx(patterns):
 def cheap_filter(job: Job, cfg: dict, today: date) -> str:
     """Filtros baratos (antes de ir buscar o detalhe). Devolve motivo de exclusão ou ''."""
     title = job.title or ""
+    if (job.extra or {}).get("excluded"):            # a própria fonte já disse porquê (ex.: BEP)
+        return job.extra["excluded"]
     for rx in _rx(cfg.get("title_exclude")):
         if rx.search(title):
             return f"título excluído ({rx.pattern})"
     loc_cfg = cfg.get("locations", {})
     loc = (job.location or "").strip()
+    if loc and loc_cfg.get("exclude") and re.search(loc_cfg["exclude"], loc, re.I):
+        return f"local excluído ({loc})"
     if loc:
         allow = re.compile(loc_cfg.get("allow", "portugal|lisbo|porto"), re.I)
         if not allow.search(loc):
@@ -160,6 +164,8 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     # 3) avisos
     if job.salary_min or job.salary_max:
         v.reasons.append(f"salário indicado: {job.salary_min or '?'}–{job.salary_max or '?'}")
+    elif (job.extra or {}).get("pay_text"):
+        v.flags.append(f"remuneração: {job.extra['pay_text'][:80]}")
     else:
         v.flags.append("sem salário indicado")
     if job.partial:
@@ -168,9 +174,12 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         v.flags.append("fonte não confirma se está aberta: abrir a página")
     if not job.location:
         v.flags.append("local não indicado")
+    if (job.extra or {}).get("deadline"):
+        v.flags.append(f"candidaturas até {job.extra['deadline']}")
 
     v.score = score
-    if score < cfg.get("min_score", 6):
+    floor_score = (job.extra or {}).get("min_score", cfg.get("min_score", 6))
+    if score < floor_score:
         v.include = False
-        v.excluded_by = f"pontuação {score} abaixo de {cfg.get('min_score', 6)}"
+        v.excluded_by = f"pontuação {score} abaixo de {floor_score}"
     return v

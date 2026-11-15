@@ -132,3 +132,30 @@ def test_partial_and_unverified_flags(cfg):
 
 def test_strip_html_handles_escaped_markup():
     assert strip_html("&lt;p&gt;Hello &amp;amp; welcome&lt;/p&gt;") == "Hello & welcome"
+
+
+def test_islands_excluded_even_if_portugal():
+    import yaml
+    from datetime import date
+    from jobtracker.models import Job
+    from jobtracker.scoring import cheap_filter
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    j = Job(source="linkedin", company="X", title="ESG Manager", url="u", location="Funchal, Madeira, Portugal")
+    assert "local excluído" in cheap_filter(j, cfg, date(2026, 11, 15))
+    j.location = "Ponta Delgada, Azores, Portugal"
+    assert "local excluído" in cheap_filter(j, cfg, date(2026, 11, 15))
+    j.location = "Évora, Portugal"
+    assert cheap_filter(j, cfg, date(2026, 11, 15)) == ""
+
+
+def test_bep_ccdr_offer_passes_with_one_strong_theme():
+    import yaml
+    from datetime import date
+    from jobtracker import sources
+    from jobtracker.scoring import evaluate
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    src = next(s for s in cfg["sources"] if s["type"] == "bep")
+    with open("tests/fixtures/bep_detail.html", encoding="utf-8") as f:
+        d = sources.parse_bep_detail(f.read(), 1)
+    v = evaluate(sources.bep_to_job(d, src, today=date(2026, 11, 15)), cfg, date(2026, 11, 15))
+    assert v.include and any("remuneração" in x for x in v.flags) and any("candidaturas até" in x for x in v.flags)

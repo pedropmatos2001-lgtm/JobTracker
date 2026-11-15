@@ -143,6 +143,64 @@ def test_dry_run_writes_and_sends_nothing(cfg, tmp_path):
 def test_max_per_alert(cfg, tmp_path):
     sp, dd = paths(tmp_path)
     sent = []
-    jobs = [good(url=f"https://a/{i}") for i in range(8)]
+    jobs = [good(url=f"https://a/{i}", company=f"Empresa {i}") for i in range(8)]
     r = run(cfg, {}, WED, sp, dd, **harness({"A": jobs, "B": []}, sent))
     assert r["stats"]["passed"] == 8 and sent[0][1].count("https://a/") == cfg["max_per_alert"]
+
+
+def test_same_job_on_two_boards_counts_once(cfg, tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    a = good(url="https://www.linkedin.com/jobs/view/1", company="Siemens S.A.")
+    b = good(url="https://pt.indeed.com/viewjob?jk=1", company="SIEMENS", title="AI Transformation Consultant (m/f)")
+    r = run(cfg, {}, WED, sp, dd, **harness({"A": [a], "B": [b]}, sent))
+    assert r["stats"]["new"] == 1 and r["stats"]["passed"] == 1
+    r2 = run(cfg, {}, WED, sp, dd, **harness({"A": [], "B": [good(url="https://x/2", company="Siemens")]}, sent))
+    assert r2["stats"]["new"] == 0                     # também entre execuções
+
+
+def test_linkedin_detail_throttled_falls_back_to_title(cfg, tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    jobs = [Job(source="linkedin", company=f"Co {i}", title="Sustainability Transformation Manager",
+                url=f"https://www.linkedin.com/jobs/view/{i}", location="Lisbon, Portugal",
+                posted="2026-11-17", extra={"linkedin_id": str(i)}) for i in range(5)]
+    calls = []
+    def detail(j):
+        calls.append(j.url)
+        raise sources.SourceError("HTTP 429")
+    h = harness({"A": jobs, "B": []}, sent)
+    h["detail"] = detail
+    r = run(cfg, {}, WED, sp, dd, **h)
+    assert len(calls) == 3                             # depois de 3 falhas deixa de insistir
+    assert r["stats"]["passed"] == 5                   # mas avalia pelo título e avisa na mesma
+    assert "descrição parcial" in sent[0][1] or "parcial" in json.dumps(r["report"])
+
+
+def test_message_points_to_page_when_more_than_max(cfg, tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    cfg["click_url"] = "https://exemplo.github.io/JobTracker/"
+    jobs = [good(url=f"https://a/{i}", company=f"Empresa {i}") for i in range(8)]
+    run(cfg, {}, WED, sp, dd, **harness({"A": jobs, "B": []}, sent))
+    assert sent[0][0].startswith("8 vaga") and f"+ {8 - cfg['max_per_alert']} outra(s) na página: https://exemplo.github.io" in sent[0][1]
+
+
+def test_afternoon_run_skips_heartbeat(cfg, tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    run(cfg, {}, MON, sp, dd, main_run=False, **harness({"A": [], "B": []}, sent))
+    assert sent == []
+
+
+def test_cursor_is_saved_and_passed_back(cfg, tmp_path):
+    sp, dd = paths(tmp_path)
+    got = []
+    def fetch(src):
+        got.append(src.get("_cursor"))
+        out = sources.JobList([])
+        out.cursor = {"last": 42}
+        return out
+    run(cfg, {}, WED, sp, dd, fetch=fetch, detail=lambda j: j, send=lambda *a: [])
+    run(cfg, {}, WED, sp, dd, fetch=fetch, detail=lambda j: j, send=lambda *a: [])
+    assert got == [None, None, {"last": 42}, {"last": 42}]

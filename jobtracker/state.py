@@ -2,7 +2,7 @@ import json
 import os
 from datetime import date, timedelta
 
-EMPTY = {"seen": {}, "health": {}, "matches": []}
+EMPTY = {"seen": {}, "health": {}, "matches": [], "cursors": {}}
 
 
 def load(path):

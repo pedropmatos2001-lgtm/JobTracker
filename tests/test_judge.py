@@ -94,7 +94,7 @@ def test_judge_call_budget(cfg, tmp_path):
     def jf(j):
         calls.append(j.url)
         return judge.normalize(GOOD)
-    jobs = [good(url="https://a/1"), good(url="https://a/2"), good(url="https://a/3")]
+    jobs = [good(url="https://a/1"), good(url="https://a/2", company="B"), good(url="https://a/3", company="C")]
     r, _, _ = run_with(cfg, tmp_path, jf, jobs=jobs)
     assert len(calls) == 1 and r["stats"]["passed"] == 3     # as restantes passam só por palavras-chave
 
@@ -129,7 +129,8 @@ def test_public_repo_stores_nothing_personal(cfg, tmp_path):
     assert r["stats"]["passed"] == 1
     assert not os.path.exists(os.path.join(dd, "kits"))           # kits nunca no git
     docs = json.load(open(os.path.join(dd, "jobs.json"), encoding="utf-8"))
-    assert docs["matches"] == []
+    assert [m["title"] for m in docs["matches"]] == ["AI Transformation Consultant"]   # só dados públicos da vaga
+    assert "judge" not in docs["matches"][0] and "reasons" not in docs["matches"][0]
     st = open(str(tmp_path / "state.json"), encoding="utf-8").read()
     assert "Mais escopo" not in st and "pede 5 anos" not in st     # notas do juiz fora do estado
 
