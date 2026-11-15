@@ -192,4 +192,21 @@ def test_marta_only_gets_public_sector_and_human_rights():
     assert evaluate(job("Project Officer – Gender Equality", "Programa de combate à violência doméstica e igualdade de género."), marta, t).include
     assert evaluate(job("Policy Officer", "Public policy analysis for the Ministry, public administration reform."), marta, t).include
     v = evaluate(job("Consultora de Incentivos", "SIFIDE, Portugal 2030, candidaturas a incentivos para empresas."), marta, t)
-    assert not v.include and "temas" in v.excluded_by
+    assert not v.include                 # incentivos fiscais ficam de fora (pelo título ou por falta de temas)
+
+
+def test_marta_eu_affairs_and_projects_yes_tax_incentives_no():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    marta = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["marta"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 3 anos de experiência.")
+    assert evaluate(job("EU Affairs Account Executive", "Public affairs agency, monitoring the European Parliament and the European Commission."), marta, t).include
+    assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), marta, t).include
+    assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), marta, t).include
+    assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), marta, t).include

@@ -2,7 +2,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
-# skills de terceiros instaladas com `npx skills add` (reinstalar com: npx skills experimental_install)
+# skills instaladas localmente para o Claude (não pertencem ao repositório)
 .agents/
-.claude/skills/*
-!.claude/skills/revisao-ui-vagas/
+.claude/
+skills-lock.json
