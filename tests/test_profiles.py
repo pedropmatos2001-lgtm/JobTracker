@@ -269,3 +269,18 @@ def test_time_budget_defers_work_but_still_publishes(tmp_path):
     docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))          # publicou na mesma
     assert docs["matches"] == []
     assert any("adiada" in s.get("status", "") for s in docs["tracker"]["sources"])
+
+
+def test_source_limited_to_one_profile(tmp_path):
+    sp, dd = paths(tmp_path)
+    c = cfg2()
+    c["sources"] = [{"type": "x", "name": "UNjobs", "profiles": ["maria"]}]
+    sent = []
+    both = mk("Gestor de Fundos Europeus e Sustentabilidade", "3 anos de experiência. Políticas públicas e assuntos europeus: "
+              "Comissão Europeia, Portugal 2030, sustentabilidade, economia circular, melhoria de processos.", company="CCDR Norte")
+    run(c, {}, WED, sp, dd, fetch=lambda s: [both], detail=lambda j: j, send=lambda t, b, cl, p=None: sent.append(p["id"]) or ["ok"])
+    docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
+    assert all(set(m["profiles"]) <= {"maria"} for m in docs["matches"])
+    assert "pedro" not in sent
+    run(c, {}, WED, sp, dd, fetch=lambda s: [both], detail=lambda j: j, send=lambda t, b, cl, p=None: sent.append(p["id"]) or ["ok"])
+    assert "pedro" not in sent                                   # nunca fica "por avaliar" para o Pedro

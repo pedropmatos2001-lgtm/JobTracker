@@ -518,3 +518,66 @@ def test_maria_libe_and_public_affairs_rank_above_consulting():
     consult = ev("Logistics Consultant", "Consulting projects for corporate clients on supply chain processes.", company="Accenture")
     assert coke.include and libe.include
     assert coke.score > consult.score and libe.score > consult.score
+
+
+def test_maria_audit_generic_consultant_titles_and_incentives_out():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-10", description=desc + " 2 anos de experiência."), maria, t)
+    for title, desc, company in [
+        ("Incentives Consultant", "SIFIDE II and Portugal 2030 grant applications for companies.", "Ayming"),
+        ("Consultor de Fundos Europeus", "Candidaturas aos sistemas de incentivos do Portugal 2030 e PRR para empresas.", "X"),
+        ("Credit Risk Consultant", "Credit risk models and IFRS 9.", "Banco"),
+        ("Consultor Imobiliário", "Venda de imóveis.", "Imobiliária"),
+        ("Insurance Consultant", "Advise clients on insurance products.", "Seguradora"),
+        ("HR Consultant", "Payroll and HR administration for client companies.", "X"),
+        ("MEP Coordinator", "Coordinate MEP design (HVAC, electrical, plumbing) on construction projects.", "Construtora"),
+    ]:
+        v = ev(title, desc, company)
+        assert not v.include, (title, v.score, v.themes)
+    for title, desc, company in [
+        ("EU Funds Consultant", "EU Institutions team: framework contracts and tenders for the European Commission.", "Deloitte"),
+        ("Junior Consultant", "Management consulting projects; strategy and process redesign for clients.", "Boutique X"),
+        ("Assessor de Comunicação Política", "Assessoria política ao grupo parlamentar; acompanhamento da agenda legislativa.", "X"),
+        ("Técnica Superior – Igualdade e Não Discriminação", "Plano Municipal para a Igualdade e contratação pública responsiva ao género.", "Câmara Municipal de Lisboa"),
+        ("Policy Officer – Data Protection and Civil Liberties", "Advocacy on data protection and civil liberties in EU law.", "NGO"),
+        ("Programme Officer – Employment Policy", "Labour market policies, decent work and social protection.", "OIT"),
+    ]:
+        v = ev(title, desc, company)
+        assert v.include, (title, v.excluded_by, v.themes)
+
+
+def test_maria_top_priority_outranks_big4_generic_consulting():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-10", description=desc + " 2 years of experience."), maria, t)
+    generic = [ev("Business Analyst", "Consulting projects; process mapping and stakeholder interviews.", "Deloitte"),
+               ev("Strategy Consultant", "Strategy and operations consulting projects for corporate clients.", "Accenture"),
+               ev("Consultora de Gestão", "Projetos de consultoria de gestão e melhoria de processos.", "Sia Partners")]
+    top = [ev("Graduate Public Affairs", "Monitor legislative developments in Portugal and the EU; stakeholder engagement.", "Coca-Cola Europacific Partners"),
+           ev("Accredited Parliamentary Assistant", "Follow LIBE and PETI committee files for an MEP. Remote from Lisbon.", "European Parliament"),
+           ev("Assessora de Gabinete", "Acompanhamento legislativo e articulação com a Assembleia da República.", "Ministério"),
+           ev("Monitoring & Evaluation Officer", "Impact evaluation of development cooperation programmes.", "Camões"),
+           ev("Programme Officer – Employment Policy", "Labour market policies and social protection.", "OIT")]
+    assert all(g.include for g in generic) and all(x.include for x in top)
+    assert min(x.score for x in top) > max(g.score for g in generic), ([x.score for x in top], [g.score for g in generic])
+
+
+def test_maria_digital_rights_is_libe_not_tech():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    v = evaluate(Job(source="linkedin", company="NGO", title="Policy Officer – Digital Rights", url="u", location="Lisboa, Portugal",
+                     posted="2026-11-10", description="Civil liberties and fundamental rights in EU digital legislation. 2 anos."),
+                 maria, date(2026, 11, 15))
+    assert v.include, (v.excluded_by, v.themes)
+    assert not evaluate(Job(source="linkedin", company="X", title="Digital Marketing Consultant", url="u", location="Lisboa, Portugal",
+                            posted="2026-11-10", description="Campaigns. 2 anos."), maria, date(2026, 11, 15)).include
