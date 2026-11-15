@@ -243,7 +243,7 @@ profiles:
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
         - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
-        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento"
+        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label"
       keywords:
         strong_cap: 14
         strong:

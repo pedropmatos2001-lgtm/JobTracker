@@ -285,3 +285,16 @@ def test_maria_no_teachers_nor_generic_public_jobs():
                "Support public affairs and engagement with the European Commission and Portuguese government.",
                company="Coca-Cola Europacific Partners")
     assert evaluate(coke, maria, t).include
+
+
+def test_maria_no_content_moderation_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    j = Job(source="linkedin", company="Concentrix", title="AI Dubbing Content Moderator (Spanish-Speaking)", url="u",
+            location="Lisboa, Portugal", posted="2026-11-14",
+            description="Review dubbed content for hate speech and discrimination policy violations. 1 year of experience.")
+    assert not evaluate(j, maria, date(2026, 11, 15)).include
