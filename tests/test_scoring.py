@@ -600,3 +600,22 @@ def test_maria_brussels_only_for_top_jobs_pedro_never():
     assert not ev("maria", "Project Officer", "Management of EU-funded projects (Erasmus+, Interreg).").include   # não é tema de topo
     assert not ev("pedro", "Sustainability Consultant", "CSRD and decarbonisation for clients.").include      # o Pedro não tem Bruxelas
     assert not ev("maria", "Public Affairs Manager", "EU affairs.", loc="Porto Alegre, Brazil").include      # Porto Alegre não é Porto
+
+
+def test_maria_public_affairs_title_beats_multi_theme_consulting_and_noise_out():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-10", description=desc + " 2 years of experience."), maria, t)
+    coke = ev("Graduate Public Affairs, Communications and Sustainability",
+              "Support public affairs and communications; stakeholder engagement.", "Coca-Cola Europacific Partners")
+    eura = ev("Junior Consultant", "Consulting on EU funding: European Commission programmes, framework contracts, "
+              "EU policy and public affairs for clients.", "EurA AG")
+    assert coke.include and coke.score > eura.score, (coke.score, eura.score)
+    for title in ("Research Scientist – Patient-Centered Outcomes", "Lecturer in Systems Thinking and Foresight",
+                  "Oliver Wyman - Social Media Manager", "Portugal com ACNUR | Projeto Face To Face",
+                  "Associate Director, Patient Advocacy", "Implementation Associate Consultant"):
+        assert not ev(title, "Public policy, EU affairs, human rights and consulting projects.").include, title

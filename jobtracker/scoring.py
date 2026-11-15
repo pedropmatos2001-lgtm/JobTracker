@@ -239,6 +239,15 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         v.reasons.append("+ função de consultoria numa consultora-alvo")
         v.themes.append(cfg.get("target_role_label", "Consultoria"))
     score += min(strong_pts, kw.get("strong_cap", 14))
+    # Temas de topo no título (ex.: Public Affairs, assuntos europeus) valem mais do que somar temas na descrição:
+    # uma vaga que É sobre isso tem de ficar acima de uma consultoria genérica que só o menciona.
+    ttb = cfg.get("title_theme_bonus") or {}
+    if ttb.get("labels"):
+        for item in kw.get("strong", []):
+            if label_of(item) in ttb["labels"] and re.search(pat_of(item), job.title or "", re.I):
+                score += ttb.get("points", 6)
+                v.reasons.append(f"+ tema de topo no título ({label_of(item)})")
+                break
     med = sum(1 for pat in kw.get("medium", []) if re.search(pat_of(pat), text, re.I))
     score += min(med, kw.get("medium_cap", 4))
     neg = sum(1 for pat in kw.get("negative", []) if re.search(pat, text, re.I))
