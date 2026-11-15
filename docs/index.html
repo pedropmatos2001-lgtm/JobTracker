@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Vagas">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#1b1f24" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -19,8 +19,8 @@
   :root {
     color-scheme: light;
     --bg: #f2f2f7; --side: rgba(246,246,249,.9); --card: #ffffff; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.08);
-    --hover: rgba(0,0,0,.04); --label: #1c1c1e; --label-2: #6c6c70; --label-3: #8a8a8e; --sep: rgba(60,60,67,.13);
-    --blue: #007aff; --blue-soft: rgba(0,122,255,.1); --green: #248a3d; --green-soft: rgba(52,199,89,.14); --orange: #c25700;
+    --hover: rgba(0,0,0,.04); --label: #1c1c1e; --label-2: #5f5f64; --label-3: #636368; --sep: rgba(60,60,67,.13);
+    --blue: #007aff; --blue-text: #0060c7; --blue-soft: rgba(0,122,255,.1); --green: #1b6e30; --green-soft: rgba(52,199,89,.14); --orange: #a84b00;
     --bar: rgba(242,242,247,.82); --modal: rgba(255,255,255,.97); --seg-on: #ffffff; --current: rgba(0,0,0,.055);
     --avatar-bg: #1c1c1e; --avatar-fg: #ffffff; --chart: rgba(0,122,255,.28); --switch-off: #e9e9eb;
     --shadow: 0 1px 2px rgba(0,0,0,.04), 0 1px 1px rgba(0,0,0,.02); --shadow-hover: 0 10px 30px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
@@ -28,22 +28,24 @@
     --r-card: 16px; --r-ctl: 10px;
   }
   :root[data-theme="dark"] { color-scheme: dark;
-    --bg: #000000; --side: rgba(22,22,24,.92); --card: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.16);
-    --hover: rgba(255,255,255,.06); --label: #f2f2f7; --label-2: #aeaeb2; --label-3: #8e8e93; --sep: rgba(84,84,88,.5);
-    --blue: #0a84ff; --blue-soft: rgba(10,132,255,.18); --green: #30d158; --green-soft: rgba(48,209,88,.16); --orange: #ff9f0a;
-    --bar: rgba(0,0,0,.72); --modal: rgba(44,44,46,.97); --seg-on: #636366; --current: rgba(255,255,255,.08);
-    --avatar-bg: #f2f2f7; --avatar-fg: #1c1c1e; --chart: rgba(10,132,255,.4); --switch-off: #39393d;
+    --bg: #1b1f24; --side: rgba(27,31,36,.92); --card: #252a31; --fill: rgba(150,160,175,.16); --fill-2: rgba(150,160,175,.1);
+    --hover: rgba(255,255,255,.05); --label: #eceef1; --label-2: #b4b9c0; --label-3: #9aa0a8; --sep: rgba(150,160,175,.18);
+    --blue: #0a84ff; --blue-text: #6cb4ff; --blue-soft: rgba(10,132,255,.18); --green: #30d158; --green-soft: rgba(48,209,88,.16); --orange: #ff9f0a;
+    --bar: rgba(27,31,36,.82); --modal: rgba(43,49,57,.98); --seg-on: #4a525d; --current: rgba(255,255,255,.07);
+    --avatar-bg: #eceef1; --avatar-fg: #1b1f24; --chart: rgba(10,132,255,.4); --switch-off: #3a414b;
     --shadow: 0 0 0 .5px rgba(255,255,255,.06); --shadow-hover: 0 0 0 .5px rgba(255,255,255,.12), 0 10px 30px rgba(0,0,0,.5); }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--label); -webkit-font-smoothing: antialiased;
          font: 16px/1.5 -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif; letter-spacing: -.011em; }
   button, input, select, a { font: inherit; color: inherit; letter-spacing: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-  a { color: var(--blue); }
+  a { color: var(--blue-text); }
   svg { flex: none; }
   .tnum { font-variant-numeric: tabular-nums; }
   .wrap { max-width: 860px; margin: 0 auto; padding: 0 32px; }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .skip:focus { position: fixed; z-index: 50; top: 12px; left: 12px; width: auto; height: auto; clip: auto; padding: 10px 16px; border-radius: 10px;
+                background: var(--blue-text); color: #fff; text-decoration: none; font-weight: 600; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   /* ---------- barra lateral (computador) ---------- */
@@ -158,9 +160,13 @@
   .select { position: relative; }
   .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: var(--r-ctl); padding: 8px 30px 8px 12px;
                    font-size: 15px; cursor: pointer; min-height: 38px; max-width: 220px; text-overflow: ellipsis; }
-  .select select.on { background: var(--blue-soft); color: var(--blue); font-weight: 500; }
+  .select select.on { background: var(--blue-soft); color: var(--blue-text); font-weight: 500; }
+  /* as listas nativas (Windows, Android) não seguem o tema sozinhas: cores explícitas para cada opção */
+  select option, select optgroup { background-color: var(--card); color: var(--label); }
+  input::placeholder { color: var(--label-2); opacity: 1; }
+  input:-webkit-autofill { -webkit-text-fill-color: var(--label); box-shadow: 0 0 0 40px var(--fill) inset; }
   .select svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
-  .clear { border: 0; background: transparent; color: var(--blue); font-size: 15px; cursor: pointer; padding: 8px 4px; min-height: 38px; }
+  .clear { border: 0; background: transparent; color: var(--blue-text); font-size: 15px; cursor: pointer; padding: 8px 4px; min-height: 38px; }
   .count { font-size: 13px; color: var(--label-2); margin: 16px 2px 10px; }
   .day { font-size: 15px; font-weight: 600; color: var(--label-2); margin: 22px 2px 10px; }
   .list { display: grid; gap: 10px; }
@@ -184,7 +190,7 @@
   .tags span { font-size: 13px; color: var(--label-2); background: var(--fill-2); border-radius: 7px; padding: 3px 9px; }
   .tags .fit { font-weight: 600; }
   .tags .fit.high { background: var(--green-soft); color: var(--green); }
-  .tags .fit.good { background: var(--blue-soft); color: var(--blue); }
+  .tags .fit.good { background: var(--blue-soft); color: var(--blue-text); }
   .warn { font-size: 13px; color: var(--orange); margin-top: 8px; }
   .acts { position: relative; z-index: 2; display: flex; }
   .apply { width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--label-3); display: grid; place-items: center; cursor: pointer;
@@ -223,12 +229,12 @@
   .row .rt span { display: block; font-size: 14px; color: var(--label-2); margin-top: 2px; }
   .row .rv { flex: none; font-size: 16px; color: var(--label-2); text-align: right; }
   .row .rv.strong { color: var(--label); font-weight: 600; }
-  .theme-ico { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue);
+  .theme-ico { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue-text);
                font-size: 14px; font-weight: 700; }
   .note { font-size: 14px; color: var(--label-2); margin: 10px 4px 0; }
-  .btn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--blue); color: #fff; border-radius: 999px; padding: 10px 18px;
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--blue-text); color: #fff; border-radius: 999px; padding: 10px 18px;
          font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; min-height: 44px; transition: transform 160ms var(--ease-out); }
-  .btn.ghost { background: var(--fill); color: var(--blue); }
+  .btn.ghost { background: var(--fill); color: var(--blue-text); }
   .src-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 3px 0; }
   .src-row .bad { color: var(--orange); }
 
@@ -266,7 +272,7 @@
             padding: 2px 0 env(safe-area-inset-bottom); }
     .tabs button { border: 0; background: transparent; display: grid; justify-items: center; align-content: center; gap: 2px; min-height: 49px;
                    cursor: pointer; font-size: 10px; font-weight: 500; color: var(--label-3); }
-    .tabs button[aria-current=page] { color: var(--blue); }
+    .tabs button[aria-current=page] { color: var(--blue-text); }
     header.wrap { padding-top: 16px; }
     h1 { font-size: 34px; }
     .sub { font-size: 15px; }
@@ -309,7 +315,7 @@
 </style>
 </head>
 <body>
-<a class="sr" href="#main">Saltar para o conteúdo</a>
+<a class="sr skip" href="#main">Saltar para o conteúdo</a>
 <div class="app">
 <aside class="side" aria-label="Navegação">
   <div class="brand">Vagas</div>
