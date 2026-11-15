@@ -104,6 +104,18 @@
 
   /* ---------- cabeçalho ---------- */
   header.wrap { padding-top: 48px; padding-bottom: 8px; }
+  .hrow { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .htext { min-width: 0; }
+  .sync { display: flex; align-items: center; gap: 4px; flex: none; margin-top: 4px; }
+  .sync-at { font-size: 13px; color: var(--label-3); text-align: right; }
+  .sync-at.err { color: var(--orange); }
+  .sync-btn.busy svg { animation: spin 1s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .sync-btn.busy svg { animation: none; } }
+  .tb-right { display: flex; align-items: center; gap: 2px; }
+  .token-form { display: flex; gap: 8px; padding: 12px 16px 14px; }
+  .token-form input { flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 10px 12px; border: 0; border-radius: var(--r-ctl);
+                      background: var(--fill); color: var(--label); }
   h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
   .sub { color: var(--label-2); font-size: 17px; margin-top: 6px; letter-spacing: -.02em; }
   main.wrap { padding-bottom: 96px; }
@@ -204,6 +216,7 @@
   /* ponto azul de vaga nova, com legenda ao passar ou tocar */
   .logo-wrap { position: relative; width: 48px; height: 48px; }
   .dot { position: absolute; z-index: 3; top: -12px; right: -12px; width: 32px; height: 32px; border: 0; padding: 0; background: transparent;
+  .dot.out { opacity: 0; transform: scale(.6); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
          display: grid; place-items: center; cursor: default; }
   .dot::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2.5px var(--card); }
   .tip { position: absolute; z-index: 20; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%) scale(.97); transform-origin: bottom center;
@@ -269,6 +282,8 @@
               padding: calc(6px + env(safe-area-inset-top)) 8px 6px 16px; background: var(--bar);
               backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: .5px solid var(--sep); }
     .topbar .brand { padding: 0; }
+    .hrow { flex-direction: column; gap: 2px; }
+    .sync { margin-top: 0; } .sync .sync-btn { display: none; } .sync-at { text-align: left; }
     .topbar .brand img { height: 22px; }
     .topbar .profile-btn { flex: none; min-height: 44px; padding: 4px 6px 4px 4px; gap: 8px; }
     .topbar .profile-btn .ph { display: none; }
@@ -339,8 +354,8 @@
 </div>
 
 <div class="content">
-  <div class="topbar"><span class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></span><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div>
-  <header class="wrap"><h1 id="h1">Vagas</h1><div class="sub" id="sub">A carregar…</div></header>
+  <div class="topbar"><span class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></span><div class="tb-right"><button class="icon-btn sync-btn" type="button" id="mSync"></button><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div></div>
+  <header class="wrap"><div class="hrow"><div class="htext"><h1 id="h1">Vagas</h1><div class="sub" id="sub">A carregar…</div></div><div class="sync"><span class="sync-at" id="syncAt" aria-live="polite"></span><button class="icon-btn sync-btn" type="button" id="dSync"></button></div></div></header>
   <main class="wrap" id="main"></main>
   <nav class="tabs" id="tabs" aria-label="Secções"></nav>
 </div>
@@ -362,6 +377,7 @@ const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls)
 const svg = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
 const I = (d, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const P = {
+  sync: '<path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 21v-5h5"/><path d="M3 12a9 9 0 0 1 15.4-6.4L21 8"/><path d="M21 3v5h-5"/>',
   home: '<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>',
   jobs: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/>',
   rules: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
@@ -382,6 +398,82 @@ const TICK = '<svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill=
 const repoEdit = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
   return location.hostname.endsWith("github.io") && r ? `https://github.com/${u}/${r}/edit/main/config.yaml` : ""; })();
 
+// ---------- procurar agora (corre o workflow no GitHub) ----------
+// A página é pública: o token nunca vai para o código. Cada pessoa cola o seu nas Definições e ele fica só neste browser.
+const REPO = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
+  return location.hostname.endsWith("github.io") && r ? { owner: u, repo: r } : null; })();
+const TOKEN_KEY = "vagas-gh-token";
+const getToken = () => { try { return localStorage.getItem(TOKEN_KEY) || ""; } catch (e) { return ""; } };
+const sync = { busy: false, msg: "", err: false };
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function paintSync() {
+  for (const id of ["mSync", "dSync"]) { const b = $(id); if (!b) continue;
+    b.textContent = ""; b.append(svg(I(P.sync, 20))); b.classList.toggle("busy", sync.busy);
+    b.setAttribute("aria-label", sync.busy ? "A procurar vagas" : "Procurar vagas agora"); b.title = b.getAttribute("aria-label"); }
+  const at = $("syncAt"); if (!at) return;
+  at.textContent = sync.msg || (sync.busy ? "A procurar vagas, cerca de 10 minutos" : (whenUpdated() ? `Atualizado ${whenUpdated()}` : ""));
+  at.classList.toggle("err", sync.err);
+}
+async function gh(path, opts = {}) {
+  const r = await fetch(`https://api.github.com/repos/${REPO.owner}/${REPO.repo}${path}`, { ...opts,
+    headers: { Authorization: `Bearer ${getToken()}`, Accept: "application/vnd.github+json", ...(opts.headers || {}) } });
+  if (r.status === 401 || r.status === 403 || r.status === 404) throw new Error("token");
+  if (!r.ok) throw new Error("http");
+  return r.status === 204 ? null : r.json();
+}
+async function runSync(e) {
+  const btn = e && e.currentTarget;
+  if (sync.busy || !REPO) return nope(btn);
+  if (!getToken()) { go("settings"); setTimeout(() => { const i = $("ghToken"); if (i) { i.scrollIntoView({ block: "center" }); i.focus(); } }, 60); return; }
+  Object.assign(sync, { busy: true, msg: "", err: false }); paintSync();
+  const since = Date.now() - 60e3;
+  try {
+    await gh("/actions/workflows/daily.yml/dispatches", { method: "POST", body: JSON.stringify({ ref: "main" }) });
+    let run = null;                                   // espera que a recolha acabe (até 40 minutos)
+    for (let i = 0; i < 160; i++) {
+      await sleep(15e3);
+      const d = await gh("/actions/workflows/daily.yml/runs?per_page=5&event=workflow_dispatch");
+      run = (d.workflow_runs || []).find(x => new Date(x.created_at).getTime() >= since);
+      if (run && run.status === "completed") break;
+    }
+    if (!run || run.status !== "completed" || run.conclusion !== "success") throw new Error("run");
+    const before = updatedAt;                          // depois, espera que a página publique os dados novos
+    for (let i = 0; i < 24; i++) {
+      await sleep(15e3);
+      const d = await fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).catch(() => null);
+      if (d && d.updated_at && d.updated_at !== before) { applyData(d); break; }
+    }
+  } catch (err) {
+    Object.assign(sync, { err: true, msg: err.message === "token" ? "O token não tem acesso. Revê-o nas Definições." :
+      err.message === "run" ? "A recolha não terminou bem. Vê os detalhes no GitHub." : "Não foi possível procurar agora." });
+  } finally { sync.busy = false; paintSync(); if (page === "settings") render({ quiet: true }); }
+}
+function syncRows() {
+  if (!REPO) return [];
+  const actions = `https://github.com/${REPO.owner}/${REPO.repo}/actions/workflows/daily.yml`;
+  const t = getToken(), out = [];
+  const go_ = el("button", "btn ghost", sync.busy ? "A procurar…" : "Procurar"); go_.type = "button"; go_.onclick = runSync;
+  out.push(row("Procurar agora", "Corre a recolha fora do horário. Demora cerca de 10 minutos.", go_));
+  if (t) {
+    const del = el("button", "btn ghost", "Apagar"); del.type = "button";
+    del.onclick = () => { try { localStorage.removeItem(TOKEN_KEY); } catch (e) {} sync.msg = ""; sync.err = false; paintSync(); render({ quiet: true }); };
+    out.push(row("Token do GitHub", "Guardado só neste dispositivo.", del));
+  } else {
+    const r = row("Token do GitHub", "Necessário para procurar daqui. Fica guardado só neste dispositivo.");
+    const f = el("form", "token-form"); const i = el("input"); i.id = "ghToken"; i.type = "password"; i.autocomplete = "off";
+    i.placeholder = "github_pat_…"; i.setAttribute("aria-label", "Token do GitHub");
+    const b = el("button", "btn", "Guardar"); b.type = "submit";
+    f.onsubmit = ev => { ev.preventDefault(); const v = i.value.trim(); if (!v) return nope(b);
+      try { localStorage.setItem(TOKEN_KEY, v); } catch (e) {} sync.msg = ""; sync.err = false; paintSync(); render({ quiet: true }); };
+    f.append(i, b); out.push(r, f);
+  }
+  const ext = (txt, href) => { const a = el("a", "btn ghost"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.append(document.createTextNode(txt), svg(I(P.ext, 16))); return a; };
+  out.push(row("Criar token", "No GitHub: token fine-grained, só para este repositório, com a permissão Actions em leitura e escrita.",
+    ext("Abrir", "https://github.com/settings/personal-access-tokens/new")));
+  out.push(row("Sem token", "Também podes correr a recolha diretamente no GitHub, em Run workflow.", ext("GitHub", actions)));
+  return out;
+}
+
 // ---------- vibração para ações que não são possíveis ----------
 // Android: Vibration API. iPhone (iOS 18+): um <input switch> escondido dá um toque háptico ao mudar.
 function nope(target) {
@@ -400,13 +492,20 @@ const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", r
 const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Site da empresa";
 const placeOf = m => (m.location || "").replace(/, Portugal$/, "").split(",")[0].replace(/ e Região$/, "").trim() || "Sem local";
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
-let profiles = [], current = "", all = [], data = [], updated = "", tracker = {};
+let profiles = [], current = "", all = [], data = [], updated = "", updatedAt = "", tracker = {};
 let page = "home", marks = {}, filters = { v: "novas", tema: "", fonte: "", local: "", dias: "7", q: "" };
 const RENAMED = { marta: "maria" };   // perfis que mudaram de id: ligações e dados antigos passam para o novo
 const markKey = pid => "vagas-candidaturas:" + pid, seenKey = pid => "vagas-vistas:" + pid;
 const day0 = iso => new Date((iso || updated) + "T00:00:00");
 const ageDays = iso => Math.round((day0(updated) - day0(iso)) / 864e5);
 const fmt = new Intl.DateTimeFormat("pt-PT", { day: "numeric", month: "long" });
+const fmtTime = new Intl.DateTimeFormat("pt-PT", { hour: "2-digit", minute: "2-digit" });
+function whenUpdated() {   // "hoje às 16:45", "ontem às 07:15", "13 de novembro às 16:20"
+  if (!updatedAt) return updated ? `a ${fmt.format(day0(updated))}` : "";
+  const d = new Date(updatedAt), t = new Date(), y = new Date(t); y.setDate(t.getDate() - 1);
+  const same = (a, b) => a.toDateString() === b.toDateString();
+  return `${same(d, t) ? "hoje" : same(d, y) ? "ontem" : "a " + fmt.format(d)} às ${fmtTime.format(d)}`;
+}
 const fmtShort = new Intl.DateTimeFormat("pt-PT", { day: "numeric", month: "short" });
 const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
 const ago = iso => { const a = ageDays(iso); return a <= 0 ? "Hoje" : a === 1 ? "Ontem" : `Há ${a} dias`; };
@@ -453,7 +552,7 @@ const PAGES = [
 ];
 function renderChrome() {
   const nav = $("nav"); nav.textContent = "";
-  const newN = data.filter(isNew).length;
+  const newN = data.filter(m => isNew(m) && !seen[m.url]).length;   // novas por abrir
   for (const pg of PAGES.filter(x => x.id !== "settings")) {
     const b = el("button", "item"); b.type = "button"; b.append(svg(I(pg.icon)), document.createTextNode(pg.label));
     if (pg.id === "jobs" && newN) b.append(el("span", "n tnum", `${newN} ${newN === 1 ? "nova" : "novas"}`));
@@ -516,14 +615,17 @@ function card(m) {
   let newDot = null;
   const t = el("div", "jt");
   const tr = el("div", "title-row");
-  if (isNew(m)) {
+  if (isNew(m) && !seen[m.url]) {
     const d = el("button", "dot"); d.type = "button"; d.setAttribute("aria-label", "Vaga nova, chegou na última recolha");
     d.append(el("span", "tip", "Nova, chegou na última recolha"));
     d.onclick = e => { e.stopPropagation(); d.classList.toggle("show"); setTimeout(() => d.classList.remove("show"), 2000); };
     newDot = d;
   }
   const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
-  a.addEventListener("click", () => { seen[m.url] = 1; store.set(seenKey(current), seen); });
+  // abrir a vaga (clique normal ou com o botão do meio) conta como vista: o ponto de nova sai logo
+  const open = () => { if (seen[m.url]) return; seen[m.url] = 1; store.set(seenKey(current), seen);
+    if (newDot) { newDot.classList.add("out"); setTimeout(() => newDot.remove(), 200); } renderChrome(); };
+  a.addEventListener("click", open); a.addEventListener("auxclick", open);
   tr.append(a); t.append(tr, el("div", "company", m.company || ""));
   const meta = el("div", "meta");
   for (const [ic, txt] of [[P.pin, placeOf(m)], [P.clock, ago(m.posted || m.first_seen)], [P.globe, srcOf(m)]]) {
@@ -556,7 +658,7 @@ function render(opts = {}) {
 
 function renderHome(main) {
   const p = profile(), last = new Date(updated + "T00:00:00");
-  header(p.name ? `Olá, ${p.name}` : "Início", `Última recolha a ${fmt.format(last)}.`);
+  header(p.name ? `Olá, ${p.name}` : "Início", "O resumo das tuas vagas.");
   const byDay = {}; data.forEach(m => byDay[m.first_seen] = (byDay[m.first_seen] || 0) + 1);
   const newN = data.filter(isNew).length;
   const prevDay = Object.keys(byDay).filter(d => d < updated).sort().pop();
@@ -737,7 +839,8 @@ function renderSettings(main) {
   const src = el("div"); (tracker.sources || []).forEach(s => { const st = s.status || ""; const r = el("div", "src-row");
     r.append(el("span", null, s.name), el("span", /ERRO/.test(st) ? "bad" : "tnum", /ERRO/.test(st) ? "Com erro" : (st.replace(/^ok, /, "").replace(/ \(.*\)$/, "") || "Sem dados"))); src.append(r); });
   const fontes = row("Fontes", null); fontes.querySelector(".rt").append(src);
-  main.append(group(row("Horário", tracker.schedule || "Todos os dias, duas vezes", rv(`Última a ${fmt.format(day0(updated))}`)), (tracker.sources || []).length ? fontes : null));
+  main.append(group(row("Horário", tracker.schedule || "Todos os dias, duas vezes", rv(`Última ${whenUpdated()}`)), (tracker.sources || []).length ? fontes : null));
+  if (REPO) { main.append(el("h2", "sec", "Procura manual")); main.append(group(...syncRows())); }
   main.append(el("h2", "sec", "Notificações"));
   main.append(group(row(`Notificações de ${p.name || "este perfil"}`, p.channel ? "Na app ntfy, só com as vagas novas deste perfil e uma única vez por vaga." : "Este perfil ainda não tem canal ntfy.")));
 }
@@ -801,16 +904,18 @@ for (const [o, n] of Object.entries(RENAMED)) for (const k of [markKey, seenKey]
   try { const v = localStorage.getItem(k(o)); if (v != null && localStorage.getItem(k(n)) == null) localStorage.setItem(k(n), v); localStorage.removeItem(k(o)); } catch (e) {}
 }
 if (RENAMED[store.get("vagas-perfil", "")]) store.set("vagas-perfil", RENAMED[store.get("vagas-perfil", "")]);
-fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
-  updated = d.updated; tracker = d.tracker || {};
+function applyData(d) {
+  updated = d.updated; updatedAt = d.updated_at || ""; tracker = d.tracker || {};
   profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];
   all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") || ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
   const h = readUrl();
   if (h.pg) page = h.pg;
   const pid = h.pid || store.get("vagas-perfil", profiles[0].id);
   current = profiles.some(p => p.id === pid) ? pid : profiles[0].id;
-  select(current);
-}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar a página."; });
+  select(current); paintSync();
+}
+$("mSync").onclick = runSync; $("dSync").onclick = runSync; paintSync();
+fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(applyData).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar a página."; });
 addEventListener("hashchange", () => { const h = readUrl(); if (!profiles.length) return;
   if (h.pid && h.pid !== current) { if (h.pg) page = h.pg; select(h.pid); } else if (h.pg && h.pg !== page) go(h.pg); });
 </script>
