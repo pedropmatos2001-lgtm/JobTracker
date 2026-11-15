@@ -1,6 +1,6 @@
 // Service worker do JobTracker: permite instalar a página como aplicação e abri-la sem rede.
 // Vai sempre primeiro à rede (as vagas mudam duas vezes por dia); só usa a cópia guardada se não houver rede.
-const CACHE = "jobtracker-v1";
+const CACHE = "jobtracker-v2";
 const CORE = ["./", "index.html", "jobs.json", "manifest.json", "logo.png", "icon-192.png", "favicon-32.png"];
 
 self.addEventListener("install", e => {

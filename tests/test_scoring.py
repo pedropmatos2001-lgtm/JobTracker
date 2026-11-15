@@ -75,7 +75,7 @@ def test_good_job_passes(cfg):
     (dict(description="8+ years of experience in ESG reporting."), "anos"),
     (dict(description="1-2 years of experience in sustainability."), "júnior"),
     (dict(description="Fluent Dutch required. 4 years of experience in AI transformation."), "língua"),
-    (dict(salary_max=30000), "salário"),
+    (dict(salary_max=28000), "salário"),
 ])
 def test_exclusions(cfg, kw, fragment):
     v = evaluate(job(**kw), cfg, TODAY)

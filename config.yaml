@@ -4,7 +4,7 @@
 # Fasquia salarial (EUR brutos/ano). Pode ser substituída pelo segredo MIN_SALARY_EUR.
 # Vagas com salário PUBLICADO abaixo disto são excluídas. Vagas sem salário
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
-min_salary_eur: 35000
+min_salary_eur: 30000          # Pedro: só muda por pelo menos 30 000 € brutos por ano (conta quando a vaga publica o salário)
 # Empresas que nunca interessam ao Pedro: já trabalha na Deloitte (GPS), e mudar para outra Big4 não é subir.
 company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b"
 company_exclude_label: "Deloitte, EY, PwC e KPMG"
@@ -218,6 +218,7 @@ profiles:
     profile_env: CANDIDATE_PROFILE_MARIA
     rules:
       sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      min_salary_eur: 0                           # a Maria não tem salário mínimo
       company_exclude: ""                         # a exclusão das Big4 é só do Pedro
       company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
