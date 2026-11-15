@@ -1,3 +1,8 @@
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# skills instaladas localmente para o Claude (não pertencem ao repositório)
+.agents/
+.claude/
+skills-lock.json

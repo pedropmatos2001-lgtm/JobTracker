@@ -162,19 +162,51 @@ def test_bep_ccdr_offer_passes_with_one_strong_theme():
     assert v.include and any("remuneração" in x for x in v.flags) and any("candidaturas até" in x for x in v.flags)
 
 
-def test_associations_and_clusters_get_bonus():
+def test_no_bonus_for_associations_but_utilities_count_for_pedro():
     import yaml
     from datetime import date
     from jobtracker.models import Job
     from jobtracker.scoring import evaluate
     cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
-    desc = "Gestão de projetos europeus Horizon Europe. 4 anos de experiência."
-    base = dict(source="linkedin", title="Gestor de Projetos", url="u", location="Porto, Portugal",
-                posted="2026-11-14", description=desc)
+    desc = "Gestão de processos e melhoria contínua. 4 anos de experiência."
+    base = dict(source="linkedin", title="Gestor de Operações", url="u", location="Porto, Portugal", posted="2026-11-14", description=desc)
     t = date(2026, 11, 15)
-    plain = evaluate(Job(company="Empresa Qualquer", **base), cfg, t)
-    for org in ["Associação Empresarial do Minho", "PRODUTECH - Cluster das Tecnologias de Produção",
-                "BCSD Portugal", "VORTEX CoLAB", "AEP - Associação Empresarial de Portugal"]:
-        v = evaluate(Job(company=org, **base), cfg, t)
-        assert v.score == plain.score + cfg["org_bonus"]["points"], org
-    assert not plain.include and evaluate(Job(company="BCSD Portugal", **base), cfg, t).include
+    plain = evaluate(Job(company="Empresa Qualquer", **base), cfg, t).score
+    assert evaluate(Job(company="Associação Empresarial do Minho", **base), cfg, t).score == plain
+    assert evaluate(Job(company="BCSD Portugal", **base), cfg, t).score == plain
+    assert evaluate(Job(company="Águas do Norte", **base), cfg, t).score == plain + cfg["sector_bonus"]["points"]
+
+
+def test_marta_only_gets_public_sector_and_human_rights():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    marta = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["marta"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 3 anos de experiência.")
+    assert evaluate(job("Técnica de Proteção de Crianças e Jovens", "Projeto de proteção de crianças em situação de risco."), marta, t).include
+    assert evaluate(job("Project Officer – Gender Equality", "Programa de combate à violência doméstica e igualdade de género."), marta, t).include
+    assert evaluate(job("Policy Officer", "Public policy analysis for the Ministry, public administration reform."), marta, t).include
+    v = evaluate(job("Consultora de Incentivos", "SIFIDE, Portugal 2030, candidaturas a incentivos para empresas."), marta, t)
+    assert not v.include                 # incentivos fiscais ficam de fora (pelo título ou por falta de temas)
+
+
+def test_marta_eu_affairs_and_projects_yes_tax_incentives_no():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    marta = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["marta"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 3 anos de experiência.")
+    assert evaluate(job("EU Affairs Account Executive", "Public affairs agency, monitoring the European Parliament and the European Commission."), marta, t).include
+    assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), marta, t).include
+    assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), marta, t).include
+    assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), marta, t).include

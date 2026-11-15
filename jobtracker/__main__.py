@@ -43,10 +43,13 @@ def _human(pattern):
 def rules_summary(pcfg):
     """Resumo das regras de um perfil, sem nada pessoal, para a página de definições."""
     kw = pcfg.get("keywords", {})
-    return {"min_score": pcfg.get("min_score"), "years": pcfg.get("years"), "max_age_days": pcfg.get("max_age_days"),
+    return {"require_theme": bool(pcfg.get("require_theme")), "min_score": pcfg.get("min_score"), "years": pcfg.get("years"), "max_age_days": pcfg.get("max_age_days"),
             "min_salary_eur": pcfg.get("min_salary_eur"),
             "strong": [x for x in (label_of(p) or _human(pat_of(p)) for p in kw.get("strong", [])) if x],
             "medium": [x for x in (label_of(p) or _human(pat_of(p)) for p in kw.get("medium", [])) if x],
+            "strong_detail": [{"label": label_of(p) or _human(pat_of(p)),
+                               "examples": (p.get("examples") if isinstance(p, dict) else None) or []}
+                              for p in kw.get("strong", [])],
             "bonus": [b for b in ("associações e clusters" if (pcfg.get("org_bonus") or {}).get("pattern") else "",
                                   "utilities e energia" if (pcfg.get("sector_bonus") or {}).get("pattern") else "") if b]}
 
@@ -242,11 +245,12 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         if prev is not None:                   # já está na página (outro perfil): acrescenta este perfil
             prev.setdefault("profiles", {first_id: {"score": prev.get("score"), "flags": prev.get("flags", [])}})
             for pid, (v, jd) in hits.items():
-                prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
+                prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
+                                         **({"fit": jd["fit"]} if jd else {})}
             continue
         entry = {**j.to_dict(), "score": first_v.score, "flags": first_v.flags[:4], "first_seen": today.isoformat(),
-                 "profiles": {pid: {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
-                              for pid, (v, jd) in hits.items()}}
+                 "profiles": {pid: {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
+                                    **({"fit": jd["fit"]} if jd else {})} for pid, (v, jd) in hits.items()}}
         if not pub:
             entry.update({"reasons": first_v.reasons[:6], "judge": first_jd})
         elif first_jd:
@@ -323,7 +327,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                                     "queries": len(s.get("queries") or []), "status": next(
                                         (r.split(": ", 1)[1] for r in report if r.startswith((s.get("name") or "") + ": ")), "")}
                                    for s in cfg.get("sources", []) if s.get("enabled") is not False],
-                       "schedule": cfg.get("schedule_text", "Todos os dias, ≈07:15 e ≈16:15 (hora UTC)"),
+                       "schedule": cfg.get("schedule_text", "Todos os dias, por volta das 7h15 e das 16h15"),
                        "stats": stats}
             json.dump({"updated": today.isoformat(), "profiles": [p["public"] for p in profiles], "tracker": tracker,
                        "matches": state["matches"]}, f, ensure_ascii=False)

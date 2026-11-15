@@ -4,555 +4,731 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Vagas">
-<meta name="theme-color" content="#f5f5f7">
+<meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Vagas</title>
 <style>
-  /* Estilo Apple: tipo de letra do sistema, cinzentos neutros e um único azul. */
+  /* Estilo Apple Saúde: fundo cinzento, cartões brancos, cor só para estados e dados. */
   :root {
     color-scheme: light;
-    --bg: #ffffff; --side: #f5f5f7; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.08); --hover: rgba(0,0,0,.04);
-    --label: #1d1d1f; --label-2: #6e6e73; --label-3: #86868b; --sep: rgba(60,60,67,.16);
-    --blue: #0071e3; --green: #248a3d; --orange: #b25000; --red: #d70015;
-    --surface: #ffffff; --bar: rgba(255,255,255,.82); --topbar: rgba(245,245,247,.86); --modal: rgba(255,255,255,.96);
-    --seg-on: #ffffff; --current: rgba(0,0,0,.06); --avatar-bg: #1d1d1f; --avatar-fg: #ffffff; --card-line: rgba(0,0,0,.06);
-    --motion-100: 100ms; --motion-150: 150ms; --motion-200: 200ms; --motion-300: 300ms;
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+    --bg: #f2f2f7; --side: rgba(246,246,249,.9); --card: #ffffff; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.08);
+    --hover: rgba(0,0,0,.04); --label: #1c1c1e; --label-2: #6c6c70; --label-3: #8a8a8e; --sep: rgba(60,60,67,.13);
+    --blue: #007aff; --blue-soft: rgba(0,122,255,.1); --green: #248a3d; --green-soft: rgba(52,199,89,.14); --orange: #c25700;
+    --bar: rgba(242,242,247,.82); --modal: rgba(255,255,255,.97); --seg-on: #ffffff; --current: rgba(0,0,0,.055);
+    --avatar-bg: #1c1c1e; --avatar-fg: #ffffff; --chart: rgba(0,122,255,.28); --switch-off: #e9e9eb;
+    --shadow: 0 1px 2px rgba(0,0,0,.04), 0 1px 1px rgba(0,0,0,.02); --shadow-hover: 0 10px 30px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    --r-card: 16px; --r-ctl: 10px;
   }
   :root[data-theme="dark"] { color-scheme: dark;
-    --bg: #000000; --side: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.18); --hover: rgba(255,255,255,.06);
-    --label: #f5f5f7; --label-2: #a1a1a6; --label-3: #8e8e93; --sep: rgba(84,84,88,.55);
-    --blue: #0a84ff; --green: #30d158; --orange: #ff9f0a; --red: #ff453a;
-    --surface: #1c1c1e; --bar: rgba(0,0,0,.72); --topbar: rgba(28,28,30,.86); --modal: rgba(44,44,46,.96);
-    --seg-on: #636366; --current: rgba(255,255,255,.08); --avatar-bg: #f5f5f7; --avatar-fg: #1d1d1f; --card-line: rgba(255,255,255,.06); }
+    --bg: #000000; --side: rgba(22,22,24,.92); --card: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.16);
+    --hover: rgba(255,255,255,.06); --label: #f2f2f7; --label-2: #aeaeb2; --label-3: #8e8e93; --sep: rgba(84,84,88,.5);
+    --blue: #0a84ff; --blue-soft: rgba(10,132,255,.18); --green: #30d158; --green-soft: rgba(48,209,88,.16); --orange: #ff9f0a;
+    --bar: rgba(0,0,0,.72); --modal: rgba(44,44,46,.97); --seg-on: #636366; --current: rgba(255,255,255,.08);
+    --avatar-bg: #f2f2f7; --avatar-fg: #1c1c1e; --chart: rgba(10,132,255,.4); --switch-off: #39393d;
+    --shadow: 0 0 0 .5px rgba(255,255,255,.06); --shadow-hover: 0 0 0 .5px rgba(255,255,255,.12), 0 10px 30px rgba(0,0,0,.5); }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--label); -webkit-font-smoothing: antialiased;
-         font: 15px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif; letter-spacing: -.01em; }
-  button, input, select { font: inherit; color: inherit; letter-spacing: inherit; }
+         font: 16px/1.5 -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, sans-serif; letter-spacing: -.011em; }
+  button, input, select, a { font: inherit; color: inherit; letter-spacing: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
   a { color: var(--blue); }
   svg { flex: none; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 32px; }
-
-  /* ---------- barra lateral ---------- */
-  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
-  .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; overflow-x: hidden; background: var(--side); border-right: .5px solid var(--sep);
-          padding: 20px 10px 10px; display: flex; flex-direction: column; min-width: 0; }
-  .brand { font-size: 15px; font-weight: 600; padding: 2px 10px 18px; letter-spacing: -.02em; }
-  .sect { font-size: 11px; font-weight: 500; color: var(--label-3); padding: 14px 10px 6px; }
-  .nav { display: grid; gap: 1px; }
-  .item { position: relative; display: flex; align-items: center; gap: 10px; width: 100%; min-height: 34px; padding: 6px 10px; border: 0; border-radius: 8px;
-          background: transparent; text-align: left; cursor: pointer; font-size: 14px; color: var(--label); text-decoration: none;
-          transition: background-color var(--motion-150) var(--ease-out); }
-  .item svg { color: var(--label-2); }
-  .item:hover { background: var(--hover); }
-  .item[aria-current=page] { background: var(--current); font-weight: 500; }
-  .item[aria-current=page]::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 2px; background: var(--blue); }
-  .item .n { margin-left: auto; font-size: 12px; color: var(--label-3); font-variant-numeric: tabular-nums; }
-  .bottom { margin-top: auto; border-top: .5px solid var(--sep); padding-top: 10px; display: grid; gap: 1px; }
-  .me { display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px; min-width: 0; }
-  .avatar { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--avatar-bg); color: var(--avatar-fg);
-            font-weight: 600; font-size: 12px; letter-spacing: 0; }
-  .me .pinfo, .pitem .pinfo { min-width: 0; flex: 1; }
-  .pn { font-size: 14px; font-weight: 600; line-height: 1.25; }
-  .ph { font-size: 12px; color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-  /* ---------- janela "Trocar de perfil" ---------- */
-  .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.18); opacity: 0; pointer-events: none;
-           transition: opacity var(--motion-150) var(--ease-in); }
-  .scrim.open { opacity: 1; pointer-events: auto; transition: opacity var(--motion-200) var(--ease-out); }
-  .modal { position: fixed; z-index: 31; left: 50%; top: 50%; width: min(420px, calc(100vw - 32px)); background: var(--modal);
-           backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px); border-radius: 16px; padding: 18px 12px 12px;
-           box-shadow: 0 24px 60px rgba(0,0,0,.18), 0 0 0 .5px rgba(0,0,0,.08);
-           opacity: 0; visibility: hidden; transform: translate(-50%, -48%) scale(.97); pointer-events: none;
-           transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in), visibility 0s linear var(--motion-150); }
-  .modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%); pointer-events: auto;
-                transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out), visibility 0s; }
-  .modal h2 { font-size: 17px; font-weight: 600; margin: 0 8px 2px; }
-  .modal p { font-size: 13px; color: var(--label-2); margin: 0 8px 12px; }
-  .plist { display: grid; gap: 2px; }
-  .pitem { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 10px; border-radius: 10px;
-           text-align: left; cursor: pointer; min-height: 56px; transition: background-color var(--motion-100) var(--ease-out); }
-  .pitem:hover, .pitem:focus-visible { background: var(--hover); }
-  .pitem .count { font-size: 12px; color: var(--label-2); font-variant-numeric: tabular-nums; }
-  .pitem .tick { color: var(--blue); visibility: hidden; }
-  .pitem[aria-current=true] .tick { visibility: visible; }
-  .pitem .avatar { width: 36px; height: 36px; font-size: 13px; }
-  .mfoot { display: flex; justify-content: space-between; align-items: center; border-top: .5px solid var(--sep); margin-top: 8px; padding: 10px 8px 0; }
-  .mfoot a, .mfoot button { font-size: 14px; text-decoration: none; border: 0; background: transparent; color: var(--blue); cursor: pointer; padding: 6px 0; }
-
-  /* ---------- conteúdo ---------- */
-  header.wrap { padding-top: 48px; padding-bottom: 4px; }
-  h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h1.swap { animation: fade var(--motion-200) var(--ease-out); }
-  .sub { color: var(--label-2); font-size: 15px; margin-top: 6px; }
-  .bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(1.8) blur(20px);
-         -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid transparent; transition: border-color var(--motion-150) var(--ease-out); }
-  .bar.scrolled { border-bottom-color: var(--sep); }
-  .bar .wrap { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 16px; padding-bottom: 12px; }
-  .search { position: relative; flex: 1 1 240px; }
-  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--label-3); }
-  input[type=search] { width: 100%; padding: 8px 12px 8px 32px; border: 0; border-radius: 9px; background: var(--fill); outline: none; font-size: 14px;
-                       -webkit-appearance: none; appearance: none; }
-  input[type=search]::placeholder { color: var(--label-3); }
-  input[type=search]:focus { box-shadow: 0 0 0 3px rgba(0,113,227,.25); }
-  .seg { display: inline-flex; background: var(--fill); border-radius: 9px; padding: 2px; }
-  .seg button { border: 0; background: transparent; font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 7px; cursor: pointer;
-                transition: background-color var(--motion-150) var(--ease-out), box-shadow var(--motion-150) var(--ease-out); }
-  .seg button[aria-pressed=true] { background: var(--seg-on); box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); }
-  .select { position: relative; }
-  .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: 9px; padding: 6px 28px 6px 12px;
-                   font-size: 13px; font-weight: 500; cursor: pointer; }
-  .select svg { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
-  .mviews { display: none; }
-
-  main { padding-bottom: 56px; }
-  .group-label { font-size: 13px; font-weight: 600; color: var(--label); padding: 24px 0 2px; }
-  .group-label:first-child { padding-top: 8px; }
-  .list { display: grid; }
-
-  /* uma vaga = uma linha */
-  .job { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 4px 14px 0;
-         border-bottom: .5px solid var(--sep); }
-  .job.done { opacity: .5; }
-  .job.enter { animation: rise var(--motion-300) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 30ms); }
-  .job.leaving { opacity: 0; transform: translateX(-8px); transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in); }
-  .logo { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
-          font-weight: 600; font-size: 13px; letter-spacing: 0; margin-top: 1px; }
-  .jt { min-width: 0; }
-  .title { display: block; font-size: 15px; font-weight: 600; line-height: 1.33; color: var(--label); text-decoration: none; }
-  .title::after { content: ""; position: absolute; inset: 0; }               /* a linha toda abre a vaga */
-  .job:hover .title { color: var(--blue); }
-  .title:focus-visible { outline: none; }
-  .job:has(.title:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
-  .l2 { font-size: 14px; color: var(--label-2); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .l3 { font-size: 12px; color: var(--label-3); margin-top: 3px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .dot-new { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
-  .warn { color: var(--orange); }
-  .acts { position: relative; z-index: 1; display: flex; align-items: center; gap: 2px; }
-  .icon { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--label-3); display: grid; place-items: center;
-          cursor: pointer; transition: background-color var(--motion-150) var(--ease-out), color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
-  .icon:hover { background: var(--hover); color: var(--label); }
-  .icon:active { transform: scale(.92); }
-  .icon.on { color: var(--green); }
-
-  /* definições: grupos de linhas, como nas Definições do iOS/macOS */
-  .settings { display: grid; gap: 28px; padding-top: 20px; }
-  .settings.enter { animation: rise var(--motion-300) var(--ease-out) backwards; }
-  .sgroup h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -.02em; }
-  .scard { background: var(--surface); border-radius: 14px; box-shadow: 0 0 0 .5px var(--sep), 0 1px 2px var(--card-line); overflow: hidden; }
-  .srow { display: flex; align-items: center; gap: 16px; padding: 14px 16px; min-height: 60px; }
-  .srow + .srow { border-top: .5px solid var(--sep); }
-  .srow .st { flex: 1; min-width: 0; }
-  .srow .st b { display: block; font-size: 15px; font-weight: 500; }
-  .srow .st span { display: block; font-size: 13px; color: var(--label-2); margin-top: 1px; }
-  .srow .sv { text-align: right; font-size: 14px; color: var(--label-2); flex: none; }
-  .srow .sv b { display: block; color: var(--label); font-weight: 600; }
-  button.srow { width: 100%; border: 0; background: transparent; text-align: left; cursor: pointer; transition: background-color var(--motion-150) var(--ease-out); }
-  button.srow:hover { background: var(--hover); }
-  .pill { border: .5px solid var(--sep); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500;
-          cursor: pointer; text-decoration: none; color: var(--label); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-          transition: background-color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
-  .pill:hover { background: var(--hover); }
-  .pill:active { transform: scale(.97); }
-  .pill.danger { color: var(--red); }
-  .pill.dark { background: var(--label); color: var(--bg); border-color: transparent; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .chips span { font-size: 12px; color: var(--label-2); background: var(--fill-2); border-radius: 6px; padding: 3px 8px; }
-  .srcrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 13px; padding: 2px 0; }
-  .srcrow .ok { color: var(--label-2); } .srcrow .bad { color: var(--red); }
-  .back { border: 0; background: transparent; color: var(--label); font-size: 13px; font-weight: 500; cursor: pointer; padding: 6px 0; display: inline-flex; gap: 6px; align-items: center; }
-  .prow-acts { display: flex; gap: 8px; align-items: center; }
-  .inuse { color: var(--green); font-size: 14px; font-weight: 500; display: inline-flex; gap: 4px; align-items: center; }
-  .sv .seg { margin: 0; }
-  @media (max-width: 600px) { .srow { flex-wrap: wrap; } .srow .sv { text-align: left; } }
-
-  .empty { text-align: center; padding: 64px 20px; color: var(--label-2); }
-  .empty b { display: block; color: var(--label); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
-  footer { color: var(--label-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
-
-  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 14px;
-           background: rgba(29,29,31,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; border-radius: 14px;
-           padding: 8px 8px 8px 16px; font-size: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.2);
-           transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
-           transition: transform var(--motion-150) var(--ease-in), opacity var(--motion-150) var(--ease-in); }
-  .toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto;
-                transition: transform var(--motion-200) var(--ease-out), opacity var(--motion-200) var(--ease-out); }
-  .toast button { border: 0; background: transparent; color: #64b5ff; font-weight: 600; padding: 0 10px; min-height: 36px; cursor: pointer; border-radius: 8px; }
-
-  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 32px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  @media (pointer: coarse) {
-    .seg button, .select select, .item, .mfoot a, .mfoot button, .toast button { min-height: 44px; }
-    .icon { width: 44px; height: 44px; }
+  /* ---------- barra lateral (computador) ---------- */
+  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100dvh; }
+  .side { position: sticky; top: 0; height: 100dvh; overflow: hidden auto; background: var(--side); border-right: .5px solid var(--sep);
+          backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+          padding: 24px 12px 12px; display: flex; flex-direction: column; min-width: 0; }
+  .brand { font-size: 20px; font-weight: 700; letter-spacing: -.025em; padding: 0 10px 22px; }
+  .nav { display: grid; gap: 2px; }
+  .item { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 38px; padding: 8px 10px; border: 0; border-radius: var(--r-ctl);
+          background: transparent; text-align: left; cursor: pointer; font-size: 15px; color: var(--label); text-decoration: none;
+          transition: background-color 150ms var(--ease-out); }
+  .item svg { color: var(--label-2); }
+  .item[aria-current=page] { background: var(--current); font-weight: 600; }
+  .item[aria-current=page] svg { color: var(--blue); }
+  .item .n { margin-left: auto; font-size: 13px; color: var(--label-3); font-weight: 400; }
+  .bottom { margin-top: auto; padding-top: 10px; border-top: .5px solid var(--sep); display: flex; align-items: center; gap: 4px; }
+  .profile-btn { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; border: 0; background: transparent; padding: 8px;
+                 border-radius: 12px; cursor: pointer; text-align: left; min-height: 52px; transition: background-color 150ms var(--ease-out); }
+  .profile-btn .chev { color: var(--label-3); margin-left: auto; }
+  .icon-btn { flex: none; width: 44px; height: 44px; border: 0; border-radius: 12px; background: transparent; color: var(--label-2);
+              display: grid; place-items: center; cursor: pointer; transition: background-color 150ms var(--ease-out), color 150ms var(--ease-out); }
+  .icon-btn[aria-current=page] { background: var(--current); color: var(--blue); }
+  .avatar { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; background: var(--avatar-bg); color: var(--avatar-fg);
+            font-weight: 600; font-size: 13px; letter-spacing: 0; }
+  .pinfo { min-width: 0; }
+  .pn { font-size: 15px; font-weight: 600; line-height: 1.25; }
+  .ph { font-size: 13px; color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (hover: hover) and (pointer: fine) {
+    .item:hover, .profile-btn:hover, .icon-btn:hover { background: var(--hover); }
+    .item[aria-current=page]:hover, .icon-btn[aria-current=page]:hover { background: var(--current); }
   }
 
-  /* telemóvel: barra lateral vira barra de topo; vistas passam para um seletor */
-  .topbar { display: none; }
+  /* ---------- janela de perfis ---------- */
+  .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.24); opacity: 0; pointer-events: none; transition: opacity 200ms var(--ease-out); }
+  .scrim.open { opacity: 1; pointer-events: auto; transition-duration: 250ms; }
+  .modal { position: fixed; z-index: 31; left: 50%; top: 50%; width: min(400px, calc(100vw - 32px)); background: var(--modal);
+           backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-radius: 20px; padding: 20px 12px 12px;
+           box-shadow: 0 24px 60px rgba(0,0,0,.22), 0 0 0 .5px rgba(0,0,0,.08); overscroll-behavior: contain;
+           opacity: 0; visibility: hidden; transform: translate(-50%, -50%) scale(.96); pointer-events: none;
+           transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), visibility 0s linear 200ms; }
+  .modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%); pointer-events: auto;
+                transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out), visibility 0s; }
+  .modal h2 { font-size: 20px; font-weight: 700; letter-spacing: -.02em; margin: 0 10px 12px; }
+  .plist { display: grid; gap: 4px; }
+  .pitem { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 10px; border-radius: 14px;
+           text-align: left; cursor: pointer; min-height: 64px; transition: background-color 150ms var(--ease-out); }
+  .pitem[aria-current=true] { background: var(--blue-soft); }
+  .pitem .avatar { width: 42px; height: 42px; font-size: 15px; }
+  .pitem .pinfo { flex: 1; }
+  .pitem .tick { color: var(--blue); visibility: hidden; }
+  .pitem[aria-current=true] .tick { visibility: visible; }
+  @media (hover: hover) and (pointer: fine) { .pitem:hover { background: var(--hover); } .pitem[aria-current=true]:hover { background: var(--blue-soft); } }
+
+  /* ---------- cabeçalho ---------- */
+  header.wrap { padding-top: 48px; padding-bottom: 8px; }
+  h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
+  .sub { color: var(--label-2); font-size: 17px; margin-top: 6px; letter-spacing: -.02em; }
+  main { padding-bottom: 72px; }
+  h2.sec { font-size: 22px; font-weight: 700; letter-spacing: -.025em; margin: 36px 0 12px; }
+  h2.sec .more { float: right; font-size: 15px; font-weight: 400; letter-spacing: -.01em; }
+
+  /* ---------- dashboard ---------- */
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+  .kpi { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch;
+         background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); padding: 16px 18px; border: 0; text-align: left; cursor: pointer;
+         transition: box-shadow 200ms var(--ease-out), transform 160ms var(--ease-out); }
+  .kpi .k-label { font-size: 13px; font-weight: 600; color: var(--label-2); display: flex; align-items: center; gap: 6px; }
+  .kpi .k-label svg { color: var(--blue); }
+  .kpi .k-value { font-size: 34px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; margin-top: 8px; }
+  .kpi .k-ctx { font-size: 13px; color: var(--label-2); margin-top: 2px; }
+  .panel { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); padding: 18px 20px; }
+  .kpis + .panel { margin-top: 12px; }
+  .chart { display: grid; grid-template-columns: repeat(14, 1fr); align-items: end; gap: 6px; height: 140px; margin-top: 14px; }
+  .bar-col { position: relative; height: 100%; display: flex; align-items: flex-end; }
+  .bar { width: 100%; min-height: 3px; border-radius: 6px 6px 3px 3px; background: var(--chart); }
+  .bar.today { background: var(--blue); }
+  .bar-col .tip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); white-space: nowrap; }
+  .axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--label-3); margin-top: 8px; }
+  .chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .chart-head b { font-size: 17px; font-weight: 600; }
+  .chart-head span { font-size: 13px; color: var(--label-2); }
+  .grid2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 12px; }
+  .companies { display: grid; }
+  .company-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
+  .company-row + .company-row { border-top: .5px solid var(--sep); }
+  .company-row .c-name { flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .company-row .c-n { font-size: 15px; color: var(--label-2); }
+  .mini-logo { width: 32px; height: 32px; border-radius: 8px; font-size: 12px; }
+
+  /* ---------- vagas ---------- */
+  .bar-sticky { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+                margin: 0 -32px; padding: 14px 32px 12px; }
+  .bar-sticky::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 10px; pointer-events: none;
+                       background: linear-gradient(var(--sep), transparent); opacity: 0; transition: opacity 150ms var(--ease-out); }
+  .bar-sticky.scrolled::after { opacity: 1; }
+  .seg { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--fill); border-radius: 9px; padding: 2px; }
+  .seg .thumb { position: absolute; top: 2px; bottom: 2px; left: 2px; border-radius: 7px; background: var(--seg-on);
+                box-shadow: 0 3px 8px rgba(0,0,0,.12), 0 3px 1px rgba(0,0,0,.04); transition: transform 250ms var(--ease-in-out); }
+  .seg button { position: relative; z-index: 1; border: 0; background: transparent; font-size: 14px; font-weight: 500; padding: 6px 18px; cursor: pointer;
+                border-radius: 7px; min-width: 0; white-space: nowrap; }
+  .seg button[aria-pressed=true] { font-weight: 600; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
+  .search { position: relative; flex: 1 1 200px; }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--label-3); }
+  input[type=search] { width: 100%; padding: 8px 12px 8px 34px; border: 0; border-radius: var(--r-ctl); background: var(--fill); outline: none; font-size: 16px;
+                       -webkit-appearance: none; appearance: none; min-height: 38px; }
+  input[type=search]::placeholder { color: var(--label-3); }
+  input[type=search]:focus { box-shadow: 0 0 0 3px var(--blue-soft); }
+  .select { position: relative; }
+  .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: var(--r-ctl); padding: 8px 30px 8px 12px;
+                   font-size: 15px; cursor: pointer; min-height: 38px; max-width: 220px; text-overflow: ellipsis; }
+  .select select.on { background: var(--blue-soft); color: var(--blue); font-weight: 500; }
+  .select svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
+  .clear { border: 0; background: transparent; color: var(--blue); font-size: 15px; cursor: pointer; padding: 8px 4px; min-height: 38px; }
+  .count { font-size: 13px; color: var(--label-2); margin: 16px 2px 10px; }
+  .day { font-size: 15px; font-weight: 600; color: var(--label-2); margin: 22px 2px 10px; }
+  .list { display: grid; gap: 10px; }
+  .job { position: relative; display: grid; grid-template-columns: 48px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 16px 12px 16px 18px;
+         background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); transition: box-shadow 200ms var(--ease-out); }
+  .job.applied { opacity: .62; }
+  .logo { width: 48px; height: 48px; border-radius: 11px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
+          font-weight: 700; font-size: 16px; letter-spacing: -.02em; overflow: hidden; box-shadow: inset 0 0 0 .5px var(--sep); }
+  .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .jt { min-width: 0; }
+  .title-row { display: flex; align-items: baseline; gap: 8px; }
+  .title { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--label); text-decoration: none; letter-spacing: -.02em; }
+  .title::after { content: ""; position: absolute; inset: 0; border-radius: var(--r-card); }
+  .title:focus-visible { outline: none; }
+  .job:has(.title:focus-visible) { box-shadow: 0 0 0 3px var(--blue); }
+  .company { font-size: 15px; color: var(--label); margin-top: 2px; }
+  .meta { font-size: 13px; color: var(--label-2); margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .meta span { display: inline-flex; align-items: center; gap: 5px; }
+  .meta svg { color: var(--label-3); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tags span { font-size: 13px; color: var(--label-2); background: var(--fill-2); border-radius: 7px; padding: 3px 9px; }
+  .tags .fit { font-weight: 600; }
+  .tags .fit.high { background: var(--green-soft); color: var(--green); }
+  .tags .fit.good { background: var(--blue-soft); color: var(--blue); }
+  .warn { font-size: 13px; color: var(--orange); margin-top: 8px; }
+  .acts { position: relative; z-index: 2; display: flex; }
+  .apply { width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--label-3); display: grid; place-items: center; cursor: pointer;
+           transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out), transform 160ms var(--ease-out); }
+  .apply[aria-pressed=true] { color: var(--green); }
+  /* ponto azul de vaga nova, com legenda ao passar ou tocar */
+  .dot { position: absolute; z-index: 3; left: -2px; top: 16px; width: 22px; height: 44px; border: 0; padding: 0; background: transparent;
+         display: grid; place-items: center; cursor: default; }
+  .dot::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
+  .tip { position: absolute; z-index: 20; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%) scale(.97); transform-origin: bottom center;
+         background: var(--label); color: var(--bg); font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+         opacity: 0; pointer-events: none; transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
+  .dot .tip { left: 0; transform: scale(.97); transform-origin: bottom left; }
+  .dot:focus-visible .tip, .dot.show .tip { opacity: 1; transform: none; }
+  .bar-col:hover .tip, .bar-col:focus-visible .tip { opacity: 1; transform: translateX(-50%); }
+  @media (hover: hover) and (pointer: fine) {
+    .dot:hover .tip { opacity: 1; transform: none; transition-delay: 250ms; }
+    .job:hover, .kpi:hover { box-shadow: var(--shadow-hover); }
+    .apply:hover { background: var(--hover); color: var(--label); }
+    .apply[aria-pressed=true]:hover { color: var(--green); }
+  }
+  .empty { text-align: center; padding: 56px 20px; color: var(--label-2); background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); }
+  .empty b { display: block; color: var(--label); font-size: 20px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.02em; }
+  .empty button { margin-top: 14px; }
+
+  /* ---------- regras e definições ---------- */
+  .group { background: var(--card); border-radius: var(--r-card); box-shadow: var(--shadow); overflow: hidden; }
+  .row { display: flex; align-items: center; gap: 16px; padding: 14px 18px; min-height: 56px; }
+  .row + .row { border-top: .5px solid var(--sep); }
+  .row .rt { flex: 1; min-width: 0; }
+  .row .rt b { display: block; font-size: 16px; font-weight: 500; }
+  .row .rt span { display: block; font-size: 14px; color: var(--label-2); margin-top: 2px; }
+  .row .rv { flex: none; font-size: 16px; color: var(--label-2); text-align: right; }
+  .row .rv.strong { color: var(--label); font-weight: 600; }
+  .theme-ico { flex: none; width: 32px; height: 32px; border-radius: 8px; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue);
+               font-size: 14px; font-weight: 700; }
+  .note { font-size: 14px; color: var(--label-2); margin: 10px 4px 0; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--blue); color: #fff; border-radius: 999px; padding: 10px 18px;
+         font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; min-height: 44px; transition: transform 160ms var(--ease-out); }
+  .btn.ghost { background: var(--fill); color: var(--blue); }
+  /* interruptor igual ao do iPhone */
+  .switch { position: relative; flex: none; width: 51px; height: 31px; border: 0; padding: 0; border-radius: 999px; background: var(--switch-off); cursor: pointer;
+            transition: background-color 250ms var(--ease-out); }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff;
+                   box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06); transition: transform 250ms var(--ease-out); }
+  .switch::before { content: ""; position: absolute; inset: -7px -4px; }
+  .switch[aria-checked=true] { background: #34c759; }
+  .switch[aria-checked=true]::after { transform: translateX(20px); }
+  .switch[aria-disabled=true] { opacity: .45; cursor: not-allowed; }
+  .switch-hit { position: relative; display: grid; place-items: center; min-width: 51px; min-height: 44px; }
+  .src-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 3px 0; }
+  .src-row .bad { color: var(--orange); }
+
+  /* ---------- carregar no ecrã: pressão e vibração visual ---------- */
+  .kpi:active, .btn:active, .apply:active, .seg button:active, .item:active, .pitem:active, .profile-btn:active, .icon-btn:active { transform: scale(.97); }
+  .item, .pitem, .profile-btn, .icon-btn { transition: background-color 150ms var(--ease-out), transform 160ms var(--ease-out); }
+  .nope { animation: nope 320ms var(--ease-out); }
+  @keyframes nope { 0%, 100% { transform: none; } 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+
+  /* ---------- entrada (uma vez por sessão) e cartões ao fazer scroll (uma vez) ---------- */
+  .js .rise { opacity: 0; transform: translateY(8px); }
+  .js .rise.in { opacity: 1; transform: none; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); transition-delay: var(--d, 0ms); }
+  .js .reveal { opacity: 0; transform: translateY(8px); }
+  .js .reveal.in { opacity: 1; transform: none; transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
+  .swap { animation: fade 150ms var(--ease-out); }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ---------- telemóvel ---------- */
+  .topbar, .tabs { display: none; }
+  @media (pointer: coarse) { .seg button, .select select, input[type=search], .clear { min-height: 44px; } }
   @media (max-width: 900px) {
+    body { font-size: 17px; }
     .app { display: block; }
     .side { display: none; }
-    .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; gap: 12px;
-              padding: 6px 12px 6px 16px; background: var(--topbar); backdrop-filter: saturate(1.8) blur(20px);
-              -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid var(--sep); }
-    .topbar .brand { padding: 0; }
-    .topbar button { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 4px; border-radius: 999px; min-height: 44px; cursor: pointer; font-size: 14px; font-weight: 500; }
-    .bar { top: 57px; }
-    .mviews { display: inline-flex; }
-    header.wrap { padding-top: 20px; }
-    h1 { font-size: 30px; }
     .wrap { padding: 0 16px; }
-    .modal { left: 8px; right: 8px; top: auto; bottom: calc(8px + env(safe-area-inset-bottom)); width: auto; transform: translateY(110%); }
-    .modal.open { transform: none; transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-300) var(--ease-out), visibility 0s; }
-    .job { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; }
-    .logo { width: 32px; height: 32px; font-size: 12px; }
+    .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; gap: 12px;
+              padding: calc(6px + env(safe-area-inset-top)) 8px 6px 16px; background: var(--bar);
+              backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: .5px solid var(--sep); }
+    .topbar .brand { padding: 0; font-size: 17px; font-weight: 600; }
+    .topbar .profile-btn { flex: none; min-height: 44px; padding: 4px 6px 4px 4px; gap: 8px; }
+    .topbar .profile-btn .ph { display: none; }
+    .topbar .avatar { width: 32px; height: 32px; }
+    .tabs { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; background: var(--bar);
+            backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-top: .5px solid var(--sep);
+            padding: 2px 0 env(safe-area-inset-bottom); }
+    .tabs button { border: 0; background: transparent; display: grid; justify-items: center; align-content: center; gap: 2px; min-height: 49px;
+                   cursor: pointer; font-size: 10px; font-weight: 500; color: var(--label-3); }
+    .tabs button[aria-current=page] { color: var(--blue); }
+    header.wrap { padding-top: 16px; }
+    h1 { font-size: 34px; }
+    .sub { font-size: 15px; }
+    h2.sec { font-size: 22px; margin-top: 28px; }
+    main { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .kpi .k-value { font-size: 28px; }
+    .grid2 { grid-template-columns: 1fr; }
+    .chart { height: 120px; gap: 4px; }
+    .bar-sticky { top: calc(57px + env(safe-area-inset-top)); margin: 0 -16px; padding: 10px 16px; }
+    .seg { display: grid; width: 100%; }
+    .seg button, .select select, input[type=search], .clear { min-height: 44px; }
+    .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 10px -16px 0; padding: 0 16px 2px; }
+    .filters::-webkit-scrollbar { display: none; }
+    .filters .search { flex: 0 0 170px; }
+    .select select { font-size: 16px; max-width: 180px; }
+    .job { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 14px 6px 14px 14px; }
+    .logo { width: 44px; height: 44px; border-radius: 10px; font-size: 15px; }
+    .title { font-size: 17px; }
+    .modal { left: 8px; right: 8px; top: auto; bottom: calc(8px + env(safe-area-inset-bottom)); width: auto; transform: translateY(110%); border-radius: 22px;
+             transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-drawer), visibility 0s linear 200ms; }
+    .modal.open { transform: none; transition: opacity 250ms var(--ease-out), transform 400ms var(--ease-drawer), visibility 0s; }
+    .row { flex-wrap: wrap; }
   }
+  @media (max-width: 380px) { .kpi .k-value { font-size: 26px; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .job.enter, h1.swap { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
-    .job.leaving { transform: none; transition: opacity var(--motion-100) ease; }
-    .icon:active { transform: none; }
-    .modal, .modal.open { transform: translate(-50%, -50%); transition: opacity var(--motion-100) ease, visibility 0s; }
-    .toast, .toast.show { transform: translate(-50%, 0); transition: opacity var(--motion-100) ease; }
+    .js .rise, .js .reveal { transform: none; }
+    .js .rise.in, .js .reveal.in { transition: opacity 150ms ease; transition-delay: 0ms; }
+    .nope { animation: none; }
+    .seg .thumb, .switch, .switch::after { transition: none; }
+    .kpi:active, .btn:active, .apply:active, .seg button:active, .item:active, .pitem:active, .profile-btn:active, .icon-btn:active { transform: none; }
+    .modal, .modal.open { transition: opacity 150ms ease, visibility 0s; }
   }
-  @media (prefers-reduced-motion: reduce) and (max-width: 900px) { .modal, .modal.open { transform: none; } }
+  @media (prefers-reduced-transparency: reduce) {
+    .side, .bar-sticky, .topbar, .tabs, .modal { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
+    .modal { background: var(--card); }
+  }
 </style>
 </head>
 <body>
+<a class="sr" href="#main">Saltar para o conteúdo</a>
 <div class="app">
 <aside class="side" aria-label="Navegação">
   <div class="brand">Vagas</div>
-  <div class="sect">Vagas</div>
-  <nav class="nav" id="views"></nav>
-  <div class="sect">Perfil</div>
-  <nav class="nav" id="pnav"></nav>
+  <nav class="nav" id="nav"></nav>
   <div class="bottom">
-    <div class="me" id="me"></div>
-    <button class="item" type="button" id="switchBtn" aria-haspopup="dialog" aria-controls="modal">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg>Trocar de perfil</button>
-    <button class="item" type="button" id="settings">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Definições</button>
+    <button class="profile-btn" type="button" id="profileBtn" aria-haspopup="dialog" aria-controls="modal"></button>
+    <button class="icon-btn" type="button" id="settingsBtn" aria-label="Definições"></button>
   </div>
 </aside>
 
 <div class="scrim" id="scrim"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
   <h2 id="mTitle">Trocar de perfil</h2>
-  <p>Cada perfil tem as suas regras, vagas e notificações.</p>
   <div class="plist" id="plist"></div>
-  <div class="mfoot"><a id="addProfile" target="_blank" rel="noopener">Adicionar perfil…</a><button type="button" id="mClose">Fechar</button></div>
 </div>
 
 <div class="content">
-  <div class="topbar"><span class="brand">Vagas</span><span style="display:flex;gap:2px"><button type="button" id="mSwitch" aria-haspopup="dialog" aria-controls="modal"></button><button type="button" id="mSettings" aria-label="Definições"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></span></div>
-  <header class="wrap">
-    <h1 id="h1">Vagas</h1>
-    <div class="sub" id="sub">A carregar…</div>
-  </header>
-  <div class="bar">
-    <div class="wrap">
-      <div class="search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input type="search" id="q" placeholder="Pesquisar" aria-label="Pesquisar título, empresa ou local">
-      </div>
-      <span class="select mviews"><select id="mviews" aria-label="Vista"></select>
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
-      <div class="seg" id="days" role="group" aria-label="Período">
-        <button data-d="7" aria-pressed="true">7 dias</button>
-        <button data-d="30">30 dias</button>
-        <button data-d="9999">Tudo</button>
-      </div>
-      <span class="select"><select id="src" aria-label="Fonte"></select>
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
-    </div>
-  </div>
-  <main class="wrap"><div id="list"></div></main>
-  <footer>Atualiza-se sozinho duas vezes por dia · Portugal continental</footer>
+  <div class="topbar"><span class="brand">Vagas</span><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div>
+  <header class="wrap"><h1 id="h1">Vagas</h1><div class="sub" id="sub">A carregar…</div></header>
+  <main class="wrap" id="main"></main>
+  <nav class="tabs" id="tabs" aria-label="Secções"></nav>
 </div>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" type="button">Anular</button></div>
+<label id="hapticLabel" class="sr" aria-hidden="true"><input type="checkbox" switch id="hapticInput" tabindex="-1"></label>
 
 <script>
+document.documentElement.classList.add("js");
 const store = {
   get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
 };
+const session = {
+  get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+  set(k) { try { sessionStorage.setItem(k, "1"); } catch (e) {} },
+};
 const $ = id => document.getElementById(id);
-// aspeto: Dia / Noite / Automático (segue o sistema)
-const mq = matchMedia("(prefers-color-scheme: dark)");
-function applyTheme() { const t = store.get("vagas-tema", "auto"); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t;
-  document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === "dark" ? "#1c1c1e" : "#f5f5f7"; }
-applyTheme(); mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const svg = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
-const I = (d, w = 16) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-const ICON = {
-  all: I('<path d="M4 6h16M4 12h16M4 18h10"/>'),
-  new: I('<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>'),
-  applied: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>'),
-  hidden: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'),
-  cv: I('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'),
-  rules: I('<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'),
-  check: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>', 20),
-  hide: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>', 20),
-  tick: '<svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
-  chev: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+const I = (d, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const P = {
+  home: '<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>',
+  jobs: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/>',
+  rules: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>',
+  settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  inbox: '<path d="M3 13l2.6-7.2A2 2 0 0 1 7.5 4.5h9a2 2 0 0 1 1.9 1.3L21 13v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/>',
+  eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  check: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>',
+  stack: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  pin: '<path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  ext: '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
 };
-// ligação para editar as regras no GitHub (a página está em <utilizador>.github.io/<repo>/)
+const CHEV_UD = '<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>';
+const CHEV_D = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+const TICK = '<svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
 const repoEdit = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
   return location.hostname.endsWith("github.io") && r ? `https://github.com/${u}/${r}/edit/main/config.yaml` : ""; })();
 
+// ---------- vibração para ações que não são possíveis ----------
+// Android: Vibration API. iPhone (iOS 18+): um <input switch> escondido dá um toque háptico ao mudar.
+function nope(target) {
+  try { if (navigator.vibrate) navigator.vibrate([12, 40, 12]); else $("hapticLabel").click(); } catch (e) {}
+  if (target) { target.classList.remove("nope"); void target.offsetWidth; target.classList.add("nope"); }
+}
+
+// ---------- tema ----------
+const mq = matchMedia("(prefers-color-scheme: dark)");
+const theme = () => store.get("vagas-tema", "auto");
+function applyTheme() { const t = theme(); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t; }
+applyTheme(); (mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme));
+
+// ---------- dados ----------
 const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", remotive: "Remoto" };
 const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Site da empresa";
+const placeOf = m => (m.location || "").replace(/, Portugal$/, "").split(",")[0].replace(/ e Região$/, "").trim() || "Sem local";
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
-const VIEWS = [
-  { id: "all", label: "Todas as vagas", icon: ICON.all },
-  { id: "new", label: "Novas hoje", icon: ICON.new },
-  { id: "applied", label: "Candidatadas", icon: ICON.applied },
-  { id: "hidden", label: "Escondidas", icon: ICON.hidden },
-];
-
-let profiles = [], current = "", marks = {}, all = [], data = [], updated = "", tracker = {};
-let view = "all", days = 7, src = "Todas", animateNext = true, toastTimer = null, undo = null;
-const markKey = pid => "vagas-estado:" + pid;
-const save = () => store.set(markKey(current), marks);
-
-const ageDays = iso => Math.round((new Date(updated + "T00:00:00") - new Date((iso || updated) + "T00:00:00")) / 864e5);
-const fmtDay = iso => { const a = ageDays(iso); if (a === 0) return "Hoje"; if (a === 1) return "Ontem";
-  const s = new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); return s[0].toUpperCase() + s.slice(1); };
-const ago = iso => { const a = ageDays(iso); return a <= 0 ? "hoje" : a === 1 ? "há 1 dia" : `há ${a} dias`; };
+let profiles = [], current = "", all = [], data = [], updated = "", tracker = {};
+let page = "home", marks = {}, filters = { v: "novas", tema: "", fonte: "", local: "", dias: "7", q: "" };
+const markKey = pid => "vagas-candidaturas:" + pid, seenKey = pid => "vagas-vistas:" + pid;
+const day0 = iso => new Date((iso || updated) + "T00:00:00");
+const ageDays = iso => Math.round((day0(updated) - day0(iso)) / 864e5);
+const fmt = new Intl.DateTimeFormat("pt-PT", { day: "numeric", month: "long" });
+const fmtShort = new Intl.DateTimeFormat("pt-PT", { day: "numeric", month: "short" });
+const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
+const ago = iso => { const a = ageDays(iso); return a <= 0 ? "Hoje" : a === 1 ? "Ontem" : `Há ${a} dias`; };
+const profile = () => profiles.find(x => x.id === current) || {};
 
 function viewFor(pid) {
   const first = profiles[0] && profiles[0].id;
   return all.filter(m => m.profiles ? pid in m.profiles : pid === first).map(m => {
     const pp = (m.profiles || {})[pid] || {};
-    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit };
+    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit, themes: pp.themes || [] };
   });
 }
-const counts = () => ({
-  all: data.filter(m => !marks[m.url]).length,
-  new: data.filter(m => !marks[m.url] && m.first_seen === updated).length,
-  applied: data.filter(m => marks[m.url] === "aplicada").length,
-  hidden: data.filter(m => marks[m.url] === "escondida").length,
-});
-const freshFor = p => { const ms = store.get(markKey(p.id), {}); return viewFor(p.id).filter(m => m.first_seen === updated && !ms[m.url]).length; };
-const avatarOf = (p, cls = "avatar") => { const a = el("span", cls, initials(p.name || p.id)); a.setAttribute("aria-hidden", "true"); return a; };
+const isNew = m => m.first_seen === updated;
+const applied = m => !!marks[m.url];
+let seen = {};
 
-function toast(msg, onUndo) {
-  $("toastMsg").textContent = msg; undo = onUndo; $("toastUndo").style.display = onUndo ? "" : "none"; $("toast").classList.add("show");
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => $("toast").classList.remove("show"), 4000);
+// ---------- entrada (uma vez por sessão) e scroll (uma vez por cartão) ----------
+let io = null;
+function enter(nodes, key) {
+  if (session.get("entrada:" + key)) return;
+  session.set("entrada:" + key);
+  const delays = [0, 50, 90, 120, 150, 175, 200, 220];
+  nodes.forEach((n, i) => { n.classList.add("rise"); n.style.setProperty("--d", (delays[i] ?? 220) + "ms"); });
+  requestAnimationFrame(() => requestAnimationFrame(() => nodes.forEach(n => n.classList.add("in"))));
 }
-$("toastUndo").onclick = () => { if (undo) undo(); undo = null; $("toast").classList.remove("show"); };
-
-function refreshChrome() { renderNav(); if (view !== "settings" && view !== "people") updateSub(); }
-function updateSub() {
-  const c = counts(), when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
-  $("sub").textContent = `${c.new} ${c.new === 1 ? "nova" : "novas"} hoje · ${c.all} por ver · atualizado a ${when}`;
+function revealOnScroll(nodes) {
+  if (!("IntersectionObserver" in window)) return;
+  if (!io) io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  const done = new Set(JSON.parse(session.get("revelados") || "[]"));
+  nodes.forEach(n => {
+    const k = n.dataset.key; if (!k || done.has(k)) return;
+    const r = n.getBoundingClientRect(); if (r.top < innerHeight) return;           // já está no ecrã: sem animação
+    done.add(k); n.classList.add("reveal"); io.observe(n);
+  });
+  try { sessionStorage.setItem("revelados", JSON.stringify([...done])); } catch (e) {}
 }
 
-function renderNav() {
-  const c = counts();
-  const nav = $("views"); nav.textContent = "";
-  for (const v of VIEWS) {
-    const b = el("button", "item"); b.type = "button"; b.append(svg(v.icon), document.createTextNode(v.label));
-    if (c[v.id]) b.append(el("span", "n", c[v.id]));
-    if (v.id === view) b.setAttribute("aria-current", "page");
-    b.onclick = () => setView(v.id);
-    nav.append(b);
+// ---------- navegação ----------
+const PAGES = [
+  { id: "home", label: "Início", icon: P.home },
+  { id: "jobs", label: "Vagas", icon: P.jobs },
+  { id: "rules", label: "Regras", icon: P.rules },
+  { id: "settings", label: "Definições", icon: P.settings },
+];
+function renderChrome() {
+  const nav = $("nav"); nav.textContent = "";
+  const newN = data.filter(isNew).length;
+  for (const pg of PAGES.filter(x => x.id !== "settings")) {
+    const b = el("button", "item"); b.type = "button"; b.append(svg(I(pg.icon)), document.createTextNode(pg.label));
+    if (pg.id === "jobs" && newN) b.append(el("span", "n tnum", `${newN} ${newN === 1 ? "nova" : "novas"}`));
+    if (pg.id === page) b.setAttribute("aria-current", "page");
+    b.onclick = () => go(pg.id); nav.append(b);
   }
-  const sel = $("mviews"); sel.textContent = "";
-  for (const v of VIEWS) { const o = el("option", null, `${v.label}${c[v.id] ? ` (${c[v.id]})` : ""}`); o.value = v.id; o.selected = v.id === view; sel.append(o); }
-
-  const p = profiles.find(x => x.id === current) || {};
-  const pnav = $("pnav"); pnav.textContent = "";
-  if (p.cv_url) { const a = el("a", "item"); a.href = p.cv_url; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.cv), document.createTextNode("Ver CV")); pnav.append(a); }
-  if (repoEdit) { const a = el("a", "item"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.rules), document.createTextNode("Ajustar regras")); pnav.append(a); }
-  pnav.previousElementSibling.style.display = pnav.children.length ? "" : "none";
-
-  const me = $("me"); me.textContent = "";
-  const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
-  me.append(avatarOf(p), info);
-  const ms = $("mSwitch"); ms.textContent = ""; ms.append(avatarOf(p), document.createTextNode(p.name || "Perfil"), svg(ICON.chev));
-  ms.setAttribute("aria-label", `Perfil: ${p.name || "o meu perfil"}. Trocar de perfil`);
-
-  if (view === "settings" || view === "people") $("settings").setAttribute("aria-current", "page"); else $("settings").removeAttribute("aria-current");
-  if (repoEdit) $("addProfile").href = repoEdit; else $("addProfile").style.display = "none";
+  const sb = $("settingsBtn"); sb.textContent = ""; sb.append(svg(I(P.settings, 20)));
+  page === "settings" ? sb.setAttribute("aria-current", "page") : sb.removeAttribute("aria-current");
+  const tabs = $("tabs"); tabs.textContent = "";
+  for (const pg of PAGES) {
+    const b = el("button"); b.type = "button"; b.append(svg(I(pg.icon, 24)), el("span", null, pg.label));
+    if (pg.id === page) b.setAttribute("aria-current", "page");
+    b.onclick = () => go(pg.id); tabs.append(b);
+  }
+  const p = profile();
+  for (const id of ["profileBtn", "mProfileBtn"]) {
+    const b = $(id); b.textContent = "";
+    const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "Perfil"), el("div", "ph", p.headline || ""));
+    const av = el("span", "avatar", initials(p.name || p.id)); av.setAttribute("aria-hidden", "true");
+    b.append(av, info, svg(CHEV_UD)); b.setAttribute("aria-label", `Perfil de ${p.name || "utilizador"}. Trocar de perfil`);
+  }
 }
 
+function go(id, opts = {}) {
+  page = id; writeUrl();
+  renderChrome(); render();
+  if (!opts.keepScroll) scrollTo(0, 0);
+  $("h1").classList.remove("swap"); void $("h1").offsetWidth; $("h1").classList.add("swap");
+}
+
+// ---------- URL: #perfil/página e filtros em ?query ----------
+function writeUrl() {
+  const q = new URLSearchParams();
+  if (page === "jobs") for (const [k, v] of Object.entries(filters)) if (v && !(k === "v" && v === "novas") && !(k === "dias" && v === "7")) q.set(k, v);
+  history.replaceState(null, "", `${location.pathname}${q.toString() ? "?" + q : ""}#${current}/${page}`);
+}
+function readUrl() {
+  const [pid, pg] = location.hash.slice(1).split("/");
+  const q = new URLSearchParams(location.search);
+  for (const k of Object.keys(filters)) if (q.get(k)) filters[k] = q.get(k);
+  return { pid, pg: PAGES.some(x => x.id === pg) ? pg : null };
+}
+
+// ---------- cartão de vaga ----------
+function logoOf(m, cls = "logo") {
+  const d = el("div", cls); d.setAttribute("aria-hidden", "true");
+  if (m.logo) { const img = new Image(); img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer"; img.src = m.logo;
+    img.onerror = () => { d.textContent = initials(m.company); }; d.append(img); }
+  else d.textContent = initials(m.company);
+  return d;
+}
+function fitOf(m) { const s = m.fit != null ? m.fit / 5 : m.score; return s >= 15 ? ["Encaixe muito alto", "high"] : s >= 11 ? ["Bom encaixe", "good"] : null; }
 function card(m) {
-  const row = el("article", "job" + (marks[m.url] ? " done" : ""));
-  const logo = el("div", "logo", initials(m.company)); logo.setAttribute("aria-hidden", "true");
+  const c = el("article", "job" + (applied(m) ? " applied" : "")); c.dataset.key = m.url;
   const t = el("div", "jt");
+  const tr = el("div", "title-row");
+  if (isNew(m)) {
+    const d = el("button", "dot"); d.type = "button"; d.setAttribute("aria-label", "Vaga nova, chegou na última recolha");
+    d.append(el("span", "tip", "Nova, chegou na última recolha"));
+    d.onclick = e => { e.stopPropagation(); d.classList.toggle("show"); setTimeout(() => d.classList.remove("show"), 2000); };
+    c.append(d);
+  }
   const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
-  const l3 = el("div", "l3");
-  if (m.first_seen === updated && !marks[m.url]) { const d = el("span", "dot-new"); d.title = "Nova"; l3.append(d); }
-  l3.append(el("span", null, `${srcOf(m)} · publicada ${ago(m.posted || m.first_seen)}`));
-  const w = (m.flags || []).find(f => !/sem salário indicado|não indica anos|não confirma/.test(f));
-  if (w) l3.append(el("span", "warn", "· " + w));
-  t.append(a, el("div", "l2", [m.company, m.location].filter(Boolean).join(" · ")), l3);
+  a.addEventListener("click", () => { seen[m.url] = 1; store.set(seenKey(current), seen); });
+  tr.append(a); t.append(tr, el("div", "company", m.company || ""));
+  const meta = el("div", "meta");
+  for (const [ic, txt] of [[P.pin, placeOf(m)], [P.clock, ago(m.posted || m.first_seen)], [P.globe, srcOf(m)]]) {
+    const s = el("span"); s.append(svg(I(ic, 14)), document.createTextNode(txt)); meta.append(s);
+  }
+  t.append(meta);
+  const tags = el("div", "tags"); (m.themes || []).forEach(x => tags.append(el("span", null, x)));
+  const f = fitOf(m); if (f) tags.append(el("span", "fit " + f[1], f[0]));
+  if (applied(m)) tags.append(el("span", null, "Candidatura feita"));
+  if (tags.children.length) t.append(tags);
+  const w = (m.flags || []).find(x => /pede \d|língua|lingua|holand|alem|franc/.test(x));
+  if (w) t.append(el("div", "warn", w[0].toUpperCase() + w.slice(1)));
   const acts = el("div", "acts");
-  const mk = (val, label, icon) => {
-    const on = marks[m.url] === val;
-    const b = el("button", "icon" + (on ? " on" : "")); b.type = "button"; b.append(svg(icon));
-    b.title = on ? `Anular: ${label}` : label; b.setAttribute("aria-label", b.title); b.setAttribute("aria-pressed", on);
-    b.onclick = () => {
-      const prev = marks[m.url];
-      if (on) delete marks[m.url]; else marks[m.url] = val;
-      save(); refreshChrome();
-      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); refreshChrome(); render(); };
-      toast(on ? "Marcação anulada" : val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
-      row.classList.add("leaving"); setTimeout(render, 150);
-    };
-    return b;
+  const b = el("button", "apply"); b.type = "button"; b.append(svg(I(P.check, 22)));
+  const on = applied(m); b.setAttribute("aria-pressed", on); b.setAttribute("aria-label", on ? "Anular candidatura" : "Marcar candidatura feita"); b.title = b.getAttribute("aria-label");
+  b.onclick = () => { if (marks[m.url]) delete marks[m.url]; else marks[m.url] = new Date().toISOString().slice(0, 10);
+    store.set(markKey(current), marks); renderChrome(); render({ quiet: true }); };
+  acts.append(b);
+  c.append(logoOf(m), t, acts);
+  return c;
+}
+
+// ---------- páginas ----------
+const header = (title, sub) => { $("h1").textContent = title; $("sub").textContent = sub; };
+function render(opts = {}) {
+  const main = $("main"); main.textContent = "";
+  ({ home: renderHome, jobs: renderJobs, rules: renderRules, settings: renderSettings })[page](main, opts);
+}
+
+function renderHome(main) {
+  const p = profile(), last = new Date(updated + "T00:00:00");
+  header(p.name ? `Olá, ${p.name}` : "Início", `Última recolha a ${fmt.format(last)}.`);
+  const byDay = {}; data.forEach(m => byDay[m.first_seen] = (byDay[m.first_seen] || 0) + 1);
+  const newN = data.filter(isNew).length;
+  const prevDay = Object.keys(byDay).filter(d => d < updated).sort().pop();
+  const prevN = prevDay ? byDay[prevDay] : 0;
+  const unseen = data.filter(m => !seen[m.url] && !applied(m) && ageDays(m.first_seen) < 14).length;
+  const appliedN = data.filter(applied).length;
+  const kp = el("div", "kpis");
+  const kpi = (icon, label, value, ctx, onclick) => { const k = el("button", "kpi"); k.type = "button";
+    const l = el("div", "k-label"); l.append(svg(I(icon, 15)), document.createTextNode(label));
+    k.append(l, el("div", "k-value tnum", value), el("div", "k-ctx", ctx)); k.onclick = onclick; return k; };
+  const diff = newN - prevN;
+  kp.append(
+    kpi(P.inbox, "Novas hoje", newN, prevDay ? (diff === 0 ? "Igual à recolha anterior" : `${diff > 0 ? "Mais" : "Menos"} ${Math.abs(diff)} do que na anterior`) : "Primeira recolha",
+        () => { filters.v = "novas"; go("jobs"); }),
+    kpi(P.eye, "Por ver", unseen, "Ainda não abertas, últimos 14 dias", () => { filters.v = "todas"; filters.dias = "30"; go("jobs"); }),
+    kpi(P.check, "Candidaturas", appliedN, appliedN ? "Marcadas neste dispositivo" : "Marca uma vaga com o visto", () => { filters.v = "todas"; filters.dias = "9999"; go("jobs"); }),
+    kpi(P.stack, "No total", data.length, "Vagas guardadas para este perfil", () => { filters.v = "todas"; filters.dias = "9999"; go("jobs"); }));
+  main.append(kp);
+
+  // ritmo dos últimos 14 dias
+  const days = [...Array(14)].map((_, i) => { const d = new Date(last); d.setDate(d.getDate() - (13 - i)); return d.toISOString().slice(0, 10); });
+  const vals = days.map(d => byDay[d] || 0), max = Math.max(1, ...vals), tot = vals.reduce((a, b) => a + b, 0);
+  const panel = el("section", "panel");
+  const head = el("div", "chart-head"); head.append(el("b", null, "Ritmo dos últimos 14 dias"), el("span", "tnum", plural(tot, "vaga nova", "vagas novas")));
+  const ch = el("div", "chart"); ch.setAttribute("role", "img");
+  ch.setAttribute("aria-label", `Vagas novas por dia nos últimos 14 dias: ${days.map((d, i) => `${fmtShort.format(day0(d))}, ${vals[i]}`).join("; ")}`);
+  days.forEach((d, i) => { const col = el("div", "bar-col"); col.tabIndex = -1;
+    const bar = el("div", "bar" + (d === updated ? " today" : "")); bar.style.height = Math.max(2, vals[i] / max * 100) + "%";
+    col.append(bar, el("span", "tip", `${fmtShort.format(day0(d))}: ${plural(vals[i], "vaga", "vagas")}`)); ch.append(col); });
+  const ax = el("div", "axis"); ax.append(el("span", null, fmtShort.format(day0(days[0]))), el("span", null, "Hoje"));
+  panel.append(head, ch, ax);
+  main.append(panel);
+
+  // destaques e empresas
+  const sec = el("h2", "sec", "Destaques da semana");
+  const g = el("div", "grid2");
+  const top = data.filter(m => ageDays(m.first_seen) < 7).sort((a, b) => (b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)).slice(0, 3);
+  const tl = el("div", "list");
+  if (top.length) top.forEach(m => tl.append(card(m))); else { const e = el("div", "empty"); e.append(el("b", null, "Sem destaques esta semana"), document.createTextNode("As melhores vagas da semana aparecem aqui.")); tl.append(e); }
+  const cp = el("section", "panel");
+  const ch2 = el("div", "chart-head"); ch2.append(el("b", null, "Empresas a contratar"), el("span", null, "30 dias"));
+  const comp = {}; data.filter(m => ageDays(m.first_seen) < 30).forEach(m => { const k = (m.company || "").trim(); if (k) (comp[k] = comp[k] || { n: 0, m }).n++; });
+  const rows = Object.entries(comp).sort((a, b) => b[1].n - a[1].n).slice(0, 6);
+  const cl = el("div", "companies");
+  if (!rows.length) cl.append(el("div", "note", "Ainda sem dados."));
+  rows.forEach(([name, o]) => { const r = el("div", "company-row"); r.append(logoOf(o.m, "logo mini-logo"), el("span", "c-name", name), el("span", "c-n tnum", o.n)); cl.append(r); });
+  cp.append(ch2, cl);
+  g.append(tl, cp);
+  main.append(sec, g);
+  enter([...kp.children, panel, sec, ...tl.children, cp], "home:" + current);
+}
+
+function themesIn(rows) { const s = {}; rows.forEach(m => (m.themes || []).forEach(t => s[t] = (s[t] || 0) + 1)); return s; }
+function renderJobs(main, opts) {
+  const p = profile();
+  const base = data.filter(m => filters.v === "novas" ? isNew(m) : ageDays(m.first_seen) < +filters.dias);
+  const q = filters.q.trim().toLowerCase();
+  const rows = base.filter(m => (!filters.tema || (m.themes || []).includes(filters.tema)) && (!filters.fonte || srcOf(m) === filters.fonte)
+    && (!filters.local || placeOf(m) === filters.local) && (!q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q)));
+  header("Vagas", filters.v === "novas" ? `${plural(base.length, "vaga nova", "vagas novas")} para ${p.name || "ti"} na última recolha.` : `Todas as vagas guardadas para ${p.name || "ti"}.`);
+
+  const sticky = el("div", "bar-sticky");
+  const seg = el("div", "seg"); seg.setAttribute("role", "group"); seg.setAttribute("aria-label", "Vista");
+  const thumb = el("span", "thumb"); seg.append(thumb);
+  const opts2 = [["novas", "Novas"], ["todas", "Todas"]];
+  opts2.forEach(([k, lab], i) => { const b = el("button", null, lab); b.type = "button"; b.setAttribute("aria-pressed", filters.v === k);
+    b.onclick = () => { if (filters.v === k) return; filters.v = k; writeUrl(); render({ quiet: true }); }; seg.append(b); });
+  requestAnimationFrame(() => { const w = (seg.clientWidth - 4) / opts2.length; thumb.style.width = w + "px";
+    thumb.style.transform = `translateX(${opts2.findIndex(x => x[0] === filters.v) * w}px)`; });
+
+  const fl = el("div", "filters");
+  const sw = el("div", "search"); const inp = el("input"); inp.type = "search"; inp.placeholder = "Pesquisar"; inp.value = filters.q;
+  inp.setAttribute("aria-label", "Pesquisar título, empresa ou local"); sw.append(svg(I(P.search, 15)), inp);
+  inp.addEventListener("input", () => { filters.q = inp.value; writeUrl(); drawList(); });
+  fl.append(sw);
+  const mkSel = (key, label, counts) => {
+    const wrap = el("span", "select"); const s = el("select"); s.setAttribute("aria-label", label);
+    s.append(Object.assign(el("option", null, label), { value: "" }));
+    Object.entries(counts).sort((a, b) => b[1] - a[1]).forEach(([k, n]) => { const o = el("option", null, `${k} (${n})`); o.value = k; o.selected = filters[key] === k; s.append(o); });
+    if (filters[key] && !(filters[key] in counts)) { const o = el("option", null, filters[key]); o.value = filters[key]; o.selected = true; s.append(o); }
+    s.classList.toggle("on", !!filters[key]);
+    s.onchange = () => { filters[key] = s.value; s.classList.toggle("on", !!s.value); writeUrl(); render({ quiet: true }); };
+    wrap.append(s, svg(CHEV_D)); return wrap;
   };
-  acts.append(mk("aplicada", "Candidatei-me", ICON.check), mk("escondida", "Esconder", ICON.hide));
-  row.append(logo, t, acts);
-  return row;
+  const count = (fn) => { const o = {}; base.forEach(m => { const k = fn(m); if (k) o[k] = (o[k] || 0) + 1; }); return o; };
+  fl.append(mkSel("tema", "Tema", themesIn(base)), mkSel("fonte", "Fonte", count(srcOf)), mkSel("local", "Local", count(placeOf)));
+  if (filters.v === "todas") {
+    const wrap = el("span", "select"); const s = el("select"); s.setAttribute("aria-label", "Período");
+    for (const [k, lab] of [["7", "Últimos 7 dias"], ["30", "Últimos 30 dias"], ["9999", "Desde sempre"]]) { const o = el("option", null, lab); o.value = k; o.selected = filters.dias === k; s.append(o); }
+    s.onchange = () => { filters.dias = s.value; writeUrl(); render({ quiet: true }); };
+    wrap.append(s, svg(CHEV_D)); fl.append(wrap);
+  }
+  const active = filters.tema || filters.fonte || filters.local || filters.q;
+  const clear = () => { filters.tema = filters.fonte = filters.local = filters.q = ""; writeUrl(); render({ quiet: true }); };
+  if (active) { const c = el("button", "clear", "Limpar filtros"); c.type = "button"; c.onclick = clear; fl.append(c); }
+  sticky.append(seg, fl);
+  main.append(sticky);
+  const listBox = el("div"); main.append(listBox);
+
+  function drawList() {
+    const q2 = filters.q.trim().toLowerCase();
+    const rs = base.filter(m => (!filters.tema || (m.themes || []).includes(filters.tema)) && (!filters.fonte || srcOf(m) === filters.fonte)
+      && (!filters.local || placeOf(m) === filters.local) && (!q2 || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q2)));
+    listBox.textContent = "";
+    listBox.append(el("div", "count tnum", rs.length === base.length ? plural(rs.length, "vaga", "vagas") : `${rs.length} de ${plural(base.length, "vaga", "vagas")}`));
+    if (!rs.length) {
+      const e = el("div", "empty");
+      if (base.length) { e.append(el("b", null, "Nenhuma vaga com estes filtros"), document.createTextNode("Experimenta outro tema ou local."));
+        const c = el("button", "btn ghost", "Limpar filtros"); c.type = "button"; c.onclick = clear; e.append(el("br"), c); }
+      else e.append(el("b", null, filters.v === "novas" ? "Nada de novo na última recolha" : "Ainda sem vagas"),
+        document.createTextNode(filters.v === "novas" ? "Quando chegarem vagas novas, recebes uma notificação." : "As primeiras aparecem depois da próxima recolha."));
+      listBox.append(e); return;
+    }
+    let dayK = null, list = null; const cards = [];
+    for (const m of rs) {
+      if (filters.v === "todas" && m.first_seen !== dayK) { dayK = m.first_seen; listBox.append(el("div", "day", ago(dayK) === "Hoje" ? "Hoje" : ago(dayK) === "Ontem" ? "Ontem" : fmt.format(day0(dayK)))); list = null; }
+      if (!list) { list = el("div", "list"); listBox.append(list); }
+      const c = card(m); cards.push(c); list.append(c);
+    }
+    if (!opts.quiet) { enter(cards.slice(0, 6), "jobs:" + current); }
+    requestAnimationFrame(() => revealOnScroll(cards.slice(6)));
+  }
+  drawList();
+  if (opts.quiet) listBox.classList.add("swap");
+  stickyBar = sticky;
+}
+let stickyBar = null;
+addEventListener("scroll", () => { if (stickyBar && stickyBar.isConnected) stickyBar.classList.toggle("scrolled", scrollY > stickyBar.offsetTop - (innerWidth > 900 ? 0 : 60)); }, { passive: true });
+
+function group(...rows) { const g = el("div", "group"); g.append(...rows.filter(Boolean)); return g; }
+function row(title, desc, right, lead) { const r = el("div", "row"); if (lead) r.append(lead); const t = el("div", "rt"); t.append(el("b", null, title));
+  if (desc) t.append(el("span", null, desc)); r.append(t); if (right) r.append(right); return r; }
+const rv = (txt, strong) => el("span", "rv tnum" + (strong ? " strong" : ""), txt);
+
+function renderRules(main) {
+  const p = profile(), r = p.rules || {}, y = r.years || {};
+  header("Regras", `O que faz uma vaga chegar a ${p.name || "ti"}.`);
+  main.append(el("h2", "sec", "Temas"));
+  const det = r.strong_detail || (r.strong || []).map(l => ({ label: l, examples: [] }));
+  main.append(group(...det.map((t, i) => row(t.label, t.examples && t.examples.length ? "Por exemplo: " + t.examples.join(", ") : null, null, el("span", "theme-ico tnum", String(i + 1))))));
+  main.append(el("p", "note", "Cada tema encontrado no texto da vaga soma 3 pontos, ou 5 se estiver no título." +
+    (r.require_theme ? " Uma vaga sem nenhum destes temas fica sempre de fora." : "")));
+  if ((r.bonus || []).length) { main.append(el("h2", "sec", "Bónus")); main.append(group(...r.bonus.map(b => row(b[0].toUpperCase() + b.slice(1), "Pontos extra pelo setor da empresa.")))); }
+  main.append(el("h2", "sec", "Filtros"));
+  main.append(group(
+    row("Pontuação mínima", "Abaixo disto, a vaga não chega até ti.", rv(`${r.min_score ?? "-"} pontos`, true)),
+    row("Experiência pedida", "Vagas que pedem mais ou menos anos ficam de fora.", rv(`${y.min ?? 0} a ${y.max ?? "-"} anos`, true)),
+    row("Idade da vaga", "Vagas publicadas há mais tempo são ignoradas.", rv(`Até ${r.max_age_days ?? "-"} dias`, true)),
+    r.min_salary_eur ? row("Salário mínimo", "Só conta quando a vaga publica o salário.", rv(`${new Intl.NumberFormat("pt-PT").format(r.min_salary_eur)} €`, true)) : null,
+    row("Zona", "Portugal continental e remoto aceite a partir de Portugal.", rv("Portugal", true))));
+  if (repoEdit) { const a = el("a", "btn"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(document.createTextNode("Editar regras"), svg(I(P.ext, 16)));
+    const w = el("div"); w.style.marginTop = "20px"; w.append(a, el("p", "note", "Abre a configuração no GitHub. As alterações contam a partir da recolha seguinte.")); main.append(w); }
 }
 
-function rowsForView() {
-  const q = $("q").value.trim().toLowerCase();
-  return data.filter(m => view === "applied" ? marks[m.url] === "aplicada" : view === "hidden" ? marks[m.url] === "escondida" : !marks[m.url])
-    .filter(m => view !== "new" || m.first_seen === updated)
-    .filter(m => view !== "all" || ageDays(m.first_seen) < days)
-    .filter(m => src === "Todas" || srcOf(m) === src)
-    .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
-}
-function render() {
-  const inSettings = view === "settings" || view === "people";
-  document.querySelector(".bar").style.display = inSettings ? "none" : "";
-  if (inSettings) return renderSettings();
-  $("days").style.display = view === "all" ? "" : "none";
-  const box = $("list"); box.textContent = "";
-  const rows = rowsForView();
-  if (!rows.length) {
-    const who = (profiles.find(x => x.id === current) || {}).name;
-    const msg = { all: data.length ? ["Sem resultados", "Experimenta alargar o período ou limpar a pesquisa."]
-                    : [who ? `Ainda sem vagas para ${who}` : "Ainda sem vagas", "As primeiras aparecem depois da próxima recolha (≈07:15 ou 16:15)."],
-                  new: ["Nada de novo hoje", "As vagas novas aparecem aqui depois de cada recolha."],
-                  applied: ["Ainda sem candidaturas", "Marca uma vaga com ✓ para a guardar aqui."],
-                  hidden: ["Nenhuma vaga escondida", "As vagas que esconderes ficam aqui, caso mudes de ideias."] }[view];
-    const e = el("div", "empty"); e.append(el("b", null, msg[0]), document.createTextNode(msg[1])); box.append(e); return;
-  }
-  let day = null, list = null, i = 0;
-  const animate = animateNext; animateNext = false;
-  for (const m of rows) {
-    if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group-label", fmtDay(day))); list = el("div", "list"); box.append(list); }
-    const c = card(m);
-    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }   // 30 ms por linha, máx. ~200 ms
-    list.append(c);
-  }
-}
-function setView(v) {
-  const was = view; view = v; animateNext = true;
-  if (v === "settings" || v === "people") { if (location.hash !== "#definicoes") history.pushState(null, "", "#definicoes"); }
-  else if (was === "settings" || was === "people") history.replaceState(null, "", "#" + current);
-  setHeader(); renderNav(); render(); scrollTo(0, 0);
-}
-function setHeader() {
-  const p = profiles.find(x => x.id === current);
-  if (view === "settings") { $("h1").textContent = "Definições"; $("sub").textContent = "Perfil em uso, aspeto, como funciona o tracker e os dados guardados neste dispositivo."; }
-  else if (view === "people") { $("h1").textContent = "Perfis"; $("sub").textContent = "Cada perfil tem as suas regras, vagas e notificações. A escolha fica guardada neste dispositivo."; }
-  else { $("h1").textContent = p && p.name && profiles.length > 1 ? `Vagas para ${p.name}` : "Vagas"; updateSub(); }
+function renderSettings(main) {
+  const p = profile();
+  header("Definições", "Aspeto da página, recolha e notificações.");
+  const sw = (checked, label, onChange, disabled) => {
+    const b = el("button", "switch"); b.type = "button"; b.setAttribute("role", "switch"); b.setAttribute("aria-checked", checked); b.setAttribute("aria-label", label);
+    if (disabled) b.setAttribute("aria-disabled", "true");
+    b.onclick = () => { if (b.getAttribute("aria-disabled") === "true") return nope(b); const v = b.getAttribute("aria-checked") !== "true"; b.setAttribute("aria-checked", v); onChange(v); };
+    const h = el("span", "switch-hit"); h.append(b); return h;
+  };
+  const followsSystem = theme() === "auto";
+  const dark = document.documentElement.dataset.theme === "dark";
+  main.append(el("h2", "sec", "Aspeto"));
+  main.append(group(
+    row("Seguir o dispositivo", "Usa o tema claro ou escuro do sistema.", sw(followsSystem, "Seguir o tema do dispositivo", v => {
+      store.set("vagas-tema", v ? "auto" : (document.documentElement.dataset.theme)); applyTheme(); render(); })),
+    row("Tema escuro", followsSystem ? "Desliga Seguir o dispositivo para escolher." : null, sw(dark, "Tema escuro", v => {
+      store.set("vagas-tema", v ? "dark" : "light"); applyTheme(); }, followsSystem))));
+  main.append(el("h2", "sec", "Recolha"));
+  const src = el("div"); (tracker.sources || []).forEach(s => { const st = s.status || ""; const r = el("div", "src-row");
+    r.append(el("span", null, s.name), el("span", /ERRO/.test(st) ? "bad" : "tnum", /ERRO/.test(st) ? "Com erro" : (st.replace(/^ok, /, "").replace(/ \(.*\)$/, "") || "Sem dados"))); src.append(r); });
+  const fontes = row("Fontes", null); fontes.querySelector(".rt").append(src);
+  main.append(group(row("Horário", tracker.schedule || "Todos os dias, duas vezes", rv(`Última a ${fmt.format(day0(updated))}`)), (tracker.sources || []).length ? fontes : null));
+  main.append(el("h2", "sec", "Notificações"));
+  main.append(group(row(`Notificações de ${p.name || "este perfil"}`, p.channel ? "Na app ntfy, só com as vagas novas deste perfil e uma única vez por vaga." : "Este perfil ainda não tem canal ntfy.")));
 }
 
-// ---------- página de definições
-const row = (title, desc, right) => { const r = el("div", "srow"); const t = el("div", "st"); t.append(el("b", null, title));
-  if (desc) t.append(el("span", null, desc)); r.append(t); if (right) r.append(right); return r; };
-const pill = (label, cls, onclick) => { const b = el("button", "pill" + (cls ? " " + cls : ""), label); b.type = "button"; if (onclick) b.onclick = onclick; return b; };
-const linkPill = (label, href) => { const a = el("a", "pill", label); a.href = href; a.target = "_blank"; a.rel = "noopener"; return a; };
-const group = (title, ...rows) => { const g = el("section", "sgroup"); g.append(el("h3", null, title)); const c = el("div", "scard"); c.append(...rows); g.append(c); return g; };
-function renderSettings() {
-  const box = $("list"); box.textContent = "";
-  const wrap = el("div", "settings" + (animateNext ? " enter" : "")); animateNext = false;
-  const p = profiles.find(x => x.id === current) || {};
-  if (view === "people") {
-    const back = el("button", "back", "← Voltar às definições"); back.type = "button"; back.onclick = () => setView("settings"); wrap.append(back);
-    const rows = profiles.map(q => {
-      const v = el("div", "prow-acts");
-      if (q.id === current) v.append(el("span", "inuse", "✓ Em uso")); else v.append(pill("Usar", "", () => { select(q.id); setView("people"); }));
-      const r = row(q.name || q.id, q.headline || "", v); r.prepend(avatarOf(q)); return r;
-    });
-    wrap.append(group(`${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}`, ...rows));
-    wrap.append(group("Acrescentar perfil",
-      row("Como acrescentar", "Copia o bloco de um perfil em «profiles:» no config.yaml, muda o nome, as regras e o tópico ntfy, e cria esse segredo no GitHub (Environment GERAL).",
-          repoEdit ? linkPill("Abrir config.yaml", repoEdit) : null),
-      row("Privacidade", "O repositório é público: nunca ponhas contactos ou o CV no config.yaml. Usa «cv_url» com uma ligação privada.")));
-    box.append(wrap); return;
-  }
-  const r = p.rules || {};
-  // Conta
-  const who = el("div", "prow-acts"); const nm = el("div", "sv"); nm.append(el("b", null, p.name || "O meu perfil"));
-  who.append(nm, pill("Trocar de perfil", "", e => openModal(e)));
-  const manage = el("button", "srow"); manage.type = "button";
-  const mt = el("div", "st"); mt.append(el("b", null, "Gerir perfis")); manage.append(mt, el("span", "sv", `${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}  ›`));
-  manage.onclick = () => setView("people");
-  wrap.append(group("Conta", row("Perfil em uso", "As vagas, as notificações e as marcações são deste perfil.", who), manage));
-  // Preferências
-  const seg = el("div", "seg"); const cur = store.get("vagas-tema", "auto");
-  for (const [k, lab] of [["light", "Dia"], ["dark", "Noite"], ["auto", "Automático"]]) {
-    const b = el("button", null, lab); b.type = "button"; b.setAttribute("aria-pressed", k === cur);
-    b.onclick = () => { store.set("vagas-tema", k); applyTheme(); seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); };
-    seg.append(b);
-  }
-  wrap.append(group("Preferências", row("Aspeto", "Com «Automático», a página segue o tema do dispositivo.", seg)));
-  // Tracker
-  const srcBox = el("div");
-  for (const s of tracker.sources || []) {
-    const line = el("div", "srcrow"); line.append(el("span", null, s.name + (s.queries ? ` · ${s.queries} pesquisas` : "")));
-    const st = s.status || "sem dados"; line.append(el("span", /ERRO/.test(st) ? "bad" : "ok", st.replace(/^ok, /, ""))); srcBox.append(line);
-  }
-  const fontes = row("Fontes", null); fontes.querySelector(".st").append(srcBox);
-  const yrs = r.years ? `${r.years.min ?? 0}–${r.years.max} anos de experiência pedidos` : "";
-  const rules = row(`Regras de ${p.name || "este perfil"}`,
-    [`Fasquia: ${r.min_score} pontos`, yrs, `vagas com até ${r.max_age_days} dias`, r.min_salary_eur ? `salário publicado ≥ ${r.min_salary_eur.toLocaleString("pt-PT")} €` : ""].filter(Boolean).join(" · "),
-    repoEdit ? linkPill("Ajustar regras", repoEdit) : null);
-  const chips = el("div", "chips"); (r.strong || []).forEach(x => chips.append(el("span", null, x))); (r.bonus || []).forEach(x => chips.append(el("span", null, "bónus: " + x)));
-  rules.querySelector(".st").append(chips);
-  const when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
-  const rec = el("div", "sv"); rec.append(el("b", null, "Última recolha"), document.createTextNode(when));
-  wrap.append(group("Tracker",
-    row("Recolha automática", tracker.schedule || "Todos os dias, duas vezes", rec),
-    fontes, rules,
-    row("Notificações", `App ntfy: cada perfil recebe só as suas vagas novas, uma vez.${p.channel ? "" : " Este perfil ainda não tem canal."}`)));
-  // Dados
-  const nApplied = Object.values(marks).filter(v => v === "aplicada").length, nHidden = Object.values(marks).filter(v => v === "escondida").length;
-  wrap.append(group("Dados neste dispositivo",
-    row("Marcações", `${nApplied} candidatadas e ${nHidden} escondidas, guardadas só neste dispositivo e neste perfil.`,
-        pill("Limpar", "danger", () => { if (!confirm(`Limpar as marcações de ${p.name || "este perfil"}?`)) return;
-          marks = {}; save(); refreshChrome(); render(); toast("Marcações limpas", null); }))));
-  wrap.append(group("Versão", row("Vagas", `Dados de ${when} · página estática no GitHub Pages, sem custos.`)));
-  box.append(wrap);
-}
-$("mviews").onchange = e => setView(e.target.value);
-
-function buildSources() {
-  const sel = $("src"); sel.textContent = "";
-  const n = {}; data.forEach(m => { n[srcOf(m)] = (n[srcOf(m)] || 0) + 1; });
-  for (const k of ["Todas", ...Object.keys(n).sort((a, b) => n[b] - n[a])]) {
-    const o = el("option", null, k === "Todas" ? "Todas as fontes" : `${k} (${n[k]})`); o.value = k; o.selected = k === src; sel.append(o);
-  }
-}
-$("src").onchange = e => { src = e.target.value; animateNext = true; render(); };
-
-// ---- janela "Trocar de perfil" (Esc, clique fora, setas; foco volta ao botão)
+// ---------- janela de perfis ----------
 let opener = null;
 function openModal(e) {
   opener = e.currentTarget;
+  if (profiles.length < 2) return nope(opener);
   const list = $("plist"); list.textContent = "";
   for (const p of profiles) {
     const b = el("button", "pitem"); b.type = "button"; b.setAttribute("aria-current", p.id === current);
-    const i = el("span", "pinfo"); i.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
-    b.append(avatarOf(p), i);
-    const n = freshFor(p); if (n) b.append(el("span", "count", `${n} ${n === 1 ? "nova" : "novas"}`));
-    b.append(svg(ICON.tick));
-    b.onclick = () => { closeModal(true); select(p.id); };
-    list.append(b);
+    const i = el("span", "pinfo"); i.append(el("div", "pn", p.name || p.id), el("div", "ph", p.headline || ""));
+    const av = el("span", "avatar", initials(p.name || p.id)); av.setAttribute("aria-hidden", "true");
+    b.append(av, i, svg(TICK)); b.onclick = () => { closeModal(true); select(p.id); }; list.append(b);
   }
   $("modal").classList.add("open"); $("scrim").classList.add("open");
   setTimeout(() => (list.querySelector('[aria-current="true"]') || list.firstChild).focus(), 30);
@@ -562,55 +738,37 @@ function closeModal(restore) {
   $("modal").classList.remove("open"); $("scrim").classList.remove("open");
   if (restore && opener) opener.focus();
 }
-$("switchBtn").onclick = openModal; $("mSwitch").onclick = openModal;
-$("scrim").onclick = () => closeModal(true); $("mClose").onclick = () => closeModal(true);
+$("profileBtn").onclick = openModal; $("mProfileBtn").onclick = openModal; $("scrim").onclick = () => closeModal(true);
+$("settingsBtn").onclick = () => go("settings");
 document.addEventListener("keydown", e => {
   if (!$("modal").classList.contains("open")) return;
-  const items = [...$("modal").querySelectorAll(".pitem, .mfoot a, .mfoot button")].filter(x => x.offsetParent);
-  const i = items.indexOf(document.activeElement);
+  const items = [...$("modal").querySelectorAll(".pitem")], i = items.indexOf(document.activeElement);
   if (e.key === "Escape") { e.preventDefault(); closeModal(true); }
-  else if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
-  else if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
-  else if (e.key === "Tab") { e.preventDefault(); items[(i + (e.shiftKey ? -1 : 1) + items.length) % items.length].focus(); }
+  else if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+  else if (e.key === "ArrowUp" || (e.key === "Tab" && e.shiftKey)) { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
 });
 
-function select(pid, fromHash) {
+function select(pid) {
   if (!profiles.some(p => p.id === pid)) pid = profiles[0].id;
-  const changed = pid !== current;
   current = pid; store.set("vagas-perfil", pid);
-  if (!fromHash && location.hash.slice(1) !== pid) history.replaceState(null, "", "#" + pid);
-  marks = store.get(markKey(pid), {});
-  data = viewFor(pid);
-  const p = profiles.find(x => x.id === pid);
-  if (changed) { $("h1").classList.remove("swap"); void $("h1").offsetWidth; $("h1").classList.add("swap"); }
-  document.title = p && p.name ? `Vagas · ${p.name}` : "Vagas";
-  src = "Todas"; animateNext = true;
-  refreshChrome(); setHeader(); buildSources(); render();
+  data = viewFor(pid); marks = store.get(markKey(pid), {}); seen = store.get(seenKey(pid), {});
+  document.title = profile().name ? `Vagas de ${profile().name}` : "Vagas";
+  filters.tema = filters.fonte = filters.local = "";
+  go(page);
 }
 
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
   updated = d.updated; tracker = d.tracker || {};
   profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];
-  all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
-    ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
-  const legacy = store.get("vagas-estado", null);          // marcações antigas passam para o primeiro perfil
-  if (legacy && !store.get(markKey(profiles[0].id), null)) store.set(markKey(profiles[0].id), legacy);
-  if (profiles.length < 2) { $("switchBtn").style.display = "none"; $("mSwitch").style.display = "none"; }
-  if (location.hash === "#definicoes") view = "settings";
-  select(location.hash === "#definicoes" ? store.get("vagas-perfil", profiles[0].id) : (location.hash.slice(1) || store.get("vagas-perfil", profiles[0].id)), true);
-}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; });
-
-document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
-  document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; animateNext = true; render(); });
-$("q").addEventListener("input", render);
-addEventListener("hashchange", () => { if (!profiles.length) return;
-  if (location.hash === "#definicoes") { if (view !== "settings" && view !== "people") setView("settings"); return; }
-  if (view === "settings" || view === "people") { view = "all"; }
-  select(location.hash.slice(1), true); });
-$("settings").onclick = () => setView("settings");
-$("mSettings").onclick = () => setView(view === "settings" ? "all" : "settings");
-const bar = document.querySelector(".bar");
-addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 90), { passive: true });
+  all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") || ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
+  const h = readUrl();
+  if (h.pg) page = h.pg;
+  const pid = h.pid || store.get("vagas-perfil", profiles[0].id);
+  current = profiles.some(p => p.id === pid) ? pid : profiles[0].id;
+  select(current);
+}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar a página."; });
+addEventListener("hashchange", () => { const h = readUrl(); if (!profiles.length) return;
+  if (h.pid && h.pid !== current) { if (h.pg) page = h.pg; select(h.pid); } else if (h.pg && h.pg !== page) go(h.pg); });
 </script>
 </body>
 </html>

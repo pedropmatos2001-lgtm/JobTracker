@@ -41,28 +41,22 @@ title_exclude:
 senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
 senior_bonus: 2
 
-# Associações, clusters de competitividade, CoLABs, centros tecnológicos e agências: valem pontos
-# extra só pelo tipo de entidade (vê-se no nome da empresa ou no título).
-org_bonus:
-  points: 5                      # associação + 1 tema forte já chega à fasquia
-  pattern: "associa[çc][ãa]o|association|\\bcluster|confedera[çc][ãa]o|federa[çc][ãa]o|\\bBCSD|\\bCoLAB|laborat[óo]rio colaborativo|centro tecnol[óo]gico|centro de interface|ag[êe]ncia (para|de|nacional|regional)|funda[çc][ãa]o|\\bINESC|\\bINEGI|\\bCEiiA|\\bISQ\\b|\\bPRODUTECH|\\bENERGYIN|smart energy|\\bAEP\\b|\\bCIP\\b|\\bAIP\\b|\\bANI\\b|\\bADENE|\\bAPREN|\\bACAP\\b|c[âa]mara de com[ée]rcio|business council|\\bNGO\\b|\\bONG\\b"
-
 keywords:
   strong_cap: 14
   strong:                  # +3 cada (+2 se estiver no título)
     # foco: negócio e operações — processos, organização, modelo operativo
-    - {label: "Processos e melhoria contínua", pattern: "process (re-?)?engineering|reengenharia|process (excellence|improvement|optimi[sz]ation|manager|owner)|operational excellence|excel[êe]ncia operacional|melhoria (cont[íi]nua|de processos)|otimiza[çc][ãa]o de processos|\\blean\\b|six sigma|bpmn?\\b"}
-    - {label: "Modelo operativo e organização", pattern: "operating model|modelo operativo|target operating|organi[sz]ational (design|effectiveness|transformation|development)|desenho organizacional|reestrutura[çc][ãa]o|reorganiza|business transformation|transforma[çc][ãa]o (organizacional|do neg[óo]cio)|change management|gest[ãa]o da mudan[çc]a"}
-    - {label: "Gestão de operações", pattern: "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|asset management|gest[ãa]o de ativos"}
+    - {label: "Processos e melhoria contínua", examples: ["melhoria contínua", "lean", "BPMN", "process excellence"], pattern: "process (re-?)?engineering|reengenharia|process (excellence|improvement|optimi[sz]ation|manager|owner)|operational excellence|excel[êe]ncia operacional|melhoria (cont[íi]nua|de processos)|otimiza[çc][ãa]o de processos|\\blean\\b|six sigma|bpmn?\\b"}
+    - {label: "Modelo operativo e organização", examples: ["modelo operativo", "desenho organizacional", "reestruturação", "change management"], pattern: "operating model|modelo operativo|target operating|organi[sz]ational (design|effectiveness|transformation|development)|desenho organizacional|reestrutura[çc][ãa]o|reorganiza|business transformation|transforma[çc][ãa]o (organizacional|do neg[óo]cio)|change management|gest[ãa]o da mudan[çc]a"}
+    - {label: "Gestão de operações", examples: ["operations manager", "business operations", "eficiência operacional", "gestão de ativos"], pattern: "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|asset management|gest[ãa]o de ativos"}
     # setor: sustentabilidade, ambiente e clima
-    - {label: "Sustentabilidade e ESG", pattern: "csrd|esg|\\bgri\\b|tcfd|ghg|sustainab|sustentabilidade|decarboni[sz]|descarboniza|circular economy|economia circular|net[- ]zero|carbon|carbono"}
-    - {label: "Clima e ambiente", pattern: "climate|clim[áa]tic|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|environment(al)?\\b|ambient(e|al)\\b|biodivers|emiss(ions|[õo]es)|iso 14001|\\blca\\b|life cycle assessment"}
+    - {label: "Sustentabilidade e ESG", examples: ["ESG", "CSRD", "descarbonização", "economia circular"], pattern: "csrd|esg|\\bgri\\b|tcfd|ghg|sustainab|sustentabilidade|decarboni[sz]|descarboniza|circular economy|economia circular|net[- ]zero|carbon|carbono"}
+    - {label: "Clima e ambiente", examples: ["alterações climáticas", "ambiente", "emissões", "biodiversidade"], pattern: "climate|clim[áa]tic|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|environment(al)?\\b|ambient(e|al)\\b|biodivers|emiss(ions|[õo]es)|iso 14001|\\blca\\b|life cycle assessment"}
     # ambiente + tecnologia, smart cities e mobilidade
-    - {label: "Smart cities e mobilidade", pattern: "smart cit|cidades? inteligentes?|urban (mobility|planning|analytics)|mobilidade|e-?mobility|transporte p[úu]blico|ferrovi|cleantech|climate tech|greentech|environmental (data|technology)|\\bgis\\b|geospatial|georreferenc"}
-    - {label: "Utilities: energia, água e resíduos", pattern: "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"}
-    - {label: "PMO e programas", pattern: "pmo|program(me)? manage|transformation (manager|lead|office)"}
-    - {label: "Fundos europeus", pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
-    - {label: "CCDR e modernização administrativa", pattern: "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"}
+    - {label: "Smart cities e mobilidade", examples: ["smart cities", "mobilidade", "transporte público", "GIS"], pattern: "smart cit|cidades? inteligentes?|urban (mobility|planning|analytics)|mobilidade|e-?mobility|transporte p[úu]blico|ferrovi|cleantech|climate tech|greentech|environmental (data|technology)|\\bgis\\b|geospatial|georreferenc"}
+    - {label: "Utilities: energia, água e resíduos", examples: ["utilities", "transição energética", "água e saneamento", "resíduos"], pattern: "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"}
+    - {label: "PMO e programas", examples: ["PMO", "program manager", "transformation office"], pattern: "pmo|program(me)? manage|transformation (manager|lead|office)"}
+    - {label: "Fundos europeus", examples: ["fundos europeus", "PRR", "Portugal 2030", "Horizon Europe"], pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
+    - {label: "CCDR e modernização administrativa", examples: ["CCDR", "desenvolvimento regional", "modernização administrativa"], pattern: "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"}
   medium:                  # +1 cada (tecnologia e IA contam, mas como complemento)
     - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|genai|generative ai|ia generativa"
     - "digital transformation|transforma[çc][ãa]o digital|automation|automatiza"
@@ -99,17 +93,18 @@ profiles:
 
   - id: marta
     name: Marta
-    headline: "Políticas públicas · Assuntos europeus · Incentivos e fundos"
-    tags: ["Políticas públicas", "Assuntos europeus", "Fundos e incentivos", "Horizon Europe", "SIFIDE"]
+    headline: "Setor público, assuntos europeus e direitos humanos"
+    tags: ["Setor público", "Assuntos europeus", "Projetos europeus", "Políticas públicas", "Direitos humanos", "Inclusão e proteção"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
     ntfy_env: NTFY_TOPIC_MARTA
     email_env: EMAIL_TO_MARTA
     profile_env: CANDIDATE_PROFILE_MARTA
     rules:
-      sector_bonus: {}                            # o bónus de utilities é do Pedro
-      min_score: 7
-      years: {min: 0, stretch_from: 4, max: 5}   # ~3 anos de experiência
+      sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      require_theme: true                         # só passam vagas com pelo menos um dos temas abaixo
+      min_score: 4                                # com require_theme, basta um tema forte e algum contexto
+      years: {min: 0, stretch_from: 4, max: 5}   # cerca de 3 anos de experiência
       senior_title: "head of|director|diretor|principal\\b|vp\\b|chief"
       senior_bonus: -3                            # cargos muito acima perdem pontos
       title_exclude:
@@ -117,27 +112,30 @@ profiles:
         - "est[áa]gio curricular|curricular internship|summer intern"
         - "software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b"
         - "\\bSAP\\b|salesforce|dynamics 365|servicenow"
-        - "account manager|business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center"
+        - "business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center"
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
+        - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
       keywords:
         strong_cap: 14
         strong:
-          - {label: "Políticas públicas", pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate)|analista de pol[íi]ticas"}
-          - {label: "Assuntos europeus", pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission"}
-          - {label: "Incentivos e fundos", pattern: "incentiv|sifide|horizon europe|portugal 2030|\\bPRR\\b|fundos europeus|fundos comunit|eu funds|grant|subven[çc]"}
-          - {label: "Candidaturas a financiamento", pattern: "candidaturas? a (fundos|financiamento|programas|projetos|incentivos)|funding application|grant writing|application reports?|financiamento"}
-          - {label: "Desenvolvimento regional e cooperação", pattern: "\\bCCDR|desenvolvimento regional|regional development|international development|desenvolvimento internacional|coopera[çc][ãa]o"}
-          - {label: "Regulação e avaliação de políticas", pattern: "regulat|regula[çc][ãa]o|legislat|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|impact assessment"}
+          - {label: "Setor público", examples: ["administração pública", "ministério", "câmara municipal", "instituto público"], pattern: "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government|governo|minist[ée]rio|ministry|munic[íi]pi|c[âa]mara municipal|autarquia|instituto p[úu]blico|\\bCCDR|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"}
+          - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|legislat|regula[çc][ãa]o|regulatory affairs"}
+          - {label: "Assuntos europeus", examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|uni[ãa]o europeia|european union|\\bEU\\b institutions|institui[çc][õo]es europeias|brussels|bruxelas|\\bMEP\\b|eurodeputad"}
+          - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Erasmus+", "Interreg", "cooperação internacional"], pattern: "eu[- ]funded project|projetos? europeus?|european projects?|horizon europe|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|project officer|gestor[a]? de projetos? europeus?|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional"}
+          - {label: "Direitos humanos", examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
+          - {label: "Infância e juventude", examples: ["proteção de crianças", "juventude", "UNICEF", "CPCJ"], pattern: "child|crian[çc]a|inf[âa]ncia|youth|juventude|jovens|menores|\\bunicef|\\bCPCJ|prote[çc][ãa]o de (crian[çc]as|menores)|child protection|safeguarding"}
+          - {label: "Igualdade de género", examples: ["igualdade de género", "violência doméstica", "direitos das mulheres"], pattern: "women|mulher|g[ée]nero|gender|igualdade|equality|viol[êe]ncia dom[ée]stica|domestic violence|gender-based violence|viol[êe]ncia de g[ée]nero|\\bCIG\\b"}
+          - {label: "Inclusão e proteção", examples: ["refugiados", "migrantes", "inclusão social", "apoio a vítimas"], pattern: "refug|asylum|asilo|migra|tr[áa]fico de seres humanos|human trafficking|vulner[áa]v|exclus[ãa]o social|inclus[ãa]o social|social inclusion|pobreza|poverty|sem-abrigo|homeless|v[íi]timas|victim|\\bAPAV|\\bACNUR|\\bUNHCR|\\bOIM\\b|\\bIOM\\b|\\bAIMA\\b"}
         medium:
+          - "research|investiga[çc][ãa]o|analyst|analista|project officer|gestor de projeto|project manager"
+          - "stakeholder|advocacy|sensibiliza[çc][ãa]o"
+          - "fundos europeus|eu funds|grant agreement|candidaturas a programas europeus"
+          - "ong\\b|ngo\\b|non-profit|sem fins lucrativos|funda[çc][ãa]o"
           - "power bi|stata|excel"
-          - "research|investiga[çc][ãa]o|analyst|analista"
-          - "stakeholder"
-          - "sustainab|sustentabilidade"
-          - "public sector|setor p[úu]blico|government|municipal|autarquia|c[âa]mara municipal"
-          - "consult"
         negative:
           - "commission|comiss[ãa]o de vendas|cold call|quota"
           - "call center|contact center"
+          - "incentivos? (fiscais|financeiros|ao investimento)|benef[íi]cios fiscais|tax incentive|\\bSIFIDE\\b|r&d tax|cr[ée]dito fiscal|consultor[a]? de incentivos|incentive consult"
 
 public_repo: true          # repositório público: sem matches, kits nem notas do juiz no git
 
@@ -206,16 +204,27 @@ sources:
       - "gestor de projetos europeus"
       - "european projects manager"
       - "innovation manager"
-      # perfil Marta
+      # perfil Marta: setor público e direitos humanos
       - "public policy"
       - "políticas públicas"
+      - "policy officer"
+      - "administração pública"
+      - "direitos humanos"
+      - "human rights"
+      - "proteção de crianças"
+      - "child protection"
+      - "igualdade de género"
+      - "gender equality"
+      - "refugiados"
+      - "inclusão social"
+      - "assuntos europeus"
+      - "projetos europeus"
+      - "UNICEF"
       - "EU affairs"
       - "public affairs"
-      - "policy analyst"
-      - "incentivos"
-      - "SIFIDE"
-      - "Horizon Europe"
-      - "grants"
+      - "European projects"
+      - "project officer"
+      - "assuntos europeus"
 
   # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
   - type: indeed
@@ -245,12 +254,15 @@ sources:
       - "alterações climáticas"
       - "smart cities"
       - "mobilidade"
-      # perfil Marta
+      # perfil Marta: setor público e direitos humanos
       - "políticas públicas"
-      - "incentivos"
+      - "administração pública"
+      - "direitos humanos"
+      - "proteção de crianças"
+      - "igualdade de género"
+      - "inclusão social"
       - "assuntos europeus"
-      - "public affairs"
-      - "consultor de incentivos"
+      - "projetos europeus"
 
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o

@@ -16,6 +16,7 @@ class Job:
     remote: Optional[bool] = None
     partial: bool = False            # descricao incompleta (ex.: Adzuna)
     unverified: bool = False         # fonte nao confirma se esta aberta (ex.: page_watch)
+    logo: str = ""                   # logotipo da empresa, quando a fonte o dá (LinkedIn, Indeed)
     extra: dict = field(default_factory=dict)   # dados para ir buscar o detalhe
 
     @property

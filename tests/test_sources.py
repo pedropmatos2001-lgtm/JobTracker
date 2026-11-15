@@ -392,3 +392,9 @@ def test_fetch_bep_skips_known_and_uses_cursor():
     s = FakeSession(BepResp(True, 1002), BepResp(False, 1004), BepResp(False, 1005), BepResp(False, 1006))
     jobs = sources.fetch_bep(src, s, {}, sleep=lambda x: None)
     assert len(jobs) == 1 and jobs.cursor == {"last": 1003} and len(s.calls) == 4   # 1003 não foi pedida
+
+
+def test_linkedin_card_keeps_company_logo():
+    a, b = sources.parse_linkedin_cards(_fx("linkedin_search.html"))
+    assert a.logo.startswith("https://media.licdn.com/") and b.logo == ""
+    assert "logo" in a.to_dict()

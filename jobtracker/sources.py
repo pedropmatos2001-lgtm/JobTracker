@@ -538,12 +538,18 @@ def parse_linkedin_cards(html_text):
             continue
         loc = card.find(class_="job-search-card__location")
         tm = card.find("time")
+        img = card.find("img")
+        logo = ""
+        if img is not None:
+            logo = img.get("data-delayed-url") or img.get("src") or ""
+            if not logo.startswith("https://") or "ghost" in logo:
+                logo = ""
         title = t.get_text(" ", strip=True)
         where = loc.get_text(" ", strip=True) if loc else ""
         jobs.append(Job(
             source="linkedin", company=c.get_text(" ", strip=True) if c else "", title=title,
             url=f"{LI_BASE}/jobs/view/{jid}", location=where,
-            posted=iso(tm.get("datetime")) if tm else "",
+            posted=iso(tm.get("datetime")) if tm else "", logo=logo,
             remote=bool(re.search(r"remot|teletrabalho", f"{title} {where}", re.I)) or None,
             extra={"linkedin_id": jid}))
     return jobs
@@ -669,7 +675,8 @@ def parse_jobspy_rows(rows, source="indeed"):
             posted=iso(str(val(r, "date_posted") or "")),
             salary_min=_annual_eur(val(r, "min_amount"), iv, cur),
             salary_max=_annual_eur(val(r, "max_amount"), iv, cur),
-            remote=bool(val(r, "is_remote")) or None))
+            remote=bool(val(r, "is_remote")) or None,
+            logo=str(val(r, "company_logo") or "") if str(val(r, "company_logo") or "").startswith("https://") else ""))
     return jobs
 
 

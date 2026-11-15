@@ -25,8 +25,8 @@ OPS = mk("Operations Excellence Manager", "4 years of experience. Process improv
          "for a water utility. Sustainability reporting.", company="Águas do Norte")
 POLICY = mk("Policy Analyst – EU Affairs", "3 years of experience. Public policy analysis, European Parliament "
             "monitoring, Horizon Europe funding applications. Stakeholder management.", company="Think Tank")
-BOTH = mk("Gestor de Fundos Europeus e Sustentabilidade", "3 anos de experiência. Candidaturas a fundos, Portugal 2030, "
-          "sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
+BOTH = mk("Gestor de Fundos Europeus e Sustentabilidade", "3 anos de experiência. Administração pública: candidaturas a fundos, "
+          "Portugal 2030, sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
 
 
 def go(cfg, jobs, tmp_path, env=None):
@@ -122,3 +122,9 @@ def test_new_profile_gets_jobs_already_seen_by_others(tmp_path):
     sent.clear()
     run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
     assert sent == []
+
+
+def test_page_entry_has_matched_themes(tmp_path):
+    _, _, docs = go(cfg2(), [OPS], tmp_path)
+    th = docs["matches"][0]["profiles"]["pedro"]["themes"]
+    assert th and all("|" not in t for t in th) and len(th) <= 3
