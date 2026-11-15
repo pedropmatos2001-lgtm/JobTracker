@@ -1,0 +1,346 @@
+{
+ "health": {
+  "Adzuna": {
+   "fail_streak": 0,
+   "last_ok": ""
+  },
+  "EDP (Lisboa)": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "EDP (Porto)": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "EU Careers (agências, Lisboa)": {
+   "fail_streak": 1,
+   "last_ok": ""
+  },
+  "Greenvolt": {
+   "fail_streak": 1,
+   "last_ok": ""
+  },
+  "LIPOR": {
+   "fail_streak": 1,
+   "last_ok": ""
+  },
+  "Porto Ambiente": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "Remotive": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "Systemiq": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  }
+ },
+ "matches": [],
+ "seen": {
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4830762101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (London, UK)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4830765101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Amsterdam, Netherlands)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4858686101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Jakarta, Indonesia)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4965904101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Nairobi, Kenya)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4965910101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Jakarta, Indonesia)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4977815101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Amsterdam, Netherlands; London, UK; Nairobi, Kenya)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/4989291101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Amsterdam, Netherlands; London, UK)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/5005523101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Nairobi, Kenya)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/5017618101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Jakarta, Indonesia)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/5017713101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Jakarta, Indonesia)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/5027666101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Delhi, India)"
+  },
+  "https://job-boards.eu.greenhouse.io/systemiq/jobs/5030021101": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Nairobi, Kenya)"
+  },
+  "https://jobs.edp.com/": {
+   "first_seen": "2026-11-15",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://jobs.edp.com/content/Contactos?locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/content/Nossa-Talent-Community?locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/content/Politica-Privacidade?locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/content/Politica_Cookies?locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Lisboa-Civil-Engineer-E-Mobility-Projects/1456996133": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Lisboa-EDP-Professional-Internship_Obras-Lisboa/1455935433": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://jobs.edp.com/job/Lisboa-LV-Dispatch-Operator-%28Lisboa%29/1435019733": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Lisboa-Segment-Management-Specialist/1454182933": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Lisboa-Senior-Electric-Mobility-Operations-Specialist/1454237733": {
+   "first_seen": "2026-11-15",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Porto-Dispatch-&-Remote-Operations-Specialist/1455742133": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/job/Porto-EDP-Professional-Internship_MV-DISPATCH-MONDEGO/1451870933": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&locale=en_US": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&locale=es_ES": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&locale=pt_BR": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&sortColumn=sort_facility&sortDirection=desc": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Lisboa&sortColumn=sort_location&sortDirection=desc": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&locale=en_US": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&locale=es_ES": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&locale=pt_BR": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&locale=pt_PT": {
+   "first_seen": "2026-11-15",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&sortColumn=sort_facility&sortDirection=desc": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://jobs.edp.com/search?locationsearch=Porto&sortColumn=sort_location&sortDirection=desc": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://policies.google.com/privacy": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://policies.google.com/technologies/cookies": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://policies.google.com/terms": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.linkedin.com/company/edp": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-2091166": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Remote - USA)"
+  },
+  "https://remotive.com/remote-jobs/artificial-intelligence/ai-trainer-video-annotation-2091161": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 24 dias"
+  },
+  "https://remotive.com/remote-jobs/customer-service/customer-service-representative-2091171": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Remote - USA)"
+  },
+  "https://remotive.com/remote-jobs/customer-service/us-remote-patient-care-advocate-customer-service-2091168": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Remote - USA)"
+  },
+  "https://remotive.com/remote-jobs/data/senior-data-engineer-2091137": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://remotive.com/remote-jobs/information-technology/tier-iii-service-desk-engineer-2091045": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://remotive.com/remote-jobs/marketing/remote-office-assistant-1680495": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://remotive.com/remote-jobs/sales/inside-sales-contractor-2086540": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://remotive.com/remote-jobs/software-development/full-stack-developer-2091165": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://remotive.com/remote-jobs/software-development/head-of-engineering-2091134": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 20 dias"
+  },
+  "https://remotive.com/remote-jobs/software-development/senior-back-end-developer-2091135": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://remotive.com/remote-jobs/software-development/senior-react-full-stack-developer-2091136": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://remotive.com/remote-jobs/software-development/software-engineer-ai-coding-tasks-2091158": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://remotive.com/remote-jobs/software-development/tech-lead-full-stack-rails-engineer-2069746": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Remote - USA, Canada, USA timezones)"
+  },
+  "https://remotive.com/remote-jobs/writing/freelance-copywriter-1749306": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://remotive.com/remote-jobs/writing/freelance-writer-1185979": {
+   "first_seen": "2026-11-15",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://twitter.com/innovationatedp": {
+   "first_seen": "2026-11-15",
+   "why": "fechada"
+  },
+  "https://www.facebook.com/policies/cookies": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.facebook.com/privacy/policy": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.linkedin.com/legal/cookie-policy": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.linkedin.com/legal/l/cookie-table": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.linkedin.com/legal/privacy-policy": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.linkedin.com/legal/user-agreement": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.portoambiente.pt/files/uploads/cms/Anúncio_Jurídico_2026.pdf": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.portoambiente.pt/files/uploads/cms/Técnico_Superior_Fontes_Financiamento (1).pdf": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.youtube.com/channel/UCXhsiXFUUCPb-GiZoMLsUEQ": {
+   "first_seen": "2026-11-15",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  }
+ }
+}
