@@ -20,7 +20,7 @@ from . import logos
 from .models import Job
 from .scoring import strip_html
 
-UA = {"User-Agent": "jobtracker-pedro/1.0 (uso pessoal)"}
+UA = {"User-Agent": "jobtracker/1.0 (uso pessoal)"}
 
 
 class SourceError(Exception):
