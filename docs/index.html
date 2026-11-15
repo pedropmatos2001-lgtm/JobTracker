@@ -16,9 +16,11 @@
 <style>
   :root {
     color-scheme: light;
-    --bg: #f6f7f9; --card: #ffffff; --ink: #0f172a; --ink-2: #475569; --ink-3: #94a3b8;
+    --bg: #f6f7f9; --card: #ffffff; --ink: #0f172a; --ink-2: #475569; --ink-3: #556070;
     --line: #e5e7eb; --line-2: #eef0f3; --accent: #2563eb; --accent-soft: #eff6ff;
-    --new: #059669; --new-soft: #ecfdf5; --warn: #b45309; --warn-soft: #fffbeb;
+    --new: #047857; --new-soft: #ecfdf5; --warn: #b45309; --warn-soft: #fffbeb;
+    --motion-100: 100ms; --motion-150: 150ms; --motion-200: 200ms; --motion-300: 300ms;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
     --radius: 14px; --shadow: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
   }
   * { box-sizing: border-box; }
@@ -38,6 +40,9 @@
   .stat span { color: var(--ink-2); font-size: 12px; }
 
   /* barra de filtros */
+  .bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 8px; pointer-events: none;
+                background: linear-gradient(rgba(15,23,42,.08), transparent); opacity: 0; transition: opacity var(--motion-150) var(--ease-out); }
+  .bar.scrolled::after { opacity: 1; }
   .bar { position: sticky; top: 0; z-index: 5; background: rgba(246,247,249,.92); backdrop-filter: saturate(1.4) blur(8px);
          -webkit-backdrop-filter: saturate(1.4) blur(8px); border-bottom: 1px solid var(--line); }
   .bar .wrap { display: grid; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
@@ -64,8 +69,14 @@
   .group { margin: 18px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
   .group:first-child { margin-top: 0; }
   .list { display: grid; gap: 10px; }
+  .job.enter { animation: rise var(--motion-300) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 30ms); }
+  .job.leaving { opacity: 0; transform: translateY(-6px) scale(.99); transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in); }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .stat b { transition: opacity var(--motion-200) var(--ease-out); }
   .job { display: grid; grid-template-columns: 44px 1fr; gap: 14px; background: var(--card); border: 1px solid var(--line);
-         border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); transition: border-color .15s, box-shadow .15s; }
+         border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+         transition: border-color var(--motion-150) var(--ease-out), box-shadow var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out); }
+  @media (hover: hover) { .job:hover { transform: translateY(-1px); } }
   .job:hover { border-color: #d5dae1; box-shadow: 0 4px 12px rgba(15,23,42,.06); }
   .job.done { opacity: .55; }
   .logo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; font-size: 16px; color: #fff; }
@@ -84,14 +95,41 @@
   .btn { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line);
          background: var(--card); color: var(--ink); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
   .btn:hover { background: #f8fafc; }
+  .btn, .chip, .seg button { transition: background-color var(--motion-150) var(--ease-out), border-color var(--motion-150) var(--ease-out),
+                             color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
+  .btn:active, .chip:active, .seg button:active { transform: scale(.97); }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   .btn.primary:hover { background: #1d4ed8; }
   .btn.on { background: var(--new-soft); border-color: #a7f3d0; color: var(--new); }
 
+  .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 12px;
+           background: var(--ink); color: #fff; border-radius: 12px; padding: 10px 10px 10px 16px; font-size: 14px; box-shadow: 0 8px 24px rgba(15,23,42,.18);
+           transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+           transition: transform var(--motion-150) var(--ease-in), opacity var(--motion-150) var(--ease-in); }
+  .toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto;
+                transition: transform var(--motion-200) var(--ease-out), opacity var(--motion-200) var(--ease-out); }
+  .toast button { font: inherit; font-weight: 600; color: #93c5fd; background: transparent; border: 0; padding: 0 10px; min-height: 44px; cursor: pointer; border-radius: 8px; }
   .empty { text-align: center; padding: 56px 16px; color: var(--ink-2); background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); }
   .empty b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
   footer { color: var(--ink-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (pointer: coarse) {
+    .btn, .chip, .seg button { min-height: 44px; }
+    .seg button { padding: 6px 14px; }
+    .toggle { min-height: 44px; }
+    .toggle input { width: 20px; height: 20px; }
+  }
+
+  /* menos movimento: só mudanças instantâneas ou fades curtos */
+  @media (prefers-reduced-motion: reduce) {
+    .job.enter { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    .job, .btn, .chip, .seg button { transition: opacity var(--motion-100) ease, background-color var(--motion-100) ease; }
+    .job:hover, .btn:active, .chip:active, .seg button:active { transform: none; }
+    .job.leaving { transform: none; transition: opacity var(--motion-100) ease; }
+    .toast, .toast.show { transform: translate(-50%, 0); transition: opacity var(--motion-100) ease; }
+  }
 
   @media (max-width: 560px) {
     h1 { font-size: 22px; }
@@ -139,6 +177,7 @@
 </div>
 
 <main class="wrap"><div id="list"></div></main>
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" type="button">Anular</button></div>
 <footer>Atualiza-se sozinho duas vezes por dia. As marcações ficam guardadas só neste dispositivo.</footer>
 
 <script>
@@ -153,7 +192,21 @@ const PALETTE = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#059669", "#0891b2
 const colorOf = s => { let h = 0; for (const c of s || "?") h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
 
-let data = [], updated = "", days = 7, src = "Todas", showDone = false;
+let data = [], updated = "", days = 7, src = "Todas", showDone = false, animateNext = true;
+let toastTimer = null, undo = null;
+function toast(msg, onUndo) {
+  const t = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  undo = onUndo; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 4000);
+}
+document.getElementById("toastUndo").onclick = () => { if (undo) undo(); undo = null; document.getElementById("toast").classList.remove("show"); };
+function updateStats() {
+  const fresh = data.filter(m => !marks[m.url]);
+  document.getElementById("sToday").textContent = fresh.filter(m => m.first_seen === updated).length;
+  document.getElementById("sWeek").textContent = fresh.filter(m => ageDays(m.first_seen) < 7).length;
+  document.getElementById("sAll").textContent = data.length;
+}
 const ageDays = iso => Math.round((new Date(updated + "T00:00:00") - new Date((iso || updated) + "T00:00:00")) / 864e5);
 const fmtDay = iso => { const a = ageDays(iso); if (a === 0) return "Hoje"; if (a === 1) return "Ontem";
   return new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); };
@@ -178,7 +231,14 @@ function card(m) {
   const acts = el("div", "acts");
   const open = el("a", "btn primary", "Abrir vaga"); open.href = m.url; open.target = "_blank"; open.rel = "noopener";
   const mk = (label, val) => { const on = marks[m.url] === val; const b = el("button", "btn" + (on ? " on" : ""), on ? "✓ " + label : label);
-    b.onclick = () => { if (on) delete marks[m.url]; else marks[m.url] = val; save(); render(); }; return b; };
+    b.onclick = () => {
+      const prev = marks[m.url];
+      if (on) delete marks[m.url]; else marks[m.url] = val;
+      save(); updateStats();
+      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); updateStats(); render(); };
+      if (!on) toast(val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
+      if (!on && !showDone) { li.classList.add("leaving"); setTimeout(render, 150); } else render();
+    }; return b; };
   acts.append(open, mk("Candidatei-me", "aplicada"), mk("Esconder", "escondida"));
   body.append(top, tags);
   li.append(logo, body, acts);
@@ -198,10 +258,13 @@ function render() {
              document.createTextNode(data.length ? "Experimenta alargar o período ou limpar a pesquisa." : "As próximas aparecem aqui assim que o tracker correr."));
     box.append(e); return;
   }
-  let day = null, list = null;
+  let day = null, list = null, i = 0;
+  const animate = animateNext; animateNext = false;
   for (const m of rows) {
     if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group", fmtDay(day))); list = el("div", "list"); box.append(list); }
-    list.append(card(m));
+    const c = card(m);
+    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }   // 30 ms por cartão, máx. ~200 ms
+    list.append(c);
   }
 }
 
@@ -211,7 +274,7 @@ function buildSources() {
   for (const n of ["Todas", ...Object.keys(counts).sort((a, b) => counts[b] - counts[a])]) {
     const b = el("button", "chip", n); b.setAttribute("aria-pressed", n === src);
     b.append(el("span", "n", n === "Todas" ? data.length : counts[n]));
-    b.onclick = () => { src = n; buildSources(); render(); };
+    b.onclick = () => { src = n; buildSources(); animateNext = true; render(); };
     box.append(b);
   }
 }
@@ -220,18 +283,17 @@ fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
   updated = d.updated;
   data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
     ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
-  const fresh = data.filter(m => !marks[m.url]);
-  document.getElementById("sToday").textContent = fresh.filter(m => m.first_seen === updated).length;
-  document.getElementById("sWeek").textContent = fresh.filter(m => ageDays(m.first_seen) < 7).length;
-  document.getElementById("sAll").textContent = data.length;
+  updateStats();
   document.getElementById("sub").textContent = "Atualizado a " + new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" }) + " · Portugal continental";
   buildSources(); render();
 }).catch(() => { document.getElementById("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; render(); });
 
 document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
-  document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; render(); });
+  document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; animateNext = true; render(); });
 document.getElementById("showDone").onchange = e => { showDone = e.target.checked; render(); };
 document.getElementById("q").addEventListener("input", render);
+const bar = document.querySelector(".bar");
+addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 140), { passive: true });
 </script>
 </body>
 </html>
