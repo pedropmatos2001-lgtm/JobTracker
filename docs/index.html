@@ -10,6 +10,8 @@
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Vagas</title>
 <style>
@@ -100,7 +102,7 @@
   header.wrap { padding-top: 48px; padding-bottom: 8px; }
   h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.025em; margin: 0; text-wrap: balance; }
   .sub { color: var(--label-2); font-size: 17px; margin-top: 6px; letter-spacing: -.02em; }
-  main { padding-bottom: 72px; }
+  main.wrap { padding-bottom: 96px; }
   h2.sec { font-size: 22px; font-weight: 700; letter-spacing: -.025em; margin: 36px 0 12px; }
   h2.sec .more { float: right; font-size: 15px; font-weight: 400; letter-spacing: -.01em; }
 
@@ -122,14 +124,16 @@
   .bar-col .tip { position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); white-space: nowrap; }
   .axis { display: flex; justify-content: space-between; font-size: 12px; color: var(--label-3); margin-top: 8px; }
   .chart-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .chart-head span { flex: none; white-space: nowrap; }
   .chart-head b { font-size: 17px; font-weight: 600; }
   .chart-head span { font-size: 13px; color: var(--label-2); }
   .grid2 { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 12px; }
-  .companies { display: grid; }
+  .companies { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .panel { min-width: 0; }
   .company-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
   .company-row + .company-row { border-top: .5px solid var(--sep); }
   .company-row .c-name { flex: 1; min-width: 0; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .company-row .c-n { font-size: 15px; color: var(--label-2); }
+  .company-row .c-n { flex: none; min-width: 28px; padding-right: 4px; text-align: right; font-size: 15px; color: var(--label-2); }
   .mini-logo { width: 32px; height: 32px; border-radius: 8px; font-size: 12px; }
 
   /* ---------- vagas ---------- */
@@ -187,17 +191,21 @@
            transition: color 150ms var(--ease-out), background-color 150ms var(--ease-out), transform 160ms var(--ease-out); }
   .apply[aria-pressed=true] { color: var(--green); }
   /* ponto azul de vaga nova, com legenda ao passar ou tocar */
-  .dot { position: absolute; z-index: 3; left: -2px; top: 16px; width: 22px; height: 44px; border: 0; padding: 0; background: transparent;
+  .logo-wrap { position: relative; width: 48px; height: 48px; }
+  .dot { position: absolute; z-index: 3; top: -12px; right: -12px; width: 32px; height: 32px; border: 0; padding: 0; background: transparent;
          display: grid; place-items: center; cursor: default; }
-  .dot::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
+  .dot::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 2.5px var(--card); }
   .tip { position: absolute; z-index: 20; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%) scale(.97); transform-origin: bottom center;
          background: var(--label); color: var(--bg); font-size: 13px; font-weight: 500; padding: 6px 10px; border-radius: 8px; white-space: nowrap;
          opacity: 0; pointer-events: none; transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out); }
-  .dot .tip { left: 0; transform: scale(.97); transform-origin: bottom left; }
-  .dot:focus-visible .tip, .dot.show .tip { opacity: 1; transform: none; }
+  .dot .tip { left: 50%; transform: translateX(-50%) scale(.97); transform-origin: bottom center; }
+  .dot:focus-visible .tip, .dot.show .tip { opacity: 1; transform: translateX(-50%); }
   .bar-col:hover .tip, .bar-col:focus-visible .tip { opacity: 1; transform: translateX(-50%); }
+  .bar-col.start .tip { left: 0; transform: scale(.97); transform-origin: bottom left; }
+  .bar-col.end .tip { left: auto; right: 0; transform: scale(.97); transform-origin: bottom right; }
+  .bar-col.start:hover .tip, .bar-col.end:hover .tip { transform: none; }
   @media (hover: hover) and (pointer: fine) {
-    .dot:hover .tip { opacity: 1; transform: none; transition-delay: 250ms; }
+    .dot:hover .tip { opacity: 1; transform: translateX(-50%); transition-delay: 250ms; }
     .job:hover, .kpi:hover { box-shadow: var(--shadow-hover); }
     .apply:hover { background: var(--hover); color: var(--label); }
     .apply[aria-pressed=true]:hover { color: var(--green); }
@@ -221,16 +229,6 @@
   .btn { display: inline-flex; align-items: center; gap: 6px; border: 0; background: var(--blue); color: #fff; border-radius: 999px; padding: 10px 18px;
          font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; white-space: nowrap; min-height: 44px; transition: transform 160ms var(--ease-out); }
   .btn.ghost { background: var(--fill); color: var(--blue); }
-  /* interruptor igual ao do iPhone */
-  .switch { position: relative; flex: none; width: 51px; height: 31px; border: 0; padding: 0; border-radius: 999px; background: var(--switch-off); cursor: pointer;
-            transition: background-color 250ms var(--ease-out); }
-  .switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff;
-                   box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06); transition: transform 250ms var(--ease-out); }
-  .switch::before { content: ""; position: absolute; inset: -7px -4px; }
-  .switch[aria-checked=true] { background: #34c759; }
-  .switch[aria-checked=true]::after { transform: translateX(20px); }
-  .switch[aria-disabled=true] { opacity: .45; cursor: not-allowed; }
-  .switch-hit { position: relative; display: grid; place-items: center; min-width: 51px; min-height: 44px; }
   .src-row { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; padding: 3px 0; }
   .src-row .bad { color: var(--orange); }
 
@@ -243,8 +241,8 @@
   /* ---------- entrada (uma vez por sessão) e cartões ao fazer scroll (uma vez) ---------- */
   .js .rise { opacity: 0; transform: translateY(8px); }
   .js .rise.in { opacity: 1; transform: none; transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out); transition-delay: var(--d, 0ms); }
-  .js .reveal { opacity: 0; transform: translateY(8px); }
-  .js .reveal.in { opacity: 1; transform: none; transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out); }
+  .js .reveal { opacity: 0; transform: translateY(12px); }
+  .js .reveal.in { opacity: 1; transform: none; transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out); }
   .swap { animation: fade 150ms var(--ease-out); }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 
@@ -273,7 +271,7 @@
     h1 { font-size: 34px; }
     .sub { font-size: 15px; }
     h2.sec { font-size: 22px; margin-top: 28px; }
-    main { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+    main.wrap { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
     .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
     .kpi .k-value { font-size: 28px; }
     .grid2 { grid-template-columns: 1fr; }
@@ -286,7 +284,8 @@
     .filters .search { flex: 0 0 170px; }
     .select select { font-size: 16px; max-width: 180px; }
     .job { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; padding: 14px 6px 14px 14px; }
-    .logo { width: 44px; height: 44px; border-radius: 10px; font-size: 15px; }
+    .logo, .logo-wrap { width: 44px; height: 44px; }
+    .logo { border-radius: 10px; font-size: 15px; }
     .title { font-size: 17px; }
     .modal { left: 8px; right: 8px; top: auto; bottom: calc(8px + env(safe-area-inset-bottom)); width: auto; transform: translateY(110%); border-radius: 22px;
              transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-drawer), visibility 0s linear 200ms; }
@@ -299,7 +298,7 @@
     .js .rise, .js .reveal { transform: none; }
     .js .rise.in, .js .reveal.in { transition: opacity 150ms ease; transition-delay: 0ms; }
     .nope { animation: none; }
-    .seg .thumb, .switch, .switch::after { transition: none; }
+    .seg .thumb { transition: none; }
     .kpi:active, .btn:active, .apply:active, .seg button:active, .item:active, .pitem:active, .profile-btn:active, .icon-btn:active { transform: none; }
     .modal, .modal.open { transition: opacity 150ms ease, visibility 0s; }
   }
@@ -380,7 +379,7 @@ function nope(target) {
 
 // ---------- tema ----------
 const mq = matchMedia("(prefers-color-scheme: dark)");
-const theme = () => store.get("vagas-tema", "auto");
+const theme = () => store.get("vagas-tema", "light");
 function applyTheme() { const t = theme(); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t; }
 applyTheme(); (mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme));
 
@@ -422,11 +421,11 @@ function enter(nodes, key) {
 }
 function revealOnScroll(nodes) {
   if (!("IntersectionObserver" in window)) return;
-  if (!io) io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
+  if (!io) io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px 160px 0px" });
   const done = new Set(JSON.parse(session.get("revelados") || "[]"));
   nodes.forEach(n => {
     const k = n.dataset.key; if (!k || done.has(k)) return;
-    const r = n.getBoundingClientRect(); if (r.top < innerHeight) return;           // já está no ecrã: sem animação
+    const r = n.getBoundingClientRect(); if (r.top < innerHeight + 160) return;      // já está (quase) no ecrã: sem animação
     done.add(k); n.classList.add("reveal"); io.observe(n);
   });
   try { sessionStorage.setItem("revelados", JSON.stringify([...done])); } catch (e) {}
@@ -496,13 +495,14 @@ function logoOf(m, cls = "logo") {
 function fitOf(m) { const s = m.fit != null ? m.fit / 5 : m.score; return s >= 15 ? ["Encaixe muito alto", "high"] : s >= 11 ? ["Bom encaixe", "good"] : null; }
 function card(m) {
   const c = el("article", "job" + (applied(m) ? " applied" : "")); c.dataset.key = m.url;
+  let newDot = null;
   const t = el("div", "jt");
   const tr = el("div", "title-row");
   if (isNew(m)) {
     const d = el("button", "dot"); d.type = "button"; d.setAttribute("aria-label", "Vaga nova, chegou na última recolha");
     d.append(el("span", "tip", "Nova, chegou na última recolha"));
     d.onclick = e => { e.stopPropagation(); d.classList.toggle("show"); setTimeout(() => d.classList.remove("show"), 2000); };
-    c.append(d);
+    newDot = d;
   }
   const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
   a.addEventListener("click", () => { seen[m.url] = 1; store.set(seenKey(current), seen); });
@@ -524,7 +524,8 @@ function card(m) {
   b.onclick = () => { if (marks[m.url]) delete marks[m.url]; else marks[m.url] = new Date().toISOString().slice(0, 10);
     store.set(markKey(current), marks); renderChrome(); render({ quiet: true }); };
   acts.append(b);
-  c.append(logoOf(m), t, acts);
+  const lw = el("div", "logo-wrap"); lw.append(logoOf(m)); if (newDot) lw.append(newDot);
+  c.append(lw, t, acts);
   return c;
 }
 
@@ -564,7 +565,7 @@ function renderHome(main) {
   const head = el("div", "chart-head"); head.append(el("b", null, "Ritmo dos últimos 14 dias"), el("span", "tnum", plural(tot, "vaga nova", "vagas novas")));
   const ch = el("div", "chart"); ch.setAttribute("role", "img");
   ch.setAttribute("aria-label", `Vagas novas por dia nos últimos 14 dias: ${days.map((d, i) => `${fmtShort.format(day0(d))}, ${vals[i]}`).join("; ")}`);
-  days.forEach((d, i) => { const col = el("div", "bar-col"); col.tabIndex = -1;
+  days.forEach((d, i) => { const col = el("div", "bar-col" + (i < 3 ? " start" : i > 10 ? " end" : "")); col.tabIndex = -1;
     const bar = el("div", "bar" + (d === updated ? " today" : "")); bar.style.height = Math.max(2, vals[i] / max * 100) + "%";
     col.append(bar, el("span", "tip", `${fmtShort.format(day0(d))}: ${plural(vals[i], "vaga", "vagas")}`)); ch.append(col); });
   const ax = el("div", "axis"); ax.append(el("span", null, fmtShort.format(day0(days[0]))), el("span", null, "Hoje"));
@@ -695,20 +696,12 @@ function renderRules(main) {
 function renderSettings(main) {
   const p = profile();
   header("Definições", "Aspeto da página, recolha e notificações.");
-  const sw = (checked, label, onChange, disabled) => {
-    const b = el("button", "switch"); b.type = "button"; b.setAttribute("role", "switch"); b.setAttribute("aria-checked", checked); b.setAttribute("aria-label", label);
-    if (disabled) b.setAttribute("aria-disabled", "true");
-    b.onclick = () => { if (b.getAttribute("aria-disabled") === "true") return nope(b); const v = b.getAttribute("aria-checked") !== "true"; b.setAttribute("aria-checked", v); onChange(v); };
-    const h = el("span", "switch-hit"); h.append(b); return h;
-  };
-  const followsSystem = theme() === "auto";
-  const dark = document.documentElement.dataset.theme === "dark";
   main.append(el("h2", "sec", "Aspeto"));
-  main.append(group(
-    row("Seguir o dispositivo", "Usa o tema claro ou escuro do sistema.", sw(followsSystem, "Seguir o tema do dispositivo", v => {
-      store.set("vagas-tema", v ? "auto" : (document.documentElement.dataset.theme)); applyTheme(); render(); })),
-    row("Tema escuro", followsSystem ? "Desliga Seguir o dispositivo para escolher." : null, sw(dark, "Tema escuro", v => {
-      store.set("vagas-tema", v ? "dark" : "light"); applyTheme(); }, followsSystem))));
+  const wrap = el("span", "select"); const sel = el("select"); sel.id = "themeSel"; sel.setAttribute("aria-label", "Aspeto");
+  for (const [k, lab] of [["light", "Claro"], ["dark", "Escuro"], ["auto", "Igual ao dispositivo"]]) { const o = el("option", null, lab); o.value = k; o.selected = theme() === k; sel.append(o); }
+  sel.onchange = () => { store.set("vagas-tema", sel.value); applyTheme(); };
+  wrap.append(sel, svg(CHEV_D));
+  main.append(group(row("Tema", "Claro, escuro ou igual ao do teu dispositivo.", wrap)));
   main.append(el("h2", "sec", "Recolha"));
   const src = el("div"); (tracker.sources || []).forEach(s => { const st = s.status || ""; const r = el("div", "src-row");
     r.append(el("span", null, s.name), el("span", /ERRO/.test(st) ? "bad" : "tnum", /ERRO/.test(st) ? "Com erro" : (st.replace(/^ok, /, "").replace(/ \(.*\)$/, "") || "Sem dados"))); src.append(r); });
