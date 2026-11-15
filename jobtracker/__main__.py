@@ -89,9 +89,20 @@ def rename_profiles(state, cfg):
             m["profiles"] = {ren.get(k, k): v for k, v in m["profiles"].items()}
 
 
+def all_target_companies(cfg):
+    """Empresas-alvo de todos os perfis, sem repetir (cada perfil só tem bónus pelas suas)."""
+    out, seen = [], set()
+    for p in build_profiles(cfg):
+        for t in target_companies(p["cfg"]):
+            if t[0] not in seen:
+                seen.add(t[0])
+                out.append(t)
+    return out
+
+
 def company_queries(src, cfg, today, main_run):
     """Pesquisas por nome de empresa-alvo, em rotação: `per_run` empresas em cada recolha."""
-    names = [n for n, _, _ in target_companies(cfg)]
+    names = [n for n, _, _ in all_target_companies(cfg)]
     per = int(src.get("per_run") or len(names) or 1)
     slices = max(1, -(-len(names) // per))
     k = (today.toordinal() * 2 + (0 if main_run else 1)) % slices
@@ -160,7 +171,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         rot = ""
         if src.get("companies_from") == "target_companies":
             ctx["queries"], rot = company_queries(src, cfg, today, main_run)
-            ctx["_company_rx"] = "|".join(f"(?:{rx})" for _, _, rx in target_companies(cfg))
+            ctx["_company_rx"] = "|".join(f"(?:{rx})" for _, _, rx in all_target_companies(cfg))
             if not ctx["queries"]:
                 continue
         try:
