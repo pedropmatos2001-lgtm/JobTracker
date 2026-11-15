@@ -79,20 +79,8 @@ sources:
     name: Systemiq
     token: systemiq               # visto em job-boards.eu.greenhouse.io/systemiq/...
 
-  # Agregadores (precisam de chave gratuita em adzuna.com/developers; senão ficam ignorados)
-  - type: adzuna
-    name: Adzuna
-    country: pt
-    where: ["Lisboa", "Porto"]
-    max_days_old: 10
-    queries:
-      - "sustainability consultant"
-      - "ESG manager"
-      - "AI transformation"
-      - "process excellence"
-      - "transformation manager"
-      - "PMO manager"
-      - "strategy operations consultant"
+  # Adzuna desligada: a API não cobre Portugal (só gb, us, de, fr, nl, es, it, at, be, br, ca, au, in, mx, nz, pl, sg, za),
+  # por isso o código "pt" dá 404. O adaptador fica no código caso passe a cobrir.
 
   - type: remotive                # remoto (sem chave)
     name: Remotive
