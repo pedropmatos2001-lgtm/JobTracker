@@ -138,7 +138,8 @@ def cheap_filter(job: Job, cfg: dict, today: date) -> str:
         return f"local excluído ({loc})"
     if loc:
         allow = re.compile(loc_cfg.get("allow", "portugal|lisbo|porto"), re.I)
-        if not allow.search(loc):
+        top_only = loc_cfg.get("top_only")         # ex.: Bruxelas, só para vagas com temas de topo (ver evaluate)
+        if not allow.search(loc) and not (top_only and re.search(top_only, loc, re.I)):
             is_remote = bool(job.remote) or re.search(r"remote|remoto|anywhere|worldwide", loc, re.I)
             remote_ok = re.compile(loc_cfg.get("remote_ok", "portugal|europe|emea|eu\\b|worldwide|anywhere"), re.I)
             bare_remote = re.fullmatch(r"\s*(remote|remoto)\s*", loc, re.I)
@@ -238,6 +239,15 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         v.reasons.append("+ função de consultoria numa consultora-alvo")
         v.themes.append(cfg.get("target_role_label", "Consultoria"))
     score += min(strong_pts, kw.get("strong_cap", 14))
+    # Temas de topo no título (ex.: Public Affairs, assuntos europeus) valem mais do que somar temas na descrição:
+    # uma vaga que É sobre isso tem de ficar acima de uma consultoria genérica que só o menciona.
+    ttb = cfg.get("title_theme_bonus") or {}
+    if ttb.get("labels"):
+        for item in kw.get("strong", []):
+            if label_of(item) in ttb["labels"] and re.search(pat_of(item), job.title or "", re.I):
+                score += ttb.get("points", 6)
+                v.reasons.append(f"+ tema de topo no título ({label_of(item)})")
+                break
     med = sum(1 for pat in kw.get("medium", []) if re.search(pat_of(pat), text, re.I))
     score += min(med, kw.get("medium_cap", 4))
     neg = sum(1 for pat in kw.get("negative", []) if re.search(pat, text, re.I))
@@ -287,6 +297,15 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         return v
     # Foco: um tema solto numa frase do anúncio (rodapé "cofinanciado por…", "foresight", "assistance") não chega.
     # A vaga tem de ter um tema no título ou pelo menos dois temas diferentes na descrição.
+    # Local de exceção (ex.: Bruxelas): só passa se a vaga tiver um dos temas de topo.
+    loc_cfg = cfg.get("locations", {})
+    top_only, loc = loc_cfg.get("top_only"), (job.location or "")
+    if top_only and re.search(top_only, loc, re.I) and not re.search(loc_cfg.get("allow", "portugal"), loc, re.I):
+        if not set(v.themes) & set(loc_cfg.get("top_themes") or []):
+            v.include = False
+            v.excluded_by = f"local fora do alvo ({loc}): aqui só vagas de topo"
+            return v
+        v.flags.append(f"fora de Portugal: {loc}")
     if cfg.get("theme_focus") and not title_theme and n_themes < 2 and not deep_theme:
         v.include = False
         v.excluded_by = "só um tema, e não no título: a vaga não é sobre isso"

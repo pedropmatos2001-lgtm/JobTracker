@@ -26,7 +26,7 @@ years:                     # anos de experiência pedidos (extraídos do texto)
 
 locations:
   # só Portugal continental (Madeira e Açores excluídos de propósito)
-  allow: "portugal|lisbo|porto|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
+  allow: "portugal|lisbo|porto(?!\\s*alegre)|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
   exclude: "madeira|funchal|porto santo|a[çc]ores|azores|ponta delgada|angra do hero|horta\\b|\\bRA[AM]\\b"
   remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
 
@@ -42,6 +42,7 @@ title_exclude:
   - "\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital"
   - "(?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel"
   # ambiente e segurança / HSE não é o perfil do Pedro
+  - "civil engineer|engenheir[oa] civil|digital (services|solutions|business partner)"
   - "seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention"
   # funções administrativas, não qualificadas, de saúde, frota, logística e sistemas de gestão: nunca
   - "(?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b"
@@ -235,6 +236,12 @@ profiles:
     rules:
       sector_bonus: {points: 1}                   # o bónus de utilities é só do Pedro; empresas-alvo da Maria só +1 (contexto, não prioridade)
       min_salary_eur: 0                           # a Maria não tem salário mínimo
+      locations:                                  # Portugal continental e remoto; Bruxelas só para vagas de topo
+        allow: "portugal|lisbo|porto(?!\\s*alegre)|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
+        exclude: "madeira|funchal|porto santo|a[çc]ores|azores|ponta delgada|angra do hero|horta\\b|\\bRA[AM]\\b"
+        remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
+        top_only: "brussels|bruxelles|brussel\\b|bruxelas|belgium|b[ée]lgica"
+        top_themes: ["Assuntos europeus", "Assessoria política e parlamentar", "Liberdades, justiça e Estado de direito", "Políticas públicas"]
       company_exclude: ""                         # a exclusão das Big4 é só do Pedro
       company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
@@ -270,6 +277,9 @@ profiles:
             - "Civitta"
       target_role_titles: "business analyst|analista de neg[óo]cio|\\banalyst\\b|analista|associate|consultant|consultor[a]?"
       target_role_label: "Consultoria de gestão e estratégia"
+      title_theme_bonus:                          # tema de topo no título vale mais (Public Affairs acima de consultoria genérica)
+        labels: ["Assuntos europeus", "Assessoria política e parlamentar", "Liberdades, justiça e Estado de direito", "Políticas públicas", "Avaliação e monitorização de políticas", "Desenvolvimento e políticas de emprego", "Direitos humanos"]
+        points: 6
       require_theme: true                         # só passam vagas com pelo menos um dos temas abaixo
       theme_focus: true                           # e o tema tem de estar no título, ou haver dois temas diferentes
       min_score: 4                                # com require_theme, basta um tema forte e algum contexto
@@ -292,6 +302,7 @@ profiles:
         - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
         - "^(?!.*(assistant|assistente|advis|assessor|parlament|office)).*\\bMEP\\b"   # MEP de construção (AVAC/eletricidade), não eurodeputado
+        - "scientist|cientista|clinical|cl[íi]nic|patient|paciente|lecturer|leitor[a]? de|professor[a]? (auxiliar|associad|convidad)|social media|redes sociais|community manager|face to face|face-to-face|angaria|fundraiser|street|implementation (consultant|associate|specialist)|product director"
         - "turismo|modelador|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label|ai training|ai trainer|treino de ia"
       keywords:
         strong_cap: 14
@@ -488,6 +499,27 @@ sources:
       - "ONG"
       - "assessor"
       - "monitoring and evaluation"
+
+  # Bruxelas, só para a Maria e só para vagas de topo (assuntos europeus, public affairs, assessoria, LIBE, políticas).
+  - type: linkedin
+    name: "LinkedIn (Bruxelas, assuntos europeus)"
+    profiles: [maria]
+    location: "Brussels, Brussels Region, Belgium"
+    hours: 720
+    max_per_query: 50
+    queries:
+      - "public affairs"
+      - "public policy consultant"
+      - "EU affairs"
+      - "policy officer"
+      - "parliamentary assistant"
+      - "EU policy"
+      - "advocacy officer"
+      - "rule of law"
+      - "fundamental rights"
+      - "migration policy"
+      - "public affairs junior"
+      - "public affairs trainee"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias

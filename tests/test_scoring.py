@@ -335,8 +335,10 @@ def test_maria_master_themes_and_remote_eu_jobs():
     assert v.include and {"Avaliação e monitorização de políticas", "Desenvolvimento e políticas de emprego"} <= set(v.themes)
     assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
                         location="European Union", remote=True), maria, t).include
+    assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                        location="Brussels, Belgium"), maria, t).include          # Bruxelas: só vagas de topo, e esta é
     assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
-                            location="Brussels, Belgium"), maria, t).include      # presencial fora de Portugal: não
+                            location="Madrid, Spain"), maria, t).include          # presencial noutros países: não
 
 
 
@@ -581,3 +583,39 @@ def test_maria_digital_rights_is_libe_not_tech():
     assert v.include, (v.excluded_by, v.themes)
     assert not evaluate(Job(source="linkedin", company="X", title="Digital Marketing Consultant", url="u", location="Lisboa, Portugal",
                             posted="2026-11-10", description="Campaigns. 2 anos."), maria, date(2026, 11, 15)).include
+
+
+def test_maria_brussels_only_for_top_jobs_pedro_never():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    ps = {p["id"]: p["cfg"] for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}
+    t = date(2026, 11, 15)
+    def ev(pid, title, desc, loc="Brussels, Brussels Region, Belgium"):
+        return evaluate(Job(source="linkedin", company="Flint Global", title=title, url="u", location=loc, posted="2026-11-01",
+                            description=desc + " 2 years of experience."), ps[pid], t)
+    flint = ev("maria", "Consultant - Public Policy and Public Affairs with a focus on EU energy, environment and sustainability policy",
+               "Public affairs and EU policy advice for clients; monitor the European Parliament and the European Commission.")
+    assert flint.include and any("fora de Portugal" in f for f in flint.flags)
+    assert not ev("maria", "Strategy Consultant", "Strategy projects for corporate clients.", ).include   # consultoria genérica em Bruxelas: não
+    assert not ev("maria", "Project Officer", "Management of EU-funded projects (Erasmus+, Interreg).").include   # não é tema de topo
+    assert not ev("pedro", "Sustainability Consultant", "CSRD and decarbonisation for clients.").include      # o Pedro não tem Bruxelas
+    assert not ev("maria", "Public Affairs Manager", "EU affairs.", loc="Porto Alegre, Brazil").include      # Porto Alegre não é Porto
+
+
+def test_maria_public_affairs_title_beats_multi_theme_consulting_and_noise_out():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-10", description=desc + " 2 years of experience."), maria, t)
+    coke = ev("Graduate Public Affairs, Communications and Sustainability",
+              "Support public affairs and communications; stakeholder engagement.", "Coca-Cola Europacific Partners")
+    eura = ev("Junior Consultant", "Consulting on EU funding: European Commission programmes, framework contracts, "
+              "EU policy and public affairs for clients.", "EurA AG")
+    assert coke.include and coke.score > eura.score, (coke.score, eura.score)
+    for title in ("Research Scientist – Patient-Centered Outcomes", "Lecturer in Systems Thinking and Foresight",
+                  "Oliver Wyman - Social Media Manager", "Portugal com ACNUR | Projeto Face To Face",
+                  "Associate Director, Patient Advocacy", "Implementation Associate Consultant"):
+        assert not ev(title, "Public policy, EU affairs, human rights and consulting projects.").include, title
