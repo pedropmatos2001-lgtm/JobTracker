@@ -285,3 +285,55 @@ def test_maria_no_teachers_nor_generic_public_jobs():
                "Support public affairs and engagement with the European Commission and Portuguese government.",
                company="Coca-Cola Europacific Partners")
     assert evaluate(coke, maria, t).include
+
+
+def test_maria_no_content_moderation_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    j = Job(source="linkedin", company="Concentrix", title="AI Dubbing Content Moderator (Spanish-Speaking)", url="u",
+            location="Lisboa, Portugal", posted="2026-11-14",
+            description="Review dubbed content for hate speech and discrimination policy violations. 1 year of experience.")
+    assert not evaluate(j, maria, date(2026, 11, 15)).include
+
+
+def test_maria_eu_projects_like_big4_teams():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc, company="X"):
+        return Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 2 years of experience.")
+    for title, desc in [
+        ("Consultant – EU Institutions", "Support framework contracts with the European Commission (DG REGIO, DG EMPL) and EU tenders."),
+        ("Grant Manager", "Manage EU-funded projects under Horizon Europe and Erasmus+; reporting to the European Commission."),
+        ("Técnica de Projetos Europeus", "Gestão de candidaturas a programas europeus e acompanhamento de projetos financiados pela União Europeia."),
+    ]:
+        v = evaluate(job(title, desc, company="Deloitte"), maria, t)
+        assert v.include and "Projetos europeus e cooperação" in v.themes, (title, v.themes, v.excluded_by)
+
+
+def test_maria_master_themes_and_remote_eu_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc, location="Lisboa, Portugal", remote=None):
+        return Job(source="linkedin", company="X", title=title, url="u", location=location, posted="2026-11-14",
+                   description=desc + " 2 years of experience.", remote=remote)
+    v = evaluate(job("Monitoring & Evaluation Officer", "Impact evaluation of labour market policies and social protection programmes."), maria, t)
+    assert v.include and {"Avaliação e monitorização de políticas", "Desenvolvimento e políticas de emprego"} <= set(v.themes)
+    assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                        location="European Union", remote=True), maria, t).include
+    assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                            location="Brussels, Belgium"), maria, t).include      # presencial fora de Portugal: não

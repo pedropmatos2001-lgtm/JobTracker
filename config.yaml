@@ -12,7 +12,7 @@ company_exclude_label: "Deloitte, EY, PwC e KPMG"
 min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
 max_age_days: 14           # ignora vagas publicadas há mais tempo
-max_detail_fetches: 120    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
+max_detail_fetches: 180    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
 alert_after_failures: 3    # avisa se uma fonte falhar N dias seguidos
 heartbeat_weekday: 0       # 0=segunda: se não houver vagas, manda "estou vivo"
 click_url: "https://pedropmatos2001-lgtm.github.io/JobTracker/"   # página com todas as vagas (GitHub Pages)
@@ -211,7 +211,7 @@ profiles:
     name: Maria
     former_ids: [marta]              # antes chamava-se Marta: herda o que já tinha visto
     headline: "Política, assuntos europeus e direitos fundamentais"
-    tags: ["Assessoria política", "Consultoria ao setor público", "Assuntos europeus", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
+    tags: ["Assessoria política", "Políticas públicas e avaliação", "Assuntos europeus", "Consultoria ao setor público", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
     ntfy_env: NTFY_TOPIC_MARIA
@@ -243,17 +243,19 @@ profiles:
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
         - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
-        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento"
+        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label"
       keywords:
         strong_cap: 14
         strong:
           - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
           - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
+          - {label: "Avaliação e monitorização de políticas", examples: ["monitoring & evaluation", "avaliação de impacto", "policy appraisal", "análise de políticas"], pattern: "monitoring (and|&) evaluation|\\bM&E\\b|\\bMEAL\\b|impact evaluation|avalia[çc][ãa]o de impacto|policy (appraisal|evaluation|assessment)|avalia[çc][ãa]o de pol[íi]ticas|programme evaluation|avalia[çc][ãa]o de programas|evidence[- ]based polic|pol[íi]ticas baseadas em evid[êe]ncia|\\bPlanAPP\\b|prospetiva|foresight"}
+          - {label: "Desenvolvimento e políticas de emprego", examples: ["desenvolvimento internacional", "políticas de emprego", "OIT", "economia do desenvolvimento"], pattern: "development econom|economia do desenvolvimento|labou?r market polic|pol[íi]ticas (ativas )?de emprego|mercado de trabalho|informal (labou?r|economy|employment)|economia informal|\\bILO\\b|\\bOIT\\b|social protection|prote[çc][ãa]o social|poverty reduction|redu[çc][ãa]o da pobreza|\\bSDGs?\\b|\\bODS\\b|sustainable development goals|objetivos de desenvolvimento sustent[áa]vel"}
           - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament"}
           - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b"}
           - {label: "Assuntos europeus", examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|\\bEU (institutions|policy|policies|legislation|law)\\b|institui[çc][õo]es europeias|pol[íi]ticas europeias|legisla[çc][ãa]o europeia|member of the european parliament|eurodeputad"}
-          - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Erasmus+", "Interreg", "cooperação internacional"], pattern: "eu[- ]funded project|projetos? europeus?|european projects?|horizon europe|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|gestor[a]? de projetos? europeus?|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional"}
+          - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Horizon Europe", "concursos da Comissão Europeia", "gestão de candidaturas"], pattern: "eu[- ]funded|funded by the (eu|european union)|financiad[oa]s? pel[ao] (ue|uni[ãa]o europeia)|projetos? europeus?|european projects?|eu projects?|horizon europe|horizonte europa|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|creative europe|europa criativa|gestor[a]? de projetos? europeus?|eu project (manager|officer|coordinator)|grant (manager|management|writer|writing)|proposal (writer|writing|manager)|candidaturas? a (programas|projetos|fundos) europeus|eu tenders?|tenders? (for|of) the european commission|framework contracts?|contratos?[- ]quadro|europeaid|technical assistance|assist[êe]ncia t[ée]cnica|directorate[- ]general|\\bDG [A-Z]{2,6}\\b|eu institutions? (clients?|practice|team)|european institutions|institui[çc][õo]es europeias|fundos europeus|fundos estruturais|structural funds|\\bPRR\\b|portugal 2030|cohesion polic|pol[íi]tica de coes[ãa]o|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional"}
           - {label: "Direitos humanos", examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
           - {label: "Infância e juventude", examples: ["proteção de crianças", "juventude", "UNICEF", "CPCJ"], pattern: "child protection|children'?s rights|direitos da crian[çc]a|prote[çc][ãa]o (de|das) (crian[çc]as|menores)|prote[çc][ãa]o (à|da) inf[âa]ncia|crian[çc]as e jovens em risco|crian[çc]as em risco|safeguarding children|child welfare|\\bunicef|\\bCPCJ|youth (policy|participation|rights)|pol[íi]ticas de juventude|associa[çc][ãa]o juvenil"}
           - {label: "Igualdade de género", examples: ["igualdade de género", "violência doméstica", "direitos das mulheres"], pattern: "gender equality|igualdade de g[ée]nero|gender mainstreaming|women'?s rights|direitos das mulheres|women'?s empowerment|empoderamento|viol[êe]ncia dom[ée]stica|domestic violence|gender-based violence|viol[êe]ncia de g[ée]nero|\\bCIG\\b|\\bUN Women"}
@@ -294,7 +296,7 @@ sources:
   - type: linkedin
     name: LinkedIn
     location: Portugal
-    hours: 72
+    hours: 168                       # 7 dias: cada recolha volta a ver a semana toda (as já vistas não se repetem)
     max_per_query: 30                # 3 páginas por pesquisa (há ~50 pesquisas: menos risco de limite)
     queries:
       - "sustainability"
@@ -370,6 +372,18 @@ sources:
       - "Government and Public Services"
       - "public sector consulting"
       - "consultora setor público"
+      - "EU projects"
+      - "EU funded projects"
+      - "Horizon Europe"
+      - "EU institutions consultant"
+      - "grant manager"
+      - "proposal writer"
+      - "monitoring and evaluation"
+      - "impact evaluation"
+      - "policy analyst"
+      - "avaliação de políticas públicas"
+      - "think tank"
+      - "development economist"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias
@@ -382,11 +396,31 @@ sources:
     hours: 168
     max_per_query: 25
 
+  # Vagas 100% remotas na UE (LinkedIn com o filtro "remoto"): sobretudo para a Maria. A regra de zona aceita
+  # remoto quando a vaga diz Europa/UE/Portugal; vagas remotas presas a outro país ficam de fora.
+  - type: linkedin
+    name: "LinkedIn (remoto UE)"
+    location: "European Union"
+    remote: true
+    hours: 168
+    max_per_query: 25
+    queries:
+      - "EU affairs"
+      - "public affairs"
+      - "policy analyst"
+      - "policy officer"
+      - "EU funded projects"
+      - "grant manager"
+      - "monitoring and evaluation"
+      - "human rights"
+      - "advocacy officer"
+      - "parliamentary"
+
   # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
   - type: indeed
     name: Indeed
     country: portugal
-    hours: 72
+    hours: 168                       # 7 dias: cada recolha volta a ver a semana toda (as já vistas não se repetem)
     max_per_query: 50
     queries:
       - "sustainability"
@@ -421,6 +455,55 @@ sources:
       - "assessor parlamentar"
       - "advocacy"
       - "ONG"
+
+  # --- ONG e agências europeias em Lisboa (sobretudo para a Maria) ---
+  # Plataforma Portuguesa das ONGD: vagas de ONG de desenvolvimento, cooperação e direitos. Muitas são para
+  # missões no terreno (médicos, farmacêuticos, logística) ou voluntariado: essas saem logo pelo título.
+  - type: ongd
+    name: "Plataforma ONGD"
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # Agências da UE com sede em Lisboa: poucas vagas por ano, mas são instituições europeias.
+  - type: eu_agency
+    name: "EUDA (agência europeia, Lisboa)"
+    company: "EUDA"
+    layout: euda
+    url: "https://www.euda.europa.eu/about/jobs_en"
+  - type: eu_agency
+    name: "EMSA (agência europeia, Lisboa)"
+    company: "EMSA"
+    layout: emsa
+    url: "https://www.emsa.europa.eu/jobs/vacancies.html"
+
+  # --- Organizações internacionais em Portugal e vagas remotas (sobretudo para a Maria) ---
+  # UNjobs agrega as vagas da ONU e de organizações internacionais com local de trabalho em Portugal
+  # (OIM Lisboa, AKDN, KAICIID, ILO, MSF…). Página simples: as ligações /vacancies/<n> são as vagas.
+  - type: page_watch
+    name: "UNjobs (Portugal)"
+    url: "https://unjobs.org/duty_stations/portugal"
+    url_regex: "/vacancies/\\d"
+    link_regex: "."
+    location: "Portugal"
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # Universidade das Nações Unidas (UNU-EGOV, Guimarães): Recruitee com domínio próprio, só ofertas em Portugal.
+  - type: recruitee
+    name: "UNU (Guimarães)"
+    company: "unu"
+    host: "careers.unu.edu"
+    country: "PT"
+  # ReliefWeb: vagas sem local fixo (remoto, roster) em ONU, ONG e organizações internacionais. RSS público.
+  - type: rss
+    name: "ReliefWeb (remoto)"
+    url: "https://reliefweb.int/jobs/rss.xml?view=unspecified-location"
+    location: "Remote"
+    remote: true
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # EuroBrussels: assuntos europeus, public affairs e ONG em Bruxelas; aqui só a lista de vagas remotas.
+  - type: page_watch
+    name: "EuroBrussels (remoto)"
+    url: "https://www.eurobrussels.com/jobs/remote"
+    url_regex: "/job_display/\\d+"
+    link_regex: "."
+    location: "Remote, Europe"
 
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o

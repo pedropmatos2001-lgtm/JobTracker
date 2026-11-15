@@ -230,3 +230,17 @@ def test_pedro_has_public_sector_consulting_theme():
            "e melhoria de processos para ministérios e câmaras.", company="Sia Partners")
     v = evaluate(j, ps["pedro"], date(2026, 11, 18))
     assert v.include and "Consultoria ao setor público" in v.themes
+
+
+def test_ongd_source_filter_and_maria_gets_relevant_ngo_jobs(tmp_path):
+    from jobtracker import sources
+    c = cfg2()
+    ongd = next(s for s in yaml.safe_load(open("config.yaml", encoding="utf-8"))["sources"] if s["type"] == "ongd")
+    c["sources"] = [ongd]
+    jobs = sources.parse_ongd(open("tests/fixtures/ongd.html", encoding="utf-8").read())
+    sp, dd = tmp_path / "s.json", tmp_path / "docs"
+    r = run(c, {}, WED, str(sp), str(dd), fetch=lambda s: jobs, detail=lambda j: j, send=lambda *a, **k: ["ok"])
+    docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
+    titles = {m["title"]: m["profiles"] for m in docs["matches"]}
+    assert "Farmacêuticos/as" not in titles                       # saiu pelo filtro da fonte
+    assert "maria" in titles.get("Gestor/a de Projetos de Cooperação e Advocacy", {})

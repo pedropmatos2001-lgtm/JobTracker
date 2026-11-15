@@ -20,7 +20,7 @@ class FakeSession:
         self.responses, self.calls = list(responses), []
 
     def request(self, method, url, **kw):
-        self.calls.append((method, url))
+        self.calls.append((method, url, kw))
         r = self.responses.pop(0)
         if isinstance(r, Exception):
             raise r
@@ -404,3 +404,41 @@ def test_linkedin_company_search_keeps_only_target_companies():
     s = FakeSession(Resp(text=_fx("linkedin_search.html")))
     jobs = sources.fetch_linkedin({"queries": ["ACME"], "_company_rx": r"\bACME\b"}, s, {}, sleep=lambda x: None)
     assert [j.company for j in jobs] == ["ACME Energia"]
+
+
+def test_parse_ongd():
+    jobs = sources.parse_ongd(_fx("ongd.html"))
+    assert [j.title for j in jobs] == ["Farmacêuticos/as", "Gestor/a de Projetos de Cooperação e Advocacy"]
+    a, b = jobs
+    assert a.company == "Médicos Sem Fronteiras" and a.location == "Portugal" and a.url.startswith("https://msf.org.pt/vaga/farmaceuticos")
+    assert b.company == "Oikos" and b.location == "Lisboa" and "2026.11.30" in b.description and "ONGD" in b.description
+
+
+def test_parse_eu_agencies_only_open_calls():
+    src = {"name": "EUDA (agência europeia, Lisboa)", "company": "EUDA"}
+    euda = sources.parse_euda(_fx("euda.html"), src, "https://www.euda.europa.eu/about/jobs_en")
+    assert [j.title for j in euda] == ["Policy officer – EU drug policy and international cooperation"]
+    assert euda[0].url == "https://www.euda.europa.eu/calls/2026/ad202602_en" and euda[0].location == "Lisboa, Portugal"
+    emsa = sources.parse_emsa(_fx("emsa.html"), {"name": "EMSA", "company": "EMSA"}, "https://www.emsa.europa.eu/jobs/vacancies.html")
+    assert [j.title for j in emsa] == ["Officer - Decarbonisation of Shipping (FGIV)", "Officer - Ship Safety and Accident Investigation (SNE)"]
+    assert "26.11.2026" in emsa[0].description
+
+
+def test_linkedin_remote_source_sets_filter_and_marks_jobs_remote():
+    s = FakeSession(Resp(text=_fx("linkedin_search.html")))
+    jobs = sources.fetch_linkedin({"queries": ["EU affairs"], "location": "European Union", "remote": True}, s, {}, sleep=lambda x: None)
+    assert jobs and all(j.remote for j in jobs)
+    assert s.calls[0][2]["params"]["f_WT"] == "2"
+
+
+def test_rss_jobs_and_recruitee_country_filter():
+    xml = ("<rss><channel><item><title>Policy Officer – Migration and Asylum</title><link>https://reliefweb.int/job/1</link>"
+           "<pubDate>Fri, 13 Nov 2026 10:00:00 +0000</pubDate><description>&lt;p&gt;Organization: IOM&lt;/p&gt; Remote</description></item>"
+           "<item><title></title><link>x</link></item></channel></rss>")
+    jobs = sources.parse_rss_jobs(xml, {"name": "ReliefWeb (remoto)", "location": "Remote", "remote": True})
+    assert [(j.title, j.company, j.remote, j.posted) for j in jobs] == [("Policy Officer – Migration and Asylum", "IOM", True, "2026-11-13")]
+    data = {"offers": [{"title": "EGOV Researcher", "careers_url": "https://careers.unu.edu/o/a", "country_code": "PT", "location": "Guimarães"},
+                       {"title": "Tokyo Officer", "careers_url": "https://careers.unu.edu/o/b", "country_code": "JP"}]}
+    s = FakeSession(Resp(data=data))
+    jobs = sources.fetch_recruitee({"company": "unu", "host": "careers.unu.edu", "country": "PT", "name": "UNU"}, s, {})
+    assert [j.title for j in jobs] == ["EGOV Researcher"] and s.calls[0][1] == "https://careers.unu.edu/api/offers/"

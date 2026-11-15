@@ -190,6 +190,10 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         if getattr(jobs, "cursor", None) is not None:
             state["cursors"][name] = jobs.cursor
         note = "; ".join(x for x in (rot, getattr(jobs, "note", "")) if x)
+        if src.get("title_exclude"):         # filtro da própria fonte (ex.: ONG com vagas médicas e de logística)
+            kept = [j for j in jobs if not re.search(src["title_exclude"], j.title or "", re.I)]
+            note = "; ".join(x for x in (note, f"{len(jobs) - len(kept)} fora do perfil pelo título" if len(kept) < len(jobs) else "") if x)
+            jobs = kept
         report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)
