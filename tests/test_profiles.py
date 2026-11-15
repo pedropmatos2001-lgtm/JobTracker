@@ -260,3 +260,12 @@ def test_rules_change_reevaluates_seen_jobs_without_alerts(tmp_path):
     docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
     assert [m["title"] for m in docs["matches"]] == ["Global Nature Strategy Coordinator"]
     assert sent == []                                         # já tinha sido vista: entra na página sem novo aviso
+
+
+def test_time_budget_defers_work_but_still_publishes(tmp_path):
+    sp, dd = paths(tmp_path)
+    r = run(cfg2(), {"RUN_BUDGET_MIN": "0"}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j,
+            send=lambda *a, **k: ["ok"])
+    docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))          # publicou na mesma
+    assert docs["matches"] == []
+    assert any("adiada" in s.get("status", "") for s in docs["tracker"]["sources"])
