@@ -4,7 +4,12 @@ on:
   schedule:
     - cron: "17 7 * * *"       # todos os dias ~07:17 UTC (manhã em Lisboa): execução principal
     - cron: "17 16 * * *"      # ~16:17 UTC: só avisa se houver vagas novas (LinkedIn premeia quem se candidata cedo)
-  workflow_dispatch: {}         # botão "Run workflow" para testar à mão
+  workflow_dispatch:            # botão "Run workflow" para correr à mão
+    inputs:
+      reavaliar:
+        description: "Reavaliar as vagas já vistas com as regras atuais (sem novos avisos)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write               # para guardar state/ e docs/ no repositório
@@ -32,6 +37,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CANDIDATE_PROFILE: ${{ secrets.CANDIDATE_PROFILE }}
           MIN_SALARY_EUR: ${{ secrets.MIN_SALARY_EUR }}
+          REEVALUATE: ${{ inputs.reavaliar }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           # perfil da Marta (cada perfil só recebe no seu canal; sem segredo, não recebe nada)
           NTFY_TOPIC_MARTA: ${{ secrets.NTFY_TOPIC_MARTA }}

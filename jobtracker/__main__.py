@@ -109,6 +109,18 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
 
     state = st.load(state_path)
     report, health_alerts, all_jobs = [], [], {}
+    # Reavaliar: volta a avaliar com as regras atuais tudo o que ainda está na janela de recolha.
+    # Mantém a data em que cada vaga foi vista e não volta a avisar quem já tinha avaliado a vaga.
+    silent = state.setdefault("silent", {})
+    if str(env.get("REEVALUATE", "")).lower() in ("1", "true", "yes", "sim"):
+        first_pid = profiles[0]["id"]
+        for u, m in state["seen"].items():
+            silent[u] = {"ev": m.get("ev") or [first_pid], "first_seen": m.get("first_seen", today.isoformat())}
+        state["seen"], state["matches"] = {}, []
+        report.append(f"reavaliação: {len(silent)} vagas vistas voltam a ser avaliadas com as regras atuais, sem novos avisos")
+    cutoff = (today.toordinal() - 30)
+    for u in [u for u, m in silent.items() if date.fromisoformat(m["first_seen"]).toordinal() < cutoff]:
+        silent.pop(u)
 
     # 1) recolher — uma fonte avariada nunca derruba as outras
     for src in cfg.get("sources", []):
@@ -167,7 +179,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         kw = prof["cfg"].get("keywords", {})
         title_rx += [re.compile(pat_of(x), re.I) for x in kw.get("strong", []) + kw.get("medium", [])]
     new_jobs.sort(key=lambda j: -sum(1 for rx in title_rx if rx.search(j.title or "")))
-    stats = {"seen": len(all_jobs), "new": sum(1 for u in todo if u not in state["seen"]), "passed": 0}
+    stats = {"seen": len(all_jobs), "new": sum(1 for u in todo if u not in state["seen"] and u not in silent), "passed": 0}
     li_fail = 0                                # falhas seguidas no detalhe do LinkedIn
 
     # 3) filtro barato -> detalhe (descrição completa, confirma que está aberta) -> pontuação por perfil
@@ -175,7 +187,8 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
     for j in new_jobs:
         old = state["seen"].get(j.uid)
         mine = [p for p in profiles if p["id"] in todo[j.uid]]
-        meta = {**(old or {}), "first_seen": (old or {}).get("first_seen", today.isoformat()), "k": dedupe_key(j),
+        first_seen = (old or {}).get("first_seen") or (silent.get(j.uid) or {}).get("first_seen") or today.isoformat()
+        meta = {**(old or {}), "first_seen": first_seen, "k": dedupe_key(j),
                 "ev": sorted(evaluated(old) | set(todo[j.uid])) if old else list(todo[j.uid])}
         whys = [cheap_filter(j, p["cfg"], today) for p in mine]
         if all(whys):                          # não interessa a nenhum perfil (dos que faltam)
@@ -238,7 +251,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         state["seen"][j.uid] = seen_meta
         if not hits:
             continue
-        matches.append({"job": j, "hits": hits})
+        matches.append({"job": j, "hits": hits, "quiet": (silent.get(j.uid) or {}).get("ev", [])})
         # a página só leva dados públicos da vaga; as notas do juiz ficam fora se o repositório for público
         first_v, first_jd = next(iter(hits.values()))
         prev = next((x for x in state["matches"] if x.get("url") == j.url), None)
@@ -248,7 +261,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                 prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
                                          **({"fit": jd["fit"]} if jd else {})}
             continue
-        entry = {**j.to_dict(), "score": first_v.score, "flags": first_v.flags[:4], "first_seen": today.isoformat(),
+        entry = {**j.to_dict(), "score": first_v.score, "flags": first_v.flags[:4], "first_seen": meta["first_seen"],
                  "profiles": {pid: {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
                                     **({"fit": jd["fit"]} if jd else {})} for pid, (v, jd) in hits.items()}}
         if not pub:
@@ -257,13 +270,15 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             entry["fit"] = first_jd["fit"]
         state["matches"].append(entry)
     stats["passed"] = len(matches)
+    for u in [u for u in silent if u in state["seen"]]:    # já reavaliadas: deixam de estar em espera
+        silent.pop(u)
 
     # 4) avisar — cada perfil recebe só as suas vagas no seu canal
     report_sent, title, body, channels = {}, "", "", []
     page = cfg.get("click_url") or ""
     for p in profiles:
         mine = [{"job": m["job"], "verdict": m["hits"][p["id"]][0], "judge": m["hits"][p["id"]][1]}
-                for m in matches if p["id"] in m["hits"]]
+                for m in matches if p["id"] in m["hits"] and p["id"] not in (m.get("quiet") or ())]
         mine.sort(key=lambda m: -(m["judge"]["fit"] if m.get("judge") else m["verdict"].score * 5))
         top = mine[: cfg.get("max_per_alert", 5)]
         click = (page + ("#" + p["id"] if len(profiles) > 1 and page else "")) or None

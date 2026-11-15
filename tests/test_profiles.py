@@ -128,3 +128,25 @@ def test_page_entry_has_matched_themes(tmp_path):
     _, _, docs = go(cfg2(), [OPS], tmp_path)
     th = docs["matches"][0]["profiles"]["pedro"]["themes"]
     assert th and all("|" not in t for t in th) and len(th) <= 3
+
+
+def test_reevaluate_applies_new_rules_without_new_alerts(tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    send = lambda t, b, c, p=None: sent.append(p["id"]) or ["ok"]
+    old = cfg2()
+    old["profiles"] = old["profiles"][:1]
+    old["min_score"] = 99                               # regras antigas: a vaga de operações não passou
+    run(old, {}, WED, sp, dd, fetch=lambda s: [OPS], detail=lambda j: j, send=send)
+    assert sent == [] and json.load(open(f"{dd}/jobs.json"))["matches"] == []
+    from datetime import date
+    later = date(2026, 11, 19)                        # quinta-feira (à sexta há o resumo semanal)
+    only_pedro = cfg2()
+    only_pedro["profiles"] = only_pedro["profiles"][:1]
+    run(only_pedro, {"REEVALUATE": "true"}, later, sp, dd, fetch=lambda s: [OPS], detail=lambda j: j, send=send)
+    docs = json.load(open(f"{dd}/jobs.json"))
+    assert [m["title"] for m in docs["matches"]] == ["Operations Excellence Manager"]   # passa com as regras novas
+    assert docs["matches"][0]["first_seen"] == WED.isoformat()                         # mantém a data original
+    assert sent == []                                                                  # e não volta a avisar
+    run(only_pedro, {}, later, sp, dd, fetch=lambda s: [OPS], detail=lambda j: j, send=send)
+    assert sent == [] and len(json.load(open(f"{dd}/jobs.json"))["matches"]) == 1      # não duplica depois
