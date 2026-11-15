@@ -469,3 +469,21 @@ def test_maria_generic_consultant_title_with_tech_description_is_out():
                      description="Software development and cloud migration projects; Python, SQL and SAP integration; "
                                  "machine learning pipelines for clients. 2 years of experience."), maria, date(2026, 11, 15))
     assert not v.include, (v.score, v.themes)
+
+
+def test_maria_business_analyst_at_consultancy_and_priority_order():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, company, desc="Client projects, stakeholder interviews and reporting. 2 anos de experiência."):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-14", description=desc), maria, t)
+    assert ev("Business Analyst", "Deloitte").include
+    assert ev("Business Analyst", "Sia Partners").include
+    assert not ev("Business Analyst", "Banco X").include                  # fora de uma consultora, não chega
+    for title in ("Data Analyst", "AI Business Analyst", "Data Engineer"):
+        assert not ev(title, "Deloitte").include, title                     # nada de tecnologia, mesmo numa Big4
+    policy = ev("Public Policy Analyst", "PwC", "Public policy analysis and policy evaluation for ministries. 2 anos.")
+    consult = ev("Strategy Consultant", "Empresa", "Strategy projects for corporate clients. 2 anos.")
+    assert policy.include and consult.include and policy.score > consult.score   # os temas do mestrado vêm primeiro
