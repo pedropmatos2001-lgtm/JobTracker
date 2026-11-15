@@ -6,7 +6,7 @@
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
 min_salary_eur: 35000
 
-min_score: 6               # pontuação mínima para avisar
+min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
 max_age_days: 14           # ignora vagas publicadas há mais tempo
 max_detail_fetches: 120    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
@@ -29,6 +29,13 @@ title_exclude:
   - "candidatura espont[âa]nea|spontaneous application"
   - "intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate"
   - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
+  # perfis técnicos / de TI (o teu perfil é transformação, processos, ESG, PMO, fundos):
+  - "\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|arquitet[oa]\\b|scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|infrastructure|infraestrutura"
+  - "\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors"
+  - "product (manager|owner|ops|development)|product management"
+  - "\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar"
+  - "account manager|business development|comercial|customer (service|support)|apoio ao cliente|speaker"
+  - "t[ée]c\\.|t[ée]cnico (de|superior de manuten)|technician|manuten[çc][ãa]o|operador|operator"
   - "sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de"
 
 senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
@@ -37,7 +44,7 @@ senior_bonus: 2
 # Associações, clusters de competitividade, CoLABs, centros tecnológicos e agências: valem pontos
 # extra só pelo tipo de entidade (vê-se no nome da empresa ou no título).
 org_bonus:
-  points: 3
+  points: 5                      # associação + 1 tema forte já chega à fasquia
   pattern: "associa[çc][ãa]o|association|\\bcluster|confedera[çc][ãa]o|federa[çc][ãa]o|\\bBCSD|\\bCoLAB|laborat[óo]rio colaborativo|centro tecnol[óo]gico|centro de interface|ag[êe]ncia (para|de|nacional|regional)|funda[çc][ãa]o|\\bINESC|\\bINEGI|\\bCEiiA|\\bISQ\\b|\\bPRODUTECH|\\bENERGYIN|smart energy|\\bAEP\\b|\\bCIP\\b|\\bAIP\\b|\\bANI\\b|\\bADENE|\\bAPREN|\\bACAP\\b|c[âa]mara de com[ée]rcio|business council|\\bNGO\\b|\\bONG\\b"
 
 keywords:
@@ -48,10 +55,10 @@ keywords:
     - "operating model|modelo operativo|target operating"
     - "csrd|esg|sustainab|sustentabilidade|decarbon|circular economy|economia circular|climate"
     - "pmo|program(me)? manage|transformation (manager|lead|office)"
-    - "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas"
+    - "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"
     - "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|pol[íi]ticas p[úu]blicas|planeamento estrat[ée]gico"
     - "energy transition|transição energética|renewable|renov[áa]vel"
-    - "digital transformation|transformação digital|process improvement|melhoria de processos|automation|automatiza"
+    - "digital transformation|transformação digital|process improvement|melhoria de processos|business transformation"
   medium:                  # +1 cada
     - "\\bAI\\b|artificial intelligence|inteligência artificial|machine learning"
     - "strategy|estratégia"
@@ -201,7 +208,9 @@ sources:
     location: "Lisboa"
 
   # Galp: portal jobs.galp.com (mesmo modelo da EDP; vagas em /job/Local-Titulo/ID/). Confirmado em 15 nov. 2026.
+  # Galp desligada: o portal carrega as vagas por JavaScript (0 ligações). As vagas da Galp chegam pelo LinkedIn.
   - type: page_watch
+    enabled: false
     name: Galp (Lisboa)
     url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Lisboa"
     link_regex: "."
@@ -209,6 +218,7 @@ sources:
     location: "Lisboa"
 
   - type: page_watch
+    enabled: false
     name: Galp (Porto)
     url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Porto"
     link_regex: "."

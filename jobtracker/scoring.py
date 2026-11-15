@@ -164,7 +164,7 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     # entidades que interessam pelo tipo (associações, clusters, CoLABs…), sem as teres de enumerar
     org = cfg.get("org_bonus") or {}
     if org.get("pattern") and re.search(org["pattern"], f"{job.company}\n{job.title}", re.I):
-        score += org.get("points", 3)
+        score += org.get("points", 5)
         v.reasons.append("entidade do tipo associação / cluster / CoLAB / centro tecnológico")
 
     # 3) avisos

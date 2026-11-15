@@ -175,5 +175,5 @@ def test_associations_and_clusters_get_bonus():
     for org in ["Associação Smart Energy", "PRODUTECH - Cluster das Tecnologias de Produção",
                 "BCSD Portugal", "VORTEX CoLAB", "AEP - Associação Empresarial de Portugal"]:
         v = evaluate(Job(company=org, **base), cfg, t)
-        assert v.score == plain.score + 3, org
+        assert v.score == plain.score + cfg["org_bonus"]["points"], org
     assert not plain.include and evaluate(Job(company="BCSD Portugal", **base), cfg, t).include

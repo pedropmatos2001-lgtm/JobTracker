@@ -66,6 +66,8 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
 
     # 1) recolher — uma fonte avariada nunca derruba as outras
     for src in cfg.get("sources", []):
+        if src.get("enabled") is False:
+            continue
         name = src.get("name") or src.get("type")
         h = state["health"].setdefault(name, {"fail_streak": 0, "last_ok": ""})
         ctx = {**src, "_known": state["seen"].keys(), "_cursor": state["cursors"].get(name)}
