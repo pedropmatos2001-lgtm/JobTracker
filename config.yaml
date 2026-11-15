@@ -34,6 +34,12 @@ title_exclude:
 senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
 senior_bonus: 2
 
+# Associações, clusters de competitividade, CoLABs, centros tecnológicos e agências: valem pontos
+# extra só pelo tipo de entidade (vê-se no nome da empresa ou no título).
+org_bonus:
+  points: 3
+  pattern: "associa[çc][ãa]o|association|\\bcluster|confedera[çc][ãa]o|federa[çc][ãa]o|\\bBCSD|\\bCoLAB|laborat[óo]rio colaborativo|centro tecnol[óo]gico|centro de interface|ag[êe]ncia (para|de|nacional|regional)|funda[çc][ãa]o|\\bINESC|\\bINEGI|\\bCEiiA|\\bISQ\\b|\\bPRODUTECH|\\bENERGYIN|smart energy|\\bAEP\\b|\\bCIP\\b|\\bAIP\\b|\\bANI\\b|\\bADENE|\\bAPREN|\\bACAP\\b|c[âa]mara de com[ée]rcio|business council|\\bNGO\\b|\\bONG\\b"
+
 keywords:
   strong_cap: 14
   strong:                  # +3 cada (+2 se estiver no título)
@@ -102,6 +108,14 @@ sources:
       - "energy transition"
       - "fundos europeus"
       - "public sector consultant"
+      - "associação"
+      - "cluster"
+      - "cluster manager"
+      - "laboratório colaborativo"
+      - "centro tecnológico"
+      - "gestor de projetos europeus"
+      - "european projects manager"
+      - "innovation manager"
 
   # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
   - type: indeed
@@ -123,6 +137,10 @@ sources:
       - "consultor estratégia"
       - "energia renovável"
       - "fundos europeus"
+      - "associação"
+      - "cluster"
+      - "projetos europeus"
+      - "gestor de inovação"
 
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o

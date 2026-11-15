@@ -159,3 +159,21 @@ def test_bep_ccdr_offer_passes_with_one_strong_theme():
         d = sources.parse_bep_detail(f.read(), 1)
     v = evaluate(sources.bep_to_job(d, src, today=date(2026, 11, 15)), cfg, date(2026, 11, 15))
     assert v.include and any("remuneração" in x for x in v.flags) and any("candidaturas até" in x for x in v.flags)
+
+
+def test_associations_and_clusters_get_bonus():
+    import yaml
+    from datetime import date
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    desc = "Gestão de projetos europeus Horizon Europe. 4 anos de experiência."
+    base = dict(source="linkedin", title="Gestor de Projetos", url="u", location="Porto, Portugal",
+                posted="2026-11-14", description=desc)
+    t = date(2026, 11, 15)
+    plain = evaluate(Job(company="Empresa Qualquer", **base), cfg, t)
+    for org in ["Associação Smart Energy", "PRODUTECH - Cluster das Tecnologias de Produção",
+                "BCSD Portugal", "VORTEX CoLAB", "AEP - Associação Empresarial de Portugal"]:
+        v = evaluate(Job(company=org, **base), cfg, t)
+        assert v.score == plain.score + 3, org
+    assert not plain.include and evaluate(Job(company="BCSD Portugal", **base), cfg, t).include
