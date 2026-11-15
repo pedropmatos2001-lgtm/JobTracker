@@ -119,10 +119,10 @@ def test_page_watch_zero_links_is_an_error():
 
 
 def test_http_retries_then_raises():
-    s = FakeSession(Resp(503), Resp(503), Resp(503))
+    s = FakeSession(Resp(503), Resp(503), Resp(503), Resp(503))
     with pytest.raises(sources.SourceError):
         sources.http(s, "GET", "https://x.com/a")
-    assert len(s.calls) == 3
+    assert len(s.calls) == 4
 
 
 def test_http_recovers_after_network_error():
@@ -234,3 +234,28 @@ def test_jsonld_expired_means_closed_and_missing_keeps_job():
     j2 = Job(source="page:X", company="X", title="t", url="https://x/f.pdf", unverified=True, extra={"jsonld": True})
     assert sources.fetch_detail(j2, FakeSession(Resp(200, text="%PDF"))) is j2
     assert sources.fetch_detail(j2, FakeSession(Resp(404))) is None
+
+
+def test_page_links_skip_social_and_other_hosts_and_use_url_regex():
+    html = ('<a href="/job/Porto-Dispatch-Specialist/1455742133/">Dispatch Specialist</a>'
+            '<a href="https://www.instagram.com/edp.global/">Instagram EDP</a>'
+            '<a href="/content/Politica-Privacidade/">Política de Privacidade</a>'
+            '<a href="https://www.edp.com/pt-pt">Website da EDP</a>')
+    jobs = sources.parse_page_links(html, "https://jobs.edp.com/search/", ".", "EDP", "Porto", url_pattern="/job/")
+    assert [j.title for j in jobs] == ["Dispatch Specialist"]
+
+
+def test_http_backs_off_on_429(monkeypatch):
+    waits, calls = [], []
+    monkeypatch.setattr(sources.time, "sleep", lambda s: waits.append(s))
+
+    class R:
+        def __init__(self, c):
+            self.status_code, self.headers = c, {}
+
+    class S:
+        def request(self, *a, **k):
+            calls.append(1)
+            return R(429 if len(calls) < 3 else 200)
+    r = sources.http(S(), "GET", "https://x.test/")
+    assert r.status_code == 200 and len(calls) == 3 and min(waits) >= 8

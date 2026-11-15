@@ -53,7 +53,8 @@ def http(session, method, url, **kw):
     kw.setdefault("timeout", 25)
     kw["headers"] = {**UA, **kw.get("headers", {})}
     last = None
-    for i in range(3):
+    for i in range(4):
+        wait = 2 * (i + 1)
         try:
             r = session.request(method, url, **kw)
         except requests.RequestException as e:
@@ -61,9 +62,16 @@ def http(session, method, url, **kw):
         else:
             if r.status_code in (429, 500, 502, 503, 504):
                 last = f"HTTP {r.status_code}"
+                if r.status_code == 429:           # limite de pedidos: espera mais (respeita Retry-After)
+                    try:
+                        wait = min(30, max(wait, int(r.headers.get("Retry-After", 0))))
+                    except (ValueError, TypeError, AttributeError):
+                        pass
+                    wait = max(wait, 8 * (i + 1))
             else:
                 return r
-        time.sleep(2 * (i + 1))
+        if i < 3:
+            time.sleep(wait)
     raise SourceError(f"{urlsplit(url).netloc}: {last}")
 
 
@@ -247,15 +255,23 @@ class _Links(HTMLParser):
             self._href = None
 
 
-def parse_page_links(html_text, base_url, pattern, name, location=""):
+def parse_page_links(html_text, base_url, pattern, name, location="", url_pattern="", same_host=True):
+    """Ligações da página que parecem vagas. pattern filtra o TEXTO da ligação; url_pattern filtra o
+    endereço (ex.: '/job/'); same_host descarta redes sociais, rodapé e outros domínios."""
     p = _Links()
     p.feed(html_text)
     rx = re.compile(pattern, re.I)
+    urx = re.compile(url_pattern, re.I) if url_pattern else None
+    host = urlsplit(base_url).netloc.lower().removeprefix("www.")
     seen, jobs = set(), []
     for href, text in p.links:
         if not (8 <= len(text) <= 160) or not rx.search(text):
             continue
         url = clean_url(urljoin(base_url, href))
+        if same_host and urlsplit(url).netloc.lower().removeprefix("www.") != host:
+            continue
+        if urx and not urx.search(url):
+            continue
         if url in seen:
             continue
         seen.add(url)
@@ -268,7 +284,8 @@ def fetch_page_watch(src, session, env):
     r = http(session, "GET", src["url"])
     if r.status_code != 200:
         raise SourceError(f"{urlsplit(src['url']).netloc}: HTTP {r.status_code}")
-    jobs = parse_page_links(r.text, src["url"], src.get("link_regex", "."), src["name"], src.get("location", ""))
+    jobs = parse_page_links(r.text, src["url"], src.get("link_regex", "."), src["name"], src.get("location", ""),
+                            src.get("url_regex", ""), src.get("same_host", True))
     if not jobs:
         raise SourceError("0 ligações com o padrão: a página pode ser dinâmica (JavaScript) ou ter mudado")
     return jobs

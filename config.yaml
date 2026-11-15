@@ -100,11 +100,8 @@ sources:
 
   # Páginas sem API: avisa de ligações novas que batam no padrão.
   # Menos fiável (se a página for dinâmica, o tracker avisa que devolveu 0 ligações).
-  - type: page_watch
-    name: EU Careers (agências, Lisboa)
-    url: "https://eu-careers.europa.eu/en/job-opportunities/open-vacancies/temp"
-    link_regex: "officer|adviser|advisor|analyst|policy|manager|digital|environment|climate|programme|project"
-    location: "Lisbon"
+  # EU Careers desligada: o endereço antigo dava 404 e a lista não separa Lisboa de Bruxelas, por isso
+  # as vagas viriam com o local errado. As agências de Lisboa (EMSA, EUDA) são cobertas pela tarefa diária.
 
   # --- Empresas do Norte (ambiente / energia / água / resíduos), verificadas em nov. 2026 ---
   # EDP: portal próprio com pesquisa por localização (padrão de URL confirmado).
@@ -112,12 +109,14 @@ sources:
     name: EDP (Porto)
     url: "https://jobs.edp.com/search/?q=&locationsearch=Porto&locale=pt_PT"
     link_regex: "."
+    url_regex: "/job/"
     location: "Porto"
 
   - type: page_watch
     name: EDP (Lisboa)
     url: "https://jobs.edp.com/search/?q=&locationsearch=Lisboa&locale=pt_PT"
     link_regex: "."
+    url_regex: "/job/"
     location: "Lisboa"
 
   # Porto Ambiente: lista as vagas em PDF na página de recrutamento (confirmado).
@@ -127,12 +126,8 @@ sources:
     link_regex: "t[ée]cnic|jurista|engenheir|gestor|analista|diretor|coordenador|especialista"
     location: "Porto"
 
-  # LIPOR: página de procedimentos concursais (a lista de vagas não foi vista; se der 0 ligações o tracker avisa).
-  - type: page_watch
-    name: LIPOR
-    url: "https://www.lipor.pt/pt/sobre-nos/as-nossas-pessoas/junta-te-a-nossa-equipa/procedimentos-concursais/"
-    link_regex: "t[ée]cnic|jurista|engenheir|gestor|analista|diretor|coordenador|especialista|assistente"
-    location: "Porto"
+  # LIPOR desligada: a página dá 404 a partir do GitHub (provável bloqueio ou mudança de endereço).
+  # Os procedimentos concursais saem também na Bolsa de Emprego Público (BEP).
 
   # Sem lista pública de vagas (só candidatura espontânea / LinkedIn): Quadrante, Indaqua, Águas do Douro e Paiva
   # e restante grupo AdP (publica no LinkedIn). Ficam cobertas pela pesquisa diária da tarefa Claude.
