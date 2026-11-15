@@ -5,120 +5,232 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Vagas">
-<meta name="theme-color" content="#1E3A2E">
+<meta name="theme-color" content="#ffffff">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Vagas</title>
 <style>
-  :root { color-scheme: light dark; --ink:#1b1f1c; --mute:#5d655f; --line:#d9ddd6; --bg:#f7f7f3; --card:#fff; --accent:#1E3A2E; --warn:#8a5a00; --new:#1f6f43; --chip:#eceee8; }
-  @media (prefers-color-scheme: dark) { :root { --ink:#eef1ec; --mute:#a2aaa3; --line:#2c332e; --bg:#101411; --card:#171c18; --accent:#9fc3ab; --warn:#e0b25a; --new:#7fd1a2; --chip:#222923; } }
-  * { box-sizing:border-box; }
-  body { margin:0; font:16px/1.45 -apple-system, system-ui, sans-serif; background:var(--bg); color:var(--ink); padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
-  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
-  header { padding:20px 0 8px; } h1 { font-size:22px; margin:0 0 2px; } .sub { color:var(--mute); font-size:14px; }
-  .bar { position:sticky; top:0; z-index:2; background:var(--bg); padding:8px 0 10px; border-bottom:1px solid var(--line); display:grid; gap:8px; }
-  input[type=search] { width:100%; font:inherit; padding:9px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); }
-  .chips { display:flex; gap:6px; flex-wrap:wrap; }
-  .chip { font:inherit; font-size:14px; padding:5px 11px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--ink); cursor:pointer; }
-  .chip[aria-pressed=true] { background:var(--accent); color:var(--bg); border-color:var(--accent); }
-  ul { list-style:none; margin:0; padding:12px 0 40px; display:grid; gap:10px; }
-  li.job { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
-  li.job.done { opacity:.55; }
-  a.t { color:var(--accent); font-weight:600; text-decoration:none; } a.t:hover { text-decoration:underline; }
-  .meta { color:var(--mute); font-size:14px; margin-top:2px; }
-  .flag { color:var(--warn); font-size:13px; margin-top:6px; }
-  .top { display:flex; gap:8px; align-items:baseline; justify-content:space-between; }
-  .score { color:var(--mute); font-size:13px; white-space:nowrap; }
-  .badge { font-size:12px; font-weight:600; color:var(--new); margin-right:6px; }
-  .acts { display:flex; gap:8px; margin-top:8px; }
-  .acts button { font:inherit; font-size:13px; padding:4px 10px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--mute); cursor:pointer; }
-  .empty { text-align:center; color:var(--mute); padding:40px 16px; }
-  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  :root {
+    color-scheme: light;
+    --bg: #f6f7f9; --card: #ffffff; --ink: #0f172a; --ink-2: #475569; --ink-3: #94a3b8;
+    --line: #e5e7eb; --line-2: #eef0f3; --accent: #2563eb; --accent-soft: #eff6ff;
+    --new: #059669; --new-soft: #ecfdf5; --warn: #b45309; --warn-soft: #fffbeb;
+    --radius: 14px; --shadow: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 Inter, -apple-system, system-ui, "Segoe UI", sans-serif;
+         padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+
+  /* cabeçalho */
+  header { background: var(--card); border-bottom: 1px solid var(--line); }
+  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 28px; padding-bottom: 20px; flex-wrap: wrap; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 0; letter-spacing: -.02em; font-weight: 700; }
+  .sub { color: var(--ink-2); font-size: 14px; margin-top: 4px; }
+  .stats { display: flex; gap: 10px; }
+  .stat { border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; min-width: 92px; background: var(--card); }
+  .stat b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .stat span { color: var(--ink-2); font-size: 12px; }
+
+  /* barra de filtros */
+  .bar { position: sticky; top: 0; z-index: 5; background: rgba(246,247,249,.92); backdrop-filter: saturate(1.4) blur(8px);
+         -webkit-backdrop-filter: saturate(1.4) blur(8px); border-bottom: 1px solid var(--line); }
+  .bar .wrap { display: grid; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
+  .search { position: relative; }
+  .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
+  input[type=search] { width: 100%; font: inherit; padding: 10px 12px 10px 38px; border: 1px solid var(--line); border-radius: 10px;
+                       background: var(--card); color: var(--ink); outline: none; transition: border-color .15s, box-shadow .15s; }
+  input[type=search]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .seg { display: inline-flex; background: #eceef2; border-radius: 10px; padding: 3px; }
+  .seg button { font: inherit; font-size: 13px; font-weight: 500; border: 0; background: transparent; color: var(--ink-2);
+                padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+  .seg button[aria-pressed=true] { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
+  .chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line);
+          background: var(--card); color: var(--ink-2); cursor: pointer; transition: all .15s; }
+  .chip:hover { border-color: #cbd5e1; }
+  .chip[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .chip .n { opacity: .6; margin-left: 4px; font-variant-numeric: tabular-nums; }
+  .spacer { flex: 1; }
+  .toggle { font-size: 13px; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+
+  /* lista */
+  main { padding-top: 22px; padding-bottom: 48px; }
+  .group { margin: 18px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+  .group:first-child { margin-top: 0; }
+  .list { display: grid; gap: 10px; }
+  .job { display: grid; grid-template-columns: 44px 1fr; gap: 14px; background: var(--card); border: 1px solid var(--line);
+         border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); transition: border-color .15s, box-shadow .15s; }
+  .job:hover { border-color: #d5dae1; box-shadow: 0 4px 12px rgba(15,23,42,.06); }
+  .job.done { opacity: .55; }
+  .logo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; font-size: 16px; color: #fff; }
+  .top { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; }
+  .title { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--ink); text-decoration: none; letter-spacing: -.005em; }
+  .title:hover { color: var(--accent); }
+  .meta { color: var(--ink-2); font-size: 14px; margin-top: 2px; }
+  .meta .dot { color: var(--ink-3); margin: 0 6px; }
+  .score { flex: none; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px;
+           padding: 3px 9px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .tag { font-size: 12px; font-weight: 500; border-radius: 6px; padding: 2px 8px; background: #f1f5f9; color: var(--ink-2); }
+  .tag.new { background: var(--new-soft); color: var(--new); }
+  .tag.warn { background: var(--warn-soft); color: var(--warn); }
+  .acts { grid-column: 2; display: flex; gap: 8px; margin-top: -2px; flex-wrap: wrap; }
+  .btn { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line);
+         background: var(--card); color: var(--ink); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn:hover { background: #f8fafc; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.primary:hover { background: #1d4ed8; }
+  .btn.on { background: var(--new-soft); border-color: #a7f3d0; color: var(--new); }
+
+  .empty { text-align: center; padding: 56px 16px; color: var(--ink-2); background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); }
+  .empty b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
+  footer { color: var(--ink-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 22px; }
+    .stats { width: 100%; } .stat { flex: 1; min-width: 0; }
+    .job { grid-template-columns: 36px 1fr; gap: 12px; padding: 14px; }
+    .acts { grid-column: 1 / -1; gap: 6px; margin-top: 0; } .btn { padding: 7px 10px; }
+    .logo { width: 36px; height: 36px; font-size: 14px; }
+    .spacer { display: none; }
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header><h1>Vagas para ti</h1><div class="sub" id="sub">A carregar…</div></header>
-  <div class="bar">
-    <input type="search" id="q" placeholder="Filtrar por título, empresa ou local" aria-label="Filtrar vagas">
-    <div class="chips" id="days" role="group" aria-label="Período">
-      <button class="chip" data-d="1">Hoje</button>
-      <button class="chip" data-d="7" aria-pressed="true">7 dias</button>
-      <button class="chip" data-d="30">30 dias</button>
-      <button class="chip" data-d="9999">Tudo</button>
+<header>
+  <div class="wrap head">
+    <div>
+      <h1>Vagas para ti</h1>
+      <div class="sub" id="sub">A carregar…</div>
     </div>
-    <div class="chips" id="srcs" role="group" aria-label="Fonte"></div>
-    <div class="chips" role="group" aria-label="Estado">
-      <button class="chip" id="showDone" aria-pressed="false">Mostrar escondidas e candidatadas</button>
+    <div class="stats">
+      <div class="stat"><b id="sToday">–</b><span>Novas hoje</span></div>
+      <div class="stat"><b id="sWeek">–</b><span>Últimos 7 dias</span></div>
+      <div class="stat"><b id="sAll">–</b><span>No total</span></div>
     </div>
   </div>
-  <ul id="list"></ul>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="q" placeholder="Pesquisar título, empresa ou local" aria-label="Pesquisar vagas">
+    </div>
+    <div class="row">
+      <div class="seg" id="days" role="group" aria-label="Período">
+        <button data-d="1">Hoje</button>
+        <button data-d="7" aria-pressed="true">7 dias</button>
+        <button data-d="30">30 dias</button>
+        <button data-d="9999">Tudo</button>
+      </div>
+      <span class="spacer"></span>
+      <label class="toggle"><input type="checkbox" id="showDone"> Mostrar candidatadas e escondidas</label>
+    </div>
+    <div class="row" id="srcs" role="group" aria-label="Fonte"></div>
+  </div>
 </div>
+
+<main class="wrap"><div id="list"></div></main>
+<footer>Atualiza-se sozinho duas vezes por dia. As marcações ficam guardadas só neste dispositivo.</footer>
+
 <script>
 const KEY = "vagas-estado";
 let marks = {};
 try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch (e) {} };
-const SRC = { linkedin: "LinkedIn", indeed: "Indeed", page: "Sites de empresas", workable: "Sites de empresas",
-  greenhouse: "Sites de empresas", lever: "Sites de empresas", smartrecruiters: "Sites de empresas", workday: "Sites de empresas",
-  personio: "Sites de empresas", teamtailor: "Sites de empresas", recruitee: "Sites de empresas", remotive: "Remoto" };
-const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Outras";
-let data = [], updated = "", days = 7, src = "Todas", showDone = false;
 
-function daysAgo(iso) { const d = new Date(iso + "T00:00:00"); return Math.floor((new Date(updated + "T00:00:00") - d) / 864e5); }
+const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", remotive: "Remoto" };
+const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Sites de empresas";
+const PALETTE = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#059669", "#0891b2", "#4f46e5", "#be123c", "#65a30d", "#0d9488"];
+const colorOf = s => { let h = 0; for (const c of s || "?") h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
+const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
+
+let data = [], updated = "", days = 7, src = "Todas", showDone = false;
+const ageDays = iso => Math.round((new Date(updated + "T00:00:00") - new Date((iso || updated) + "T00:00:00")) / 864e5);
+const fmtDay = iso => { const a = ageDays(iso); if (a === 0) return "Hoje"; if (a === 1) return "Ontem";
+  return new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); };
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+function card(m) {
+  const li = el("article", "job" + (marks[m.url] ? " done" : ""));
+  const logo = el("div", "logo", initials(m.company)); logo.style.background = colorOf(m.company); logo.setAttribute("aria-hidden", "true");
+  const body = el("div");
+  const top = el("div", "top");
+  const left = el("div");
+  const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
+  const meta = el("div", "meta");
+  [m.company, m.location].filter(Boolean).forEach((t, i) => { if (i) meta.append(el("span", "dot", "·")); meta.append(document.createTextNode(t)); });
+  left.append(a, meta);
+  top.append(left, el("span", "score", m.fit != null ? `Encaixe ${m.fit}` : `${m.score} pts`));
+  const tags = el("div", "tags");
+  if (m.first_seen === updated) tags.append(el("span", "tag new", "Nova"));
+  tags.append(el("span", "tag", srcOf(m)));
+  if (m.posted) tags.append(el("span", "tag", "Publicada " + (ageDays(m.posted) <= 0 ? "hoje" : `há ${ageDays(m.posted)} d`)));
+  (m.flags || []).filter(f => !/sem salário indicado|não indica anos/.test(f)).slice(0, 2).forEach(f => tags.append(el("span", "tag warn", f)));
+  const acts = el("div", "acts");
+  const open = el("a", "btn primary", "Abrir vaga"); open.href = m.url; open.target = "_blank"; open.rel = "noopener";
+  const mk = (label, val) => { const on = marks[m.url] === val; const b = el("button", "btn" + (on ? " on" : ""), on ? "✓ " + label : label);
+    b.onclick = () => { if (on) delete marks[m.url]; else marks[m.url] = val; save(); render(); }; return b; };
+  acts.append(open, mk("Candidatei-me", "aplicada"), mk("Esconder", "escondida"));
+  body.append(top, tags);
+  li.append(logo, body, acts);
+  return li;
+}
 
 function render() {
   const q = document.getElementById("q").value.trim().toLowerCase();
-  const ul = document.getElementById("list"); ul.textContent = "";
-  const rows = data.filter(m => daysAgo(m.first_seen) < days)
+  const box = document.getElementById("list"); box.textContent = "";
+  const rows = data.filter(m => ageDays(m.first_seen) < days)
     .filter(m => src === "Todas" || srcOf(m) === src)
     .filter(m => showDone || !marks[m.url])
     .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
-  if (!rows.length) { const li = document.createElement("li"); li.className = "empty"; li.textContent = data.length ? "Nada com estes filtros." : "Ainda sem vagas que passem a fasquia."; ul.append(li); return; }
+  if (!rows.length) {
+    const e = el("div", "empty");
+    e.append(el("b", null, data.length ? "Nada com estes filtros" : "Ainda sem vagas"),
+             document.createTextNode(data.length ? "Experimenta alargar o período ou limpar a pesquisa." : "As próximas aparecem aqui assim que o tracker correr."));
+    box.append(e); return;
+  }
+  let day = null, list = null;
   for (const m of rows) {
-    const li = document.createElement("li"); li.className = "job" + (marks[m.url] ? " done" : "");
-    const top = document.createElement("div"); top.className = "top";
-    const left = document.createElement("div");
-    if (m.first_seen === updated) { const b = document.createElement("span"); b.className = "badge"; b.textContent = "NOVA"; left.append(b); }
-    const a = document.createElement("a"); a.className = "t"; a.href = m.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = m.title; left.append(a);
-    const sc = document.createElement("span"); sc.className = "score"; sc.textContent = m.fit != null ? "fit " + m.fit : m.score + " pts";
-    top.append(left, sc);
-    const meta = document.createElement("div"); meta.className = "meta";
-    meta.textContent = [m.company, m.location, srcOf(m), "vista a " + m.first_seen].filter(Boolean).join(" · ");
-    li.append(top, meta);
-    if (m.flags && m.flags.length) { const f = document.createElement("div"); f.className = "flag"; f.textContent = "⚠ " + m.flags.slice(0, 3).join("; "); li.append(f); }
-    const acts = document.createElement("div"); acts.className = "acts";
-    const mk = (label, val) => { const b = document.createElement("button"); b.textContent = marks[m.url] === val ? "Desfazer" : label;
-      b.onclick = () => { if (marks[m.url] === val) delete marks[m.url]; else marks[m.url] = val; save(); render(); }; return b; };
-    acts.append(mk("Candidatei-me", "aplicada"), mk("Esconder", "escondida"));
-    if (marks[m.url]) { const s = document.createElement("span"); s.className = "score"; s.textContent = marks[m.url]; acts.append(s); }
-    li.append(acts); ul.append(li);
+    if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group", fmtDay(day))); list = el("div", "list"); box.append(list); }
+    list.append(card(m));
   }
 }
 
-function chipGroup(id, onPick) {
-  document.getElementById(id).addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if (!b) return;
-    for (const c of e.currentTarget.querySelectorAll(".chip")) c.setAttribute("aria-pressed", c === b);
-    onPick(b); render();
-  });
+function buildSources() {
+  const box = document.getElementById("srcs"); box.textContent = "";
+  const counts = {}; data.forEach(m => { counts[srcOf(m)] = (counts[srcOf(m)] || 0) + 1; });
+  for (const n of ["Todas", ...Object.keys(counts).sort((a, b) => counts[b] - counts[a])]) {
+    const b = el("button", "chip", n); b.setAttribute("aria-pressed", n === src);
+    b.append(el("span", "n", n === "Todas" ? data.length : counts[n]));
+    b.onclick = () => { src = n; buildSources(); render(); };
+    box.append(b);
+  }
 }
 
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
-  data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") || (b.fit ?? b.score * 5) - (a.fit ?? a.score * 5));
   updated = d.updated;
-  const today = data.filter(m => m.first_seen === updated).length;
-  document.getElementById("sub").textContent = `Atualizado a ${updated} · ${today} nova(s) hoje · ${data.length} guardada(s)`;
-  const names = ["Todas", ...new Set(data.map(srcOf))];
-  const box = document.getElementById("srcs");
-  for (const n of names) { const b = document.createElement("button"); b.className = "chip"; b.textContent = n; b.setAttribute("aria-pressed", n === "Todas"); box.append(b); }
-  render();
-}).catch(() => { document.getElementById("sub").textContent = "Sem dados ainda: corre o fluxo uma vez."; });
+  data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
+    ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
+  const fresh = data.filter(m => !marks[m.url]);
+  document.getElementById("sToday").textContent = fresh.filter(m => m.first_seen === updated).length;
+  document.getElementById("sWeek").textContent = fresh.filter(m => ageDays(m.first_seen) < 7).length;
+  document.getElementById("sAll").textContent = data.length;
+  document.getElementById("sub").textContent = "Atualizado a " + new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" }) + " · Portugal continental";
+  buildSources(); render();
+}).catch(() => { document.getElementById("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; render(); });
 
-chipGroup("days", b => { days = +b.dataset.d; });
-chipGroup("srcs", b => { src = b.textContent; });
-document.getElementById("showDone").onclick = e => { showDone = !showDone; e.currentTarget.setAttribute("aria-pressed", showDone); render(); };
+document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; render(); });
+document.getElementById("showDone").onchange = e => { showDone = e.target.checked; render(); };
 document.getElementById("q").addEventListener("input", render);
 </script>
 </body>
