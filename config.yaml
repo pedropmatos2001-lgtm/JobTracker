@@ -247,6 +247,10 @@ profiles:
         - "business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center"
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
         - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
+        - "\\btax\\b|fiscal|impostos|\\biva\\b|\\bvat\\b|transfer pricing|pre[çc]os de transfer|contabil|accounting|accountant|auditor|\\baudit\\b|auditoria|assurance|payroll|processamento salarial|actuar|tesouraria|treasury"
+        - "\\bIT\\b|\\bSAP\\b|\\bERP\\b|\\bCRM\\b|cyber|ciberseguran|data engineer|cloud|infrastructure|infraestrutura|servicenow|oracle|microsoft dynamics|d365"
+        # nada de tecnologia para a Maria: IA, dados, digital, automação, sistemas
+        - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b|dados\\b|analytics|\\bBI\\b|power bi|digital|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
         - "turismo|modelador|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label|ai training|ai trainer|treino de ia"
       keywords:
@@ -256,6 +260,7 @@ profiles:
           - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
           - {label: "Avaliação e monitorização de políticas", examples: ["monitoring & evaluation", "avaliação de impacto", "policy appraisal", "análise de políticas"], pattern: "monitoring (and|&) evaluation|\\bM&E\\b|\\bMEAL\\b|impact evaluation|avalia[çc][ãa]o de impacto|policy (appraisal|evaluation|assessment)|avalia[çc][ãa]o de pol[íi]ticas|programme evaluation|avalia[çc][ãa]o de programas|evidence[- ]based polic|pol[íi]ticas baseadas em evid[êe]ncia|\\bPlanAPP\\b|prospetiva|foresight"}
           - {label: "Desenvolvimento e políticas de emprego", examples: ["desenvolvimento internacional", "políticas de emprego", "OIT", "economia do desenvolvimento"], pattern: "development econom|economia do desenvolvimento|labou?r market polic|pol[íi]ticas (ativas )?de emprego|mercado de trabalho|informal (labou?r|economy|employment)|economia informal|\\bILO\\b|\\bOIT\\b|social protection|prote[çc][ãa]o social|poverty reduction|redu[çc][ãa]o da pobreza|\\bSDGs?\\b|\\bODS\\b|sustainable development goals|objetivos de desenvolvimento sustent[áa]vel"}
+          - {label: "Consultoria de gestão e estratégia", examples: ["consultora de gestão", "strategy consultant", "business consultant", "transformação organizacional"], pattern: "(management|business|strategy|strategic|transformation|organi[sz]ational|operations|governance|risk|change|process|sustainability|esg|public sector|policy) (consult|advisory|advisor)|consultor[a]? (j[úu]nior |s[ée]nior )?(de |em )?(gest[ãa]o|neg[óo]cio|estrat[ée]gi|organiza|processos|transforma|sustentabilidade|risco|governa)|consultoria (de|em) (gest[ãa]o|estrat[ée]gia|neg[óo]cio|organiza)|\\b(junior |senior )?consultant\\b|\\bconsultor[a]?\\b|management consulting|consulting (projects?|firm|clients|engagements)|projetos de consultoria|strategy (and|&) operations"}
           - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament"}
           - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b|\\badvocacy\\b"}
@@ -276,6 +281,7 @@ profiles:
           - "(sales|on|plus|\\+) commissions?\\b|commission[- ]based|comiss[õo]es (de vendas|sobre vendas)|comiss[ãa]o de vendas|cold call|sales quota"
           - "call center|contact center"
           - "incentivos? (fiscais|financeiros|ao investimento)|benef[íi]cios fiscais|tax incentive|\\bSIFIDE\\b|r&d tax|cr[ée]dito fiscal|consultor[a]? de incentivos|incentive consult"
+          - "software (development|engineering)|programming|programa[çc][ãa]o|\\bpython\\b|\\bjava\\b|\\bsql\\b|cloud (platform|migration|architecture)|\\bSAP\\b|data engineering|machine learning|artificial intelligence|intelig[êe]ncia artificial|\\bIT (systems|solutions|consulting)\\b"
 
 public_repo: true          # repositório público: sem matches, kits nem notas do juiz no git
 
@@ -397,6 +403,9 @@ sources:
       - "policy analyst"
       - "avaliação de políticas públicas"
       - "think tank"
+      - "junior consultant"
+      - "consultor júnior"
+      - "business analyst consulting"
       - "development economist"
 
   # Núcleo do Pedro: ambiente, clima, sustentabilidade e energia. São as pesquisas com mais vagas

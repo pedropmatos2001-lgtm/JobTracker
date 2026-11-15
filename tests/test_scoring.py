@@ -427,3 +427,45 @@ def test_maria_needs_theme_in_title_or_two_themes():
     ]:
         v = ev(title, desc)
         assert v.include, (title, v.excluded_by, v.themes)
+
+
+def test_maria_business_consulting_yes_tax_no():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Porto, Portugal",
+                            posted="2026-11-14", description=desc + " 2 anos de experiência."), maria, t)
+    for title, desc in [
+        ("Consultora de Gestão", "Projetos de reorganização e melhoria de processos para empresas industriais."),
+        ("Strategy Consultant", "Strategy and operations projects for corporate clients."),
+        ("Junior Consultant – Business Transformation", "Operating model and change management for clients."),
+        ("Business Analyst – Management Consulting", "Consulting projects: process mapping and stakeholder interviews for clients."),
+    ]:
+        v = ev(title, desc, company="Deloitte")
+        assert v.include, (title, v.excluded_by, v.themes)
+    for title in ("Tax Consultant", "Consultor Fiscal", "Transfer Pricing Consultant", "Audit Assistant", "Consultor de IVA",
+                  "SAP Consultant", "IT Consultant", "Accounting Consultant"):
+        assert not ev(title, "Consultoria para empresas.").include, title
+
+
+def test_maria_no_tech_consulting():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    for title in ("Strategic Digital Consultant – Data & AI", "AI Governance Consultant", "Digital Transformation Consultant",
+                  "Data Analyst – Public Sector", "Technology Consultant", "Automation Consultant (RPA)", "Power BI Consultant"):
+        v = evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal",
+                         posted="2026-11-14", description="Public policy consulting for ministries. 2 anos."), maria, date(2026, 11, 15))
+        assert not v.include, title
+
+
+def test_maria_generic_consultant_title_with_tech_description_is_out():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    v = evaluate(Job(source="linkedin", company="X", title="Consultant", url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                     description="Software development and cloud migration projects; Python, SQL and SAP integration; "
+                                 "machine learning pipelines for clients. 2 years of experience."), maria, date(2026, 11, 15))
+    assert not v.include, (v.score, v.themes)
