@@ -5,295 +5,612 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Vagas">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#f5f5f7">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>Vagas</title>
 <style>
+  /* Estilo Apple: tipo de letra do sistema, cinzentos neutros e um único azul. */
   :root {
     color-scheme: light;
-    --bg: #f6f7f9; --card: #ffffff; --ink: #0f172a; --ink-2: #475569; --ink-3: #556070;
-    --line: #e5e7eb; --line-2: #eef0f3; --accent: #2563eb; --accent-soft: #eff6ff;
-    --new: #047857; --new-soft: #ecfdf5; --warn: #b45309; --warn-soft: #fffbeb;
+    --bg: #ffffff; --side: #f5f5f7; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.08); --hover: rgba(0,0,0,.04);
+    --label: #1d1d1f; --label-2: #6e6e73; --label-3: #86868b; --sep: rgba(60,60,67,.16);
+    --blue: #0071e3; --green: #248a3d; --orange: #b25000; --red: #d70015;
+    --surface: #ffffff; --bar: rgba(255,255,255,.82); --topbar: rgba(245,245,247,.86); --modal: rgba(255,255,255,.96);
+    --seg-on: #ffffff; --current: rgba(0,0,0,.06); --avatar-bg: #1d1d1f; --avatar-fg: #ffffff; --card-line: rgba(0,0,0,.06);
     --motion-100: 100ms; --motion-150: 150ms; --motion-200: 200ms; --motion-300: 300ms;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
-    --radius: 14px; --shadow: 0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
   }
+  :root[data-theme="dark"] { color-scheme: dark;
+    --bg: #000000; --side: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.18); --hover: rgba(255,255,255,.06);
+    --label: #f5f5f7; --label-2: #a1a1a6; --label-3: #8e8e93; --sep: rgba(84,84,88,.55);
+    --blue: #0a84ff; --green: #30d158; --orange: #ff9f0a; --red: #ff453a;
+    --surface: #1c1c1e; --bar: rgba(0,0,0,.72); --topbar: rgba(28,28,30,.86); --modal: rgba(44,44,46,.96);
+    --seg-on: #636366; --current: rgba(255,255,255,.08); --avatar-bg: #f5f5f7; --avatar-fg: #1d1d1f; --card-line: rgba(255,255,255,.06); }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 Inter, -apple-system, system-ui, "Segoe UI", sans-serif;
-         padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  body { margin: 0; background: var(--bg); color: var(--label); -webkit-font-smoothing: antialiased;
+         font: 15px/1.47 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Segoe UI", system-ui, sans-serif; letter-spacing: -.01em; }
+  button, input, select { font: inherit; color: inherit; letter-spacing: inherit; }
+  a { color: var(--blue); }
+  svg { flex: none; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 32px; }
 
-  /* cabeçalho */
-  header { background: var(--card); border-bottom: 1px solid var(--line); }
-  .head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding-top: 28px; padding-bottom: 20px; flex-wrap: wrap; }
-  h1 { font-size: 26px; line-height: 1.2; margin: 0; letter-spacing: -.02em; font-weight: 700; }
-  .sub { color: var(--ink-2); font-size: 14px; margin-top: 4px; }
-  .stats { display: flex; gap: 10px; }
-  .stat { border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; min-width: 92px; background: var(--card); }
-  .stat b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
-  .stat span { color: var(--ink-2); font-size: 12px; }
+  /* ---------- barra lateral ---------- */
+  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
+  .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; overflow-x: hidden; background: var(--side); border-right: .5px solid var(--sep);
+          padding: 20px 10px 10px; display: flex; flex-direction: column; min-width: 0; }
+  .brand { font-size: 15px; font-weight: 600; padding: 2px 10px 18px; letter-spacing: -.02em; }
+  .sect { font-size: 11px; font-weight: 500; color: var(--label-3); padding: 14px 10px 6px; }
+  .nav { display: grid; gap: 1px; }
+  .item { position: relative; display: flex; align-items: center; gap: 10px; width: 100%; min-height: 34px; padding: 6px 10px; border: 0; border-radius: 8px;
+          background: transparent; text-align: left; cursor: pointer; font-size: 14px; color: var(--label); text-decoration: none;
+          transition: background-color var(--motion-150) var(--ease-out); }
+  .item svg { color: var(--label-2); }
+  .item:hover { background: var(--hover); }
+  .item[aria-current=page] { background: var(--current); font-weight: 500; }
+  .item[aria-current=page]::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 2px; background: var(--blue); }
+  .item .n { margin-left: auto; font-size: 12px; color: var(--label-3); font-variant-numeric: tabular-nums; }
+  .bottom { margin-top: auto; border-top: .5px solid var(--sep); padding-top: 10px; display: grid; gap: 1px; }
+  .me { display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px; min-width: 0; }
+  .avatar { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--avatar-bg); color: var(--avatar-fg);
+            font-weight: 600; font-size: 12px; letter-spacing: 0; }
+  .me .pinfo, .pitem .pinfo { min-width: 0; flex: 1; }
+  .pn { font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .ph { font-size: 12px; color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* barra de filtros */
-  .bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 8px; pointer-events: none;
-                background: linear-gradient(rgba(15,23,42,.08), transparent); opacity: 0; transition: opacity var(--motion-150) var(--ease-out); }
-  .bar.scrolled::after { opacity: 1; }
-  .bar { position: sticky; top: 0; z-index: 5; background: rgba(246,247,249,.92); backdrop-filter: saturate(1.4) blur(8px);
-         -webkit-backdrop-filter: saturate(1.4) blur(8px); border-bottom: 1px solid var(--line); }
-  .bar .wrap { display: grid; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
-  .search { position: relative; }
-  .search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-3); }
-  input[type=search] { width: 100%; font: inherit; padding: 10px 12px 10px 38px; border: 1px solid var(--line); border-radius: 10px;
-                       background: var(--card); color: var(--ink); outline: none; transition: border-color .15s, box-shadow .15s; }
-  input[type=search]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37,99,235,.15); }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .seg { display: inline-flex; background: #eceef2; border-radius: 10px; padding: 3px; }
-  .seg button { font: inherit; font-size: 13px; font-weight: 500; border: 0; background: transparent; color: var(--ink-2);
-                padding: 6px 12px; border-radius: 8px; cursor: pointer; }
-  .seg button[aria-pressed=true] { background: var(--card); color: var(--ink); box-shadow: var(--shadow); }
-  .chip { font: inherit; font-size: 13px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line);
-          background: var(--card); color: var(--ink-2); cursor: pointer; transition: all .15s; }
-  .chip:hover { border-color: #cbd5e1; }
-  .chip[aria-pressed=true] { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .chip .n { opacity: .6; margin-left: 4px; font-variant-numeric: tabular-nums; }
-  .spacer { flex: 1; }
-  .toggle { font-size: 13px; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+  /* ---------- janela "Trocar de perfil" ---------- */
+  .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.18); opacity: 0; pointer-events: none;
+           transition: opacity var(--motion-150) var(--ease-in); }
+  .scrim.open { opacity: 1; pointer-events: auto; transition: opacity var(--motion-200) var(--ease-out); }
+  .modal { position: fixed; z-index: 31; left: 50%; top: 50%; width: min(420px, calc(100vw - 32px)); background: var(--modal);
+           backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px); border-radius: 16px; padding: 18px 12px 12px;
+           box-shadow: 0 24px 60px rgba(0,0,0,.18), 0 0 0 .5px rgba(0,0,0,.08);
+           opacity: 0; visibility: hidden; transform: translate(-50%, -48%) scale(.97); pointer-events: none;
+           transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in), visibility 0s linear var(--motion-150); }
+  .modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%); pointer-events: auto;
+                transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out), visibility 0s; }
+  .modal h2 { font-size: 17px; font-weight: 600; margin: 0 8px 2px; }
+  .modal p { font-size: 13px; color: var(--label-2); margin: 0 8px 12px; }
+  .plist { display: grid; gap: 2px; }
+  .pitem { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 10px; border-radius: 10px;
+           text-align: left; cursor: pointer; min-height: 56px; transition: background-color var(--motion-100) var(--ease-out); }
+  .pitem:hover, .pitem:focus-visible { background: var(--hover); }
+  .pitem .count { font-size: 12px; color: var(--label-2); font-variant-numeric: tabular-nums; }
+  .pitem .tick { color: var(--blue); visibility: hidden; }
+  .pitem[aria-current=true] .tick { visibility: visible; }
+  .pitem .avatar { width: 36px; height: 36px; font-size: 13px; }
+  .mfoot { display: flex; justify-content: space-between; align-items: center; border-top: .5px solid var(--sep); margin-top: 8px; padding: 10px 8px 0; }
+  .mfoot a, .mfoot button { font-size: 14px; text-decoration: none; border: 0; background: transparent; color: var(--blue); cursor: pointer; padding: 6px 0; }
 
-  /* lista */
-  main { padding-top: 22px; padding-bottom: 48px; }
-  .group { margin: 18px 0 8px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
-  .group:first-child { margin-top: 0; }
-  .list { display: grid; gap: 10px; }
+  /* ---------- conteúdo ---------- */
+  header.wrap { padding-top: 48px; padding-bottom: 4px; }
+  h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.03em; margin: 0; }
+  h1.swap { animation: fade var(--motion-200) var(--ease-out); }
+  .sub { color: var(--label-2); font-size: 15px; margin-top: 6px; }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(1.8) blur(20px);
+         -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid transparent; transition: border-color var(--motion-150) var(--ease-out); }
+  .bar.scrolled { border-bottom-color: var(--sep); }
+  .bar .wrap { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 16px; padding-bottom: 12px; }
+  .search { position: relative; flex: 1 1 240px; }
+  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--label-3); }
+  input[type=search] { width: 100%; padding: 8px 12px 8px 32px; border: 0; border-radius: 9px; background: var(--fill); outline: none; font-size: 14px;
+                       -webkit-appearance: none; appearance: none; }
+  input[type=search]::placeholder { color: var(--label-3); }
+  input[type=search]:focus { box-shadow: 0 0 0 3px rgba(0,113,227,.25); }
+  .seg { display: inline-flex; background: var(--fill); border-radius: 9px; padding: 2px; }
+  .seg button { border: 0; background: transparent; font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 7px; cursor: pointer;
+                transition: background-color var(--motion-150) var(--ease-out), box-shadow var(--motion-150) var(--ease-out); }
+  .seg button[aria-pressed=true] { background: var(--seg-on); box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); }
+  .select { position: relative; }
+  .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: 9px; padding: 6px 28px 6px 12px;
+                   font-size: 13px; font-weight: 500; cursor: pointer; }
+  .select svg { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
+  .mviews { display: none; }
+
+  main { padding-bottom: 56px; }
+  .group-label { font-size: 13px; font-weight: 600; color: var(--label); padding: 24px 0 2px; }
+  .group-label:first-child { padding-top: 8px; }
+  .list { display: grid; }
+
+  /* uma vaga = uma linha */
+  .job { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 4px 14px 0;
+         border-bottom: .5px solid var(--sep); }
+  .job.done { opacity: .5; }
   .job.enter { animation: rise var(--motion-300) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 30ms); }
-  .job.leaving { opacity: 0; transform: translateY(-6px) scale(.99); transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in); }
-  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-  .stat b { transition: opacity var(--motion-200) var(--ease-out); }
-  .job { display: grid; grid-template-columns: 44px 1fr; gap: 14px; background: var(--card); border: 1px solid var(--line);
-         border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
-         transition: border-color var(--motion-150) var(--ease-out), box-shadow var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out); }
-  @media (hover: hover) { .job:hover { transform: translateY(-1px); } }
-  .job:hover { border-color: #d5dae1; box-shadow: 0 4px 12px rgba(15,23,42,.06); }
-  .job.done { opacity: .55; }
-  .logo { width: 44px; height: 44px; border-radius: 10px; display: grid; place-items: center; font-weight: 700; font-size: 16px; color: #fff; }
-  .top { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; }
-  .title { font-size: 16px; font-weight: 600; line-height: 1.35; color: var(--ink); text-decoration: none; letter-spacing: -.005em; }
-  .title:hover { color: var(--accent); }
-  .meta { color: var(--ink-2); font-size: 14px; margin-top: 2px; }
-  .meta .dot { color: var(--ink-3); margin: 0 6px; }
-  .score { flex: none; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 999px;
-           padding: 3px 9px; white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .tag { font-size: 12px; font-weight: 500; border-radius: 6px; padding: 2px 8px; background: #f1f5f9; color: var(--ink-2); }
-  .tag.new { background: var(--new-soft); color: var(--new); }
-  .tag.warn { background: var(--warn-soft); color: var(--warn); }
-  .acts { grid-column: 2; display: flex; gap: 8px; margin-top: -2px; flex-wrap: wrap; }
-  .btn { font: inherit; font-size: 13px; font-weight: 500; padding: 7px 12px; border-radius: 8px; border: 1px solid var(--line);
-         background: var(--card); color: var(--ink); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-  .btn:hover { background: #f8fafc; }
-  .btn, .chip, .seg button { transition: background-color var(--motion-150) var(--ease-out), border-color var(--motion-150) var(--ease-out),
-                             color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
-  .btn:active, .chip:active, .seg button:active { transform: scale(.97); }
-  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .btn.primary:hover { background: #1d4ed8; }
-  .btn.on { background: var(--new-soft); border-color: #a7f3d0; color: var(--new); }
+  .job.leaving { opacity: 0; transform: translateX(-8px); transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in); }
+  .logo { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
+          font-weight: 600; font-size: 13px; letter-spacing: 0; margin-top: 1px; }
+  .jt { min-width: 0; }
+  .title { display: block; font-size: 15px; font-weight: 600; line-height: 1.33; color: var(--label); text-decoration: none; }
+  .title::after { content: ""; position: absolute; inset: 0; }               /* a linha toda abre a vaga */
+  .job:hover .title { color: var(--blue); }
+  .title:focus-visible { outline: none; }
+  .job:has(.title:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
+  .l2 { font-size: 14px; color: var(--label-2); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .l3 { font-size: 12px; color: var(--label-3); margin-top: 3px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .dot-new { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+  .warn { color: var(--orange); }
+  .acts { position: relative; z-index: 1; display: flex; align-items: center; gap: 2px; }
+  .icon { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--label-3); display: grid; place-items: center;
+          cursor: pointer; transition: background-color var(--motion-150) var(--ease-out), color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
+  .icon:hover { background: var(--hover); color: var(--label); }
+  .icon:active { transform: scale(.92); }
+  .icon.on { color: var(--green); }
 
-  .toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 12px;
-           background: var(--ink); color: #fff; border-radius: 12px; padding: 10px 10px 10px 16px; font-size: 14px; box-shadow: 0 8px 24px rgba(15,23,42,.18);
-           transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+  /* definições: grupos de linhas, como nas Definições do iOS/macOS */
+  .settings { display: grid; gap: 28px; padding-top: 20px; }
+  .settings.enter { animation: rise var(--motion-300) var(--ease-out) backwards; }
+  .sgroup h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -.02em; }
+  .scard { background: var(--surface); border-radius: 14px; box-shadow: 0 0 0 .5px var(--sep), 0 1px 2px var(--card-line); overflow: hidden; }
+  .srow { display: flex; align-items: center; gap: 16px; padding: 14px 16px; min-height: 60px; }
+  .srow + .srow { border-top: .5px solid var(--sep); }
+  .srow .st { flex: 1; min-width: 0; }
+  .srow .st b { display: block; font-size: 15px; font-weight: 500; }
+  .srow .st span { display: block; font-size: 13px; color: var(--label-2); margin-top: 1px; }
+  .srow .sv { text-align: right; font-size: 14px; color: var(--label-2); flex: none; }
+  .srow .sv b { display: block; color: var(--label); font-weight: 600; }
+  button.srow { width: 100%; border: 0; background: transparent; text-align: left; cursor: pointer; transition: background-color var(--motion-150) var(--ease-out); }
+  button.srow:hover { background: var(--hover); }
+  .pill { border: .5px solid var(--sep); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500;
+          cursor: pointer; text-decoration: none; color: var(--label); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+          transition: background-color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
+  .pill:hover { background: var(--hover); }
+  .pill:active { transform: scale(.97); }
+  .pill.danger { color: var(--red); }
+  .pill.dark { background: var(--label); color: var(--bg); border-color: transparent; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chips span { font-size: 12px; color: var(--label-2); background: var(--fill-2); border-radius: 6px; padding: 3px 8px; }
+  .srcrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 13px; padding: 2px 0; }
+  .srcrow .ok { color: var(--label-2); } .srcrow .bad { color: var(--red); }
+  .back { border: 0; background: transparent; color: var(--label); font-size: 13px; font-weight: 500; cursor: pointer; padding: 6px 0; display: inline-flex; gap: 6px; align-items: center; }
+  .prow-acts { display: flex; gap: 8px; align-items: center; }
+  .inuse { color: var(--green); font-size: 14px; font-weight: 500; display: inline-flex; gap: 4px; align-items: center; }
+  .sv .seg { margin: 0; }
+  @media (max-width: 600px) { .srow { flex-wrap: wrap; } .srow .sv { text-align: left; } }
+
+  .empty { text-align: center; padding: 64px 20px; color: var(--label-2); }
+  .empty b { display: block; color: var(--label); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
+  footer { color: var(--label-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
+
+  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 14px;
+           background: rgba(29,29,31,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; border-radius: 14px;
+           padding: 8px 8px 8px 16px; font-size: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.2);
+           transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
            transition: transform var(--motion-150) var(--ease-in), opacity var(--motion-150) var(--ease-in); }
   .toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto;
                 transition: transform var(--motion-200) var(--ease-out), opacity var(--motion-200) var(--ease-out); }
-  .toast button { font: inherit; font-weight: 600; color: #93c5fd; background: transparent; border: 0; padding: 0 10px; min-height: 44px; cursor: pointer; border-radius: 8px; }
-  .empty { text-align: center; padding: 56px 16px; color: var(--ink-2); background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); }
-  .empty b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
-  footer { color: var(--ink-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
-  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .toast button { border: 0; background: transparent; color: #64b5ff; font-weight: 600; padding: 0 10px; min-height: 36px; cursor: pointer; border-radius: 8px; }
+
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
   @media (pointer: coarse) {
-    .btn, .chip, .seg button { min-height: 44px; }
-    .seg button { padding: 6px 14px; }
-    .toggle { min-height: 44px; }
-    .toggle input { width: 20px; height: 20px; }
+    .seg button, .select select, .item, .mfoot a, .mfoot button, .toast button { min-height: 44px; }
+    .icon { width: 44px; height: 44px; }
   }
 
-  /* menos movimento: só mudanças instantâneas ou fades curtos */
+  /* telemóvel: barra lateral vira barra de topo; vistas passam para um seletor */
+  .topbar { display: none; }
+  @media (max-width: 900px) {
+    .app { display: block; }
+    .side { display: none; }
+    .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; gap: 12px;
+              padding: 6px 12px 6px 16px; background: var(--topbar); backdrop-filter: saturate(1.8) blur(20px);
+              -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid var(--sep); }
+    .topbar .brand { padding: 0; }
+    .topbar button { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 4px; border-radius: 999px; min-height: 44px; cursor: pointer; font-size: 14px; font-weight: 500; }
+    .bar { top: 57px; }
+    .mviews { display: inline-flex; }
+    header.wrap { padding-top: 20px; }
+    h1 { font-size: 30px; }
+    .wrap { padding: 0 16px; }
+    .modal { left: 8px; right: 8px; top: auto; bottom: calc(8px + env(safe-area-inset-bottom)); width: auto; transform: translateY(110%); }
+    .modal.open { transform: none; transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-300) var(--ease-out), visibility 0s; }
+    .job { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; }
+    .logo { width: 32px; height: 32px; font-size: 12px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .job.enter { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
-    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
-    .job, .btn, .chip, .seg button { transition: opacity var(--motion-100) ease, background-color var(--motion-100) ease; }
-    .job:hover, .btn:active, .chip:active, .seg button:active { transform: none; }
+    .job.enter, h1.swap { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
     .job.leaving { transform: none; transition: opacity var(--motion-100) ease; }
+    .icon:active { transform: none; }
+    .modal, .modal.open { transform: translate(-50%, -50%); transition: opacity var(--motion-100) ease, visibility 0s; }
     .toast, .toast.show { transform: translate(-50%, 0); transition: opacity var(--motion-100) ease; }
   }
-
-  @media (max-width: 560px) {
-    h1 { font-size: 22px; }
-    .stats { width: 100%; } .stat { flex: 1; min-width: 0; }
-    .job { grid-template-columns: 36px 1fr; gap: 12px; padding: 14px; }
-    .acts { grid-column: 1 / -1; gap: 6px; margin-top: 0; } .btn { padding: 7px 10px; }
-    .logo { width: 36px; height: 36px; font-size: 14px; }
-    .spacer { display: none; }
-  }
+  @media (prefers-reduced-motion: reduce) and (max-width: 900px) { .modal, .modal.open { transform: none; } }
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap head">
-    <div>
-      <h1>Vagas para ti</h1>
-      <div class="sub" id="sub">A carregar…</div>
-    </div>
-    <div class="stats">
-      <div class="stat"><b id="sToday">–</b><span>Novas hoje</span></div>
-      <div class="stat"><b id="sWeek">–</b><span>Últimos 7 dias</span></div>
-      <div class="stat"><b id="sAll">–</b><span>No total</span></div>
-    </div>
+<div class="app">
+<aside class="side" aria-label="Navegação">
+  <div class="brand">Vagas</div>
+  <div class="sect">Vagas</div>
+  <nav class="nav" id="views"></nav>
+  <div class="sect">Perfil</div>
+  <nav class="nav" id="pnav"></nav>
+  <div class="bottom">
+    <div class="me" id="me"></div>
+    <button class="item" type="button" id="switchBtn" aria-haspopup="dialog" aria-controls="modal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg>Trocar de perfil</button>
+    <button class="item" type="button" id="settings">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Definições</button>
   </div>
-</header>
+</aside>
 
-<div class="bar">
-  <div class="wrap">
-    <div class="search">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input type="search" id="q" placeholder="Pesquisar título, empresa ou local" aria-label="Pesquisar vagas">
-    </div>
-    <div class="row">
+<div class="scrim" id="scrim"></div>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <h2 id="mTitle">Trocar de perfil</h2>
+  <p>Cada perfil tem as suas regras, vagas e notificações.</p>
+  <div class="plist" id="plist"></div>
+  <div class="mfoot"><a id="addProfile" target="_blank" rel="noopener">Adicionar perfil…</a><button type="button" id="mClose">Fechar</button></div>
+</div>
+
+<div class="content">
+  <div class="topbar"><span class="brand">Vagas</span><span style="display:flex;gap:2px"><button type="button" id="mSwitch" aria-haspopup="dialog" aria-controls="modal"></button><button type="button" id="mSettings" aria-label="Definições"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></span></div>
+  <header class="wrap">
+    <h1 id="h1">Vagas</h1>
+    <div class="sub" id="sub">A carregar…</div>
+  </header>
+  <div class="bar">
+    <div class="wrap">
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="q" placeholder="Pesquisar" aria-label="Pesquisar título, empresa ou local">
+      </div>
+      <span class="select mviews"><select id="mviews" aria-label="Vista"></select>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
       <div class="seg" id="days" role="group" aria-label="Período">
-        <button data-d="1">Hoje</button>
         <button data-d="7" aria-pressed="true">7 dias</button>
         <button data-d="30">30 dias</button>
         <button data-d="9999">Tudo</button>
       </div>
-      <span class="spacer"></span>
-      <label class="toggle"><input type="checkbox" id="showDone"> Mostrar candidatadas e escondidas</label>
+      <span class="select"><select id="src" aria-label="Fonte"></select>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
     </div>
-    <div class="row" id="srcs" role="group" aria-label="Fonte"></div>
   </div>
+  <main class="wrap"><div id="list"></div></main>
+  <footer>Atualiza-se sozinho duas vezes por dia · Portugal continental</footer>
 </div>
-
-<main class="wrap"><div id="list"></div></main>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" type="button">Anular</button></div>
-<footer>Atualiza-se sozinho duas vezes por dia. As marcações ficam guardadas só neste dispositivo.</footer>
 
 <script>
-const KEY = "vagas-estado";
-let marks = {};
-try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch (e) {} };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+const $ = id => document.getElementById(id);
+// aspeto: Dia / Noite / Automático (segue o sistema)
+const mq = matchMedia("(prefers-color-scheme: dark)");
+function applyTheme() { const t = store.get("vagas-tema", "auto"); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t;
+  document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === "dark" ? "#1c1c1e" : "#f5f5f7"; }
+applyTheme(); mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const svg = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
+const I = (d, w = 16) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const ICON = {
+  all: I('<path d="M4 6h16M4 12h16M4 18h10"/>'),
+  new: I('<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>'),
+  applied: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>'),
+  hidden: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'),
+  cv: I('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'),
+  rules: I('<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'),
+  check: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>', 20),
+  hide: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>', 20),
+  tick: '<svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
+  chev: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+};
+// ligação para editar as regras no GitHub (a página está em <utilizador>.github.io/<repo>/)
+const repoEdit = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
+  return location.hostname.endsWith("github.io") && r ? `https://github.com/${u}/${r}/edit/main/config.yaml` : ""; })();
 
 const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", remotive: "Remoto" };
-const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Sites de empresas";
-const PALETTE = ["#2563eb", "#7c3aed", "#db2777", "#ea580c", "#059669", "#0891b2", "#4f46e5", "#be123c", "#65a30d", "#0d9488"];
-const colorOf = s => { let h = 0; for (const c of s || "?") h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
+const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Site da empresa";
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
+const VIEWS = [
+  { id: "all", label: "Todas as vagas", icon: ICON.all },
+  { id: "new", label: "Novas hoje", icon: ICON.new },
+  { id: "applied", label: "Candidatadas", icon: ICON.applied },
+  { id: "hidden", label: "Escondidas", icon: ICON.hidden },
+];
 
-let data = [], updated = "", days = 7, src = "Todas", showDone = false, animateNext = true;
-let toastTimer = null, undo = null;
-function toast(msg, onUndo) {
-  const t = document.getElementById("toast");
-  document.getElementById("toastMsg").textContent = msg;
-  undo = onUndo; t.classList.add("show");
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 4000);
-}
-document.getElementById("toastUndo").onclick = () => { if (undo) undo(); undo = null; document.getElementById("toast").classList.remove("show"); };
-function updateStats() {
-  const fresh = data.filter(m => !marks[m.url]);
-  document.getElementById("sToday").textContent = fresh.filter(m => m.first_seen === updated).length;
-  document.getElementById("sWeek").textContent = fresh.filter(m => ageDays(m.first_seen) < 7).length;
-  document.getElementById("sAll").textContent = data.length;
-}
+let profiles = [], current = "", marks = {}, all = [], data = [], updated = "", tracker = {};
+let view = "all", days = 7, src = "Todas", animateNext = true, toastTimer = null, undo = null;
+const markKey = pid => "vagas-estado:" + pid;
+const save = () => store.set(markKey(current), marks);
+
 const ageDays = iso => Math.round((new Date(updated + "T00:00:00") - new Date((iso || updated) + "T00:00:00")) / 864e5);
 const fmtDay = iso => { const a = ageDays(iso); if (a === 0) return "Hoje"; if (a === 1) return "Ontem";
-  return new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); };
-const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const s = new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); return s[0].toUpperCase() + s.slice(1); };
+const ago = iso => { const a = ageDays(iso); return a <= 0 ? "hoje" : a === 1 ? "há 1 dia" : `há ${a} dias`; };
+
+function viewFor(pid) {
+  const first = profiles[0] && profiles[0].id;
+  return all.filter(m => m.profiles ? pid in m.profiles : pid === first).map(m => {
+    const pp = (m.profiles || {})[pid] || {};
+    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit };
+  });
+}
+const counts = () => ({
+  all: data.filter(m => !marks[m.url]).length,
+  new: data.filter(m => !marks[m.url] && m.first_seen === updated).length,
+  applied: data.filter(m => marks[m.url] === "aplicada").length,
+  hidden: data.filter(m => marks[m.url] === "escondida").length,
+});
+const freshFor = p => { const ms = store.get(markKey(p.id), {}); return viewFor(p.id).filter(m => m.first_seen === updated && !ms[m.url]).length; };
+const avatarOf = (p, cls = "avatar") => { const a = el("span", cls, initials(p.name || p.id)); a.setAttribute("aria-hidden", "true"); return a; };
+
+function toast(msg, onUndo) {
+  $("toastMsg").textContent = msg; undo = onUndo; $("toastUndo").style.display = onUndo ? "" : "none"; $("toast").classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => $("toast").classList.remove("show"), 4000);
+}
+$("toastUndo").onclick = () => { if (undo) undo(); undo = null; $("toast").classList.remove("show"); };
+
+function refreshChrome() { renderNav(); if (view !== "settings" && view !== "people") updateSub(); }
+function updateSub() {
+  const c = counts(), when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
+  $("sub").textContent = `${c.new} ${c.new === 1 ? "nova" : "novas"} hoje · ${c.all} por ver · atualizado a ${when}`;
+}
+
+function renderNav() {
+  const c = counts();
+  const nav = $("views"); nav.textContent = "";
+  for (const v of VIEWS) {
+    const b = el("button", "item"); b.type = "button"; b.append(svg(v.icon), document.createTextNode(v.label));
+    if (c[v.id]) b.append(el("span", "n", c[v.id]));
+    if (v.id === view) b.setAttribute("aria-current", "page");
+    b.onclick = () => setView(v.id);
+    nav.append(b);
+  }
+  const sel = $("mviews"); sel.textContent = "";
+  for (const v of VIEWS) { const o = el("option", null, `${v.label}${c[v.id] ? ` (${c[v.id]})` : ""}`); o.value = v.id; o.selected = v.id === view; sel.append(o); }
+
+  const p = profiles.find(x => x.id === current) || {};
+  const pnav = $("pnav"); pnav.textContent = "";
+  if (p.cv_url) { const a = el("a", "item"); a.href = p.cv_url; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.cv), document.createTextNode("Ver CV")); pnav.append(a); }
+  if (repoEdit) { const a = el("a", "item"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.rules), document.createTextNode("Ajustar regras")); pnav.append(a); }
+  pnav.previousElementSibling.style.display = pnav.children.length ? "" : "none";
+
+  const me = $("me"); me.textContent = "";
+  const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
+  me.append(avatarOf(p), info);
+  const ms = $("mSwitch"); ms.textContent = ""; ms.append(avatarOf(p), document.createTextNode(p.name || "Perfil"), svg(ICON.chev));
+  ms.setAttribute("aria-label", `Perfil: ${p.name || "o meu perfil"}. Trocar de perfil`);
+
+  if (view === "settings" || view === "people") $("settings").setAttribute("aria-current", "page"); else $("settings").removeAttribute("aria-current");
+  if (repoEdit) $("addProfile").href = repoEdit; else $("addProfile").style.display = "none";
+}
 
 function card(m) {
-  const li = el("article", "job" + (marks[m.url] ? " done" : ""));
-  const logo = el("div", "logo", initials(m.company)); logo.style.background = colorOf(m.company); logo.setAttribute("aria-hidden", "true");
-  const body = el("div");
-  const top = el("div", "top");
-  const left = el("div");
+  const row = el("article", "job" + (marks[m.url] ? " done" : ""));
+  const logo = el("div", "logo", initials(m.company)); logo.setAttribute("aria-hidden", "true");
+  const t = el("div", "jt");
   const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
-  const meta = el("div", "meta");
-  [m.company, m.location].filter(Boolean).forEach((t, i) => { if (i) meta.append(el("span", "dot", "·")); meta.append(document.createTextNode(t)); });
-  left.append(a, meta);
-  top.append(left, el("span", "score", m.fit != null ? `Encaixe ${m.fit}` : `${m.score} pts`));
-  const tags = el("div", "tags");
-  if (m.first_seen === updated) tags.append(el("span", "tag new", "Nova"));
-  tags.append(el("span", "tag", srcOf(m)));
-  if (m.posted) tags.append(el("span", "tag", "Publicada " + (ageDays(m.posted) <= 0 ? "hoje" : `há ${ageDays(m.posted)} d`)));
-  (m.flags || []).filter(f => !/sem salário indicado|não indica anos/.test(f)).slice(0, 2).forEach(f => tags.append(el("span", "tag warn", f)));
+  const l3 = el("div", "l3");
+  if (m.first_seen === updated && !marks[m.url]) { const d = el("span", "dot-new"); d.title = "Nova"; l3.append(d); }
+  l3.append(el("span", null, `${srcOf(m)} · publicada ${ago(m.posted || m.first_seen)}`));
+  const w = (m.flags || []).find(f => !/sem salário indicado|não indica anos|não confirma/.test(f));
+  if (w) l3.append(el("span", "warn", "· " + w));
+  t.append(a, el("div", "l2", [m.company, m.location].filter(Boolean).join(" · ")), l3);
   const acts = el("div", "acts");
-  const open = el("a", "btn primary", "Abrir vaga"); open.href = m.url; open.target = "_blank"; open.rel = "noopener";
-  const mk = (label, val) => { const on = marks[m.url] === val; const b = el("button", "btn" + (on ? " on" : ""), on ? "✓ " + label : label);
+  const mk = (val, label, icon) => {
+    const on = marks[m.url] === val;
+    const b = el("button", "icon" + (on ? " on" : "")); b.type = "button"; b.append(svg(icon));
+    b.title = on ? `Anular: ${label}` : label; b.setAttribute("aria-label", b.title); b.setAttribute("aria-pressed", on);
     b.onclick = () => {
       const prev = marks[m.url];
       if (on) delete marks[m.url]; else marks[m.url] = val;
-      save(); updateStats();
-      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); updateStats(); render(); };
-      if (!on) toast(val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
-      if (!on && !showDone) { li.classList.add("leaving"); setTimeout(render, 150); } else render();
-    }; return b; };
-  acts.append(open, mk("Candidatei-me", "aplicada"), mk("Esconder", "escondida"));
-  body.append(top, tags);
-  li.append(logo, body, acts);
-  return li;
+      save(); refreshChrome();
+      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); refreshChrome(); render(); };
+      toast(on ? "Marcação anulada" : val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
+      row.classList.add("leaving"); setTimeout(render, 150);
+    };
+    return b;
+  };
+  acts.append(mk("aplicada", "Candidatei-me", ICON.check), mk("escondida", "Esconder", ICON.hide));
+  row.append(logo, t, acts);
+  return row;
 }
 
-function render() {
-  const q = document.getElementById("q").value.trim().toLowerCase();
-  const box = document.getElementById("list"); box.textContent = "";
-  const rows = data.filter(m => ageDays(m.first_seen) < days)
+function rowsForView() {
+  const q = $("q").value.trim().toLowerCase();
+  return data.filter(m => view === "applied" ? marks[m.url] === "aplicada" : view === "hidden" ? marks[m.url] === "escondida" : !marks[m.url])
+    .filter(m => view !== "new" || m.first_seen === updated)
+    .filter(m => view !== "all" || ageDays(m.first_seen) < days)
     .filter(m => src === "Todas" || srcOf(m) === src)
-    .filter(m => showDone || !marks[m.url])
     .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
+}
+function render() {
+  const inSettings = view === "settings" || view === "people";
+  document.querySelector(".bar").style.display = inSettings ? "none" : "";
+  if (inSettings) return renderSettings();
+  $("days").style.display = view === "all" ? "" : "none";
+  const box = $("list"); box.textContent = "";
+  const rows = rowsForView();
   if (!rows.length) {
-    const e = el("div", "empty");
-    e.append(el("b", null, data.length ? "Nada com estes filtros" : "Ainda sem vagas"),
-             document.createTextNode(data.length ? "Experimenta alargar o período ou limpar a pesquisa." : "As próximas aparecem aqui assim que o tracker correr."));
-    box.append(e); return;
+    const who = (profiles.find(x => x.id === current) || {}).name;
+    const msg = { all: data.length ? ["Sem resultados", "Experimenta alargar o período ou limpar a pesquisa."]
+                    : [who ? `Ainda sem vagas para ${who}` : "Ainda sem vagas", "As primeiras aparecem depois da próxima recolha (≈07:15 ou 16:15)."],
+                  new: ["Nada de novo hoje", "As vagas novas aparecem aqui depois de cada recolha."],
+                  applied: ["Ainda sem candidaturas", "Marca uma vaga com ✓ para a guardar aqui."],
+                  hidden: ["Nenhuma vaga escondida", "As vagas que esconderes ficam aqui, caso mudes de ideias."] }[view];
+    const e = el("div", "empty"); e.append(el("b", null, msg[0]), document.createTextNode(msg[1])); box.append(e); return;
   }
   let day = null, list = null, i = 0;
   const animate = animateNext; animateNext = false;
   for (const m of rows) {
-    if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group", fmtDay(day))); list = el("div", "list"); box.append(list); }
+    if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group-label", fmtDay(day))); list = el("div", "list"); box.append(list); }
     const c = card(m);
-    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }   // 30 ms por cartão, máx. ~200 ms
+    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }   // 30 ms por linha, máx. ~200 ms
     list.append(c);
   }
 }
+function setView(v) {
+  const was = view; view = v; animateNext = true;
+  if (v === "settings" || v === "people") { if (location.hash !== "#definicoes") history.pushState(null, "", "#definicoes"); }
+  else if (was === "settings" || was === "people") history.replaceState(null, "", "#" + current);
+  setHeader(); renderNav(); render(); scrollTo(0, 0);
+}
+function setHeader() {
+  const p = profiles.find(x => x.id === current);
+  if (view === "settings") { $("h1").textContent = "Definições"; $("sub").textContent = "Perfil em uso, aspeto, como funciona o tracker e os dados guardados neste dispositivo."; }
+  else if (view === "people") { $("h1").textContent = "Perfis"; $("sub").textContent = "Cada perfil tem as suas regras, vagas e notificações. A escolha fica guardada neste dispositivo."; }
+  else { $("h1").textContent = p && p.name && profiles.length > 1 ? `Vagas para ${p.name}` : "Vagas"; updateSub(); }
+}
+
+// ---------- página de definições
+const row = (title, desc, right) => { const r = el("div", "srow"); const t = el("div", "st"); t.append(el("b", null, title));
+  if (desc) t.append(el("span", null, desc)); r.append(t); if (right) r.append(right); return r; };
+const pill = (label, cls, onclick) => { const b = el("button", "pill" + (cls ? " " + cls : ""), label); b.type = "button"; if (onclick) b.onclick = onclick; return b; };
+const linkPill = (label, href) => { const a = el("a", "pill", label); a.href = href; a.target = "_blank"; a.rel = "noopener"; return a; };
+const group = (title, ...rows) => { const g = el("section", "sgroup"); g.append(el("h3", null, title)); const c = el("div", "scard"); c.append(...rows); g.append(c); return g; };
+function renderSettings() {
+  const box = $("list"); box.textContent = "";
+  const wrap = el("div", "settings" + (animateNext ? " enter" : "")); animateNext = false;
+  const p = profiles.find(x => x.id === current) || {};
+  if (view === "people") {
+    const back = el("button", "back", "← Voltar às definições"); back.type = "button"; back.onclick = () => setView("settings"); wrap.append(back);
+    const rows = profiles.map(q => {
+      const v = el("div", "prow-acts");
+      if (q.id === current) v.append(el("span", "inuse", "✓ Em uso")); else v.append(pill("Usar", "", () => { select(q.id); setView("people"); }));
+      const r = row(q.name || q.id, q.headline || "", v); r.prepend(avatarOf(q)); return r;
+    });
+    wrap.append(group(`${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}`, ...rows));
+    wrap.append(group("Acrescentar perfil",
+      row("Como acrescentar", "Copia o bloco de um perfil em «profiles:» no config.yaml, muda o nome, as regras e o tópico ntfy, e cria esse segredo no GitHub (Environment GERAL).",
+          repoEdit ? linkPill("Abrir config.yaml", repoEdit) : null),
+      row("Privacidade", "O repositório é público: nunca ponhas contactos ou o CV no config.yaml. Usa «cv_url» com uma ligação privada.")));
+    box.append(wrap); return;
+  }
+  const r = p.rules || {};
+  // Conta
+  const who = el("div", "prow-acts"); const nm = el("div", "sv"); nm.append(el("b", null, p.name || "O meu perfil"));
+  who.append(nm, pill("Trocar de perfil", "", e => openModal(e)));
+  const manage = el("button", "srow"); manage.type = "button";
+  const mt = el("div", "st"); mt.append(el("b", null, "Gerir perfis")); manage.append(mt, el("span", "sv", `${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}  ›`));
+  manage.onclick = () => setView("people");
+  wrap.append(group("Conta", row("Perfil em uso", "As vagas, as notificações e as marcações são deste perfil.", who), manage));
+  // Preferências
+  const seg = el("div", "seg"); const cur = store.get("vagas-tema", "auto");
+  for (const [k, lab] of [["light", "Dia"], ["dark", "Noite"], ["auto", "Automático"]]) {
+    const b = el("button", null, lab); b.type = "button"; b.setAttribute("aria-pressed", k === cur);
+    b.onclick = () => { store.set("vagas-tema", k); applyTheme(); seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); };
+    seg.append(b);
+  }
+  wrap.append(group("Preferências", row("Aspeto", "Com «Automático», a página segue o tema do dispositivo.", seg)));
+  // Tracker
+  const srcBox = el("div");
+  for (const s of tracker.sources || []) {
+    const line = el("div", "srcrow"); line.append(el("span", null, s.name + (s.queries ? ` · ${s.queries} pesquisas` : "")));
+    const st = s.status || "sem dados"; line.append(el("span", /ERRO/.test(st) ? "bad" : "ok", st.replace(/^ok, /, ""))); srcBox.append(line);
+  }
+  const fontes = row("Fontes", null); fontes.querySelector(".st").append(srcBox);
+  const yrs = r.years ? `${r.years.min ?? 0}–${r.years.max} anos de experiência pedidos` : "";
+  const rules = row(`Regras de ${p.name || "este perfil"}`,
+    [`Fasquia: ${r.min_score} pontos`, yrs, `vagas com até ${r.max_age_days} dias`, r.min_salary_eur ? `salário publicado ≥ ${r.min_salary_eur.toLocaleString("pt-PT")} €` : ""].filter(Boolean).join(" · "),
+    repoEdit ? linkPill("Ajustar regras", repoEdit) : null);
+  const chips = el("div", "chips"); (r.strong || []).forEach(x => chips.append(el("span", null, x))); (r.bonus || []).forEach(x => chips.append(el("span", null, "bónus: " + x)));
+  rules.querySelector(".st").append(chips);
+  const when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
+  const rec = el("div", "sv"); rec.append(el("b", null, "Última recolha"), document.createTextNode(when));
+  wrap.append(group("Tracker",
+    row("Recolha automática", tracker.schedule || "Todos os dias, duas vezes", rec),
+    fontes, rules,
+    row("Notificações", `App ntfy: cada perfil recebe só as suas vagas novas, uma vez.${p.channel ? "" : " Este perfil ainda não tem canal."}`)));
+  // Dados
+  const nApplied = Object.values(marks).filter(v => v === "aplicada").length, nHidden = Object.values(marks).filter(v => v === "escondida").length;
+  wrap.append(group("Dados neste dispositivo",
+    row("Marcações", `${nApplied} candidatadas e ${nHidden} escondidas, guardadas só neste dispositivo e neste perfil.`,
+        pill("Limpar", "danger", () => { if (!confirm(`Limpar as marcações de ${p.name || "este perfil"}?`)) return;
+          marks = {}; save(); refreshChrome(); render(); toast("Marcações limpas", null); }))));
+  wrap.append(group("Versão", row("Vagas", `Dados de ${when} · página estática no GitHub Pages, sem custos.`)));
+  box.append(wrap);
+}
+$("mviews").onchange = e => setView(e.target.value);
 
 function buildSources() {
-  const box = document.getElementById("srcs"); box.textContent = "";
-  const counts = {}; data.forEach(m => { counts[srcOf(m)] = (counts[srcOf(m)] || 0) + 1; });
-  for (const n of ["Todas", ...Object.keys(counts).sort((a, b) => counts[b] - counts[a])]) {
-    const b = el("button", "chip", n); b.setAttribute("aria-pressed", n === src);
-    b.append(el("span", "n", n === "Todas" ? data.length : counts[n]));
-    b.onclick = () => { src = n; buildSources(); animateNext = true; render(); };
-    box.append(b);
+  const sel = $("src"); sel.textContent = "";
+  const n = {}; data.forEach(m => { n[srcOf(m)] = (n[srcOf(m)] || 0) + 1; });
+  for (const k of ["Todas", ...Object.keys(n).sort((a, b) => n[b] - n[a])]) {
+    const o = el("option", null, k === "Todas" ? "Todas as fontes" : `${k} (${n[k]})`); o.value = k; o.selected = k === src; sel.append(o);
   }
+}
+$("src").onchange = e => { src = e.target.value; animateNext = true; render(); };
+
+// ---- janela "Trocar de perfil" (Esc, clique fora, setas; foco volta ao botão)
+let opener = null;
+function openModal(e) {
+  opener = e.currentTarget;
+  const list = $("plist"); list.textContent = "";
+  for (const p of profiles) {
+    const b = el("button", "pitem"); b.type = "button"; b.setAttribute("aria-current", p.id === current);
+    const i = el("span", "pinfo"); i.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
+    b.append(avatarOf(p), i);
+    const n = freshFor(p); if (n) b.append(el("span", "count", `${n} ${n === 1 ? "nova" : "novas"}`));
+    b.append(svg(ICON.tick));
+    b.onclick = () => { closeModal(true); select(p.id); };
+    list.append(b);
+  }
+  $("modal").classList.add("open"); $("scrim").classList.add("open");
+  setTimeout(() => (list.querySelector('[aria-current="true"]') || list.firstChild).focus(), 30);
+}
+function closeModal(restore) {
+  if (!$("modal").classList.contains("open")) return;
+  $("modal").classList.remove("open"); $("scrim").classList.remove("open");
+  if (restore && opener) opener.focus();
+}
+$("switchBtn").onclick = openModal; $("mSwitch").onclick = openModal;
+$("scrim").onclick = () => closeModal(true); $("mClose").onclick = () => closeModal(true);
+document.addEventListener("keydown", e => {
+  if (!$("modal").classList.contains("open")) return;
+  const items = [...$("modal").querySelectorAll(".pitem, .mfoot a, .mfoot button")].filter(x => x.offsetParent);
+  const i = items.indexOf(document.activeElement);
+  if (e.key === "Escape") { e.preventDefault(); closeModal(true); }
+  else if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+  else if (e.key === "Tab") { e.preventDefault(); items[(i + (e.shiftKey ? -1 : 1) + items.length) % items.length].focus(); }
+});
+
+function select(pid, fromHash) {
+  if (!profiles.some(p => p.id === pid)) pid = profiles[0].id;
+  const changed = pid !== current;
+  current = pid; store.set("vagas-perfil", pid);
+  if (!fromHash && location.hash.slice(1) !== pid) history.replaceState(null, "", "#" + pid);
+  marks = store.get(markKey(pid), {});
+  data = viewFor(pid);
+  const p = profiles.find(x => x.id === pid);
+  if (changed) { $("h1").classList.remove("swap"); void $("h1").offsetWidth; $("h1").classList.add("swap"); }
+  document.title = p && p.name ? `Vagas · ${p.name}` : "Vagas";
+  src = "Todas"; animateNext = true;
+  refreshChrome(); setHeader(); buildSources(); render();
 }
 
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
-  updated = d.updated;
-  data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
+  updated = d.updated; tracker = d.tracker || {};
+  profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];
+  all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
     ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
-  updateStats();
-  document.getElementById("sub").textContent = "Atualizado a " + new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" }) + " · Portugal continental";
-  buildSources(); render();
-}).catch(() => { document.getElementById("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; render(); });
+  const legacy = store.get("vagas-estado", null);          // marcações antigas passam para o primeiro perfil
+  if (legacy && !store.get(markKey(profiles[0].id), null)) store.set(markKey(profiles[0].id), legacy);
+  if (profiles.length < 2) { $("switchBtn").style.display = "none"; $("mSwitch").style.display = "none"; }
+  if (location.hash === "#definicoes") view = "settings";
+  select(location.hash === "#definicoes" ? store.get("vagas-perfil", profiles[0].id) : (location.hash.slice(1) || store.get("vagas-perfil", profiles[0].id)), true);
+}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; });
 
 document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; animateNext = true; render(); });
-document.getElementById("showDone").onchange = e => { showDone = e.target.checked; render(); };
-document.getElementById("q").addEventListener("input", render);
+$("q").addEventListener("input", render);
+addEventListener("hashchange", () => { if (!profiles.length) return;
+  if (location.hash === "#definicoes") { if (view !== "settings" && view !== "people") setView("settings"); return; }
+  if (view === "settings" || view === "people") { view = "all"; }
+  select(location.hash.slice(1), true); });
+$("settings").onclick = () => setView("settings");
+$("mSettings").onclick = () => setView(view === "settings" ? "all" : "settings");
 const bar = document.querySelector(".bar");
-addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 140), { passive: true });
+addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 90), { passive: true });
 </script>
 </body>
 </html>

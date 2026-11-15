@@ -74,6 +74,15 @@ class Verdict:
     excluded_by: str = ""
 
 
+def pat_of(x):
+    """Um tema pode ser só o padrão ou {label: "nome legível", pattern: "..."}."""
+    return x["pattern"] if isinstance(x, dict) else x
+
+
+def label_of(x):
+    return x.get("label") if isinstance(x, dict) else None
+
+
 def _rx(patterns):
     return [re.compile(p, re.I) for p in patterns or []]
 
@@ -141,15 +150,16 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     kw = cfg.get("keywords", {})
     score = 0
     strong_pts = 0
-    for pat in kw.get("strong", []):
+    for item in kw.get("strong", []):
+        pat = pat_of(item)
         rx = re.compile(pat, re.I)
         if rx.search(text):
             strong_pts += 3
             if rx.search(job.title):
                 strong_pts += 2
-            v.reasons.append(f"+ {pat}")
+            v.reasons.append(f"+ {label_of(item) or pat}")
     score += min(strong_pts, kw.get("strong_cap", 14))
-    med = sum(1 for pat in kw.get("medium", []) if re.search(pat, text, re.I))
+    med = sum(1 for pat in kw.get("medium", []) if re.search(pat_of(pat), text, re.I))
     score += min(med, kw.get("medium_cap", 4))
     neg = sum(1 for pat in kw.get("negative", []) if re.search(pat, text, re.I))
     score -= 3 * neg
@@ -166,6 +176,10 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     if org.get("pattern") and re.search(org["pattern"], f"{job.company}\n{job.title}", re.I):
         score += org.get("points", 5)
         v.reasons.append("entidade do tipo associação / cluster / CoLAB / centro tecnológico")
+    sec = cfg.get("sector_bonus") or {}
+    if sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
+        score += sec.get("points", 4)
+        v.reasons.append("empresa/setor preferido (utilities, energia, água, resíduos)")
 
     # 3) avisos
     if job.salary_min or job.salary_max:

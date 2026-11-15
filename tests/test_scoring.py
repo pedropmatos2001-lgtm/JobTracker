@@ -19,7 +19,8 @@ def job(**kw):
     base = dict(source="t", company="X", title="AI Transformation Consultant",
                 url="https://x/1", location="Lisbon, Portugal", posted="2026-11-15",
                 description="3+ years of experience in digital transformation. Process re-engineering "
-                            "and agentic AI. Stakeholder management and requirements gathering.")
+                            "and agentic AI. Operating model design for a sustainability programme. "
+                            "Stakeholder management and requirements gathering.")
     base.update(kw)
     return Job(**base)
 
@@ -172,7 +173,7 @@ def test_associations_and_clusters_get_bonus():
                 posted="2026-11-14", description=desc)
     t = date(2026, 11, 15)
     plain = evaluate(Job(company="Empresa Qualquer", **base), cfg, t)
-    for org in ["Associação Smart Energy", "PRODUTECH - Cluster das Tecnologias de Produção",
+    for org in ["Associação Empresarial do Minho", "PRODUTECH - Cluster das Tecnologias de Produção",
                 "BCSD Portugal", "VORTEX CoLAB", "AEP - Associação Empresarial de Portugal"]:
         v = evaluate(Job(company=org, **base), cfg, t)
         assert v.score == plain.score + cfg["org_bonus"]["points"], org

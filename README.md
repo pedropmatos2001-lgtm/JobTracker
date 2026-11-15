@@ -7,6 +7,19 @@ Corre sozinho **duas vezes por dia, todos os dias** (≈07:15 e ≈16:15 UTC) no
 
 Não depende do Claude nem do teu portátil ligado.
 
+## Vários perfis (ex.: Pedro e Marta)
+
+A recolha é feita uma vez; cada perfil avalia as vagas com as suas regras (`profiles:` no `config.yaml`) e:
+- recebe **só as suas** notificações, no seu tópico ntfy (`NTFY_TOPIC` para o Pedro, `NTFY_TOPIC_MARTA` para a Marta);
+- tem a sua vista na página: a barra lateral troca de perfil (ou abre diretamente `…/JobTracker/#marta`).
+
+Uma vaga só é notificada uma vez por perfil. Se acrescentares um perfil novo, ele avalia as vagas que ainda
+estão na janela de recolha (últimas 72 h), sem os outros perfis voltarem a receber nada.
+
+**Acrescentar uma pessoa:** copia o bloco da Marta em `profiles:`, muda `id`, `name`, as regras e o nome dos
+segredos (`ntfy_env`), cria esse segredo no Environment `GERAL` e acrescenta-o ao `env:` do workflow.
+Nunca ponhas contactos ou o CV no `config.yaml` (o repositório é público); usa `cv_url` com uma ligação privada.
+
 ## De onde vêm as vagas
 
 | Fonte | O que cobre | Precisas de escolher empresas? |
