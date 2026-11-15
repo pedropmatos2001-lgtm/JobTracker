@@ -12,7 +12,7 @@ import yaml
 
 from . import judge as judge_mod
 from . import kit as kit_mod
-from . import notify, sources
+from . import logos, notify, sources
 from . import state as st
 from .models import Job
 from .scoring import cheap_filter, evaluate, label_of, pat_of, target_companies
@@ -368,6 +368,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             if rb:
                 send(rt, rb, click, p)
 
+    logos.apply(state, state["matches"])
     if not dry_run:
         st.save(state_path, state, today)
         os.makedirs(docs_dir, exist_ok=True)

@@ -14,6 +14,8 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 import requests
 
+from . import logos
+
 from .models import Job
 from .scoring import strip_html
 
@@ -685,7 +687,8 @@ def parse_jobspy_rows(rows, source="indeed"):
             salary_min=_annual_eur(val(r, "min_amount"), iv, cur),
             salary_max=_annual_eur(val(r, "max_amount"), iv, cur),
             remote=bool(val(r, "is_remote")) or None,
-            logo=str(val(r, "company_logo") or "") if str(val(r, "company_logo") or "").startswith("https://") else ""))
+            logo=str(val(r, "company_logo") or "") if str(val(r, "company_logo") or "").startswith("https://") else "",
+            domain=logos.domain_of(str(val(r, "company_url_direct") or ""))))
     return jobs
 
 

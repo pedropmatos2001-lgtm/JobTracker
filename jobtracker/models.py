@@ -17,6 +17,7 @@ class Job:
     partial: bool = False            # descricao incompleta (ex.: Adzuna)
     unverified: bool = False         # fonte nao confirma se esta aberta (ex.: page_watch)
     logo: str = ""                   # logotipo da empresa, quando a fonte o dá (LinkedIn, Indeed)
+    domain: str = ""                 # site da empresa, quando a fonte o dá (para o ícone na página)
     extra: dict = field(default_factory=dict)   # dados para ir buscar o detalhe
 
     @property
