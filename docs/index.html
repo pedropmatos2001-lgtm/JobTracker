@@ -493,7 +493,7 @@ const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Site da empresa";
 const placeOf = m => (m.location || "").replace(/, Portugal$/, "").split(",")[0].replace(/ e Região$/, "").trim() || "Sem local";
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
 let profiles = [], current = "", all = [], data = [], updated = "", updatedAt = "", tracker = {};
-let page = "home", marks = {}, filters = { v: "novas", tema: "", fonte: "", local: "", dias: "7", q: "" };
+let page = "home", marks = {}, filters = { v: "novas", tema: "", fonte: "", local: "", dias: "7", q: "", ordem: "relevancia" };
 const RENAMED = { marta: "maria" };   // perfis que mudaram de id: ligações e dados antigos passam para o novo
 const markKey = pid => "vagas-candidaturas:" + pid, seenKey = pid => "vagas-vistas:" + pid;
 const day0 = iso => new Date((iso || updated) + "T00:00:00");
@@ -586,7 +586,7 @@ function go(id, opts = {}) {
 // ---------- URL: #perfil/página e filtros em ?query ----------
 function writeUrl() {
   const q = new URLSearchParams();
-  if (page === "jobs") for (const [k, v] of Object.entries(filters)) if (v && !(k === "v" && v === "novas") && !(k === "dias" && v === "7")) q.set(k, v);
+  if (page === "jobs") for (const [k, v] of Object.entries(filters)) if (v && !(k === "v" && v === "novas") && !(k === "dias" && v === "7") && !(k === "ordem" && v === "relevancia")) q.set(k, v);
   history.replaceState(null, "", `${location.pathname}${q.toString() ? "?" + q : ""}#${current}/${page}`);
 }
 function readUrl() {
@@ -745,6 +745,12 @@ function renderJobs(main, opts) {
   };
   const count = (fn) => { const o = {}; base.forEach(m => { const k = fn(m); if (k) o[k] = (o[k] || 0) + 1; }); return o; };
   fl.append(mkSel("tema", "Tema", themesIn(base)), mkSel("fonte", "Fonte", count(srcOf)), mkSel("local", "Local", count(placeOf)));
+  { // ordem: por relevância (pontuação do perfil) ou por data
+    const wrap = el("span", "select"); const s = el("select"); s.setAttribute("aria-label", "Ordenar");
+    for (const [k, lab] of [["relevancia", "Mais relevantes"], ["recentes", "Mais recentes"]]) { const o = el("option", null, lab); o.value = k; o.selected = filters.ordem === k; s.append(o); }
+    s.onchange = () => { filters.ordem = s.value; writeUrl(); render({ quiet: true }); };
+    wrap.append(s, svg(CHEV_D)); fl.append(wrap);
+  }
   if (filters.v === "todas") {
     const wrap = el("span", "select"); const s = el("select"); s.setAttribute("aria-label", "Período");
     for (const [k, lab] of [["7", "Últimos 7 dias"], ["30", "Últimos 30 dias"], ["9999", "Desde sempre"]]) { const o = el("option", null, lab); o.value = k; o.selected = filters.dias === k; s.append(o); }
@@ -772,9 +778,11 @@ function renderJobs(main, opts) {
         document.createTextNode(filters.v === "novas" ? "Quando chegarem vagas novas, recebes uma notificação." : "As primeiras aparecem depois da próxima recolha."));
       listBox.append(e); return;
     }
+    const rel = filters.ordem !== "recentes";
+    if (rel) rs.sort((a, b) => ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)) || (b.first_seen || "").localeCompare(a.first_seen || ""));
     let dayK = null, list = null; const cards = [];
     for (const m of rs) {
-      if (filters.v === "todas" && m.first_seen !== dayK) { dayK = m.first_seen; listBox.append(el("div", "day", ago(dayK) === "Hoje" ? "Hoje" : ago(dayK) === "Ontem" ? "Ontem" : fmt.format(day0(dayK)))); list = null; }
+      if (!rel && filters.v === "todas" && m.first_seen !== dayK) { dayK = m.first_seen; listBox.append(el("div", "day", ago(dayK) === "Hoje" ? "Hoje" : ago(dayK) === "Ontem" ? "Ontem" : fmt.format(day0(dayK)))); list = null; }
       if (!list) { list = el("div", "list"); listBox.append(list); }
       const c = card(m); cards.push(c); list.append(c);
     }

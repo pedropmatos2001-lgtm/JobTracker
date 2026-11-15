@@ -487,3 +487,34 @@ def test_maria_business_analyst_at_consultancy_and_priority_order():
     policy = ev("Public Policy Analyst", "PwC", "Public policy analysis and policy evaluation for ministries. 2 anos.")
     consult = ev("Strategy Consultant", "Empresa", "Strategy projects for corporate clients. 2 anos.")
     assert policy.include and consult.include and policy.score > consult.score   # os temas do mestrado vêm primeiro
+
+
+def test_unskilled_admin_health_fleet_jobs_never_pass():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    ps = {p["id"]: p["cfg"] for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}
+    t = date(2026, 11, 15)
+    titles = ["Gestor de Frota (M/F)", "Assistente Administrativo - Centro de Saúde", "Administrativa/o - Fiel de Armazém",
+              "Diretor/a de Golfe", "S4/HANA Consultant Logistic", "Consultor Funcional Sénior Cegid PHC",
+              "Head of Talent Acquisition", "Contact Center Solutions Specialist", "Rececionista de Clínica"]
+    for pid in ("pedro", "maria"):
+        for title in titles:
+            j = Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                    description="Políticas públicas, sustentabilidade, gestão ambiental e assuntos europeus. 3 anos.")
+            assert not evaluate(j, ps[pid], t).include, (pid, title)
+
+
+def test_maria_libe_and_public_affairs_rank_above_consulting():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-14", description=desc + " 2 anos de experiência."), maria, t)
+    coke = ev("Graduate Public Affairs, Communications and Sustainability", "Public affairs and engagement with the European Commission.",
+              company="Coca-Cola Europacific Partners")
+    libe = ev("Policy Officer – Civil Liberties", "Rule of law, fundamental rights and asylum policy files.")
+    consult = ev("Logistics Consultant", "Consulting projects for corporate clients on supply chain processes.", company="Accenture")
+    assert coke.include and libe.include
+    assert coke.score > consult.score and libe.score > consult.score
