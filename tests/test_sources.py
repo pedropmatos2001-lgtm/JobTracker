@@ -404,3 +404,21 @@ def test_linkedin_company_search_keeps_only_target_companies():
     s = FakeSession(Resp(text=_fx("linkedin_search.html")))
     jobs = sources.fetch_linkedin({"queries": ["ACME"], "_company_rx": r"\bACME\b"}, s, {}, sleep=lambda x: None)
     assert [j.company for j in jobs] == ["ACME Energia"]
+
+
+def test_parse_ongd():
+    jobs = sources.parse_ongd(_fx("ongd.html"))
+    assert [j.title for j in jobs] == ["Farmacêuticos/as", "Gestor/a de Projetos de Cooperação e Advocacy"]
+    a, b = jobs
+    assert a.company == "Médicos Sem Fronteiras" and a.location == "Portugal" and a.url.startswith("https://msf.org.pt/vaga/farmaceuticos")
+    assert b.company == "Oikos" and b.location == "Lisboa" and "2026.11.30" in b.description and "ONGD" in b.description
+
+
+def test_parse_eu_agencies_only_open_calls():
+    src = {"name": "EUDA (agência europeia, Lisboa)", "company": "EUDA"}
+    euda = sources.parse_euda(_fx("euda.html"), src, "https://www.euda.europa.eu/about/jobs_en")
+    assert [j.title for j in euda] == ["Policy officer – EU drug policy and international cooperation"]
+    assert euda[0].url == "https://www.euda.europa.eu/calls/2026/ad202602_en" and euda[0].location == "Lisboa, Portugal"
+    emsa = sources.parse_emsa(_fx("emsa.html"), {"name": "EMSA", "company": "EMSA"}, "https://www.emsa.europa.eu/jobs/vacancies.html")
+    assert [j.title for j in emsa] == ["Officer - Decarbonisation of Shipping (FGIV)", "Officer - Ship Safety and Accident Investigation (SNE)"]
+    assert "26.11.2026" in emsa[0].description

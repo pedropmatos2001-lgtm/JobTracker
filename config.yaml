@@ -428,6 +428,24 @@ sources:
       - "advocacy"
       - "ONG"
 
+  # --- ONG e agências europeias em Lisboa (sobretudo para a Maria) ---
+  # Plataforma Portuguesa das ONGD: vagas de ONG de desenvolvimento, cooperação e direitos. Muitas são para
+  # missões no terreno (médicos, farmacêuticos, logística) ou voluntariado: essas saem logo pelo título.
+  - type: ongd
+    name: "Plataforma ONGD"
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # Agências da UE com sede em Lisboa: poucas vagas por ano, mas são instituições europeias.
+  - type: eu_agency
+    name: "EUDA (agência europeia, Lisboa)"
+    company: "EUDA"
+    layout: euda
+    url: "https://www.euda.europa.eu/about/jobs_en"
+  - type: eu_agency
+    name: "EMSA (agência europeia, Lisboa)"
+    company: "EMSA"
+    layout: emsa
+    url: "https://www.emsa.europa.eu/jobs/vacancies.html"
+
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o
   # último número visto fica em state.json. Madeira e Açores são excluídos automaticamente.

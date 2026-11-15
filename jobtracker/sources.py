@@ -825,13 +825,98 @@ def fetch_bep(src, session, env, sleep=time.sleep):
     return res
 
 
+
+# ---------- Plataforma Portuguesa das ONGD (lista de oportunidades) ----------
+ONGD_URL = "https://www.plataformaongd.pt/oportunidades-de-emprego-e-voluntariado"
+
+
+def parse_ongd(html_text, base_url=ONGD_URL):
+    """Cada vaga é um bloco .articleFull: título (h3), entidade, local, prazo e ligação para os termos de referência."""
+    out = []
+    for b in _soup(html_text).select(".articleFull"):
+        h = b.find("h3")
+        a = b.find("a", class_="button") or b.find("a", href=True)
+        if not h or not a:
+            continue
+        info = b.find("p").get_text("\n", strip=True) if b.find("p") else ""
+        field = lambda k: (re.search(rf"{k}:\s*\n?\s*([^\n]+)", info, re.I) or [None, ""])[1].strip()
+        org, loc, due = field("Entidade"), field("Local"), field("Prazo de candidatura")
+        url = clean_url(urljoin(base_url, a["href"]))
+        desc = (f"Oportunidade publicada na Plataforma Portuguesa das ONGD (organizações não governamentais para o "
+                f"desenvolvimento). Entidade: {org}. Local: {loc or 'não indicado'}. Prazo de candidatura: {due or 'não indicado'}.")
+        out.append(Job(source="ongd", company=org or "ONGD", title=h.get_text(" ", strip=True), url=url,
+                       location=loc if loc and not re.fullmatch(r"v[áa]rios|diversos", loc, re.I) else "Portugal",
+                       description=desc, unverified=True))
+    return out
+
+
+def fetch_ongd(src, session, env):
+    url = src.get("url", ONGD_URL)
+    r = http(session, "GET", url)
+    if r.status_code != 200:
+        raise SourceError(f"plataformaongd.pt: HTTP {r.status_code}")
+    return parse_ongd(r.text, url)
+
+
+# ---------- Agências europeias em Lisboa (EUDA, EMSA): tabelas de vagas ----------
+EU_CLOSED = re.compile(r"closed|under assessment|cancel|completed|suspended|reserve list", re.I)
+
+
+def _eu_job(src, title, url, extra_text):
+    name = src.get("company") or src["name"]
+    desc = f"Vaga numa agência da União Europeia com sede em Lisboa ({name}). {extra_text}"
+    return Job(source=f"eu:{name}", company=name, title=title, url=url, location="Lisboa, Portugal",
+               description=desc, unverified=True)
+
+
+def parse_euda(html_text, src, base_url):
+    """Tabela de calls: Status | Vacancy | Reference | Contract type | Closing date | Grade. Só as que aceitam candidaturas."""
+    out = []
+    for tr in _soup(html_text).select("table tr"):
+        tds = tr.find_all("td")
+        if len(tds) < 5:
+            continue
+        status, a = tds[0].get_text(" ", strip=True), tds[1].find("a", href=True)
+        if not a or EU_CLOSED.search(status):
+            continue
+        extra = f"Tipo de contrato: {tds[3].get_text(' ', strip=True)}. Prazo: {tds[4].get_text(' ', strip=True)}."
+        out.append(_eu_job(src, a.get_text(" ", strip=True), clean_url(urljoin(base_url, a["href"])), extra))
+    return out
+
+
+def parse_emsa(html_text, src, base_url):
+    """Tabela: Vacancy (código com ligação) | Description (título) | Published | Deadline."""
+    out = []
+    for tr in _soup(html_text).select("table tr"):
+        tds = tr.find_all("td")
+        if len(tds) < 4:
+            continue
+        a = tds[0].find("a", href=True)
+        title = re.sub(r"\s*Deadline extended\s*", " ", tds[1].get_text(" ", strip=True)).strip()
+        deadline = tds[3].get_text(" ", strip=True)
+        if not a or "/jobs/vacancies/item/" not in a["href"] or not deadline or re.search(r"\bnotice\b", title, re.I):
+            continue
+        extra = f"Referência: {a.get_text(' ', strip=True)}. Publicada: {tds[2].get_text(' ', strip=True)}. Prazo: {deadline}."
+        out.append(_eu_job(src, title, clean_url(urljoin(base_url, a["href"])), extra))
+    return out
+
+
+def fetch_eu_agency(src, session, env):
+    r = http(session, "GET", src["url"])
+    if r.status_code != 200:
+        raise SourceError(f"{urlsplit(src['url']).netloc}: HTTP {r.status_code}")
+    parser = {"euda": parse_euda, "emsa": parse_emsa}[src["layout"]]
+    if "<table" not in r.text:
+        raise SourceError("página sem tabela de vagas: pode ter mudado")
+    return parser(r.text, src, src["url"])           # 0 vagas abertas é normal nestas agências
+
 FETCHERS = {
     "greenhouse": fetch_greenhouse, "lever": fetch_lever, "workable": fetch_workable,
     "smartrecruiters": fetch_smartrecruiters, "adzuna": fetch_adzuna, "remotive": fetch_remotive,
     "page_watch": fetch_page_watch,
     "workday": fetch_workday, "personio": fetch_personio, "teamtailor": fetch_teamtailor,
     "recruitee": fetch_recruitee, "linkedin": fetch_linkedin, "indeed": fetch_indeed,
-    "bep": fetch_bep,
+    "bep": fetch_bep, "ongd": fetch_ongd, "eu_agency": fetch_eu_agency,
 }
 
 

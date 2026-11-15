@@ -45,6 +45,9 @@ KNOWN_DOMAINS = {
     "sia partners": "sia-partners.com", "quaternaire": "quaternaire.pt", "augusto mateus": "augustomateus.pt",
     "cedru": "cedru.com", "ecorys": "ecorys.com", "ramboll": "ramboll.com", "arcadis": "arcadis.com", "wsp": "wsp.com",
     "erm": "erm.com", "sweco": "sweco.com", "systemiq": "systemiq.earth", "south pole": "southpole.com", "get2c": "get2c.pt",
+    "euda": "euda.europa.eu", "emsa": "emsa.europa.eu", "medicos sem fronteiras": "msf.org.pt", "oikos": "oikos.pt",
+    "amnistia internacional": "amnistia.pt", "unicef": "unicef.pt", "cruz vermelha portuguesa": "cruzvermelha.pt",
+    "plataforma ongd": "plataformaongd.pt", "apav": "apav.pt", "cig": "cig.gov.pt", "vinces": "vinces.pt",
     # empresas-alvo do Pedro
     "edp": "edp.com", "edp renovaveis": "edpr.com", "e redes": "e-redes.pt", "edp comercial": "edp.pt",
     "ren": "ren.pt", "redes energeticas nacionais": "ren.pt", "galp": "galp.com", "floene": "floene.pt",
