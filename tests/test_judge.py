@@ -110,7 +110,7 @@ def test_kit_written_for_high_fit_only(cfg, tmp_path):
 def test_kit_prompt_forbids_inventing():
     s = FakeSession("## Carta\nx")
     md = kit.build_kit(good(), "v", "perfil", "k", session=s)
-    assert md.startswith("# AI Transformation Consultant") and "Não inventes" in s.calls[0][1]["system"]
+    assert md.startswith("# Sustainability Transformation Consultant") and "Não inventes" in s.calls[0][1]["system"]
 
 
 def test_radar_summarises_week():
@@ -129,7 +129,7 @@ def test_public_repo_stores_nothing_personal(cfg, tmp_path):
     assert r["stats"]["passed"] == 1
     assert not os.path.exists(os.path.join(dd, "kits"))           # kits nunca no git
     docs = json.load(open(os.path.join(dd, "jobs.json"), encoding="utf-8"))
-    assert [m["title"] for m in docs["matches"]] == ["AI Transformation Consultant"]   # só dados públicos da vaga
+    assert [m["title"] for m in docs["matches"]] == ["Sustainability Transformation Consultant"]   # só dados públicos da vaga
     assert "judge" not in docs["matches"][0] and "reasons" not in docs["matches"][0]
     st = open(str(tmp_path / "state.json"), encoding="utf-8").read()
     assert "Mais escopo" not in st and "pede 5 anos" not in st     # notas do juiz fora do estado

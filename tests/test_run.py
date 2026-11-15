@@ -23,7 +23,7 @@ def cfg():
 
 
 def good(url="https://a/1", **kw):
-    base = dict(source="t", company="Siemens", title="AI Transformation Consultant", url=url,
+    base = dict(source="t", company="Siemens", title="Sustainability Transformation Consultant", url=url,
                 location="Lisbon, Portugal", posted="2026-11-16",
                 description="3+ years of experience. Process re-engineering and agentic AI. Operating model design for a sustainability programme. "
                             "Stakeholder management, requirements.")
@@ -57,7 +57,7 @@ def test_new_match_is_sent_once(cfg, tmp_path):
     h = harness({"A": [good()], "B": []}, sent)
     r1 = run(cfg, {}, WED, sp, dd, **h)
     assert r1["stats"] == {"seen": 1, "new": 1, "passed": 1} and len(sent) == 1
-    assert "AI Transformation Consultant" in sent[0][1]
+    assert "Sustainability Transformation Consultant" in sent[0][1]
     r2 = run(cfg, {}, WED, sp, dd, **h)                 # mesmo dia seguinte: nada de novo
     assert r2["stats"]["new"] == 0 and len(sent) == 1
     docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
@@ -153,7 +153,7 @@ def test_same_job_on_two_boards_counts_once(cfg, tmp_path):
     sp, dd = paths(tmp_path)
     sent = []
     a = good(url="https://www.linkedin.com/jobs/view/1", company="Siemens S.A.")
-    b = good(url="https://pt.indeed.com/viewjob?jk=1", company="SIEMENS", title="AI Transformation Consultant (m/f)")
+    b = good(url="https://pt.indeed.com/viewjob?jk=1", company="SIEMENS", title="Sustainability Transformation Consultant (m/f)")
     r = run(cfg, {}, WED, sp, dd, **harness({"A": [a], "B": [b]}, sent))
     assert r["stats"]["new"] == 1 and r["stats"]["passed"] == 1
     r2 = run(cfg, {}, WED, sp, dd, **harness({"A": [], "B": [good(url="https://x/2", company="Siemens")]}, sent))

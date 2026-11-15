@@ -16,7 +16,7 @@ def cfg():
 
 
 def job(**kw):
-    base = dict(source="t", company="X", title="AI Transformation Consultant",
+    base = dict(source="t", company="X", title="Sustainability Transformation Consultant",
                 url="https://x/1", location="Lisbon, Portugal", posted="2026-11-15",
                 description="3+ years of experience in digital transformation. Process re-engineering "
                             "and agentic AI. Operating model design for a sustainability programme. "
@@ -98,7 +98,7 @@ def test_stretch_flag_for_5_years(cfg):
 
 def test_senior_title_gets_bonus(cfg):
     a = evaluate(job(), cfg, TODAY).score
-    b = evaluate(job(title="Senior AI Transformation Consultant"), cfg, TODAY).score
+    b = evaluate(job(title="Senior Sustainability Transformation Consultant"), cfg, TODAY).score
     assert b == a + cfg["senior_bonus"]
 
 
@@ -113,17 +113,17 @@ def test_salary_floor_keeps_unknown_and_high(cfg):
 
 
 def test_real_world_cases_from_fixture(cfg):
-    """Casos reais: a Siemens Energy tem de passar (era a vaga mais próxima do perfil),
-    e as quatro com problema concreto têm de ser excluídas pelo motivo certo."""
+    """Casos reais: a PNO passa; a Siemens Energy (transformação digital com IA) já não é o perfil do Pedro
+    (negócio, operações, ambiente); as quatro com problema concreto saem pelo motivo certo."""
     import json
     jobs = {d["company"]: Job(**d) for d in json.load(open("tests/fixtures/sample_jobs.json", encoding="utf-8"))}
     today = date(2026, 11, 15)
-    assert evaluate(jobs["Siemens Energy"], cfg, today).include
+    assert "título excluído" in evaluate(jobs["Siemens Energy"], cfg, today).excluded_by
     assert evaluate(jobs["PNO"], cfg, today).include
     assert "língua" in evaluate(jobs["Nodis Consulting"], cfg, today).excluded_by
     assert "júnior" in evaluate(jobs["Navigator"], cfg, today).excluded_by
     assert "anos" in evaluate(jobs["Brisa"], cfg, today).excluded_by
-    assert "dias" in evaluate(jobs["Greenvolt"], cfg, today).excluded_by
+    assert not evaluate(jobs["Greenvolt"], cfg, today).include      # AI Program Manager: tecnologia e antiga
 
 
 def test_partial_and_unverified_flags(cfg):
@@ -337,3 +337,34 @@ def test_maria_master_themes_and_remote_eu_jobs():
                         location="European Union", remote=True), maria, t).include
     assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
                             location="Brussels, Belgium"), maria, t).include      # presencial fora de Portugal: não
+
+
+
+def test_pedro_business_and_environment_not_tech():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    pedro = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["pedro"]["cfg"]
+    t = date(2026, 11, 15)
+    corp = " We work in a fast-paced environment with sustainable growth. Ambiente de trabalho dinâmico. 4 anos de experiência."
+    def j(title, desc, company="X"):
+        return Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                   posted="2026-11-14", description=desc + corp)
+    for title, desc in [
+        ("IT Business Analyst", "Gather requirements and improve processes for banking applications."),
+        ("Engineering Manager, ChatBots and AI", "Lead engineers building conversational AI."),
+        ("Atendedor de loja (M/F)", "Atendimento ao público numa loja de mobilidade."),
+        ("Accounting Analyst", "Month-end close and process improvement."),
+        ("Data Analyst", "Dashboards for operations."),
+    ]:
+        v = evaluate(j(title, desc), pedro, t)
+        assert not v.include, (title, v.themes)
+    # "environment" e "sustainable growth" genéricos já não contam como tema
+    v = evaluate(j("Project Manager", "Manage internal projects."), pedro, t)
+    assert "Clima e ambiente" not in v.themes and "Sustentabilidade e ESG" not in v.themes
+    for title, desc in [
+        ("Consultor Ambiental", "Avaliação de impacte ambiental, licenciamento ambiental e gestão ambiental para clientes industriais."),
+        ("Sustainability Manager", "CSRD reporting, decarbonisation roadmap and circular economy initiatives; operating model for ESG."),
+        ("Operations Excellence Manager", "Lean, process improvement and operating model for a water utility; waste management."),
+    ]:
+        v = evaluate(j(title, desc), pedro, t)
+        assert v.include, (title, v.themes, v.excluded_by)
