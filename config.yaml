@@ -1,0 +1,138 @@
+# Configuração do tracker do candidato. Edita aqui; não é preciso mexer no código.
+
+# --- fasquia -------------------------------------------------------------
+# Fasquia salarial (EUR brutos/ano). Pode ser substituída pelo segredo MIN_SALARY_EUR.
+# Vagas com salário PUBLICADO abaixo disto são excluídas. Vagas sem salário
+# passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
+min_salary_eur: 35000
+
+min_score: 6               # pontuação mínima para avisar
+max_per_alert: 5           # máximo de vagas por notificação
+max_age_days: 14           # ignora vagas publicadas há mais tempo
+max_detail_fetches: 60     # limite diário de páginas de detalhe
+alert_after_failures: 3    # avisa se uma fonte falhar N dias seguidos
+heartbeat_weekday: 0       # 0=segunda: se não houver vagas, manda "estou vivo"
+click_url: ""              # opcional: URL da página PWA (GitHub Pages)
+
+years:                     # anos de experiência pedidos (extraídos do texto)
+  min: 3                   # abaixo disto = provável nível júnior -> exclui
+  stretch_from: 5          # a partir daqui = aviso "esticado"
+  max: 6                   # acima disto -> exclui
+
+locations:
+  allow: "portugal|lisbo|porto|oeiras|amadora|alfragide|cascais|braga|coimbra|set[úu]bal|aveiro|faro|funchal"
+  remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
+
+title_exclude:
+  - "intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate"
+  - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
+  - "sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de"
+
+senior_title: "senior|sénior|manager|lead|head|principal|director|diretor"
+senior_bonus: 2
+
+keywords:
+  strong_cap: 14
+  strong:                  # +3 cada (+2 se estiver no título)
+    - "ai transformation|ai strategy|agentic|generative ai|genai|ia generativa"
+    - "process (re-?)?engineering|reengenharia|process excellence|operational excellence|bpmn"
+    - "operating model|modelo operativo|target operating"
+    - "csrd|esg|sustainab|sustentabilidade|decarbon|circular economy|economia circular|climate"
+    - "pmo|program(me)? manage|transformation (manager|lead|office)"
+    - "eu funds|fundos europeus|horizon europe|portugal 2030|funding application|candidaturas"
+    - "energy transition|transição energética|renewable|renov[áa]vel"
+    - "digital transformation|transformação digital|process improvement|melhoria de processos|automation|automatiza"
+  medium:                  # +1 cada
+    - "\\bAI\\b|artificial intelligence|inteligência artificial|machine learning"
+    - "strategy|estratégia"
+    - "requirements|requisitos"
+    - "stakeholder"
+    - "power bi|sql|python"
+    - "public sector|setor público|government"
+  negative:                # -3 cada
+    - "commission|comiss[ãa]o|cold call|quota"
+    - "call center|contact center"
+
+public_repo: true          # repositório público: sem matches, kits nem notas do juiz no git
+
+# --- juiz de IA ------------------------------------------------------------
+# Precisa do segredo ANTHROPIC_API_KEY. Sem ele, o tracker usa só as palavras-chave.
+judge:
+  enabled: true
+  model: "claude-sonnet-5-5"
+  candidate_file: "candidate.example.md"   # só serve de modelo; o perfil real vem do segredo CANDIDATE_PROFILE
+  min_fit: 55                      # abaixo disto não te avisa
+  max_calls: 40                    # limite diário de avaliações (controla o custo)
+  kit_min_fit: 70                  # a partir daqui prepara carta e pontos do CV
+  max_kits: 3
+radar_weekday: 4                   # sexta-feira: resumo semanal
+
+# --- fontes ----------------------------------------------------------------
+# Cada fonte falha sozinha, sem afetar as outras. Para adicionar empresas, vê o README
+# (como descobrir o "token" da página de carreiras de cada uma).
+sources:
+  - type: workable
+    name: Greenvolt
+    account: greenvolt            # visto em apply.workable.com/greenvolt/...
+
+  - type: greenhouse
+    name: Systemiq
+    token: systemiq               # visto em job-boards.eu.greenhouse.io/systemiq/...
+
+  # Agregadores (precisam de chave gratuita em adzuna.com/developers; senão ficam ignorados)
+  - type: adzuna
+    name: Adzuna
+    country: pt
+    where: ["Lisboa", "Porto"]
+    max_days_old: 10
+    queries:
+      - "sustainability consultant"
+      - "ESG manager"
+      - "AI transformation"
+      - "process excellence"
+      - "transformation manager"
+      - "PMO manager"
+      - "strategy operations consultant"
+
+  - type: remotive                # remoto (sem chave)
+    name: Remotive
+    search: ["sustainability", "ESG", "AI transformation", "operations manager", "strategy"]
+
+  # Páginas sem API: avisa de ligações novas que batam no padrão.
+  # Menos fiável (se a página for dinâmica, o tracker avisa que devolveu 0 ligações).
+  - type: page_watch
+    name: EU Careers (agências, Lisboa)
+    url: "https://eu-careers.europa.eu/en/job-opportunities/open-vacancies/temp"
+    link_regex: "officer|adviser|advisor|analyst|policy|manager|digital|environment|climate|programme|project"
+    location: "Lisbon"
+
+  # --- Empresas do Norte (ambiente / energia / água / resíduos), verificadas em nov. 2026 ---
+  # EDP: portal próprio com pesquisa por localização (padrão de URL confirmado).
+  - type: page_watch
+    name: EDP (Porto)
+    url: "https://jobs.edp.com/search/?q=&locationsearch=Porto&locale=pt_PT"
+    link_regex: "."
+    location: "Porto"
+
+  - type: page_watch
+    name: EDP (Lisboa)
+    url: "https://jobs.edp.com/search/?q=&locationsearch=Lisboa&locale=pt_PT"
+    link_regex: "."
+    location: "Lisboa"
+
+  # Porto Ambiente: lista as vagas em PDF na página de recrutamento (confirmado).
+  - type: page_watch
+    name: Porto Ambiente
+    url: "https://www.portoambiente.pt/recrutamento"
+    link_regex: "t[ée]cnic|jurista|engenheir|gestor|analista|diretor|coordenador|especialista"
+    location: "Porto"
+
+  # LIPOR: página de procedimentos concursais (a lista de vagas não foi vista; se der 0 ligações o tracker avisa).
+  - type: page_watch
+    name: LIPOR
+    url: "https://www.lipor.pt/pt/sobre-nos/as-nossas-pessoas/junta-te-a-nossa-equipa/procedimentos-concursais/"
+    link_regex: "t[ée]cnic|jurista|engenheir|gestor|analista|diretor|coordenador|especialista|assistente"
+    location: "Porto"
+
+  # Sem lista pública de vagas (só candidatura espontânea / LinkedIn): Quadrante, Indaqua, Águas do Douro e Paiva
+  # e restante grupo AdP (publica no LinkedIn). Ficam cobertas pela pesquisa diária da tarefa Claude.

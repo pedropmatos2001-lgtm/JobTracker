@@ -1,0 +1,45 @@
+name: Vagas diárias
+
+on:
+  schedule:
+    - cron: "0 7 * * 1-5"      # 07:00 UTC, dias úteis (07:00 em Lisboa no inverno, 08:00 no verão)
+  workflow_dispatch: {}         # botão "Run workflow" para testar à mão
+
+permissions:
+  contents: write               # para guardar state/ e docs/ no repositório
+
+concurrency:
+  group: jobtracker
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt -r requirements-dev.txt
+      - name: Testes (se falharem, não corre com código partido)
+        run: python -m pytest -q
+      - name: Procurar vagas e avisar
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python -m jobtracker
+      - name: Guardar estado
+        run: |
+          git config user.name "jobtracker"
+          git config user.email "jobtracker@users.noreply.github.com"
+          git add state docs
+          git diff --staged --quiet || (git commit -m "estado $(date -u +%F)" && git push)

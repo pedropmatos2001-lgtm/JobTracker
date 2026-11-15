@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vagas">
+<meta name="theme-color" content="#1E3A2E">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Vagas</title>
+<style>
+  :root { color-scheme: light dark; --ink:#1b1f1c; --mute:#5d655f; --line:#d9ddd6; --bg:#f7f7f3; --card:#fff; --accent:#1E3A2E; --warn:#8a5a00; }
+  @media (prefers-color-scheme: dark) { :root { --ink:#eef1ec; --mute:#a2aaa3; --line:#2c332e; --bg:#101411; --card:#171c18; --accent:#9fc3ab; --warn:#e0b25a; } }
+  body { margin:0; font:16px/1.45 -apple-system, system-ui, sans-serif; background:var(--bg); color:var(--ink); padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
+  header { padding:20px 16px 8px; } h1 { font-size:22px; margin:0 0 2px; } .sub { color:var(--mute); font-size:14px; }
+  ul { list-style:none; margin:0; padding:8px 12px 32px; display:grid; gap:10px; max-width:720px; margin-inline:auto; }
+  li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  a { color:var(--accent); font-weight:600; text-decoration:none; } .meta { color:var(--mute); font-size:14px; margin-top:2px; }
+  .flag { color:var(--warn); font-size:13px; margin-top:6px; } .score { float:right; color:var(--mute); font-size:13px; }
+  .empty { text-align:center; color:var(--mute); padding:40px 16px; }
+</style>
+</head>
+<body>
+<header><h1>Vagas para ti</h1><div class="sub" id="sub">A carregar…</div></header>
+<ul id="list"></ul>
+<script>
+fetch("jobs.json", {cache:"no-store"}).then(r => r.json()).then(d => {
+  const ms = d.matches || [], ul = document.getElementById("list");
+  document.getElementById("sub").textContent = "Atualizado a " + d.updated + " · " + ms.length + " vaga(s) guardadas";
+  if (!ms.length) { ul.innerHTML = '<li class="empty">Ainda sem vagas que passem a fasquia.</li>'; return; }
+  for (const m of ms) {
+    const li = document.createElement("li");
+    const a = document.createElement("a"); a.href = m.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = m.title;
+    const sc = document.createElement("span"); sc.className = "score"; sc.textContent = m.score + " pts";
+    const meta = document.createElement("div"); meta.className = "meta";
+    meta.textContent = [m.company, m.location, "visto a " + m.first_seen].filter(Boolean).join(" · ");
+    li.append(sc, a, meta);
+    if (m.flags && m.flags.length) { const f = document.createElement("div"); f.className = "flag"; f.textContent = "⚠ " + m.flags.slice(0, 3).join("; "); li.append(f); }
+    ul.append(li);
+  }
+}).catch(() => { document.getElementById("sub").textContent = "Sem dados ainda: corre o fluxo uma vez."; });
+</script>
+</body>
+</html>

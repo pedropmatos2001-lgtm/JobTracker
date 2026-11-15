@@ -1,0 +1,20 @@
+[
+  {"source": "demo", "company": "Siemens Energy", "title": "Digital Transformation Specialist - Engineering Processes & AI",
+   "url": "https://demo.example/1", "location": "Amadora, Lisboa, Portugal", "posted": "2026-11-12",
+   "description": "Several years of relevant experience. 4+ years of experience in process improvement and digital transformation. Process re-engineering, AI use cases, requirements for IT, stakeholder reporting. Fluent English."},
+  {"source": "demo", "company": "Nodis Consulting", "title": "Energy Transition & Digital Professional",
+   "url": "https://demo.example/2", "location": "Remote - Europe", "posted": "2026-11-13", "remote": true,
+   "description": "Energy transition, AI and data. 3 years of experience. Fluent Dutch, with good French and English."},
+  {"source": "demo", "company": "Navigator", "title": "Especialista de Sustentabilidade",
+   "url": "https://demo.example/3", "location": "Lisboa, Portugal", "posted": "2026-11-10",
+   "description": "Experiência profissional mínima de 1-2 anos na área da sustentabilidade. ESG, CSRD."},
+  {"source": "demo", "company": "Brisa", "title": "ESG Reporting Specialist",
+   "url": "https://demo.example/4", "location": "Portugal", "posted": "2026-11-11",
+   "description": "Minimum of 8 years of experience in sustainability/ESG reporting roles. CSRD, GRI."},
+  {"source": "demo", "company": "Greenvolt", "title": "AI Program Manager",
+   "url": "https://demo.example/5", "location": "Lisbon, Portugal", "posted": "2026-09-01",
+   "description": "5+ years in program management of AI transformation. Governance, stakeholder management."},
+  {"source": "demo", "company": "PNO", "title": "(Senior) Innovation Consultant Environment",
+   "url": "https://demo.example/6", "location": "Portugal", "posted": "2026-11-14",
+   "description": "Funding applications, business cases, cost-benefit analyses and stakeholder analyses for green innovation. 3-4 years of experience. Strategy."}
+]
