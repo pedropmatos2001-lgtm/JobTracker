@@ -71,8 +71,8 @@ def brand_key(name: str) -> str:
     s = unicodedata.normalize("NFKD", name or "").encode("ascii", "ignore").decode().lower()
     s = re.sub(r"\(.*?\)", " ", s)
     words = [w for w in re.split(r"[^a-z0-9]+", s) if w]
-    while words and words[-1] in SUFFIXES:
-        words.pop()
+    while words and (words[-1] in SUFFIXES or words[-2:] == ["s", "a"]):
+        words = words[:-2] if words[-2:] == ["s", "a"] else words[:-1]
     while len(words) > 1 and words[0] in ("the", "grupo", "group"):
         words.pop(0)
     return " ".join(words)
