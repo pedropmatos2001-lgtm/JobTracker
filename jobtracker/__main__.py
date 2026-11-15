@@ -15,7 +15,7 @@ from . import kit as kit_mod
 from . import notify, sources
 from . import state as st
 from .models import Job
-from .scoring import cheap_filter, evaluate, label_of, pat_of
+from .scoring import cheap_filter, evaluate, label_of, pat_of, target_companies
 
 
 def dedupe_key(job):
@@ -51,7 +51,10 @@ def rules_summary(pcfg):
                                "examples": (p.get("examples") if isinstance(p, dict) else None) or []}
                               for p in kw.get("strong", [])],
             "bonus": [b for b in ("associações e clusters" if (pcfg.get("org_bonus") or {}).get("pattern") else "",
-                                  "utilities e energia" if (pcfg.get("sector_bonus") or {}).get("pattern") else "") if b]}
+                                  "utilities e energia" if (pcfg.get("sector_bonus") or {}).get("pattern") else "") if b],
+            "companies": [{"sector": g.get("sector", ""),
+                           "names": [c["name"] if isinstance(c, dict) else c for c in g.get("companies") or []]}
+                          for g in pcfg.get("target_companies") or []]}
 
 
 def build_profiles(cfg):
@@ -69,6 +72,30 @@ def build_profiles(cfg):
                     "public": {**{k: p[k] for k in PUBLIC_PROFILE_KEYS if p.get(k)}, "rules": rules_summary(pcfg),
                                "channel": bool(p.get("ntfy_env"))}})
     return out
+
+
+def rename_profiles(state, cfg):
+    """Um perfil que mudou de id (`former_ids`) herda tudo o que o id antigo já tinha avaliado,
+    para não voltar a receber avisos de vagas que já tinha visto."""
+    ren = {old: p["id"] for p in cfg.get("profiles") or [] for old in p.get("former_ids") or []}
+    if not ren:
+        return
+    for book in (state.get("seen", {}), state.get("silent", {})):
+        for m in book.values():
+            if m.get("ev"):
+                m["ev"] = sorted({ren.get(x, x) for x in m["ev"]})
+    for m in state.get("matches", []):
+        if isinstance(m.get("profiles"), dict):
+            m["profiles"] = {ren.get(k, k): v for k, v in m["profiles"].items()}
+
+
+def company_queries(src, cfg, today, main_run):
+    """Pesquisas por nome de empresa-alvo, em rotação: `per_run` empresas em cada recolha."""
+    names = [n for n, _, _ in target_companies(cfg)]
+    per = int(src.get("per_run") or len(names) or 1)
+    slices = max(1, -(-len(names) // per))
+    k = (today.toordinal() * 2 + (0 if main_run else 1)) % slices
+    return names[k * per:(k + 1) * per], f"empresas {k * per + 1} a {min(len(names), (k + 1) * per)} de {len(names)}"
 
 
 def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=None,
@@ -109,6 +136,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
 
     state = st.load(state_path)
     report, health_alerts, all_jobs = [], [], {}
+    rename_profiles(state, cfg)
     # Reavaliar: volta a avaliar com as regras atuais tudo o que ainda está na janela de recolha.
     # Mantém a data em que cada vaga foi vista e não volta a avisar quem já tinha avaliado a vaga.
     silent = state.setdefault("silent", {})
@@ -129,6 +157,12 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         name = src.get("name") or src.get("type")
         h = state["health"].setdefault(name, {"fail_streak": 0, "last_ok": ""})
         ctx = {**src, "_known": state["seen"].keys(), "_cursor": state["cursors"].get(name)}
+        rot = ""
+        if src.get("companies_from") == "target_companies":
+            ctx["queries"], rot = company_queries(src, cfg, today, main_run)
+            ctx["_company_rx"] = "|".join(f"(?:{rx})" for _, _, rx in target_companies(cfg))
+            if not ctx["queries"]:
+                continue
         try:
             jobs = fetch(ctx)
         except sources.SourceSkipped as e:
@@ -143,7 +177,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         h["fail_streak"], h["last_ok"] = 0, today.isoformat()
         if getattr(jobs, "cursor", None) is not None:
             state["cursors"][name] = jobs.cursor
-        note = getattr(jobs, "note", "")
+        note = "; ".join(x for x in (rot, getattr(jobs, "note", "")) if x)
         report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)

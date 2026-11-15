@@ -600,6 +600,15 @@ def fetch_linkedin(src, session, env, sleep=time.sleep):
                     errors.append(f"«{q}»: página sem vagas (bloqueio?)")
                 break
             fresh = [j for j in page if j.url not in seen]
+            if src.get("_company_rx"):      # pesquisa por empresa: fica só com vagas dessas empresas
+                for j in fresh:
+                    seen.add(j.url)
+                n_page, fresh = len(fresh), [j for j in fresh if re.search(src["_company_rx"], j.company or "", re.I)]
+                out += fresh
+                if not n_page or len(page) < 10:
+                    break
+                start += len(page)
+                continue
             for j in fresh:
                 seen.add(j.url)
             out += fresh

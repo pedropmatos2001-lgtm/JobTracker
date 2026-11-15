@@ -73,6 +73,93 @@ sector_bonus:
   points: 4
   pattern: "\\bEDP\\b|E-REDES|\\bGalp\\b|\\bREN\\b|Redes Energ[ée]ticas|Iberdrola|Endesa|Engie|Greenvolt|Lightsource|Hyperion|Voltalia|Ørsted|Orsted|[ÁA]guas de Portugal|\\bAdP\\b|\\bEPAL\\b|[ÁA]guas do|Indaqua|\\bBe Water|\\bLIPOR\\b|Valorsul|\\bEGF\\b|\\bSUMA\\b|Ambiente|\\bERSAR\\b|\\bERSE\\b|\\bADENE\\b|Floene|Goldenergy|Tejo Energia|utilit|\\benerg"
 
+# --- empresas-alvo do Pedro -------------------------------------------------
+# Lista mínima de empresas que o tracker tem de cobrir. Duas coisas acontecem:
+# 1) vagas destas empresas (pelo nome da empresa) ganham o bónus de setor, em qualquer fonte;
+# 2) a fonte "LinkedIn (empresas-alvo)" pesquisa cada uma pelo nome, em rotação (ver lá em baixo).
+# Cada empresa é um nome, ou {name, match} quando o nome nas vagas é diferente (regex, sem distinguir maiúsculas).
+target_companies:
+  - sector: "Energia"
+    companies:
+      - {name: "EDP", match: "\\bEDP\\b"}
+      - "EDP Renováveis"
+      - {name: "E-Redes", match: "E-?REDES"}
+      - "EDP Comercial"
+      - {name: "REN", match: "\\bREN\\b|Redes Energ[ée]ticas Nacionais"}
+      - "Galp"
+      - "Floene"
+      - "Greenvolt"
+      - "Endesa"
+      - "Iberdrola"
+      - "Naturgy"
+      - "Repsol"
+      - {name: "BP Portugal", match: "\\bBP\\b"}
+      - {name: "Moeve (ex-Cepsa)", match: "Moeve|Cepsa"}
+      - {name: "Prio", match: "\\bPRIO\\b"}
+      - "Rubis"
+      - "Finerge"
+      - {name: "Enel Green Power", match: "\\bEnel\\b"}
+      - "Axpo"
+      - {name: "Gold Energy", match: "Gold ?Energy"}
+      - "Martifer"
+      - "Ventinveste"
+      - "Elecgas"
+      - "Tejo Energia"
+      - "Turbogás"
+      - "Dourogás"
+      - "Efacec"
+  - sector: "Água e saneamento"
+    companies:
+      - {name: "Águas de Portugal", match: "[ÁA]guas de Portugal|\\bAdP\\b"}
+      - "EPAL"
+      - "Águas do Norte"
+      - "Águas do Tejo Atlântico"
+      - "Águas do Centro Litoral"
+      - "Águas Públicas do Alentejo"
+      - "Águas do Algarve"
+      - {name: "AdP Valor", match: "AdP Valor"}
+      - {name: "AdP Energias", match: "AdP Energias"}
+      - "Indaqua"
+      - {name: "Be Water", match: "Be ?Water"}
+      - "Luságua"
+      - "Veolia"
+      - "Águas do Porto"
+      - {name: "AGS", match: "\\bAGS\\b"}
+      - "Águas de Gaia"
+      - "Aquapor"
+  - sector: "Resíduos e economia circular"
+    companies:
+      - {name: "EGF", match: "\\bEGF\\b"}
+      - "Valorsul"
+      - "Suldouro"
+      - "Resinorte"
+      - "Ersuc"
+      - "Amarsul"
+      - {name: "Algar", match: "\\bAlgar\\b"}
+      - "Valnor"
+      - "Resiestrela"
+      - "Valorlis"
+      - "Ecolezíria"
+      - "Resitejo"
+      - "Lipor"
+      - "Braval"
+      - "Tratolixo"
+      - {name: "Sociedade Ponto Verde", match: "Ponto Verde"}
+      - "Valorpneu"
+      - "Amb3E"
+      - "Novo Verde"
+      - "Ecopilhas"
+      - {name: "Suma", match: "\\bSUMA\\b"}
+      - "Urbaser"
+      - {name: "Mota-Engil Ambiente e Serviços", match: "Mota-?Engil Ambiente"}
+      - "Ecodeal"
+  - sector: "Engenharia, consultoria e indústria"
+    companies:
+      - {name: "Quadrante", match: "\\bQuadrante\\b"}
+      - {name: "Mota-Engil", match: "Mota-?Engil"}
+      - "Teixeira Duarte"
+      - {name: "The Navigator Company", match: "Navigator"}
+
 # --- perfis -----------------------------------------------------------------
 # A recolha de vagas é feita uma vez; cada perfil avalia-as com as suas regras e recebe só as suas.
 # O primeiro perfil usa as regras do topo deste ficheiro. Os outros podem substituir qualquer regra em `rules:`.
@@ -91,17 +178,19 @@ profiles:
     profile_env: CANDIDATE_PROFILE   # só para o juiz de IA (desligado)
     admin: true                      # recebe também avisos de fontes e o "estou vivo"
 
-  - id: marta
-    name: Marta
+  - id: maria
+    name: Maria
+    former_ids: [marta]              # antes chamava-se Marta: herda o que já tinha visto
     headline: "Setor público, assuntos europeus e direitos humanos"
     tags: ["Setor público", "Assuntos europeus", "Projetos europeus", "Políticas públicas", "Direitos humanos", "Inclusão e proteção"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
-    ntfy_env: NTFY_TOPIC_MARTA
-    email_env: EMAIL_TO_MARTA
-    profile_env: CANDIDATE_PROFILE_MARTA
+    ntfy_env: NTFY_TOPIC_MARIA
+    email_env: EMAIL_TO_MARIA
+    profile_env: CANDIDATE_PROFILE_MARIA
     rules:
       sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      target_companies: []                        # as empresas-alvo também
       require_theme: true                         # só passam vagas com pelo menos um dos temas abaixo
       min_score: 4                                # com require_theme, basta um tema forte e algum contexto
       years: {min: 0, stretch_from: 4, max: 5}   # cerca de 3 anos de experiência
@@ -204,7 +293,7 @@ sources:
       - "gestor de projetos europeus"
       - "european projects manager"
       - "innovation manager"
-      # perfil Marta: setor público e direitos humanos
+      # perfil Maria: setor público e direitos humanos
       - "public policy"
       - "políticas públicas"
       - "policy officer"
@@ -224,6 +313,17 @@ sources:
       - "public affairs"
       - "European projects"
       - "project officer"
+
+  # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
+  # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias
+  # garante que nenhuma vaga escapa entre voltas.
+  - type: linkedin
+    name: "LinkedIn (empresas-alvo)"
+    companies_from: target_companies
+    per_run: 24
+    location: Portugal
+    hours: 168
+    max_per_query: 25
 
   # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
   - type: indeed
@@ -253,7 +353,7 @@ sources:
       - "alterações climáticas"
       - "smart cities"
       - "mobilidade"
-      # perfil Marta: setor público e direitos humanos
+      # perfil Maria: setor público e direitos humanos
       - "políticas públicas"
       - "administração pública"
       - "direitos humanos"

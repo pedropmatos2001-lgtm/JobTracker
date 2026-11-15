@@ -39,10 +39,10 @@ jobs:
           MIN_SALARY_EUR: ${{ secrets.MIN_SALARY_EUR }}
           REEVALUATE: ${{ inputs.reavaliar }}
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          # perfil da Marta (cada perfil só recebe no seu canal; sem segredo, não recebe nada)
-          NTFY_TOPIC_MARTA: ${{ secrets.NTFY_TOPIC_MARTA }}
-          EMAIL_TO_MARTA: ${{ secrets.EMAIL_TO_MARTA }}
-          CANDIDATE_PROFILE_MARTA: ${{ secrets.CANDIDATE_PROFILE_MARTA }}
+          # perfil da Maria (cada perfil só recebe no seu canal; sem segredo, não recebe nada)
+          NTFY_TOPIC_MARIA: ${{ secrets.NTFY_TOPIC_MARIA }}
+          EMAIL_TO_MARIA: ${{ secrets.EMAIL_TO_MARIA }}
+          CANDIDATE_PROFILE_MARIA: ${{ secrets.CANDIDATE_PROFILE_MARIA }}
           ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
           ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}

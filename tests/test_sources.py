@@ -398,3 +398,9 @@ def test_linkedin_card_keeps_company_logo():
     a, b = sources.parse_linkedin_cards(_fx("linkedin_search.html"))
     assert a.logo.startswith("https://media.licdn.com/") and b.logo == ""
     assert "logo" in a.to_dict()
+
+
+def test_linkedin_company_search_keeps_only_target_companies():
+    s = FakeSession(Resp(text=_fx("linkedin_search.html")))
+    jobs = sources.fetch_linkedin({"queries": ["ACME"], "_company_rx": r"\bACME\b"}, s, {}, sleep=lambda x: None)
+    assert [j.company for j in jobs] == ["ACME Energia"]

@@ -1,6 +1,7 @@
 """Filtros e pontuação. Tudo aqui é determinístico e testável sem rede."""
 import html
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from typing import Optional
@@ -86,6 +87,39 @@ def label_of(x):
 
 def _rx(patterns):
     return [re.compile(p, re.I) for p in patterns or []]
+
+
+def company_rx(c):
+    """Regex de uma empresa-alvo: o `match` dado, ou o nome com acentos e hífenes tolerantes."""
+    if isinstance(c, dict) and c.get("match"):
+        return c["match"]
+    name = c["name"] if isinstance(c, dict) else c
+    out = []
+    for ch in name:
+        base = unicodedata.normalize("NFD", ch)[0]
+        if ch in " -":
+            out.append(r"[\s-]?")
+        elif base != ch:
+            out.append(f"[{re.escape(ch)}{re.escape(base)}]")
+        else:
+            out.append(re.escape(ch))
+    return r"\b" + "".join(out) + r"\b"
+
+
+def target_companies(cfg):
+    """[(nome, setor, regex)] das empresas-alvo do perfil."""
+    out = []
+    for g in cfg.get("target_companies") or []:
+        for c in g.get("companies") or []:
+            out.append((c["name"] if isinstance(c, dict) else c, g.get("sector", ""), company_rx(c)))
+    return out
+
+
+def target_company(job, cfg):
+    for name, _, rx in target_companies(cfg):
+        if re.search(rx, job.company or "", re.I):
+            return name
+    return ""
 
 
 def cheap_filter(job: Job, cfg: dict, today: date) -> str:
@@ -180,7 +214,11 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         score += org.get("points", 5)
         v.reasons.append("entidade do tipo associação / cluster / CoLAB / centro tecnológico")
     sec = cfg.get("sector_bonus") or {}
-    if sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
+    tc = target_company(job, cfg)
+    if tc:
+        score += sec.get("points", 4)
+        v.reasons.append(f"empresa-alvo ({tc})")
+    elif sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
         score += sec.get("points", 4)
         v.reasons.append("empresa/setor preferido (utilities, energia, água, resíduos)")
 
