@@ -214,10 +214,12 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)
-            if src.get("profiles"):          # fonte só para alguns perfis (ex.: ONG e organizações internacionais)
-                only_for.setdefault(j.uid, set()).update(src["profiles"])
-            else:
-                only_for[j.uid] = None           # também vem de uma fonte geral: vale para todos
+            if not src.get("profiles"):
+                only_for[j.uid] = None           # vem de uma fonte geral: vale para todos
+            elif j.uid not in only_for:          # fonte só para alguns perfis (ex.: ONG e organizações internacionais)
+                only_for[j.uid] = set(src["profiles"])
+            elif only_for[j.uid] is not None:    # já era só de alguns perfis: junta estes
+                only_for[j.uid] |= set(src["profiles"])
 
     # 2) só o que ainda não vimos (pelo endereço e pela dupla empresa+título, entre fontes)
     # Cada vaga guarda que perfis já a avaliaram ("ev"). Um perfil acrescentado depois avalia as vagas que
