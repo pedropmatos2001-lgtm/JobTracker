@@ -152,7 +152,8 @@ def cheap_filter(job: Job, cfg: dict, today: date) -> str:
 # Frases-padrão dos anúncios (igualdade de oportunidades, diversidade, privacidade) não dizem nada sobre o
 # trabalho e fazem disparar temas como "igualdade de género" em quase todas as vagas. Saem antes de procurar temas.
 BOILERPLATE = re.compile(
-    r"equal (employment )?opportunit|without regard to|regardless of|irrespective of|discriminat|diversity|diverse workforce|"
+    r"equal (employment )?opportunit|without regard to|regardless of|irrespective of|(do|does|will) not discriminate|"
+    r"n[ãa]o discrimina|value diversity|diverse workforce|diversity,? (equity )?(and|&) inclusion|diversidade e inclus|"
     r"inclusive (workplace|culture|environment)|we('| a)re committed to|we celebrate|we welcome applications|"
     r"reasonable accommodation|veteran|disabilit|igualdade de oportunidades|independentemente d|sem discrimina|"
     r"diversidade|inclus(ivo|iva|ão) (e|no) (ambiente|local)|privacy|privacidade|personal data|dados pessoais|"

@@ -181,8 +181,8 @@ profiles:
   - id: maria
     name: Maria
     former_ids: [marta]              # antes chamava-se Marta: herda o que já tinha visto
-    headline: "Setor público, assuntos europeus e direitos humanos"
-    tags: ["Setor público", "Assuntos europeus", "Projetos europeus", "Políticas públicas", "Direitos humanos", "Inclusão e proteção"]
+    headline: "Política, assuntos europeus e direitos fundamentais"
+    tags: ["Assessoria política", "Assuntos europeus", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
     ntfy_env: NTFY_TOPIC_MARIA
@@ -209,6 +209,9 @@ profiles:
         strong:
           - {label: "Setor público", examples: ["administração pública", "ministério", "câmara municipal", "instituto público"], pattern: "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"}
           - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
+          - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|\\bMEP\\b"}
+          - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
+          - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b"}
           - {label: "Assuntos europeus", examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|uni[ãa]o europeia|european union|\\bEU\\b institutions|institui[çc][õo]es europeias|brussels|bruxelas|\\bMEP\\b|eurodeputad"}
           - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Erasmus+", "Interreg", "cooperação internacional"], pattern: "eu[- ]funded project|projetos? europeus?|european projects?|horizon europe|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|gestor[a]? de projetos? europeus?|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional"}
           - {label: "Direitos humanos", examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
@@ -313,6 +316,16 @@ sources:
       - "public affairs"
       - "European projects"
       - "project officer"
+      - "assessor parlamentar"
+      - "parliamentary assistant"
+      - "political advisor"
+      - "adjunto de gabinete"
+      - "advocacy officer"
+      - "ONG"
+      - "civil society"
+      - "rule of law"
+      - "fundamental rights"
+      - "migration policy"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias
@@ -361,6 +374,9 @@ sources:
       - "igualdade de género"
       - "inclusão social"
       - "assuntos europeus"
+      - "assessor parlamentar"
+      - "advocacy"
+      - "ONG"
 
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o
