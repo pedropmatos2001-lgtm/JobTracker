@@ -59,6 +59,7 @@ keywords:
     - {label: "Utilities: energia, água e resíduos", examples: ["utilities", "transição energética", "água e saneamento", "resíduos"], pattern: "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"}
     - {label: "PMO e programas", examples: ["PMO", "program manager", "transformation office"], pattern: "pmo|program(me)? manage|transformation (manager|lead|office)"}
     - {label: "Fundos europeus", examples: ["fundos europeus", "PRR", "Portugal 2030", "Horizon Europe"], pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
+    - {label: "Consultoria ao setor público", examples: ["Government & Public Services", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
     - {label: "CCDR e modernização administrativa", examples: ["CCDR", "desenvolvimento regional", "modernização administrativa"], pattern: "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"}
   medium:                  # +1 cada (tecnologia e IA contam, mas como complemento)
     - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|genai|generative ai|ia generativa"
@@ -198,7 +199,7 @@ profiles:
   - id: pedro
     name: Pedro
     headline: "Sustentabilidade, estratégia e operações"
-    tags: ["Processos e operações", "Modelo operativo", "Sustentabilidade e clima", "Ambiente e tecnologia", "Utilities", "Smart cities", "Fundos europeus"]
+    tags: ["Consultoria ao setor público", "Processos e operações", "Modelo operativo", "Sustentabilidade e clima", "Ambiente e tecnologia", "Utilities", "Smart cities", "Fundos europeus"]
     languages: ["Português", "Inglês C1", "Espanhol B1"]
     cv_url: ""                       # opcional: ligação privada para o teu CV
     ntfy_env: NTFY_TOPIC

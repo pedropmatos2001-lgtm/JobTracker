@@ -391,7 +391,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                                    for s in cfg.get("sources", []) if s.get("enabled") is not False],
                        "schedule": cfg.get("schedule_text", "Todos os dias, por volta das 7h15 e das 16h15"),
                        "stats": stats}
-            json.dump({"updated": today.isoformat(), "profiles": [p["public"] for p in profiles], "tracker": tracker,
+            json.dump({"updated": today.isoformat(), "updated_at": datetime.now(timezone.utc).isoformat(timespec="minutes"), "profiles": [p["public"] for p in profiles], "tracker": tracker,
                        "matches": state["matches"]}, f, ensure_ascii=False)
 
     return {"stats": stats, "report": report, "title": title, "body": body,

@@ -220,3 +220,13 @@ def test_pedro_skips_big4_but_gets_other_consultancies():
     v = evaluate(other, ps["pedro"], t)
     assert v.include and target_company(other, ps["pedro"]) == "Sia Partners"
     assert evaluate(big4, ps["maria"], t).excluded_by != "empresa excluída deste perfil"
+
+
+def test_pedro_has_public_sector_consulting_theme():
+    from datetime import date
+    from jobtracker.scoring import evaluate
+    ps = {p["id"]: p["cfg"] for p in build_profiles(cfg2())}
+    j = mk("Consultor Sénior – Setor Público", "4 anos de experiência. Consultoria ao setor público: modelo operativo "
+           "e melhoria de processos para ministérios e câmaras.", company="Sia Partners")
+    v = evaluate(j, ps["pedro"], date(2026, 11, 18))
+    assert v.include and "Consultoria ao setor público" in v.themes
