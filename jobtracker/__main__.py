@@ -30,13 +30,34 @@ def dedupe_key(job):
     return f"{c}|{t}" if c and t else ""
 
 
+PUBLIC_PROFILE_KEYS = ("id", "name", "headline", "tags", "languages", "cv_url", "linkedin")
+
+
+def build_profiles(cfg):
+    """Perfis definidos em config.yaml (`profiles:`). Cada um herda as regras do topo do ficheiro e
+    pode substituir qualquer uma em `rules:`. Sem `profiles:`, há um único perfil com as regras do topo."""
+    base = {k: v for k, v in cfg.items() if k not in ("profiles", "sources")}
+    raw = cfg.get("profiles") or [{"id": "eu", "admin": True}]
+    out = []
+    for i, p in enumerate(raw):
+        pcfg = {**base, **(p.get("rules") or {})}
+        out.append({"id": p["id"], "name": p.get("name", ""), "cfg": pcfg,
+                    "admin": bool(p.get("admin", i == 0)),
+                    "ntfy_env": p.get("ntfy_env", "NTFY_TOPIC"), "email_env": p.get("email_env", "EMAIL_TO"),
+                    "profile_env": p.get("profile_env", "CANDIDATE_PROFILE"),
+                    "public": {k: p[k] for k in PUBLIC_PROFILE_KEYS if p.get(k)}})
+    return out
+
+
 def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=None,
         send=None, dry_run=False, judge_fn=None, kit_fn=None, candidate_text=None, main_run=True):
     """main_run=False nas execuções extra do dia (ex.: à tarde): não repete "estou vivo" nem o radar."""
     session = session or requests.Session()
     fetch = fetch or (lambda src: sources.fetch_source(src, session, env))
     detail = detail or (lambda job: sources.fetch_detail(job, session))
-    send = send or (lambda title, body, click: notify.dispatch(env, title, body, click))
+    send = send or (lambda title, body, click, p=None: notify.dispatch(
+        env, title, body, click, topic=env.get((p or {}).get("ntfy_env", "NTFY_TOPIC")) or "",
+        email_to=env.get((p or {}).get("email_env", "EMAIL_TO")) or ""))   # sem canal próprio = nada (nunca o de outro)
 
     jcfg = cfg.get("judge", {}) or {}
     api_key = env.get("ANTHROPIC_API_KEY")
@@ -52,13 +73,16 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                 candidate_text = f.read()
         except OSError:
             candidate_text = ""
-    if judge_on and judge_fn is None:
-        model = jcfg.get("model", judge_mod.DEFAULT_MODEL)
-        judge_fn = lambda j: judge_mod.judge(j, candidate_text, api_key, model, session)
-    if judge_on and kit_fn is None and api_key:
-        model = jcfg.get("model", judge_mod.DEFAULT_MODEL)
-        kit_fn = lambda j, v: kit_mod.build_kit(j, v, candidate_text, api_key, model, session)
-    judge_budget = jcfg.get("max_calls", 40)
+    model = jcfg.get("model", judge_mod.DEFAULT_MODEL)
+    profiles = build_profiles(cfg)
+    for p in profiles:
+        text = env.get(p["profile_env"]) or (candidate_text if p["admin"] else "")
+        p["judge_fn"] = p["kit_fn"] = None
+        if judge_on and (text or judge_fn or p["admin"]):
+            p["judge_fn"] = judge_fn or (lambda j, t=text: judge_mod.judge(j, t, api_key, model, session))
+            if kit_fn or api_key:
+                p["kit_fn"] = kit_fn or (lambda j, v, t=text: kit_mod.build_kit(j, v, t, api_key, model, session))
+    judge_budget = [jcfg.get("max_calls", 40)]
     min_fit = jcfg.get("min_fit", 55)
 
     state = st.load(state_path)
@@ -91,33 +115,49 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             all_jobs.setdefault(j.uid, j)
 
     # 2) só o que ainda não vimos (pelo endereço e pela dupla empresa+título, entre fontes)
+    # Cada vaga guarda que perfis já a avaliaram ("ev"). Um perfil acrescentado depois avalia as vagas que
+    # ainda estão na janela de recolha, sem os outros perfis voltarem a ser avisados delas.
+    all_ids = [p["id"] for p in profiles]
+    first_id = all_ids[0]
+    def evaluated(meta):
+        return set(meta.get("ev") or [first_id])
     seen_keys = {m["k"] for m in state["seen"].values() if m.get("k")}
-    new_jobs = []
+    new_jobs, todo = [], {}
     for u, j in all_jobs.items():
         if u in state["seen"]:
+            old = state["seen"][u]
+            missing = [pid for pid in all_ids if pid not in evaluated(old)]
+            if missing and old.get("why") not in ("fechada", "duplicada noutra fonte"):
+                todo[u] = missing
+                new_jobs.append(j)
             continue
         k = dedupe_key(j)
         if k and k in seen_keys:
-            state["seen"][u] = {"first_seen": today.isoformat(), "why": "duplicada noutra fonte", "k": k}
+            state["seen"][u] = {"first_seen": today.isoformat(), "why": "duplicada noutra fonte", "k": k, "ev": all_ids}
             continue
         if k:
             seen_keys.add(k)
+        todo[u] = all_ids
         new_jobs.append(j)
     # as mais prometedoras pelo título primeiro: o limite de páginas de detalhe gasta-se onde vale a pena
-    kw = cfg.get("keywords", {})
-    title_rx = [re.compile(p, re.I) for p in kw.get("strong", []) + kw.get("medium", [])]
-    title_rx.append(re.compile(cfg.get("senior_title", "senior|manager|lead"), re.I))
+    title_rx = []
+    for prof in profiles:                       # palavras-chave de todos os perfis
+        kw = prof["cfg"].get("keywords", {})
+        title_rx += [re.compile(x, re.I) for x in kw.get("strong", []) + kw.get("medium", [])]
     new_jobs.sort(key=lambda j: -sum(1 for rx in title_rx if rx.search(j.title or "")))
-    stats = {"seen": len(all_jobs), "new": len(new_jobs), "passed": 0}
+    stats = {"seen": len(all_jobs), "new": sum(1 for u in todo if u not in state["seen"]), "passed": 0}
     li_fail = 0                                # falhas seguidas no detalhe do LinkedIn
 
-    # 3) filtro barato -> detalhe (descrição completa, confirma que está aberta) -> pontuação
+    # 3) filtro barato -> detalhe (descrição completa, confirma que está aberta) -> pontuação por perfil
     matches, budget = [], cfg.get("max_detail_fetches", 60)
     for j in new_jobs:
-        meta = {"first_seen": today.isoformat(), "k": dedupe_key(j)}
-        why = cheap_filter(j, cfg, today)
-        if why:
-            state["seen"][j.uid] = {**meta, "why": why}
+        old = state["seen"].get(j.uid)
+        mine = [p for p in profiles if p["id"] in todo[j.uid]]
+        meta = {**(old or {}), "first_seen": (old or {}).get("first_seen", today.isoformat()), "k": dedupe_key(j),
+                "ev": sorted(evaluated(old) | set(todo[j.uid])) if old else list(todo[j.uid])}
+        whys = [cheap_filter(j, p["cfg"], today) for p in mine]
+        if all(whys):                          # não interessa a nenhum perfil (dos que faltam)
+            state["seen"][j.uid] = {**meta, "why": meta.get("why") if old else whys[0]}
             continue
         is_li = "linkedin_id" in (j.extra or {})
         if sources.needs_detail(j) and is_li and li_fail >= 3:
@@ -144,88 +184,127 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             if j is None:                     # a fonte diz que já fechou
                 state["seen"][orig.uid] = {**meta, "why": "fechada"}
                 continue
-        v = evaluate(j, cfg, today)
-        state["seen"][j.uid] = {**meta, "score": v.score, "why": v.excluded_by}
-        if v.include:
+        hits, seen_meta = {}, {**meta}
+        if old:
+            seen_meta.pop("score", None)
+        for p in mine:
+            v = evaluate(j, p["cfg"], today)
+            seen_meta.setdefault("score", v.score)
+            seen_meta.setdefault("why", v.excluded_by)
+            if len(profiles) > 1:
+                seen_meta.setdefault("per", {})[p["id"]] = v.score if v.include else v.excluded_by
+            if not v.include:
+                continue
             jd = None
-            if judge_on and judge_budget > 0:
-                judge_budget -= 1
+            if p["judge_fn"] and judge_budget[0] > 0:
+                judge_budget[0] -= 1
                 try:
-                    jd = judge_fn(j)
+                    jd = p["judge_fn"](j)
                 except Exception as e:           # falha aberta: sem juiz, vale a pontuação
                     report.append(f"juiz falhou ({j.company}): {e}")
             if jd and (jd["decisao"] == "ignorar" or jd["fit"] < min_fit):
-                state["seen"][j.uid]["why"] = "juiz: baixo encaixe"
-                state["seen"][j.uid]["fit"] = jd["fit"]
+                seen_meta.setdefault("judge_low", []).append(p["id"])
                 continue
-            if jd:
-                state["seen"][j.uid]["fit"] = jd["fit"]
-            matches.append({"job": j, "verdict": v, "judge": jd})
-            # a página só leva dados públicos da vaga; as notas do juiz ficam fora se o repositório for público
-            entry = {**j.to_dict(), "score": v.score, "flags": v.flags[:4], "first_seen": today.isoformat()}
-            if not pub:
-                entry.update({"reasons": v.reasons[:6], "judge": jd})
-            elif jd:
-                entry["fit"] = jd["fit"]
-            state["matches"].append(entry)
+            hits[p["id"]] = (v, jd)
+        if hits:
+            seen_meta["why"] = ""
+        elif old:
+            seen_meta["why"] = old.get("why", "")
+        elif seen_meta.get("judge_low"):
+            seen_meta["why"] = "juiz: baixo encaixe"
+        seen_meta.pop("judge_low", None)
+        state["seen"][j.uid] = seen_meta
+        if not hits:
+            continue
+        matches.append({"job": j, "hits": hits})
+        # a página só leva dados públicos da vaga; as notas do juiz ficam fora se o repositório for público
+        first_v, first_jd = next(iter(hits.values()))
+        prev = next((x for x in state["matches"] if x.get("url") == j.url), None)
+        if prev is not None:                   # já está na página (outro perfil): acrescenta este perfil
+            prev.setdefault("profiles", {first_id: {"score": prev.get("score"), "flags": prev.get("flags", [])}})
+            for pid, (v, jd) in hits.items():
+                prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
+            continue
+        entry = {**j.to_dict(), "score": first_v.score, "flags": first_v.flags[:4], "first_seen": today.isoformat(),
+                 "profiles": {pid: {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
+                              for pid, (v, jd) in hits.items()}}
+        if not pub:
+            entry.update({"reasons": first_v.reasons[:6], "judge": first_jd})
+        elif first_jd:
+            entry["fit"] = first_jd["fit"]
+        state["matches"].append(entry)
     stats["passed"] = len(matches)
 
-    # 4) avisar
-    def rank(m):
-        return -(m["judge"]["fit"] if m.get("judge") else m["verdict"].score * 5)
-    top = sorted(matches, key=rank)[: cfg.get("max_per_alert", 5)]
+    # 4) avisar — cada perfil recebe só as suas vagas no seu canal
+    report_sent, title, body, channels = {}, "", "", []
+    page = cfg.get("click_url") or ""
+    for p in profiles:
+        mine = [{"job": m["job"], "verdict": m["hits"][p["id"]][0], "judge": m["hits"][p["id"]][1]}
+                for m in matches if p["id"] in m["hits"]]
+        mine.sort(key=lambda m: -(m["judge"]["fit"] if m.get("judge") else m["verdict"].score * 5))
+        top = mine[: cfg.get("max_per_alert", 5)]
+        click = (page + ("#" + p["id"] if len(profiles) > 1 and page else "")) or None
 
-    # kits de candidatura só para os melhores (tu revês e submetes; nada é enviado por mim)
-    kit_min, kit_max = jcfg.get("kit_min_fit", 70), jcfg.get("max_kits", 3)
-    made = 0
-    if kit_fn and not dry_run:
-        for m in top:
-            jd = m.get("judge")
-            if made >= kit_max or not jd or jd["fit"] < kit_min:
-                continue
-            try:
-                md = kit_fn(m["job"], jd)
-            except Exception as e:
-                report.append(f"kit falhou ({m['job'].company}): {e}")
-                continue
-            name = f"{today.isoformat()}-{kit_mod.slug(m['job'].company + ' ' + m['job'].title)}.md"
-            if pub:
-                try:
-                    ok = notify.send_email(env, f"Kit de candidatura: {m['job'].title} — {m['job'].company}", md)
-                except Exception as e:
-                    ok = False
-                    report.append(f"kit por email falhou: {e}")
-                if not ok:
+        # kits de candidatura só para os melhores (tu revês e submetes; nada é enviado por mim)
+        kit_min, kit_max = jcfg.get("kit_min_fit", 70), jcfg.get("max_kits", 3)
+        made = 0
+        if p["kit_fn"] and not dry_run:
+            for m in top:
+                jd = m.get("judge")
+                if made >= kit_max or not jd or jd["fit"] < kit_min:
                     continue
-                m["kit"] = "enviado por email"
-            else:
-                os.makedirs(os.path.join(docs_dir, "kits"), exist_ok=True)
-                with open(os.path.join(docs_dir, "kits", name), "w", encoding="utf-8") as f:
-                    f.write(md)
-                m["kit"] = f"docs/kits/{name}"
-            made += 1
+                try:
+                    md = p["kit_fn"](m["job"], jd)
+                except Exception as e:
+                    report.append(f"kit falhou ({m['job'].company}): {e}")
+                    continue
+                name = f"{today.isoformat()}-{kit_mod.slug(m['job'].company + ' ' + m['job'].title)}.md"
+                if pub:
+                    try:
+                        ok = notify.send_email(env, f"Kit de candidatura: {m['job'].title} — {m['job'].company}", md,
+                                               to=env.get(p["email_env"]) or "")
+                    except Exception as e:
+                        ok = False
+                        report.append(f"kit por email falhou: {e}")
+                    if not ok:
+                        continue
+                    m["kit"] = "enviado por email"
+                else:
+                    os.makedirs(os.path.join(docs_dir, "kits"), exist_ok=True)
+                    with open(os.path.join(docs_dir, "kits", name), "w", encoding="utf-8") as f:
+                        f.write(md)
+                    m["kit"] = f"docs/kits/{name}"
+                made += 1
 
-    heartbeat = main_run and not matches and today.weekday() == cfg.get("heartbeat_weekday", 0)
-    title, body = notify.build_message(top, health_alerts, stats, total=len(matches),
-                                       page_url=cfg.get("click_url"))
-    if heartbeat or health_alerts:
-        body += "\n\nEstado das fontes:\n" + "\n".join(f"- {r}" for r in report)
-    channels = []
-    if (matches or health_alerts or heartbeat) and not dry_run:
-        channels = send(title, body, cfg.get("click_url"))
-    if main_run and not dry_run and today.weekday() == cfg.get("radar_weekday", 4):
-        rt, rb = notify.build_radar(state["matches"], today)
-        if rb:
-            send(rt, rb, cfg.get("click_url"))
+        alerts = health_alerts if p["admin"] else []
+        heartbeat = p["admin"] and main_run and not mine and today.weekday() == cfg.get("heartbeat_weekday", 0)
+        t, b = notify.build_message(top, alerts, stats, total=len(mine), page_url=click)
+        if len(profiles) > 1 and p["name"]:
+            t = f"{p['name']}: {t}" if mine else t
+        if heartbeat or alerts:
+            b += "\n\nEstado das fontes:\n" + "\n".join(f"- {r}" for r in report)
+        if p["admin"] or not title:
+            title, body = t, b
+        if (mine or alerts or heartbeat) and not dry_run:
+            res = send(t, b, click, p)
+            report_sent[p["id"]] = res
+            if p["admin"] or not channels:
+                channels = res
+        if main_run and not dry_run and today.weekday() == cfg.get("radar_weekday", 4):
+            week = [m for m in state["matches"] if p["id"] in (m.get("profiles") or {p["id"]: 1})]
+            rt, rb = notify.build_radar(week, today)
+            if rb:
+                send(rt, rb, click, p)
 
     if not dry_run:
         st.save(state_path, state, today)
         os.makedirs(docs_dir, exist_ok=True)
         with open(os.path.join(docs_dir, "jobs.json"), "w", encoding="utf-8") as f:
-            json.dump({"updated": today.isoformat(), "matches": state["matches"]}, f, ensure_ascii=False)
+            json.dump({"updated": today.isoformat(), "profiles": [p["public"] for p in profiles],
+                       "matches": state["matches"]}, f, ensure_ascii=False)
 
     return {"stats": stats, "report": report, "title": title, "body": body,
-            "channels": channels, "matches": matches}
+            "channels": channels, "matches": matches, "sent": report_sent}
 
 
 def load_fixture(path):

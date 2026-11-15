@@ -166,6 +166,10 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     if org.get("pattern") and re.search(org["pattern"], f"{job.company}\n{job.title}", re.I):
         score += org.get("points", 5)
         v.reasons.append("entidade do tipo associação / cluster / CoLAB / centro tecnológico")
+    sec = cfg.get("sector_bonus") or {}
+    if sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
+        score += sec.get("points", 4)
+        v.reasons.append("empresa/setor preferido (utilities, energia, água, resíduos)")
 
     # 3) avisos
     if job.salary_min or job.salary_max:

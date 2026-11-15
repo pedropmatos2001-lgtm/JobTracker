@@ -27,7 +27,43 @@
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 Inter, -apple-system, system-ui, "Segoe UI", sans-serif;
          padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
-  .wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* barra lateral de perfis */
+  .app { display: grid; grid-template-columns: 288px minmax(0, 1fr); min-height: 100vh; }
+  .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--card); border-right: 1px solid var(--line);
+          padding: 22px 16px; display: flex; flex-direction: column; gap: 22px; min-width: 0; overflow-x: hidden; }
+  .side > * { min-width: 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; letter-spacing: -.01em; padding: 0 6px; }
+  .brand i { width: 28px; height: 28px; border-radius: 8px; background: var(--ink); display: grid; place-items: center; color: #fff; font-style: normal; font-size: 14px; }
+  .plabel { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3); padding: 0 8px; margin-bottom: 6px; }
+  .profiles { display: grid; gap: 2px; grid-template-columns: minmax(0, 1fr); }
+  .pbtn { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; background: transparent; padding: 8px; border-radius: 10px;
+          text-align: left; cursor: pointer; font: inherit; color: var(--ink); min-height: 48px; min-width: 0;
+          transition: background-color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
+  .pbtn:hover { background: #f4f6f8; }
+  .pbtn:active { transform: scale(.98); }
+  .pbtn[aria-current=true] { background: var(--accent-soft); }
+  .pbtn[aria-current=true] .pn { color: var(--accent); }
+  .avatar { flex: none; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 13px; }
+  .pinfo { min-width: 0; flex: 1; }
+  .pn { font-size: 14px; font-weight: 600; line-height: 1.25; transition: color var(--motion-150) var(--ease-out); }
+  .ph { font-size: 12px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pcount { flex: none; font-size: 12px; font-weight: 600; min-width: 22px; text-align: center; padding: 1px 7px; border-radius: 999px;
+            background: var(--new-soft); color: var(--new); font-variant-numeric: tabular-nums; }
+  .pcard { border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 12px; }
+  .pcard.swap { animation: fade var(--motion-200) var(--ease-out); }
+  .pcard h2 { font-size: 15px; margin: 0; letter-spacing: -.01em; }
+  .pcard .ph { white-space: normal; margin-top: 2px; }
+  .ptags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .ptags span { font-size: 12px; font-weight: 500; padding: 3px 8px; border-radius: 6px; background: #f1f5f9; color: var(--ink-2); }
+  .plang { font-size: 12px; color: var(--ink-2); }
+  .pacts { display: flex; gap: 8px; flex-wrap: wrap; }
+  .side .foot { margin-top: auto; font-size: 12px; color: var(--ink-3); padding: 0 6px; display: grid; gap: 8px; }
+  .side .foot a { color: var(--ink-2); font-weight: 500; text-decoration: none; }
+  .side .foot a:hover { color: var(--accent); }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  h1.swap { animation: fade var(--motion-200) var(--ease-out); }
 
   /* cabeçalho */
   header { background: var(--card); border-bottom: 1px solid var(--line); }
@@ -112,6 +148,23 @@
   .empty { text-align: center; padding: 56px 16px; color: var(--ink-2); background: var(--card); border: 1px dashed var(--line); border-radius: var(--radius); }
   .empty b { display: block; color: var(--ink); font-size: 16px; margin-bottom: 4px; }
   footer { color: var(--ink-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
+
+  .app.solo { display: block; } .app.solo .side { display: none; }
+
+  @media (max-width: 900px) {
+    .app { display: block; }
+    .side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; gap: 12px; }
+    .brand, .plabel, .side .foot { display: none; }
+    .profiles { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
+    .profiles::-webkit-scrollbar { display: none; }
+    .pbtn { width: auto; flex: none; padding: 6px 12px 6px 6px; border: 1px solid var(--line); border-radius: 999px; min-height: 44px; }
+    .pbtn[aria-current=true] { border-color: #bfdbfe; }
+    .pbtn .ph { display: none; }
+    .avatar { width: 30px; height: 30px; font-size: 12px; }
+    .pcard { border: 0; padding: 0; gap: 8px; }
+    .pcard h2, .pcard .ptags { display: none; }
+    .wrap { padding: 0 16px; }
+  }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   @media (pointer: coarse) {
@@ -142,10 +195,24 @@
 </style>
 </head>
 <body>
+<div class="app">
+<aside class="side" aria-label="Perfis">
+  <div class="brand"><i aria-hidden="true">V</i>Vagas</div>
+  <div>
+    <div class="plabel">Perfis</div>
+    <nav class="profiles" id="profiles"></nav>
+  </div>
+  <section class="pcard" id="pcard" aria-live="polite"></section>
+  <div class="foot">
+    <a id="addProfile" href="#" target="_blank" rel="noopener">+ Adicionar perfil</a>
+    <span>Cada perfil recebe as suas notificações. Recolha duas vezes por dia.</span>
+  </div>
+</aside>
+<div class="content">
 <header>
   <div class="wrap head">
     <div>
-      <h1>Vagas para ti</h1>
+      <h1 id="h1">Vagas para ti</h1>
       <div class="sub" id="sub">A carregar…</div>
     </div>
     <div class="stats">
@@ -179,12 +246,20 @@
 <main class="wrap"><div id="list"></div></main>
 <div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" type="button">Anular</button></div>
 <footer>Atualiza-se sozinho duas vezes por dia. As marcações ficam guardadas só neste dispositivo.</footer>
+</div>
+</div>
 
 <script>
-const KEY = "vagas-estado";
-let marks = {};
-try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
-const save = () => { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch (e) {} };
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
+};
+let profiles = [], current = "", marks = {}, all = [];
+const markKey = pid => "vagas-estado:" + pid;
+const save = () => store.set(markKey(current), marks);
+// ligação para editar as regras no GitHub (a página está em <utilizador>.github.io/<repo>/)
+const repoEdit = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
+  return location.hostname.endsWith("github.io") && r ? `https://github.com/${u}/${r}/edit/main/config.yaml` : ""; })();
 
 const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", remotive: "Remoto" };
 const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Sites de empresas";
@@ -201,6 +276,57 @@ function toast(msg, onUndo) {
   clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 4000);
 }
 document.getElementById("toastUndo").onclick = () => { if (undo) undo(); undo = null; document.getElementById("toast").classList.remove("show"); };
+function viewFor(pid) {
+  const first = profiles[0] && profiles[0].id;
+  return all.filter(m => m.profiles ? pid in m.profiles : pid === first).map(m => {
+    const pp = (m.profiles || {})[pid] || {};
+    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit };
+  });
+}
+function pidColor(p) { return colorOf(p.id + (p.name || "")); }
+function renderSide() {
+  const nav = document.getElementById("profiles"); nav.textContent = "";
+  for (const p of profiles) {
+    const ms = store.get(markKey(p.id), {});
+    const fresh = viewFor(p.id).filter(m => m.first_seen === updated && !ms[m.url]).length;
+    const b = el("button", "pbtn"); b.type = "button"; b.setAttribute("aria-current", p.id === current);
+    const av = el("span", "avatar", initials(p.name || p.id)); av.style.background = pidColor(p); av.setAttribute("aria-hidden", "true");
+    const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
+    b.append(av, info);
+    if (fresh) { const c = el("span", "pcount", fresh); c.title = `${fresh} nova(s) hoje`; b.append(c); }
+    b.onclick = () => select(p.id);
+    nav.append(b);
+  }
+  const p = profiles.find(x => x.id === current) || {};
+  const card = document.getElementById("pcard"); card.textContent = "";
+  card.classList.remove("swap"); void card.offsetWidth; card.classList.add("swap");
+  const head = el("div"); head.append(el("h2", null, p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
+  card.append(head);
+  if ((p.tags || []).length) { const t = el("div", "ptags"); p.tags.forEach(x => t.append(el("span", null, x))); card.append(t); }
+  if ((p.languages || []).length) card.append(el("div", "plang", "Línguas: " + p.languages.join(" · ")));
+  const acts = el("div", "pacts");
+  if (p.cv_url) { const a = el("a", "btn primary", "Ver CV"); a.href = p.cv_url; a.target = "_blank"; a.rel = "noopener"; acts.append(a); }
+  if (repoEdit) { const a = el("a", "btn", "Ajustar regras"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener";
+    a.title = "Abre a configuração no GitHub (secção profiles)"; acts.append(a); }
+  if (acts.children.length) card.append(acts);
+  const add = document.getElementById("addProfile");
+  if (repoEdit) add.href = repoEdit; else add.style.display = "none";
+}
+function select(pid, fromHash) {
+  if (!profiles.some(p => p.id === pid)) pid = profiles[0].id;
+  const changed = pid !== current;
+  current = pid; store.set("vagas-perfil", pid);
+  if (!fromHash && location.hash.slice(1) !== pid) history.replaceState(null, "", "#" + pid);
+  marks = store.get(markKey(pid), {});
+  data = viewFor(pid);
+  const p = profiles.find(x => x.id === pid);
+  const h1 = document.getElementById("h1");
+  h1.textContent = p && p.name ? `Vagas para ${p.name}` : "Vagas para ti";
+  if (changed) { h1.classList.remove("swap"); void h1.offsetWidth; h1.classList.add("swap"); }
+  document.title = p && p.name ? `Vagas · ${p.name}` : "Vagas";
+  src = "Todas"; animateNext = true;
+  renderSide(); updateStats(); buildSources(); render();
+}
 function updateStats() {
   const fresh = data.filter(m => !marks[m.url]);
   document.getElementById("sToday").textContent = fresh.filter(m => m.first_seen === updated).length;
@@ -234,8 +360,8 @@ function card(m) {
     b.onclick = () => {
       const prev = marks[m.url];
       if (on) delete marks[m.url]; else marks[m.url] = val;
-      save(); updateStats();
-      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); updateStats(); render(); };
+      save(); updateStats(); renderSide();
+      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); updateStats(); renderSide(); render(); };
       if (!on) toast(val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
       if (!on && !showDone) { li.classList.add("leaving"); setTimeout(render, 150); } else render();
     }; return b; };
@@ -254,8 +380,9 @@ function render() {
     .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
   if (!rows.length) {
     const e = el("div", "empty");
-    e.append(el("b", null, data.length ? "Nada com estes filtros" : "Ainda sem vagas"),
-             document.createTextNode(data.length ? "Experimenta alargar o período ou limpar a pesquisa." : "As próximas aparecem aqui assim que o tracker correr."));
+    const who = (profiles.find(x => x.id === current) || {}).name;
+    e.append(el("b", null, data.length ? "Nada com estes filtros" : (who ? `Ainda sem vagas para ${who}` : "Ainda sem vagas")),
+             document.createTextNode(data.length ? "Experimenta alargar o período ou limpar a pesquisa." : "As primeiras aparecem aqui depois da próxima recolha (≈07:15 ou 16:15)."));
     box.append(e); return;
   }
   let day = null, list = null, i = 0;
@@ -281,17 +408,22 @@ function buildSources() {
 
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
   updated = d.updated;
-  data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
+  profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];
+  all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
     ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
-  updateStats();
+  // marcações antigas (antes dos perfis) passam para o primeiro perfil
+  const legacy = store.get("vagas-estado", null);
+  if (legacy && !store.get(markKey(profiles[0].id), null)) store.set(markKey(profiles[0].id), legacy);
   document.getElementById("sub").textContent = "Atualizado a " + new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" }) + " · Portugal continental";
-  buildSources(); render();
+  if (profiles.length < 2) document.querySelector(".app").classList.add("solo");
+  select(location.hash.slice(1) || store.get("vagas-perfil", profiles[0].id), true);
 }).catch(() => { document.getElementById("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; render(); });
 
 document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; animateNext = true; render(); });
 document.getElementById("showDone").onchange = e => { showDone = e.target.checked; render(); };
 document.getElementById("q").addEventListener("input", render);
+addEventListener("hashchange", () => profiles.length && select(location.hash.slice(1), true));
 const bar = document.querySelector(".bar");
 addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 140), { passive: true });
 </script>

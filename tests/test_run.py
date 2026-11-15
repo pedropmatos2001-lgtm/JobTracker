@@ -18,13 +18,14 @@ def cfg():
         c = yaml.safe_load(f)
     c["sources"] = [{"type": "x", "name": "A"}, {"type": "x", "name": "B"}]
     c["public_repo"] = False
+    c.pop("profiles", None)          # testes de um perfil; os de vários perfis estão em test_profiles.py
     return c
 
 
 def good(url="https://a/1", **kw):
     base = dict(source="t", company="Siemens", title="AI Transformation Consultant", url=url,
                 location="Lisbon, Portugal", posted="2026-11-16",
-                description="3+ years of experience. Process re-engineering and agentic AI. "
+                description="3+ years of experience. Process re-engineering and agentic AI. Operating model design for a sustainability programme. "
                             "Stakeholder management, requirements.")
     base.update(kw)
     return Job(**base)
@@ -40,7 +41,7 @@ def harness(jobs_by_source, sent, closed=()):
     def detail(j):
         return None if j.url in closed else j
 
-    def send(title, body, click):
+    def send(title, body, click, profile=None):
         sent.append((title, body))
         return ["fake: ok"]
     return dict(fetch=fetch, detail=detail, send=send)

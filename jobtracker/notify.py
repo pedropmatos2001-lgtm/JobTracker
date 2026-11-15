@@ -57,8 +57,9 @@ def send_ntfy(topic, title, body, click=None, priority=3, server="https://ntfy.s
     r.raise_for_status()
 
 
-def send_email(env, title, body):
-    host, user, pw, to = env.get("SMTP_HOST"), env.get("SMTP_USER"), env.get("SMTP_PASS"), env.get("EMAIL_TO")
+def send_email(env, title, body, to=None):
+    host, user, pw = env.get("SMTP_HOST"), env.get("SMTP_USER"), env.get("SMTP_PASS")
+    to = env.get("EMAIL_TO") if to is None else to     # "" = este perfil não tem email
     if not all([host, user, pw, to]):
         return False
     msg = EmailMessage()
@@ -70,10 +71,10 @@ def send_email(env, title, body):
     return True
 
 
-def dispatch(env, title, body, click=None):
-    """Envia por todos os canais configurados. Devolve a lista de canais usados / erros."""
+def dispatch(env, title, body, click=None, topic=None, email_to=None):
+    """Envia por todos os canais configurados (de um perfil). Devolve a lista de canais usados / erros."""
     results = []
-    topic = env.get("NTFY_TOPIC")
+    topic = topic if topic is not None else env.get("NTFY_TOPIC")
     if topic:
         try:
             send_ntfy(topic, title, body, click=click)
@@ -81,7 +82,7 @@ def dispatch(env, title, body, click=None):
         except Exception as e:  # um canal avariado não impede os outros
             results.append(f"ntfy: ERRO {e}")
     try:
-        if send_email(env, title, body):
+        if send_email(env, title, body, to=email_to):
             results.append("email: ok")
     except Exception as e:
         results.append(f"email: ERRO {e}")
