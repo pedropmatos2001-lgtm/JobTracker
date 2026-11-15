@@ -298,3 +298,23 @@ def test_maria_no_content_moderation_jobs():
             location="Lisboa, Portugal", posted="2026-11-14",
             description="Review dubbed content for hate speech and discrimination policy violations. 1 year of experience.")
     assert not evaluate(j, maria, date(2026, 11, 15)).include
+
+
+def test_maria_eu_projects_like_big4_teams():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc, company="X"):
+        return Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 2 years of experience.")
+    for title, desc in [
+        ("Consultant – EU Institutions", "Support framework contracts with the European Commission (DG REGIO, DG EMPL) and EU tenders."),
+        ("Grant Manager", "Manage EU-funded projects under Horizon Europe and Erasmus+; reporting to the European Commission."),
+        ("Técnica de Projetos Europeus", "Gestão de candidaturas a programas europeus e acompanhamento de projetos financiados pela União Europeia."),
+    ]:
+        v = evaluate(job(title, desc, company="Deloitte"), maria, t)
+        assert v.include and "Projetos europeus e cooperação" in v.themes, (title, v.themes, v.excluded_by)
