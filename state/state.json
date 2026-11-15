@@ -1,8 +1,17 @@
 {
+ "cursors": {
+  "BEP (emprego público)": {
+   "last": 156914
+  }
+ },
  "health": {
   "Adzuna": {
    "fail_streak": 1,
    "last_ok": ""
+  },
+  "BEP (emprego público)": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
   },
   "EDP (Lisboa)": {
    "fail_streak": 0,
@@ -16,13 +25,33 @@
    "fail_streak": 1,
    "last_ok": ""
   },
+  "Galp (Lisboa)": {
+   "fail_streak": 1,
+   "last_ok": ""
+  },
+  "Galp (Porto)": {
+   "fail_streak": 1,
+   "last_ok": ""
+  },
   "Greenvolt": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "Indeed": {
    "fail_streak": 0,
    "last_ok": "2026-11-15"
   },
   "LIPOR": {
    "fail_streak": 1,
    "last_ok": ""
+  },
+  "Lightsource bp (Lisboa)": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
+  },
+  "LinkedIn": {
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
   },
   "Porto Ambiente": {
    "fail_streak": 0,
@@ -37,7 +66,1901 @@
    "last_ok": "2026-11-15"
   }
  },
- "matches": [],
+ "matches": [
+  {
+   "company": "Que Rico Casal",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "AI Project Manager (Estratégia e Operações)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490502812"
+  },
+  {
+   "company": "N-iX",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "AI Enablement Lead (GenAI Value Lab)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489254363"
+  },
+  {
+   "company": "Retarus",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "indeed",
+   "title": "Senior QA Engineer (m/f/d) - Quality Strategy & Automation",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=3b9ac4674cfb5a1d"
+  },
+  {
+   "company": "Kuehne+Nagel",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 19,
+   "source": "linkedin",
+   "title": "Global Road Logistics Artificial Intelligence Manager (m/f/d)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4482727074"
+  },
+  {
+   "company": "EY",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "AI & Tech Senior Consultant",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4385044625"
+  },
+  {
+   "company": "Deloitte",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Consultant/ Senior Consultant - Artificial Intelligence & Data",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4473509218"
+  },
+  {
+   "company": "Hays",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "AI Tech Lead (m/f/d)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4467874821"
+  },
+  {
+   "company": "Metyis",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "AI Data Governance Implementation Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4472559522"
+  },
+  {
+   "company": "BNP Paribas CIB",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "V.I.E - Full Stack AI Transformation Engineer H/F - Lisbon - 24 mois",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490754480"
+  },
+  {
+   "company": "Siemens",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Senior AI Engineer",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4488917686"
+  },
+  {
+   "company": "BNP Paribas CIB",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 14,
+   "source": "linkedin",
+   "title": "Primary Markets - Full Stack AI Transformation Engineer",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4482764758"
+  },
+  {
+   "company": "Hays",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 15,
+   "source": "linkedin",
+   "title": "AI Automation Engineer (m/f/d)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4486363361"
+  },
+  {
+   "company": "OutSystems",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Agentic Tech Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4414665518"
+  },
+  {
+   "company": "Planet",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Commercial AI Enablement & Performance Manager",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4435498120"
+  },
+  {
+   "company": "WTW",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "AI & Automation Specialist – Western Europe CRB",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4482806699"
+  },
+  {
+   "company": "IRIUM Portugal",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "linkedin",
+   "title": "AI Tech Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490525421"
+  },
+  {
+   "company": "Jimdo",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Senior Product Owner, Support Platform & AI",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490704197"
+  },
+  {
+   "company": "ALTEN",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "AI/Python Expert",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4464559419"
+  },
+  {
+   "company": "Wrike",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "linkedin",
+   "title": "Senior Product Manager, AI Platform & Ecosystem",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490747741"
+  },
+  {
+   "company": "Intermedia Intelligent Communications",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-15",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Sr. Product Manager - AI Builder",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4464243511"
+  },
+  {
+   "company": "Jimdo",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Senior AI Engineer",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4436338828"
+  },
+  {
+   "company": "Deloitte",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Senior Consultant | Microsoft Power Platform, Microsoft 365 & AI",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4474355738"
+  },
+  {
+   "company": "Confidential",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 16,
+   "source": "linkedin",
+   "title": "Business Transformation & Process Excellence Lead in Lisbon or Bucharest",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4480375824"
+  },
+  {
+   "company": "Johnson & Johnson Innovative Medicine",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
+    "sem salário indicado"
+   ],
+   "location": "Porto Salvo, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Transcend Manager PMO",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4491083767"
+  },
+  {
+   "company": "Revolut",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Strategy & Operations Manager (Crypto)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4445749822"
+  },
+  {
+   "company": "Sonae Sierra",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "Strategy & Corporate Development Project Manager",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4491068345"
+  },
+  {
+   "company": "Siemens",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Amadora, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 18,
+   "source": "indeed",
+   "title": "Senior AI Forward Deployed Engineer (FDE) (m/f/d)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=50faac6b2e5abf12"
+  },
+  {
+   "company": "Workato",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Remoto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": true,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "indeed",
+   "title": "Engineering Manager, ChatBots and AI",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=74160dcb25229b8b"
+  },
+  {
+   "company": "BNP Paribas",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "V.I.E - Full Stack AI Transformation Engineer H/F - Lisbon - 24 mois",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=a76b4cdbebfe6177"
+  },
+  {
+   "company": "Continental",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lousado, Braga, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Global Nature Strategy Coordinator",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490374148"
+  },
+  {
+   "company": "Continental",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lousado, Braga, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Sustainability Governance Mgr.",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490359817"
+  },
+  {
+   "company": "Carrier",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Matosinhos, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Environmental Health Safety & Facilities Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4487370335"
+  },
+  {
+   "company": "Enermatch",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Head de Marketing | Energia solar e autoconsumo coletivo",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490506595"
+  },
+  {
+   "company": "Vestas",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Leça do Bailio, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 13,
+   "source": "linkedin",
+   "title": "System Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4482730990"
+  },
+  {
+   "company": "BNP Paribas CIB",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "ESG Analyst - Fixed-Term",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4491002643"
+  },
+  {
+   "company": "Siemens Energy",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Amadora, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "AI Governance Specialist",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4472586671"
+  },
+  {
+   "company": "Coca-Cola Europacific Partners",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 14,
+   "source": "linkedin",
+   "title": "Associate Director, Business Resilience (Europe)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490731070"
+  },
+  {
+   "company": "repsol",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Gestor Comercial Setor Público (m/f)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4480678426"
+  },
+  {
+   "company": "Carrier",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Matosinhos, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Quality Project & Product Leader",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489867411"
+  },
+  {
+   "company": "BNP Paribas CIB",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Risk Senior Auditor",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4388734641"
+  },
+  {
+   "company": "Mastercard",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "Manager, Product Management",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4479425655"
+  },
+  {
+   "company": "Mastercard",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Senior Research Analyst - Associate Managing Consultant",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4443641575"
+  },
+  {
+   "company": "Mastercard",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Manager, Product Development",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4440179677"
+  },
+  {
+   "company": "Euroimmun",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Oeiras, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Account Manager - Diagnostics",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4482441241"
+  },
+  {
+   "company": "ICEYE",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Business Development Manager, Missions - Portugal",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4474730158"
+  },
+  {
+   "company": "BNP Paribas CIB",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Senior Business Analyst",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4456315902"
+  },
+  {
+   "company": "Siemens Energy",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Amadora, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 18,
+   "source": "linkedin",
+   "title": "Strategic Digital Consultant – Data & AI",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4434138379"
+  },
+  {
+   "company": "Siemens Energy",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "AI Solution Architect and Product Owner – Cost Value Engineering",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489589854"
+  },
+  {
+   "company": "Inetum",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "AI Architect",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4369913041"
+  },
+  {
+   "company": "Iterable",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Senior Data Scientist",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490707713"
+  },
+  {
+   "company": "SDG Group España",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "AI Architect",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4442825294"
+  },
+  {
+   "company": "Keyrus",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Data & AI Governance Architect",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490766345"
+  },
+  {
+   "company": "Jobgether",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "AI Platform Engineer",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489531932"
+  },
+  {
+   "company": "IRIUM Portugal",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "linkedin",
+   "title": "AI Engineer",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490524418"
+  },
+  {
+   "company": "Hays",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "IT Project Manager (m/f/d)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490746798"
+  },
+  {
+   "company": "Confidential",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "Digital Procurement Technology & Solutions Lead - Lisbon or Bucharest",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4480351916"
+  },
+  {
+   "company": "CodeWin",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "BPM & Digital Transformation Expert",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489274023"
+  },
+  {
+   "company": "adidas",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Senior Manager Tax",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4472613383"
+  },
+  {
+   "company": "SAP",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Porto Salvo, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "linkedin",
+   "title": "Business Processes Senior Consultant - Supply Planning / Integrated Business Planning",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4480616200"
+  },
+  {
+   "company": "LCG",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Change Manager M365",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490323685"
+  },
+  {
+   "company": "Philip Morris International",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Albarraque, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Principal Solution Architect SF and SAP Platform",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490362776"
+  },
+  {
+   "company": "Fujitsu",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Braga e Região",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 11,
+   "source": "linkedin",
+   "title": "SAP MM Senior Consultant",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4470924678"
+  },
+  {
+   "company": "(anónimo)",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Porto e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "linkedin",
+   "title": "Consultor SAP SuccessFactors Sénior (M/F)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4488909768"
+  },
+  {
+   "company": "BNP Paribas",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Product Manager",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490359720"
+  },
+  {
+   "company": "Inetum",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": true,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Team Leader / Microsoft Power Platform & Copilot Studio (Remote or Hybrid)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490709060"
+  },
+  {
+   "company": "Devoteam",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Low Code Unit | Senior Power Platform Consultant",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4445731147"
+  },
+  {
+   "company": "Optiwisers",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Microsoft Dynamics 365 CRM Operations Manager",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489565881"
+  },
+  {
+   "company": "Infineon Technologies",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Maia, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Procurement Process Excellence and Analytics Specialist (f/m/div)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4490708350"
+  },
+  {
+   "company": "Enovis",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Web Platform Manager",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4473277549"
+  },
+  {
+   "company": "Revolut",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "linkedin",
+   "title": "Operations Manager (Process)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489266291"
+  },
+  {
+   "company": "Insulet Corporation",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Senior Order Management Lead (Hybrid)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4489573284"
+  },
+  {
+   "company": "MIGSO-PCUBED",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Coimbra e Região",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "PMO (Escritório de projetos)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4488961028"
+  },
+  {
+   "company": "Siemens Energy",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Global Payroll Process Lead (f/m/d)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4481384425"
+  },
+  {
+   "company": "Ocean Infinity",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Porto, Porto, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Product Ops Lead",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4480031903"
+  },
+  {
+   "company": "Viatris",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "indeed",
+   "title": "Associate Manager, Rim Data Maintenance",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=4a7ca5ad7b75a8d4"
+  },
+  {
+   "company": "BNP Paribas",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "ESG Analyst - Fixed-Term",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=b748398534d41019"
+  },
+  {
+   "company": "bp",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "indeed",
+   "title": "Planning & Promotions Lead, Portugal - Fixed-Term Contract",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=561d2b4d56207667"
+  },
+  {
+   "company": "Siemens",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Amadora, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "indeed",
+   "title": "Tax Data & Process Automation Expert (m/f/d)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=0ad6cb4ffa9161a0"
+  },
+  {
+   "company": "Bitil - Professional Services In Technologies, Lda",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 6+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Senior SAP Functional S/4HANA SD Consultant (Hybrid - Lisbon/Portugal)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=5945a43a7ade4aa1"
+  },
+  {
+   "company": "Santander",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "Product Manager | Digital Channels",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=be26599ddc901f8a"
+  },
+  {
+   "company": "Boston Consulting Group",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "indeed",
+   "title": "PSG Senior Analyst - MDP Compensation Operations",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=46b9b8921ecf8c65"
+  },
+  {
+   "company": "Farfetch",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Porto, P13, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "indeed",
+   "title": "Head of Procurement",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=2843cb6265ca7082"
+  },
+  {
+   "company": "SpeedlineHub",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Braga, P03, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": true,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Senior Business Development Manager",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=59b67e0b397c9e51"
+  },
+  {
+   "company": "Nestlé USA",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Linda-a-Velha, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Social Intelligence Senior Analyst",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=6bbc1a3774d255d9"
+  },
+  {
+   "company": "Siemens",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-14",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "indeed",
+   "title": "Customer Services Support - German Speaker (m/f/d)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=9bd220facf4e1d39"
+  },
+  {
+   "company": "Bosch",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Braga, P03, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "Environmental, Health & Safety (EHS) Technician (f/m/div.)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=17c9d0ceb729ef33"
+  },
+  {
+   "company": "Atlas Copco Group",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Porto Salvo, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Indirect Procurement&Fleet Specialist",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=4861e700cd427910"
+  },
+  {
+   "company": "CME",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Chaves, P17, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "indeed",
+   "title": "Téc. de Manutenção Eólica (m/f) | Chaves",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=67165a2e5336d413"
+  },
+  {
+   "company": "Hitachi Energy",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Oeiras, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "RAM Engineer",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=a8dbb2bd1186277f"
+  },
+  {
+   "company": "Ivy Partners Group SA",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "Site Reliability Engineer",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=b2003698bd4deb59"
+  },
+  {
+   "company": "GENPACT PORTUGAL, SOCIEDADE UNIPESSOAL LDA",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "indeed",
+   "title": "Sr. Associate - Insurance Broker 5B",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=2a3eaa5fe4a68b2f"
+  },
+  {
+   "company": "CONSORT Group",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "menciona holandês/alemão/francês: confirmar se é obrigatório",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Database & Infrastructure Engineer Consortis - Infra & Support · Lisbon · Hybride",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=a4680aad06338e0e"
+  },
+  {
+   "company": "Axians | Digital Solutions - Tech Talent",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 8,
+   "source": "indeed",
+   "title": "IT Ops Engineer",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=954bf7f73db97dd4"
+  },
+  {
+   "company": "WIRE IT",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Customer Journeys Consultant",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=b05332bd06bacb04"
+  },
+  {
+   "company": "LUZA Group",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": true,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Product Security Expert",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=a89544d3a53da105"
+  },
+  {
+   "company": "Danone",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 7,
+   "source": "indeed",
+   "title": "Business Controller (Temporary)",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=1e23e67eb7e79d7f"
+  },
+  {
+   "company": "Nutrient",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Remoto, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": true,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "Internal Tools Engineer",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=de2aacf74d9c45db"
+  },
+  {
+   "company": "Bose",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, P11, Portugal",
+   "partial": false,
+   "posted": "2026-11-12",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 6,
+   "source": "indeed",
+   "title": "Data Analyst",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=5ecc59856733251b"
+  },
+  {
+   "company": "Camões - Instituto da Cooperação e da Língua, I.P.",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "remuneração: 1.499,15€ ou superior, caso o candidato seja detentor de PR acima, na carreira d",
+    "candidaturas até 2026-11-27"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 3,
+   "source": "bep",
+   "title": "Técnico Superior — Realização de tarefas de tratamento documental (seleção, catalogação, classificação e in",
+   "unverified": false,
+   "url": "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156816"
+  },
+  {
+   "company": "Instituto da Conservação da Natureza e das Florestas, I.P.",
+   "first_seen": "2026-11-15",
+   "flags": [
+    "não indica anos de experiência",
+    "remuneração: 1 499,15 €",
+    "candidaturas até 2026-11-27"
+   ],
+   "location": "Oeiras, Lisboa, Portugal",
+   "partial": false,
+   "posted": "2026-11-13",
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 3,
+   "source": "bep",
+   "title": "Técnico Superior — Os postos de trabalho a ocupar enquadram-se genericamente no anexo a que se refere o n.º 2",
+   "unverified": false,
+   "url": "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156908"
+  }
+ ],
  "seen": {
   "https://apply.workable.com/greenvolt/j/00DF71E41B": {
    "first_seen": "2026-11-15",
@@ -422,6 +2345,1008 @@
    "score": 0,
    "why": "pontuação 0 abaixo de 6"
   },
+  "https://pt.indeed.com/viewjob?jk=00ba67a186696e98": {
+   "first_seen": "2026-11-15",
+   "k": "puma|sales associate concessions eci lisboa",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=0118eaf6eb094b7b": {
+   "first_seen": "2026-11-15",
+   "k": "mcoutinho|tecnico de controlo de qualidade palmela",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=050e24e17a3dc839": {
+   "first_seen": "2026-11-15",
+   "k": "nors|gestor de suporte e planeamento comercial porto",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=051b9d7f6add7490": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|senior it solution delivery manager sales applications",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=07c62f0108348bee": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|web developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=09b1ce902eff1595": {
+   "first_seen": "2026-11-15",
+   "k": "innovation makers|application operations engineer banking platforms",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=0ad6cb4ffa9161a0": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|tax data process automation expert",
+   "score": 12,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=0f2debefeeddc9e2": {
+   "first_seen": "2026-11-15",
+   "k": "smile up|clinical recepcionist rececionista clinica dentaria carnaxide",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=1076cc02618f2be6": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|data architect",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=13ee11e4fa325f78": {
+   "first_seen": "2026-11-15",
+   "k": "miguel recrutador|gestor comercial boliqueime",
+   "score": 0,
+   "why": "salário máximo 25200 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=166d5aa00087d958": {
+   "first_seen": "2026-11-15",
+   "k": "cuf|auxiliar de acao medica farmacia",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=17c9d0ceb729ef33": {
+   "first_seen": "2026-11-15",
+   "k": "bosch|environmental health safety technician",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=19ab85a7a78fe5c3": {
+   "first_seen": "2026-11-15",
+   "k": "atalic|recepcionista para empreendimentos turisticos em lisboa",
+   "score": 0,
+   "why": "salário máximo 15960 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=1b3487bf17e7038d": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|ui ux designer",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=1bbd463c2d0d5c02": {
+   "first_seen": "2026-11-15",
+   "k": "ivy partners|solution architect",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=1d6881155d5ea92d": {
+   "first_seen": "2026-11-15",
+   "k": "schreiber foods|chefe de turno de producao",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=1e05d31effd46a0c": {
+   "first_seen": "2026-11-15",
+   "k": "pandora jewelry|seasonal shop assistant",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=1e23e67eb7e79d7f": {
+   "first_seen": "2026-11-15",
+   "k": "danone|business controller",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=1ef59296db4613a6": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|designer grafico",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=278bdccec122c30a": {
+   "first_seen": "2026-11-15",
+   "k": "kyndryl|unified systems operator",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=2843cb6265ca7082": {
+   "first_seen": "2026-11-15",
+   "k": "farfetch|head of procurement",
+   "score": 8,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=288686b16a96da27": {
+   "first_seen": "2026-11-15",
+   "k": "hoteis de charme|cozinheiro de 1a vista restaurante 1 estrela michelin 3 sois guia repsol",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=28eef682d14bf938": {
+   "first_seen": "2026-11-15",
+   "k": "calvelex|programador full stack",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=2a3eaa5fe4a68b2f": {
+   "first_seen": "2026-11-15",
+   "k": "genpact sociedade|sr associate insurance broker 5b",
+   "score": 9,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=2b7b01bea3e3d404": {
+   "first_seen": "2026-11-15",
+   "k": "iqvia|information security automation analyst",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=2ccc9c660a906618": {
+   "first_seen": "2026-11-15",
+   "k": "d4b data for business|consultor funcional erp",
+   "score": 0,
+   "why": "salário máximo 22000 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=2ce74a6b93c4bc94": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|data analytics internships",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=2e22fd4e3c843232": {
+   "first_seen": "2026-11-15",
+   "k": "bosch|electrical engineer heat pumps",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=309d6efbb7487bb1": {
+   "first_seen": "2026-11-15",
+   "k": "keyrus|data ai governance architect",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=340c3dcc439e6dbb": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas|partners for projects trainee",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=353b7547ace77ba1": {
+   "first_seen": "2026-11-15",
+   "k": "ibg global|coordenador de gestao de obra de carpintarias",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=374310b698c5532a": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|senior ai agentic developer solution architect",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=375b60e04559cac8": {
+   "first_seen": "2026-11-15",
+   "k": "cataa associacao centro de apoio tecnologico agro alimentar|gestor financeiro de projetos project finance manager",
+   "score": 0,
+   "why": "salário máximo 18953 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=389bff3dfc455ac0": {
+   "first_seen": "2026-11-15",
+   "k": "xtedder|gestor operacional",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=392804f69e2ec1d8": {
+   "first_seen": "2026-11-15",
+   "k": "be great consulting|farmaceutico matosinhos porto equilibrio evolucao",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=3b2c23e6a8a86039": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas|product manager",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=3b9ac4674cfb5a1d": {
+   "first_seen": "2026-11-15",
+   "k": "retarus|senior qa engineer quality strategy automation",
+   "score": 11,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=3caa3ba6e1af26a2": {
+   "first_seen": "2026-11-15",
+   "k": "capgemini|contact center solutions specialist",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=3cdb0c68ccc81d75": {
+   "first_seen": "2026-11-15",
+   "k": "mariam ademe|english speaking customer support",
+   "score": 0,
+   "why": "salário máximo 17472 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=4036b296e5f2487e": {
+   "first_seen": "2026-11-15",
+   "k": "luxury revelation|medico tricologia capilar",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=4058b847fd51550d": {
+   "first_seen": "2026-11-15",
+   "k": "pagerduty|senior principal customer success manager",
+   "score": 0,
+   "why": "exige língua que não falas: «Fluency in German»"
+  },
+  "https://pt.indeed.com/viewjob?jk=415c1dcc8b954ba9": {
+   "first_seen": "2026-11-15",
+   "k": "minor hotels europe americas|waiter guilty by olivier",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=41d67454bfd202b2": {
+   "first_seen": "2026-11-15",
+   "k": "sovos|junior vat compliance analyst",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=45c6d92add05e8cc": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|copywriter",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=46b9b8921ecf8c65": {
+   "first_seen": "2026-11-15",
+   "k": "boston consulting|psg senior analyst mdp compensation operations",
+   "score": 9,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=480c2280b51279b4": {
+   "first_seen": "2026-11-15",
+   "k": "casas cria forma|engenheiro civil projetos estruturas e construcao modular lsf",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=4826d41cbea83a8c": {
+   "first_seen": "2026-11-15",
+   "k": "life is nice|engenheiro civil",
+   "score": 0,
+   "why": "salário máximo 28000 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=4861e700cd427910": {
+   "first_seen": "2026-11-15",
+   "k": "atlas copco|indirect procurement fleet specialist",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=486f2a0d7ad8f2d9": {
+   "first_seen": "2026-11-15",
+   "k": "the adecco|operations manager sales marketing lisboa",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=49b21da8bd359e62": {
+   "first_seen": "2026-11-15",
+   "k": "bosch|tecnico de mecatronica",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=4a7ca5ad7b75a8d4": {
+   "first_seen": "2026-11-15",
+   "k": "viatris|associate manager rim data maintenance",
+   "score": 9,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=4b96371ea0bf8f5c": {
+   "first_seen": "2026-11-15",
+   "k": "valgrupo|programador full stack alcanede porto de mos",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=4b9f396b0a5b35b0": {
+   "first_seen": "2026-11-15",
+   "k": "nutrivalley|tecnico de producao",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=4decfb101de76e1b": {
+   "first_seen": "2026-11-15",
+   "k": "cuf|tecnico de anatomia patologica",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=4ef7128e2593c7c4": {
+   "first_seen": "2026-11-15",
+   "k": "purpose project makers|05 sre",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=4f1d46900daeecab": {
+   "first_seen": "2026-11-15",
+   "k": "smile up|oral sales specialist comercial saude oral campo alegre",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=4f9598ea0755e014": {
+   "first_seen": "2026-11-15",
+   "k": "talan|senior calypso business analyst",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=500a9313f85b202b": {
+   "first_seen": "2026-11-15",
+   "k": "amf safety shoes|tecnico de desenvolvimento de produto calcado de seguranca",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=50faac6b2e5abf12": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|senior ai forward deployed engineer",
+   "score": 18,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=52673f26890cfcc4": {
+   "first_seen": "2026-11-15",
+   "k": "askblue|outsystems developer application maintenance",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=561d2b4d56207667": {
+   "first_seen": "2026-11-15",
+   "k": "bp|planning promotions lead fixed term contract",
+   "score": 8,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=57df94dc9b5c5777": {
+   "first_seen": "2026-11-15",
+   "k": "coca cola europacific partners|customer service agent",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=5845a1be1a3b1eb1": {
+   "first_seen": "2026-11-15",
+   "k": "talentos fartos 2 0|consultor comercial ordenado comissao atrativa seg a sex com ou sem exp",
+   "score": 0,
+   "why": "salário máximo 25200 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=5945a43a7ade4aa1": {
+   "first_seen": "2026-11-15",
+   "k": "bitil professional services in technologies|senior sap functional s 4hana sd consultant",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=59b67e0b397c9e51": {
+   "first_seen": "2026-11-15",
+   "k": "speedlinehub|senior business development manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=5ecc59856733251b": {
+   "first_seen": "2026-11-15",
+   "k": "bose|data analyst",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=60e65773fef932ff": {
+   "first_seen": "2026-11-15",
+   "k": "valgrupo|tecnico de producao animal caldas da rainha",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=66aede907e62c719": {
+   "first_seen": "2026-11-15",
+   "k": "tieto|arquiteto cloud azure",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=66ed5961b41f2ebf": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|qa analyst artificial intelligence",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=67165a2e5336d413": {
+   "first_seen": "2026-11-15",
+   "k": "cme|tec de manutencao eolica chaves",
+   "score": 8,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=673ff5660b1a4271": {
+   "first_seen": "2026-11-15",
+   "k": "sbm offshore|hsse engineer",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=68aa547e4b87bd84": {
+   "first_seen": "2026-11-15",
+   "k": "glow beauty|vendedor maquilhador",
+   "score": 0,
+   "why": "salário máximo 15400 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=6a6bf9ef08e74d71": {
+   "first_seen": "2026-11-15",
+   "k": "sener|engenheiro a civil estruturas data centers sines",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=6b63df99d0a168a7": {
+   "first_seen": "2026-11-15",
+   "k": "purpose project makers|01 project manager junior",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=6bbc1a3774d255d9": {
+   "first_seen": "2026-11-15",
+   "k": "nestle usa|social intelligence senior analyst",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=6fa0d3107b3b409b": {
+   "first_seen": "2026-11-15",
+   "k": "innovation makers|it support",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=7081973ff3021155": {
+   "first_seen": "2026-11-15",
+   "k": "casa da picanha|gerente de restaurante full time casa da picanha",
+   "score": 0,
+   "why": "salário máximo 23800 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=714bc19a2ac2f0e2": {
+   "first_seen": "2026-11-15",
+   "k": "zumbu com|administrativo de suporte",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=71cf63f8edf6c624": {
+   "first_seen": "2026-11-15",
+   "k": "anteros empreitadas scop|coordenador adjunto de obra zona de tras os montes carrazeda de ansiaes",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=7220c718fba60fba": {
+   "first_seen": "2026-11-15",
+   "k": "cruz academy|administracao e contabilidade toc",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=72f05d4b94b755fb": {
+   "first_seen": "2026-11-15",
+   "k": "bigone energetic solutions|edp gestores solares",
+   "score": 0,
+   "why": "salário máximo 21000 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=7307f80c2c2978bf": {
+   "first_seen": "2026-11-15",
+   "k": "wtw|employee experience implementation consultant",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=73b866d35e4eca11": {
+   "first_seen": "2026-11-15",
+   "k": "purpose project makers|21 business analyst",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=74160dcb25229b8b": {
+   "first_seen": "2026-11-15",
+   "k": "workato|engineering manager chatbots and ai",
+   "score": 9,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=77816d854fca5b17": {
+   "first_seen": "2026-11-15",
+   "k": "hyland|internal project manager",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=7e27d4e5b765c040": {
+   "first_seen": "2026-11-15",
+   "k": "klife recruiter|gestor de clientes comercial leiria",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=8011314579ddca31": {
+   "first_seen": "2026-11-15",
+   "k": "mcoutinho|chefe de oficina colisao leiria 432 2026",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=8036721bc078a710": {
+   "first_seen": "2026-11-15",
+   "k": "unilabs|talent acquisition partner",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=82051ec94e3c9e67": {
+   "first_seen": "2026-11-15",
+   "k": "iterable|senior data scientist",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=833f2074d9f9e25b": {
+   "first_seen": "2026-11-15",
+   "k": "frutorra pimenta|estagio financial planning controlling",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=8f312047accd2cfa": {
+   "first_seen": "2026-11-15",
+   "k": "benteler international aktiengesellschaft|materials planner",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=900d7b7db2d0f8c8": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|responsavel gestao de categoria conforto",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=90294be1f6205c8c": {
+   "first_seen": "2026-11-15",
+   "k": "previne prevencao higiene e saude|tecnico de seguranca nivel vi",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=904411ff8748289b": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|gestor de projetos",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=90a9d91c339545a8": {
+   "first_seen": "2026-11-15",
+   "k": "medvidi health|senior staff product designer",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=9146c1b2b2bbba1e": {
+   "first_seen": "2026-11-15",
+   "k": "maintarget|assistente de loja vodafone cepcom sines",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=921df535e4db8ee5": {
+   "first_seen": "2026-11-15",
+   "k": "minor hotels europe americas|coordenador a de grupos e eventos tivoli oriente lisboa hotel",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=92f7c50279eed5ca": {
+   "first_seen": "2026-11-15",
+   "k": "dst|tecnico de qualidade i engenharia e construcao",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=9456d125c4405bc6": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|data quality engineer sales finance",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=954bf7f73db97dd4": {
+   "first_seen": "2026-11-15",
+   "k": "axians digital solutions tech talent|it ops engineer",
+   "score": 8,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=96bee34e851cef32": {
+   "first_seen": "2026-11-15",
+   "k": "alsa|tecnico a de contabilidade",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=987dd65a8b786d71": {
+   "first_seen": "2026-11-15",
+   "k": "j antonio da silva|operadores de producao metalomecanica braga",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=98f884f7aaeb2a38": {
+   "first_seen": "2026-11-15",
+   "k": "nortempo recruitment|chefe de turno de regeneracao",
+   "score": 0,
+   "why": "salário máximo 19600 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=99e48b9aaaf62aa0": {
+   "first_seen": "2026-11-15",
+   "k": "cuf|auxiliar de acao medica internamento cirurgico hospital cuf alvor",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=9a31ebc8ce208ce3": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|operador a logistica full time",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=9bd220facf4e1d39": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|customer services support german speaker",
+   "score": 9,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=9bf1ed4a562496cb": {
+   "first_seen": "2026-11-15",
+   "k": "bounce|senior product designer",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=a00624da762e9b69": {
+   "first_seen": "2026-11-15",
+   "k": "euromind|tecnico de manutencao",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=a10f09ef90d7d87a": {
+   "first_seen": "2026-11-15",
+   "k": "bl consulting|chefe de equipa fundao",
+   "score": 0,
+   "why": "salário máximo 18200 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=a39a84f952d958db": {
+   "first_seen": "2026-11-15",
+   "k": "minor hotels europe americas|and events coordinator tivoli oriente lisboa hotel",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=a410f9fc22631983": {
+   "first_seen": "2026-11-15",
+   "k": "vivisol|lider de operacoes no terreno nacional",
+   "score": 0,
+   "why": "salário máximo 23800 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=a4680aad06338e0e": {
+   "first_seen": "2026-11-15",
+   "k": "consort|database infrastructure engineer consortis infra support lisbon hybride",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=a69acfafaedb4524": {
+   "first_seen": "2026-11-15",
+   "k": "iss world|senior software engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=a76b4cdbebfe6177": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas|v i e full stack ai transformation engineer h f lisbon 24 mois",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=a89544d3a53da105": {
+   "first_seen": "2026-11-15",
+   "k": "luza|product security expert",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=a8dbb2bd1186277f": {
+   "first_seen": "2026-11-15",
+   "k": "hitachi energy|ram engineer",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=ab9adfc9204dfd6d": {
+   "first_seen": "2026-11-15",
+   "k": "miguel recrutador|operador de reciclagem sao bras loule portimao",
+   "score": 0,
+   "why": "salário máximo 14700 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=abd157ed6433304c": {
+   "first_seen": "2026-11-15",
+   "k": "iss world|software engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=ac902d83fbb33b9d": {
+   "first_seen": "2026-11-15",
+   "k": "hey hermes|estagio profissional iefp logistica e expedicao",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=af6f902e80e01fd7": {
+   "first_seen": "2026-11-15",
+   "k": "engie|responsavel de suporte juridico etica compliance lisboa",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=b03aa5f1539bf740": {
+   "first_seen": "2026-11-15",
+   "k": "cme|eng o ambiente",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=b05332bd06bacb04": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|customer journeys consultant",
+   "score": 7,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=b07e7a3e740f132b": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|vendedor a full time",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=b2003698bd4deb59": {
+   "first_seen": "2026-11-15",
+   "k": "ivy partners|site reliability engineer",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=b2468e85a967ed12": {
+   "first_seen": "2026-11-15",
+   "k": "shaken not stirred|project management associate partnerships",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=b297fd774fdf9950": {
+   "first_seen": "2026-11-15",
+   "k": "starface servicos de gestao s a|supervisor de operacoes porto",
+   "score": 0,
+   "why": "salário máximo 16800 abaixo de 35000"
+  },
+  "https://pt.indeed.com/viewjob?jk=b2a58c89776711fb": {
+   "first_seen": "2026-11-15",
+   "k": "expleo|senior cloud architect",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=b30d5c99b87826da": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|gestor de cliente",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=b38eee2de249ffa0": {
+   "first_seen": "2026-11-15",
+   "k": "progitape|arquitecto paisagista",
+   "score": 0,
+   "why": "pede 15+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=b46d6d219f86ba41": {
+   "first_seen": "2026-11-15",
+   "k": "luza|martech developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=b547b3b179cdbf9d": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|innovation ai professional",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=b748398534d41019": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas|esg analyst fixed term",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=bac838bd12bc5857": {
+   "first_seen": "2026-11-15",
+   "k": "oramix|site reliability engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=bde963ea9ceaada5": {
+   "first_seen": "2026-11-15",
+   "k": "edp|civil engineer e mobility projects",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=be26599ddc901f8a": {
+   "first_seen": "2026-11-15",
+   "k": "santander|product manager digital channels",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=bfdc30ac3622149e": {
+   "first_seen": "2026-11-15",
+   "k": "inspired schools|maths teacher paternity cover",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c23b22884fe6d848": {
+   "first_seen": "2026-11-15",
+   "k": "minor hotels europe americas|empregado a de mesa 2a guilty by olivier tivoli oriente lisboa hotel",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c25c43fe89dff10b": {
+   "first_seen": "2026-11-15",
+   "k": "alltera pure living|assistente comercial de telemarketing e agendamento de reunioes",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=c2ec0f48a8e1f0a8": {
+   "first_seen": "2026-11-15",
+   "k": "oramix|senior dba oracle microsoft sql server",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c3847ec7c22cded9": {
+   "first_seen": "2026-11-15",
+   "k": "atlas automoveis|diretor a geral setor automovel",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c3ff2e134a3c60fa": {
+   "first_seen": "2026-11-15",
+   "k": "shaken not stirred|programs facilitator",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c5890beecddfe9e5": {
+   "first_seen": "2026-11-15",
+   "k": "axians digital solutions enterprise|workplace specialist",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=c697caab4a4772f6": {
+   "first_seen": "2026-11-15",
+   "k": "sbm offshore|senior hsse engineer",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=cc6193097bda464c": {
+   "first_seen": "2026-11-15",
+   "k": "capgemini|mendix developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=d01a553f56935985": {
+   "first_seen": "2026-11-15",
+   "k": "purpose project makers|05 fullstack net angular",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=d40a8c17e88d345a": {
+   "first_seen": "2026-11-15",
+   "k": "vestas|fleet coordinator",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=d4c3f69c3c23e78e": {
+   "first_seen": "2026-11-15",
+   "k": "luza|analista de produto solda senior",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=d6fc77dc5e57e08d": {
+   "first_seen": "2026-11-15",
+   "k": "nestle usa|customer service specialist dutch speaker",
+   "score": 0,
+   "why": "exige língua que não falas: «Fluent in Dutch»"
+  },
+  "https://pt.indeed.com/viewjob?jk=d79370ba8378486e": {
+   "first_seen": "2026-11-15",
+   "k": "celfocus|aws migration cloud engineer",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=d89c5bca58e8563d": {
+   "first_seen": "2026-11-15",
+   "k": "unit360|frontend developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=d95805b6c224b2ae": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|operador a logistica part time",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://pt.indeed.com/viewjob?jk=da30c502ff72ee39": {
+   "first_seen": "2026-11-15",
+   "k": "mailerlite|senior technical recruiter",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=dbba697de3cc02d1": {
+   "first_seen": "2026-11-15",
+   "k": "rydoo|account executive uk",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=dcfb0b2902f55d89": {
+   "first_seen": "2026-11-15",
+   "k": "peoplecert|localisation assistant relocation to athens",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=de2aacf74d9c45db": {
+   "first_seen": "2026-11-15",
+   "k": "nutrient|internal tools engineer",
+   "score": 6,
+   "why": ""
+  },
+  "https://pt.indeed.com/viewjob?jk=df1a0912f304da92": {
+   "first_seen": "2026-11-15",
+   "k": "oliver wyman|oliver wyman social media manager lisbon",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=dfbc112d72b47e82": {
+   "first_seen": "2026-11-15",
+   "k": "medicapilar|operador de contact center lingua francesa",
+   "score": 0,
+   "why": "exige língua que não falas: «Francês fluent»"
+  },
+  "https://pt.indeed.com/viewjob?jk=e07974fed049ea4d": {
+   "first_seen": "2026-11-15",
+   "k": "dhl|pricing specialist dh express",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=e0ed888030d91052": {
+   "first_seen": "2026-11-15",
+   "k": "finders|junior financial controller hotelaria",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=e59425a49052817a": {
+   "first_seen": "2026-11-15",
+   "k": "cuf|auxiliar de acao medica bloco operatorio hospital cuf alvor",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=e7465db6fc4a040a": {
+   "first_seen": "2026-11-15",
+   "k": "salvador caetano|pivot kaizen",
+   "why": "duplicada noutra fonte"
+  },
+  "https://pt.indeed.com/viewjob?jk=e8dc314299d0e8cf": {
+   "first_seen": "2026-11-15",
+   "k": "inegi|life cycle engineering",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=eb5555491b85e13e": {
+   "first_seen": "2026-11-15",
+   "k": "axians digital consulting|marketing trainee graduate program",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=eb7b273340e73abe": {
+   "first_seen": "2026-11-15",
+   "k": "elementis global|lca specialist",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=ec25acb93aac2f2f": {
+   "first_seen": "2026-11-15",
+   "k": "nestle usa|customer service specialist italian speake",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=ed79fb32290b58b7": {
+   "first_seen": "2026-11-15",
+   "k": "the adecco|senior consultant tax legal adecco lisboa",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=ee4f456e4e289e55": {
+   "first_seen": "2026-11-15",
+   "k": "speedlinehub|team lead of affiliate",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=f04f601609a826b1": {
+   "first_seen": "2026-11-15",
+   "k": "infineon technologies|internal communications trainee for edge systems",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=f10932c5f106b80e": {
+   "first_seen": "2026-11-15",
+   "k": "bosch|extracurricular internship functional consulting ai sales solutions",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=f1949e0b084b5354": {
+   "first_seen": "2026-11-15",
+   "k": "fabrica de tintas 2000|gestor da qualidade",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=f5a29b3a24fd6b93": {
+   "first_seen": "2026-11-15",
+   "k": "daufood|distribuidor abertura bolhao",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=f7a2540ad36847e9": {
+   "first_seen": "2026-11-15",
+   "k": "insertpage studio|executivo de vendas",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=f7ff8cc1acfc3c06": {
+   "first_seen": "2026-11-15",
+   "k": "inetum|l1 it infrastructures support",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=f88b377e6c92123b": {
+   "first_seen": "2026-11-15",
+   "k": "sibelco|operator production rio maior",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://pt.indeed.com/viewjob?jk=f9fd518e6e54d5f6": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|tecnico de controlo de qualidade para linhas de montagem de carregadores de veiculos eletricos",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://pt.indeed.com/viewjob?jk=faba488487927767": {
+   "first_seen": "2026-11-15",
+   "k": "leroy merlin|operador a caixa part time",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
   "https://pt.linkedin.com/company/edp": {
    "first_seen": "2026-11-15",
    "score": 0,
@@ -499,6 +3424,493 @@
    "first_seen": "2026-11-15",
    "why": "fechada"
   },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156811": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de loures odivelas e p e|tecnico superior das areas de diagnostico e terapeutica procedimento concursal para constituicao de reserva de recrutamento de tecnicos superiores",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156812": {
+   "first_seen": "2026-11-15",
+   "k": "inspecao geral das atividades em saude|tecnico de sistemas e tecnologias de informacao conteudo funcional correspondente a carreira especial de tecnico de sistemas e tecnologias",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156813": {
+   "first_seen": "2026-11-15",
+   "k": "universidade politecnica de coimbra|docente do ensino superior politecnico as funcoes genericas dos docentes do ensino superior politecnico previstas no artigo 2 o a",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156814": {
+   "first_seen": "2026-11-15",
+   "k": "patrimonio cultural i p|tecnico de sistemas e tecnologias de informacao exercicio de atividades inerentes a carreira especial de tecnico de sistemas e tecnologias",
+   "why": "carreira fora do alvo (Técnico de Sistemas e Tecnologias de Informação)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156816": {
+   "first_seen": "2026-11-15",
+   "k": "camoes instituto da cooperacao e da lingua i p|tecnico superior realizacao de tarefas de tratamento documental selecao catalogacao classificacao e in",
+   "score": 3,
+   "why": ""
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156818": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de castelo branco e p e|assistente operacional conteudo funcional estipulado na legislacao especifica propria",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156819": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal da horta|assistente operacional conducao de veiculos pesados municipais operacao de maquinas pesadas transporte de mater",
+   "why": "fora do continente (Horta, RAA - Ilha do Faial)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156823": {
+   "first_seen": "2026-11-15",
+   "k": "instituto de gestao financeira da seguranca social i p|tecnico superior exercicio de funcoes da carreira de tecnico superior com o grau de complexidade 3 para a",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156824": {
+   "first_seen": "2026-11-15",
+   "k": "instituto de informatica i p|tecnico superior o instituto de informatica ip pretende reforcar a equipa da unidade de contratacao publi",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156825": {
+   "first_seen": "2026-11-15",
+   "k": "policia de seguranca publica|tecnico superior exercicio de funcoes com grau de complexidade funcional 3 correspondente a carreira categ",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156826": {
+   "first_seen": "2026-11-15",
+   "k": "exercito|assistente operacional conservacao limpeza apoio de servicos limpar e lavar superficies objetos e manutencao",
+   "why": "oferta expirada"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156827": {
+   "first_seen": "2026-11-15",
+   "k": "universidade de aveiro|investigador doutorado de nivel inicial exercicio de atividades de investigacao na area cientifica de ciencias e engenharia do amb",
+   "why": "carreira fora do alvo ()"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156828": {
+   "first_seen": "2026-11-15",
+   "k": "universidade politecnica de portalegre|docente do ensino superior politecnico funcoes e conteudo funcional da categoria",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156829": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de sesimbra|assistente operacional divisao de logistica e gestao de frota exercer funcoes de enquadradas no conteudo funciona",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156830": {
+   "first_seen": "2026-11-15",
+   "k": "instituto de gestao financeira da seguranca social i p|assistente tecnico exercicio de funcoes da carreira de assistente tecnico com o grau de complexidade 2 para",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156831": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de castelo branco e p e|assistente operacional conteudo funcional estipulado na legislacao especifica propria",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156832": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de santiago do cacem|assistente operacional exerce funcoes de natureza executiva de carater manual ou mecanico enquadradas em direti",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156833": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de lisboa ocidental e p e|assistente tecnico o posto de trabalho caracteriza se pelo exercicio de funcoes na carreira e categoria de as",
+   "why": "carreira fora do alvo (Assistente Técnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156834": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude do alto minho e p e|medica ao posto de trabalho apresentado a concurso corresponde o conteudo funcional estabelecido",
+   "why": "carreira fora do alvo (Médica)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156836": {
+   "first_seen": "2026-11-15",
+   "k": "instituto superior de economia e gestao da universidade de lisboa|tecnico superior o tecnico superior desempenhara funcoes na divisao de projetos de investigacao da direcao",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156837": {
+   "first_seen": "2026-11-15",
+   "k": "agrupamento de escolas do carregado alenquer|tecnico de sistemas e tecnologias de informacao funcoes de natureza essencialmente executava de aplicacao de boas praticas metodos e pro",
+   "why": "carreira fora do alvo (Técnico de Sistemas e Tecnologias de Informação)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156839": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de sesimbra|assistente operacional divisao de logistica e gestao de frota gestao de frota exercer funcoes enquadradas no con",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156840": {
+   "first_seen": "2026-11-15",
+   "k": "instituto dos mercados publicos do imobiliario e da construcao i p|assistente tecnico instrucao e analise de processos de acesso e permanencia no ambito das atividades regula",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156841": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de viseu|tecnico superior para alem das funcoes constantes no anexo referido no n o 2 do artigo 88o da ltfp aprovad",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156842": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico as indicadas no n o 5 do art o 3o do estatuto da carreira do pessoal docente do ensino sup",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156843": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de sesimbra|assistente operacional divisao de logistica e gestao de frota logistica exercer funcoes enquadradas no conteudo",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156844": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de almeirim|tecnico superior a planificar organizar implementar e avaliar atividades e experiencias pedagogicas adeq",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156845": {
+   "first_seen": "2026-11-15",
+   "k": "junta de freguesia de sao roque|assistente operacional funcoes de natureza executiva de caracter manual ou mecanico no ambito da limpeza higie",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156846": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico n o 4 do art o 3o do estatuto da carreira docente do ensino superior politecnico",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156847": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional para os direitos das criancas e jovens|tecnico superior pretende se tecnico superior para integrar o corpo tecnico pessoas e servicos partilhad",
+   "score": -3,
+   "why": "pontuação -3 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156848": {
+   "first_seen": "2026-11-15",
+   "k": "instituto de gestao financeira da seguranca social i p|tecnico superior exercicio de funcoes inerentes a carreira categoria de tecnico superior com o grau de com",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156849": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico no 4 do art o 3o do estatuto da carreira do pessoal docente do ensino politecnico",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156850": {
+   "first_seen": "2026-11-15",
+   "k": "junta de freguesia de santa maria sao pedro e matacaes|assistente operacional funcoes de natureza executiva de caracter manual ou mecanico enquadradas em diretivas ge",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156851": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico no 4 do art o 3o do estatuto da carreira do pessoal docente do ensino politecnico",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156852": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional para os direitos das criancas e jovens|assistente tecnico pretende se assistente tecnico para integrar o corpo tecnico pessoas e servicos partilh",
+   "why": "carreira fora do alvo (Assistente Técnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156853": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico no 4 do art o 3 do estatuto da carreira do pessoal docente do ensino politecnico",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156854": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico no 4 do arto 3a do estatuto da carreira do pessoal docente do ensino politecnico",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156855": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico as indicadas no n o 5 do art o 3 o do estatuto da carreira do pessoal docente do ensino su",
+   "why": "carreira fora do alvo (Docente do ensino superior politécnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156856": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional para os direitos das criancas e jovens|assistente tecnico pretende se assistente tecnico para integrar o corpo tecnico pessoas e servicos partilh",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156857": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico as indicadas no n o 5 do art o 3 o do estatuto da carreira do pessoal docente do ensino su",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156858": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude do estuario do tejo e p e|tecnico superior funcoes correspondentes a caracterizacao funcional da categoria de tecnico superior const",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156859": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|docente do ensino superior politecnico as indicadas no n o 5 do art o 3 o do estatuto da carreira do pessoal docente do ensino su",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156860": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de braga e p e|medica garantir o cumprimento dos requisitos do sistema de gestao integrada nas vertentes da qual",
+   "why": "carreira fora do alvo (Médica)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156861": {
+   "first_seen": "2026-11-15",
+   "k": "autoridade para as condicoes do trabalho|tecnico superior missao e objetivos da funcao instrucao de processos de contraordenacoes laborais e emi",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156862": {
+   "first_seen": "2026-11-15",
+   "k": "faculdade de ciencias da universidade do porto|assistente de investigacao como assistente de investigacao cabe participar desenvolver e executar projetos de invest",
+   "why": "carreira fora do alvo ()"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156863": {
+   "first_seen": "2026-11-15",
+   "k": "universidade do porto|assistente operacional",
+   "why": "carreira fora do alvo ()"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156864": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de mangualde|assistente operacional apoiar as atividades e eventos culturais e educativos dinamizados regularmente na bibliote",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156865": {
+   "first_seen": "2026-11-15",
+   "k": "universidade de coimbra|tecnico superior funcoes consultivas de estudo planeamento e aplicacao de metodos e processos de natureza",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156866": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de caldas da rainha|tecnico superior o conteudo funcional e o constante do anexo a ltfp referido no no 2 do artigo 88o da carre",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156867": {
+   "first_seen": "2026-11-15",
+   "k": "faculdade de ciencias da universidade do porto|doutorado de nivel inicial 5",
+   "why": "carreira fora do alvo ()"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156868": {
+   "first_seen": "2026-11-15",
+   "k": "universidade da beira interior|docente universitario professor auxiliar na area disciplinar de arquitetura de acordo com",
+   "why": "carreira fora do alvo (Docente universitário)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156869": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de caldas da rainha|tecnico superior o conteudo funcional e o constante do anexo a ltfp referido no no 2 do artigo 88o da carre",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156870": {
+   "first_seen": "2026-11-15",
+   "k": "universidade da beira interior|tecnico superior o posto de trabalho carateriza se pelo exercicio de funcoes de tecnico superior com o con",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156871": {
+   "first_seen": "2026-11-15",
+   "k": "universidade da beira interior|docente universitario professor associado na area disciplinar de ciencias aeroespaciais de acordo com o conteud",
+   "why": "carreira fora do alvo (Docente universitário)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156872": {
+   "first_seen": "2026-11-15",
+   "k": "universidade da beira interior|tecnico superior o posto de trabalho carateriza se pelo exercicio de funcoes de tecnico superior com o con",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156873": {
+   "first_seen": "2026-11-15",
+   "k": "turismo de i p|tecnico superior o turismo de atraves da sua direcao de marketing e mercados pretende recrutar u",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156874": {
+   "first_seen": "2026-11-15",
+   "k": "instituto de tecnologia quimica e biologica antonio xavier itqb nova institute of chemical and b|doutorado o investigador doutorado a contratar ira desenvolver atividades de investigacao no ambito",
+   "why": "carreira fora do alvo ()"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156875": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de sesimbra|tecnico superior departamento de assuntos juridicos",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156876": {
+   "first_seen": "2026-11-15",
+   "k": "comissao de coordenacao e desenvolvimento regional do norte i p|tecnico superior o posto de trabalho caracteriza se pelo exercicio de funcoes na carreira e categoria de te",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156877": {
+   "first_seen": "2026-11-15",
+   "k": "junta de freguesia de macieira de cambra|assistente operacional o posto de trabalho caracteriza se pelo exercicio de funcoes na carreira geral de assisten",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156878": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de evora|assistente tecnico efetua o apoio administrativo da chefia da divisao",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156879": {
+   "first_seen": "2026-11-15",
+   "k": "faculdade de engenharia da universidade do porto|doutorado de nivel inicial aviso de abertura de procedimento concursal de selecao internacional para a contratacao de",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156880": {
+   "first_seen": "2026-11-15",
+   "k": "comissao para a cidadania e a igualdade de genero|assistente tecnico garantir o secretariado executivo e a gestao de agendas atraves da organizacao e atualizac",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156881": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional de protecao de dados|tecnico superior no ambito de mobilidade intercategorias para 1 consultor jurista para a unidade apo",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156882": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de castelo de paiva|tecnico superior tecnico superior turismo",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156883": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional de protecao de dados|assistente tecnico no ambito do procedimento de recrutamento de 1 assistente tecnico em regime de mobil",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156884": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de viana do alentejo|tecnico superior desempenhar as funcoes constantes do anexo a lei geral do trabalho em funcoes publicas ap",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156885": {
+   "first_seen": "2026-11-15",
+   "k": "comissao nacional de protecao de dados|assistente tecnico no ambito do procedimento de recrutamento de 1 assistente tecnico em regime de mobil",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156886": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de vila nova de gaia|tecnico superior as funcoes a desempenhar serao as constantes do artigo 88 o n o 2 da lei geral do trabal",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156887": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de almeirim|assistente operacional a execucao de tarefas da competencia do municipio em materia educativa indispensaveis ao",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156889": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de vila nova de gaia|tecnico superior as funcoes a desempenhar sao as previstas no n o 2 do artigo 88 o da lei geral do trabalho",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156890": {
+   "first_seen": "2026-11-15",
+   "k": "unidade local de saude de castelo branco e p e|carreira farmaceutica conteudo funcional estipulado na legislacao especifica propria",
+   "why": "carreira fora do alvo (Carreira Farmacêutica)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156891": {
+   "first_seen": "2026-11-15",
+   "k": "comissao para a cidadania e a igualdade de genero|tecnico superior gerir e executar os orcamentos de funcionamento e de investimento propondo as alteracoes",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156892": {
+   "first_seen": "2026-11-15",
+   "k": "direcao geral da administracao da justica|assistente tecnico recrutamento de 5 assistentes tecnicos por mobilidade na categoria para os segui",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156893": {
+   "first_seen": "2026-11-15",
+   "k": "direcao geral da administracao da justica|assistente operacional recrutamento de 1 assistente operacional por mobilidade na categoria para o nucleo",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156894": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de obidos|tecnico superior compete ao tecnico superior de enfermagem veterinaria integrado no servico de veterinario",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156895": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de castelo de paiva|tecnico superior tecnico superior educacao social",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156896": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de oeiras|tecnico superior caracterizacao do posto de trabalho",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156897": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de constancia|assistente operacional as funcoes a exercer sao as previstas no anexo ao mapa de pessoal do municipio enquadrada",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156898": {
+   "first_seen": "2026-11-15",
+   "k": "faculdade de letras da universidade de lisboa|tecnico superior o posto de trabalho inerente ao presente procedimento concursal envolve o exercicio de fun",
+   "score": 0,
+   "why": "pontuação 0 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156899": {
+   "first_seen": "2026-11-15",
+   "k": "junta de freguesia de prazins santo tirso|assistente tecnico as funcoes a desempenhar nos postos de trabalho a ocupar correspondem ao grau 2 de complex",
+   "why": "carreira fora do alvo (Assistente Técnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156900": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal da lourinha|tecnico superior desempenho de funcoes de grau de complexidade 3 conforme o conteudo funcional fixado em a",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156901": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de loule|tecnico superior local de trabalho",
+   "why": "tipo excluído (Mobilidade Interna)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156902": {
+   "first_seen": "2026-11-15",
+   "k": "camara municipal de loule|tecnico superior local de trabalho",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156904": {
+   "first_seen": "2026-11-15",
+   "k": "universidade de coimbra|assistente tecnico funcoes de natureza executiva de aplicacao de metodos e processos com base em diretivas",
+   "why": "carreira fora do alvo (Assistente Técnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156905": {
+   "first_seen": "2026-11-15",
+   "k": "direcao geral de politica de defesa nacional|tecnico superior acompanhar e analisar a evolucao do ambiente estrategico e de seguranca internacional n",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156906": {
+   "first_seen": "2026-11-15",
+   "k": "agencia para o desenvolvimento e coesao i p|especialista de sistemas e tecnologias de informacao atividades do especialista de sistemas e tecnologias de informacao do rgdfe",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 3"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156907": {
+   "first_seen": "2026-11-15",
+   "k": "instituto politecnico de leiria|assistente tecnico um posto de trabalho na categoria e carreira geral de assistente tecnico para desempenhar",
+   "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156908": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|tecnico superior os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "score": 3,
+   "why": ""
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156909": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|tecnico superior os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156910": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|tecnico superior os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156911": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|tecnico superior os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156912": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|tecnico superior os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156913": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|assistente tecnico os postos de trabalho a ocupar enquadram se genericamente no anexo a que se refere o n o 2",
+   "why": "carreira fora do alvo (Assistente Técnico)"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=156914": {
+   "first_seen": "2026-11-15",
+   "k": "instituto da conservacao da natureza e das florestas i p|assistente operacional o posto de trabalho a ocupar enquadra se genericamente no anexo a que se refere o n o 2 do",
+   "why": "carreira fora do alvo (Assistente Operacional)"
+  },
   "https://www.facebook.com/policies/cookies": {
    "first_seen": "2026-11-15",
    "score": 0,
@@ -508,6 +3920,1046 @@
    "first_seen": "2026-11-15",
    "score": 0,
    "why": "pontuação 0 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4369913041": {
+   "first_seen": "2026-11-15",
+   "k": "inetum|ai architect",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4385044625": {
+   "first_seen": "2026-11-15",
+   "k": "ey|ai tech senior consultant",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4388581256": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|consulting transformation principal",
+   "score": 0,
+   "why": "pede 9+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4388734641": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|risk senior auditor",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4400520495": {
+   "first_seen": "2026-11-15",
+   "k": "bain company|expert senior associate consultant tech transformation",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://www.linkedin.com/jobs/view/4409350716": {
+   "first_seen": "2026-11-15",
+   "k": "emagine|junior operations integration engineer",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4414665504": {
+   "first_seen": "2026-11-15",
+   "k": "outsystems|lead analyst security strategy assurance",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4414665518": {
+   "first_seen": "2026-11-15",
+   "k": "outsystems|agentic tech lead",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4417853383": {
+   "first_seen": "2026-11-15",
+   "k": "richemont|senior devops platform engineer with a python ai focus",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4434138379": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|strategic digital consultant data ai",
+   "score": 18,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4435498120": {
+   "first_seen": "2026-11-15",
+   "k": "planet|commercial ai enablement performance manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4436275480": {
+   "first_seen": "2026-11-15",
+   "k": "sram llc|production control manager",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4436280261": {
+   "first_seen": "2026-11-15",
+   "k": "sram llc|production control manager",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4436338828": {
+   "first_seen": "2026-11-15",
+   "k": "jimdo|senior ai engineer",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4437410990": {
+   "first_seen": "2026-11-15",
+   "k": "mckinsey company|associate tech ai",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4437753403": {
+   "first_seen": "2026-11-15",
+   "k": "enbw it solutions|ai full stack developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4437848009": {
+   "first_seen": "2026-11-15",
+   "k": "mckinsey company|business analyst tech ai",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4438238312": {
+   "first_seen": "2026-11-15",
+   "k": "bmc software|senior ai data architect solution engineer flexible across spain ireland india",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4440179677": {
+   "first_seen": "2026-11-15",
+   "k": "mastercard|manager product development",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4442825294": {
+   "first_seen": "2026-11-15",
+   "k": "sdg espana|ai architect",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4443641575": {
+   "first_seen": "2026-11-15",
+   "k": "mastercard|senior research analyst associate managing consultant",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4444142192": {
+   "first_seen": "2026-11-15",
+   "k": "ey parthenon|ey parthenon technology strategy it due diligence",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://www.linkedin.com/jobs/view/4445731147": {
+   "first_seen": "2026-11-15",
+   "k": "devoteam|low code unit senior power platform consultant",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4445749822": {
+   "first_seen": "2026-11-15",
+   "k": "revolut|strategy operations manager",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4445766248": {
+   "first_seen": "2026-11-15",
+   "k": "revolut|strategy operations manager",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4450653415": {
+   "first_seen": "2026-11-15",
+   "k": "bain company|ai digital products consultant strategy transformation practice",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4456220432": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|senior ai engineer",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4456315902": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|senior business analyst",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4462863448": {
+   "first_seen": "2026-11-15",
+   "k": "thales|junior pmo project financial controller",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4464101021": {
+   "first_seen": "2026-11-15",
+   "k": "kraken|principal business operations pro",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4464243511": {
+   "first_seen": "2026-11-15",
+   "k": "intermedia intelligent communications|sr product manager ai builder",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4464559419": {
+   "first_seen": "2026-11-15",
+   "k": "alten|ai python expert",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4466873170": {
+   "first_seen": "2026-11-15",
+   "k": "adentis|senior cloud infrastructure architect",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4467874821": {
+   "first_seen": "2026-11-15",
+   "k": "hays|ai tech lead",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4469611727": {
+   "first_seen": "2026-11-15",
+   "k": "hitachi digital services|it technical delivery lead energy industry",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4470924678": {
+   "first_seen": "2026-11-15",
+   "k": "fujitsu|sap mm senior consultant",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4470934392": {
+   "first_seen": "2026-11-15",
+   "k": "fujitsu|sap mm senior consultant",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4471599729": {
+   "first_seen": "2026-11-15",
+   "k": "emagine|rpa software developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4472559522": {
+   "first_seen": "2026-11-15",
+   "k": "metyis|ai data governance implementation lead",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4472586671": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|ai governance specialist",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4472613383": {
+   "first_seen": "2026-11-15",
+   "k": "adidas|senior manager tax",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4472648573": {
+   "first_seen": "2026-11-15",
+   "k": "airbus|business analyst engineering",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4472936356": {
+   "first_seen": "2026-11-15",
+   "k": "ey|manager sap fi gl lisboa porto",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4472944013": {
+   "first_seen": "2026-11-15",
+   "k": "ey|manager sap successfactors",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4473180993": {
+   "first_seen": "2026-11-15",
+   "k": "natixis in|lead software engineer bpce si",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4473277549": {
+   "first_seen": "2026-11-15",
+   "k": "enovis|web platform manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4473297482": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|consultant senior consultant artificial intelligence data",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4473336787": {
+   "first_seen": "2026-11-15",
+   "k": "emagine|data scientist ml engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4473509218": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|consultant senior consultant artificial intelligence data",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4473741609": {
+   "first_seen": "2026-11-15",
+   "k": "synopsys inc|senior r d pi engineer",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4474148834": {
+   "first_seen": "2026-11-15",
+   "k": "fusion consulting|it project manager quality systems in pharma",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4474192091": {
+   "first_seen": "2026-11-15",
+   "k": "fedex europe|clearance broker associate with german",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4474355738": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|senior consultant microsoft power platform microsoft 365 ai",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4474362478": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|manager microsoft power platform microsoft 365 ai",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4474372132": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|manager microsoft power platform microsoft 365 ai",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4474372133": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|senior consultant microsoft power platform microsoft 365 ai",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4474730158": {
+   "first_seen": "2026-11-15",
+   "k": "iceye|business development manager missions",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4478270430": {
+   "first_seen": "2026-11-15",
+   "k": "engie solucoes de energia|tecnico de avac lousado",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4478855915": {
+   "first_seen": "2026-11-15",
+   "k": "ntt data europe latam|salesforce developer coimbra",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4479425655": {
+   "first_seen": "2026-11-15",
+   "k": "mastercard|manager product management",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480031903": {
+   "first_seen": "2026-11-15",
+   "k": "ocean infinity|product ops lead",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480351916": {
+   "first_seen": "2026-11-15",
+   "k": "confidential|digital procurement technology solutions lead lisbon or bucharest",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480375824": {
+   "first_seen": "2026-11-15",
+   "k": "confidential|business transformation process excellence lead in lisbon or bucharest",
+   "score": 16,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480616200": {
+   "first_seen": "2026-11-15",
+   "k": "sap|business processes senior consultant supply planning integrated business planning",
+   "score": 8,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480678426": {
+   "first_seen": "2026-11-15",
+   "k": "repsol|gestor comercial setor publico",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4480941849": {
+   "first_seen": "2026-11-15",
+   "k": "omninstal|tecnico de contabilidade e financas",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4481384425": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|global payroll process lead",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4481665917": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|head of digital workplace security governance",
+   "score": 0,
+   "why": "pede 14+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4482141745": {
+   "first_seen": "2026-11-15",
+   "k": "the manitowoc company|intern safety energy envirement",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4482441241": {
+   "first_seen": "2026-11-15",
+   "k": "euroimmun|account manager diagnostics",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4482463769": {
+   "first_seen": "2026-11-15",
+   "k": "inetum|microsoft pre post sales consultant senior consultant",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4482483879": {
+   "first_seen": "2026-11-15",
+   "k": "tfs healthscience|senior project manager",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4482494568": {
+   "first_seen": "2026-11-15",
+   "k": "tfs healthscience|clinical database programming process lead",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4482722186": {
+   "first_seen": "2026-11-15",
+   "k": "cisco|software engineer early in career",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4482727074": {
+   "first_seen": "2026-11-15",
+   "k": "kuehne nagel|global road logistics artificial intelligence manager",
+   "score": 19,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4482730990": {
+   "first_seen": "2026-11-15",
+   "k": "vestas|system lead",
+   "score": 13,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4482764758": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|primary markets full stack ai transformation engineer",
+   "score": 14,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4482765806": {
+   "first_seen": "2026-11-15",
+   "k": "bgbx|infrastructure data engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4482806699": {
+   "first_seen": "2026-11-15",
+   "k": "wtw|ai automation specialist western europe crb",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4482860164": {
+   "first_seen": "2026-11-15",
+   "k": "enercon|senior shipment planner",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4483137774": {
+   "first_seen": "2026-11-15",
+   "k": "elastic|principal software engineer global ux application platform",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4483206451": {
+   "first_seen": "2026-11-15",
+   "k": "pine cliffs resort|landscape manager",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4483853634": {
+   "first_seen": "2026-11-15",
+   "k": "volkswagen financial services|data engineer bi",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4486363361": {
+   "first_seen": "2026-11-15",
+   "k": "hays|ai automation engineer",
+   "score": 15,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4487003602": {
+   "first_seen": "2026-11-15",
+   "k": "fluxe agency|assistente administrativo",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4487370335": {
+   "first_seen": "2026-11-15",
+   "k": "carrier|environmental health safety facilities lead",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4488322423": {
+   "first_seen": "2026-11-15",
+   "k": "hays|senior solution owner wms solutions",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4488325000": {
+   "first_seen": "2026-11-15",
+   "k": "exalt fi|ai solutions developer genai rag",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4488533859": {
+   "first_seen": "2026-11-15",
+   "k": "natixis in|data engineer bpce si",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4488534633": {
+   "first_seen": "2026-11-15",
+   "k": "decskill|ai platform expert",
+   "score": 0,
+   "why": "pede 15+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4488909768": {
+   "first_seen": "2026-11-15",
+   "k": "",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4488917507": {
+   "first_seen": "2026-11-15",
+   "k": "norfin|esg analyst",
+   "score": 0,
+   "why": "pede só 2 ano(s): provável nível júnior"
+  },
+  "https://www.linkedin.com/jobs/view/4488917686": {
+   "first_seen": "2026-11-15",
+   "k": "siemens|senior ai engineer",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4488923177": {
+   "first_seen": "2026-11-15",
+   "k": "next engineering|junior project manager",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4488940098": {
+   "first_seen": "2026-11-15",
+   "k": "randstad|project manager energias renovaveis",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4488958679": {
+   "first_seen": "2026-11-15",
+   "k": "itds|business unit director",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4488961028": {
+   "first_seen": "2026-11-15",
+   "k": "migso pcubed|pmo",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4488966207": {
+   "first_seen": "2026-11-15",
+   "k": "adecco permanent recruitment|tecnico de energias renovaveis",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4489238886": {
+   "first_seen": "2026-11-15",
+   "k": "exalt fi|c developer ultra low latency algo trading",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4489251732": {
+   "first_seen": "2026-11-15",
+   "k": "livraria lello|livreiro senior",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4489254363": {
+   "first_seen": "2026-11-15",
+   "k": "n ix|ai enablement lead",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489259824": {
+   "first_seen": "2026-11-15",
+   "k": "infraestruturas de|tecnico de assessoria financeira almada",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4489261312": {
+   "first_seen": "2026-11-15",
+   "k": "nearing visabeira|corporate cybersecurity manager viseu",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4489266291": {
+   "first_seen": "2026-11-15",
+   "k": "revolut|operations manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489269825": {
+   "first_seen": "2026-11-15",
+   "k": "boston consulting|global supplier risk governance director",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4489274023": {
+   "first_seen": "2026-11-15",
+   "k": "codewin|bpm digital transformation expert",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489287993": {
+   "first_seen": "2026-11-15",
+   "k": "sbm offshore|senior hsse engineer",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4489292938": {
+   "first_seen": "2026-11-15",
+   "k": "fh collective academy|dutch speaking customer support specialist",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4489303110": {
+   "first_seen": "2026-11-15",
+   "k": "itrtech|tech lead power platform",
+   "score": 4,
+   "why": "pontuação 4 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4489503246": {
+   "first_seen": "2026-11-15",
+   "k": "secil|atlas fast track trainee program da o proximo passo connosco",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4489531932": {
+   "first_seen": "2026-11-15",
+   "k": "jobgether|ai platform engineer",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489563668": {
+   "first_seen": "2026-11-15",
+   "k": "smith nephew|junior design quality engineer",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4489565881": {
+   "first_seen": "2026-11-15",
+   "k": "optiwisers|microsoft dynamics 365 crm operations manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489569481": {
+   "first_seen": "2026-11-15",
+   "k": "findmore consulting|azure data engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4489573284": {
+   "first_seen": "2026-11-15",
+   "k": "insulet corporation|senior order management lead",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489575149": {
+   "first_seen": "2026-11-15",
+   "k": "futuro famoso|consultor de vendas",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4489577983": {
+   "first_seen": "2026-11-15",
+   "k": "emagine|senior ai engineer copilot studio consultant",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4489578243": {
+   "first_seen": "2026-11-15",
+   "k": "grit solutions|senior tech lead power platform",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4489581966": {
+   "first_seen": "2026-11-15",
+   "k": "accenture|cyber strategy risk architecture manager",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4489586464": {
+   "first_seen": "2026-11-15",
+   "k": "1global|telecom billing software engineer lisbon based",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4489589610": {
+   "first_seen": "2026-11-15",
+   "k": "kcs it|senior m a project manager",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4489589854": {
+   "first_seen": "2026-11-15",
+   "k": "siemens energy|ai solution architect and product owner cost value engineering",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4489590181": {
+   "first_seen": "2026-11-15",
+   "k": "grit solutions|senior tech lead power platform",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4489593277": {
+   "first_seen": "2026-11-15",
+   "k": "keyrus|data ai governance architect",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4489603478": {
+   "first_seen": "2026-11-15",
+   "k": "innotech|dynamics 365 developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4489694417": {
+   "first_seen": "2026-11-15",
+   "k": "faurecia|vie deputy program manager",
+   "why": "local excluído (São João da Madeira, Aveiro, Portugal)"
+  },
+  "https://www.linkedin.com/jobs/view/4489835297": {
+   "first_seen": "2026-11-15",
+   "k": "noesis|creatio application developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4489867411": {
+   "first_seen": "2026-11-15",
+   "k": "carrier|quality project product leader",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490323685": {
+   "first_seen": "2026-11-15",
+   "k": "lcg|change manager m365",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490326212": {
+   "first_seen": "2026-11-15",
+   "k": "inoweiser|ai consultant hybrid",
+   "score": 5,
+   "why": "pontuação 5 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490334731": {
+   "first_seen": "2026-11-15",
+   "k": "jobbex it|ai engineer",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://www.linkedin.com/jobs/view/4490345517": {
+   "first_seen": "2026-11-15",
+   "k": "rotta solutions|tecnico de diagnostico de infiltracoes",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4490347684": {
+   "first_seen": "2026-11-15",
+   "k": "hays|tecnico de certificacao e sistemas de gestao",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4490351943": {
+   "first_seen": "2026-11-15",
+   "k": "faurecia|it trainee intern",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4490353110": {
+   "first_seen": "2026-11-15",
+   "k": "stef|tecnico de controlo de gestao operacional m h alenquer",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4490359720": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas|product manager",
+   "score": 9,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490359817": {
+   "first_seen": "2026-11-15",
+   "k": "continental|sustainability governance mgr",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490362776": {
+   "first_seen": "2026-11-15",
+   "k": "philip morris international|principal solution architect sf and sap platform",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490364923": {
+   "first_seen": "2026-11-15",
+   "k": "ppm coachers|01 project manager junior",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4490366634": {
+   "first_seen": "2026-11-15",
+   "k": "virthio|ai architect",
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4490370601": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|partners for projects trainee",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4490374148": {
+   "first_seen": "2026-11-15",
+   "k": "continental|global nature strategy coordinator",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490378089": {
+   "first_seen": "2026-11-15",
+   "k": "aubay|devops engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490380710": {
+   "first_seen": "2026-11-15",
+   "k": "wire it|power platform automation developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490389814": {
+   "first_seen": "2026-11-15",
+   "k": "fujitsu|ai automation solutions developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490391534": {
+   "first_seen": "2026-11-15",
+   "k": "condukt|ai product owner",
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
+  },
+  "https://www.linkedin.com/jobs/view/4490502812": {
+   "first_seen": "2026-11-15",
+   "k": "que rico casal|ai project manager",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490506595": {
+   "first_seen": "2026-11-15",
+   "k": "enermatch|head de marketing energia solar e autoconsumo coletivo",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490507669": {
+   "first_seen": "2026-11-15",
+   "k": "flexcompute|senior backend software engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490520595": {
+   "first_seen": "2026-11-15",
+   "k": "irium|it business analyst",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4490524418": {
+   "first_seen": "2026-11-15",
+   "k": "irium|ai engineer",
+   "score": 8,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490525421": {
+   "first_seen": "2026-11-15",
+   "k": "irium|ai tech lead",
+   "score": 8,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490592631": {
+   "first_seen": "2026-11-15",
+   "k": "experis|operations digital marketing manager",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490593673": {
+   "first_seen": "2026-11-15",
+   "k": "fidelidade|junior innovation engineer innovation ventures",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4490594825": {
+   "first_seen": "2026-11-15",
+   "k": "fcamara|senior data engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490597488": {
+   "first_seen": "2026-11-15",
+   "k": "izertis|senior integration architect external consulting opportunity api event driven modernization",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490704197": {
+   "first_seen": "2026-11-15",
+   "k": "jimdo|senior product owner support platform ai",
+   "score": 10,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490707713": {
+   "first_seen": "2026-11-15",
+   "k": "iterable|senior data scientist",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490708350": {
+   "first_seen": "2026-11-15",
+   "k": "infineon technologies|procurement process excellence and analytics specialist",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490709060": {
+   "first_seen": "2026-11-15",
+   "k": "inetum|team leader microsoft power platform copilot studio",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490711892": {
+   "first_seen": "2026-11-15",
+   "k": "bosch|compliance ai and technology architect",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4490731070": {
+   "first_seen": "2026-11-15",
+   "k": "coca cola europacific partners|associate director business resilience",
+   "score": 14,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490739145": {
+   "first_seen": "2026-11-15",
+   "k": "be great consulting|tecnico de ambiente qualidade e seguranca",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4490739863": {
+   "first_seen": "2026-11-15",
+   "k": "lidl|junior consultant consultant operations purchase solutions sede sintra",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4490740823": {
+   "first_seen": "2026-11-15",
+   "k": "arrow electronics|sales operations project manager",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://www.linkedin.com/jobs/view/4490743958": {
+   "first_seen": "2026-11-15",
+   "k": "tp|product owner tp ai connect",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490746798": {
+   "first_seen": "2026-11-15",
+   "k": "hays|it project manager",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490747741": {
+   "first_seen": "2026-11-15",
+   "k": "wrike|senior product manager ai platform ecosystem",
+   "score": 8,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490752375": {
+   "first_seen": "2026-11-15",
+   "k": "tp|product owner tp ai operate ai performance management gamification",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490754480": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|v i e full stack ai transformation engineer h f lisbon 24 mois",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490755703": {
+   "first_seen": "2026-11-15",
+   "k": "aubay|power bi data analyst",
+   "score": 1,
+   "why": "pontuação 1 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490757350": {
+   "first_seen": "2026-11-15",
+   "k": "foursys|senior outsystems developers",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490759198": {
+   "first_seen": "2026-11-15",
+   "k": "tp|product owner tp ai assist",
+   "score": 2,
+   "why": "pontuação 2 abaixo de 6"
+  },
+  "https://www.linkedin.com/jobs/view/4490760113": {
+   "first_seen": "2026-11-15",
+   "k": "noesis|creatio application developer",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4490763521": {
+   "first_seen": "2026-11-15",
+   "k": "deloitte|tech manager advisory",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4490765252": {
+   "first_seen": "2026-11-15",
+   "k": "sysmatch|ai architect",
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4490766345": {
+   "first_seen": "2026-11-15",
+   "k": "keyrus|data ai governance architect",
+   "score": 12,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4490798882": {
+   "first_seen": "2026-11-15",
+   "k": "seekers|engenheiro junior ia aplicada a construcao e energia estagio profissional",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4491002643": {
+   "first_seen": "2026-11-15",
+   "k": "bnp paribas cib|esg analyst fixed term",
+   "score": 6,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4491068345": {
+   "first_seen": "2026-11-15",
+   "k": "sonae sierra|strategy corporate development project manager",
+   "score": 11,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4491081214": {
+   "first_seen": "2026-11-15",
+   "k": "coca cola europacific partners|graduate public affairs communications and sustainability",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4491083362": {
+   "first_seen": "2026-11-15",
+   "k": "integer consulting|senior solution architect",
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4491083767": {
+   "first_seen": "2026-11-15",
+   "k": "johnson johnson innovative medicine|transcend manager pmo",
+   "score": 7,
+   "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4491095695": {
+   "first_seen": "2026-11-15",
+   "k": "sisint|funcao engenheiro electrotecnico junior",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
   },
   "https://www.linkedin.com/legal/cookie-policy": {
    "first_seen": "2026-11-15",
