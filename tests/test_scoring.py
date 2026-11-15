@@ -237,3 +237,24 @@ def test_boilerplate_does_not_make_corporate_jobs_reach_maria():
     ok = evaluate(job("Graduate Public Affairs, Communications and Sustainability",
                       "Monitor EU affairs and the European Commission, engage with public sector stakeholders."), maria, t)
     assert ok.include and "Assuntos europeus" in ok.themes
+
+
+def test_maria_gets_libe_style_work_and_not_data_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 2 anos de experiência.")
+    for title, desc, theme in [
+        ("Assessora Parlamentar", "Apoio ao grupo parlamentar na Comissão de Assuntos Constitucionais, Direitos, Liberdades e Garantias.", "Assessoria política e parlamentar"),
+        ("Policy Officer – Rule of Law", "Monitor rule of law and civil liberties files in the LIBE committee of the European Parliament.", "Liberdades, justiça e Estado de direito"),
+        ("Advocacy Officer", "NGO working on migrants' rights and asylum policy; civil society coalitions.", "Sociedade civil e associações"),
+        ("Técnica de Projeto", "Associação de defesa dos direitos humanos: combate à discriminação e ao discurso de ódio.", "Liberdades, justiça e Estado de direito"),
+    ]:
+        v = evaluate(job(title, desc), maria, t)
+        assert v.include and theme in v.themes, (title, v.themes, v.excluded_by)
