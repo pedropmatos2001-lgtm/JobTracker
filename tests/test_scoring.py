@@ -368,3 +368,38 @@ def test_pedro_business_and_environment_not_tech():
     ]:
         v = evaluate(j(title, desc), pedro, t)
         assert v.include, (title, v.themes, v.excluded_by)
+
+
+def test_pedro_gets_linkedin_sustainability_search_examples():
+    """Exemplos de uma pesquisa 'sustentabilidade' no LinkedIn que têm de chegar ao Pedro."""
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    pedro = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["pedro"]["cfg"]
+    t = date(2026, 11, 15)
+    cases = {
+        "Técnico de Ambiente (m/f) - Obra": "Gestão ambiental em obra, licenciamento ambiental e resíduos. 3 anos de experiência.",
+        "Engenheiro/a do Ambiente | Consultoria Ambiental": "Consultoria ambiental: avaliação de impacte ambiental e licenciamento ambiental. 3 anos de experiência.",
+        "Environmental Sustainability Engineer – Project Coordination": "Environmental management, decarbonisation and ISO 14001 projects. 4 years of experience.",
+        "Engenheiro projetos de Energia e Descarbonização": "Projetos de eficiência energética e descarbonização da indústria. 3 anos de experiência.",
+        "Environmental & Biodiversity Specialist": "Biodiversity assessments and environmental impact studies. 4 years of experience.",
+        "Procurement Sustainability Specialist": "Sustainable procurement, supplier ESG assessments, decarbonisation. 4 years of experience.",
+        "LCA specialist": "Life cycle assessment and carbon footprint of products. 3 years of experience.",
+        "Global Nature Strategy Coordinator": "Nature-positive strategy, biodiversity and natural capital for a global manufacturer. 4 years of experience.",
+    }
+    for title, desc in cases.items():
+        v = evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal",
+                         posted="2026-10-25", description=desc), pedro, t)
+        assert v.include, (title, v.score, v.excluded_by)
+    for title in ("Técnico de Manutenção", "Técnico de Informática", "Software Engineer", "Engenheiro de Software"):
+        assert not evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal",
+                                posted="2026-11-10", description="3 anos."), pedro, t).include
+
+
+def test_maria_mep_assistant_is_not_excluded():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    v = evaluate(Job(source="linkedin", company="European Parliament", title="MEP Assistant (Accredited Parliamentary Assistant)",
+                     url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                     description="Support the MEP on LIBE committee files and EU affairs. 2 years of experience."), maria, date(2026, 11, 15))
+    assert v.include, (v.excluded_by, v.themes)

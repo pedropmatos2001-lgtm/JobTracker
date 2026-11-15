@@ -9,16 +9,16 @@ min_salary_eur: 30000          # Pedro: só muda por pelo menos 30 000 € bruto
 company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b|hospitality|hotel|resort"
 company_exclude_label: "Deloitte, EY, PwC, KPMG e hotelaria"
 
-min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
+min_score: 5               # pontuação mínima (um tema forte no título ou dois temas no texto chegam)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
-max_age_days: 14           # ignora vagas publicadas há mais tempo
-max_detail_fetches: 180    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
+max_age_days: 30           # ignora vagas publicadas há mais tempo (muitas ficam abertas um mês)
+max_detail_fetches: 300    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
 alert_after_failures: 3    # avisa se uma fonte falhar N dias seguidos
 heartbeat_weekday: 0       # 0=segunda: se não houver vagas, manda "estou vivo"
 click_url: "https://pedropmatos2001-lgtm.github.io/JobTracker/"   # página com todas as vagas (GitHub Pages)
 
 years:                     # anos de experiência pedidos (extraídos do texto)
-  min: 3                   # abaixo disto = provável nível júnior -> exclui
+  min: 2                   # abaixo disto = provável nível júnior -> exclui
   stretch_from: 5          # a partir daqui = aviso "esticado"
   max: 6                   # acima disto -> exclui
 
@@ -33,7 +33,8 @@ title_exclude:
   - "intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate"
   - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
   # perfis técnicos / de TI (o teu perfil é transformação, processos, ESG, PMO, fundos):
-  - "\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|arquitet[oa]\\b|scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|infrastructure|infraestrutura"
+  # engenheiros de tecnologia saem; engenheiros do ambiente, energia e sustentabilidade ficam
+  - "(software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|infrastructure|infraestrutura"
   - "\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors"
   # tecnologia, IA e dados não são o teu perfil (negócio, operações, ambiente):
   - "\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|\\bdata\\b|dados\\b|analytics|\\bBI\\b|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa"
@@ -41,8 +42,8 @@ title_exclude:
   - "product (manager|owner|ops|development)|product management"
   - "\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar"
   - "account manager|business development|comercial|customer (service|support)|apoio ao cliente|speaker"
-  - "t[ée]c\\.|t[ée]cnico (de|superior de manuten)|technician|manuten[çc][ãa]o|operador|operator"
-  - "sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de"
+  - "t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|technician|manuten[çc][ãa]o|operador|operator"
+  - "sales|vendas|account executive|recruiter|driver|motorista|assistente"
 
 senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
 senior_bonus: 2
@@ -78,7 +79,7 @@ keywords:
 # Empresas e setores que preferes (utilities, energia, água, resíduos): +4 pelo nome da empresa ou título.
 sector_bonus:                # empresa ou título de utilities, energia, água, resíduos, ambiente e sustentabilidade
   points: 4
-  pattern: "\\bEDP\\b|E-REDES|\\bGalp\\b|\\bREN\\b|Redes Energ[ée]ticas|Iberdrola|Endesa|Engie|Greenvolt|Lightsource|Hyperion|Voltalia|Ørsted|Orsted|[ÁA]guas de Portugal|\\bAdP\\b|\\bEPAL\\b|[ÁA]guas do|Indaqua|\\bBe Water|\\bLIPOR\\b|Valorsul|\\bEGF\\b|\\bSUMA\\b|Ambiente|\\bERSAR\\b|\\bERSE\\b|\\bADENE\\b|Floene|Goldenergy|Tejo Energia|utilit|\\benerg|ambiental|environmental|sustainab|sustentab|\\bESG\\b|climat|clim[áa]tic|descarboniz|decarboni|economia circular|circular economy"
+  pattern: "\\bEDP\\b|E-REDES|\\bGalp\\b|\\bREN\\b|Redes Energ[ée]ticas|Iberdrola|Endesa|Engie|Greenvolt|Lightsource|Hyperion|Voltalia|Ørsted|Orsted|[ÁA]guas de Portugal|\\bAdP\\b|\\bEPAL\\b|[ÁA]guas do|Indaqua|\\bBe Water|\\bLIPOR\\b|Valorsul|\\bEGF\\b|\\bSUMA\\b|Ambiente|\\bERSAR\\b|\\bERSE\\b|\\bADENE\\b|Floene|Goldenergy|Tejo Energia|utilit|\\benerg|ambiental|environmental|sustainab|sustentab|\\bESG\\b|climat|clim[áa]tic|descarboniz|decarboni|economia circular|circular economy|\\bnature\\b|natureza|biodivers|natural capital|capital natural|\\bLCA\\b|life cycle"
 
 # --- empresas-alvo do Pedro -------------------------------------------------
 # Lista mínima de empresas que o tracker tem de cobrir. Duas coisas acontecem:
@@ -246,7 +247,7 @@ profiles:
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
         - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
         - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
-        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label"
+        - "turismo|modelador|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label"
       keywords:
         strong_cap: 14
         strong:
@@ -396,6 +397,43 @@ sources:
       - "avaliação de políticas públicas"
       - "think tank"
       - "development economist"
+
+  # Núcleo do Pedro: ambiente, clima, sustentabilidade e energia. São as pesquisas com mais vagas
+  # relevantes, por isso leem até 100 resultados por termo e os últimos 30 dias.
+  - type: linkedin
+    name: "LinkedIn (ambiente e sustentabilidade)"
+    location: Portugal
+    hours: 720
+    max_per_query: 100
+    queries:
+      - "sustentabilidade"
+      - "sustainability"
+      - "ambiente"
+      - "environmental"
+      - "ESG"
+      - "alterações climáticas"
+      - "climate"
+      - "descarbonização"
+      - "energia"
+      - "economia circular"
+
+  # Núcleo da Maria: política, assuntos europeus, direitos e projetos europeus. Até 100 resultados e 30 dias.
+  - type: linkedin
+    name: "LinkedIn (política e assuntos europeus)"
+    location: Portugal
+    hours: 720
+    max_per_query: 100
+    queries:
+      - "assuntos europeus"
+      - "public affairs"
+      - "políticas públicas"
+      - "policy officer"
+      - "direitos humanos"
+      - "projetos europeus"
+      - "cooperação"
+      - "ONG"
+      - "assessor"
+      - "monitoring and evaluation"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias

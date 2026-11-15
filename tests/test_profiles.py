@@ -244,3 +244,19 @@ def test_ongd_source_filter_and_maria_gets_relevant_ngo_jobs(tmp_path):
     titles = {m["title"]: m["profiles"] for m in docs["matches"]}
     assert "Farmacêuticos/as" not in titles                       # saiu pelo filtro da fonte
     assert "maria" in titles.get("Gestor/a de Projetos de Cooperação e Advocacy", {})
+
+
+def test_rules_change_reevaluates_seen_jobs_without_alerts(tmp_path):
+    sp, dd = paths(tmp_path)
+    sent = []
+    send = lambda t, b, c, p=None: sent.append(p["id"]) or ["ok"]
+    nature = mk("Global Nature Strategy Coordinator", "4 years of experience. Nature-positive strategy and natural capital.",
+                company="Continental")
+    strict = cfg2()
+    strict["min_score"] = 30                                  # regra antiga: nada passa
+    run(strict, {}, WED, sp, dd, fetch=lambda s: [nature], detail=lambda j: j, send=send)
+    assert json.load(open(f"{dd}/jobs.json", encoding="utf-8"))["matches"] == []
+    run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [nature], detail=lambda j: j, send=send)   # regras novas
+    docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
+    assert [m["title"] for m in docs["matches"]] == ["Global Nature Strategy Coordinator"]
+    assert sent == []                                         # já tinha sido vista: entra na página sem novo aviso
