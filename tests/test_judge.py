@@ -7,6 +7,11 @@ from jobtracker import judge, kit, notify
 from jobtracker.__main__ import run
 from tests.test_run import WED, cfg, good, harness, paths  # noqa: F401
 
+@pytest.fixture(autouse=True)
+def judge_on(cfg):
+    cfg.setdefault("judge", {})["enabled"] = True
+
+
 GOOD = {"fit": 82, "decisao": "candidatar", "porque": "Encaixa em IA aplicada.",
         "alertas": ["pede 5 anos"], "vale_mudar_de_emprego": True,
         "porque_sair": "Mais escopo e salário.", "salario_estimado": "não indicado"}
@@ -143,3 +148,9 @@ def test_profile_comes_from_secret(cfg, tmp_path):
     _run(cfg, {"ANTHROPIC_API_KEY": "k", "CANDIDATE_PROFILE": "PERFIL-SECRETO"}, WED, sp, dd,
          session=S(), **h)
     assert "PERFIL-SECRETO" in seen[0]
+
+
+def test_judge_is_off_by_default_in_config(cfg, tmp_path):
+    import yaml
+    real = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    assert real["judge"]["enabled"] is False
