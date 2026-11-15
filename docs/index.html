@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Vagas">
+<meta name="apple-mobile-web-app-title" content="JobTracker">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1f24" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex, nofollow">
@@ -13,7 +13,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="icon-180.png">
-<title>Vagas</title>
+<title>JobTracker</title>
 <style>
   /* Estilo Apple Saúde: fundo cinzento, cartões brancos, cor só para estados e dados. */
   :root {
@@ -53,7 +53,9 @@
   .side { position: sticky; top: 0; height: 100dvh; overflow: hidden auto; background: var(--side); border-right: .5px solid var(--sep);
           backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
           padding: 24px 12px 12px; display: flex; flex-direction: column; min-width: 0; }
-  .brand { font-size: 20px; font-weight: 700; letter-spacing: -.025em; padding: 0 10px 22px; }
+  .brand { padding: 4px 10px 24px; line-height: 0; }
+  .brand img { display: block; height: 26px; width: auto; }
+  :root[data-theme="dark"] .brand img { filter: invert(1); }
   .nav { display: grid; gap: 2px; }
   .item { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 38px; padding: 8px 10px; border: 0; border-radius: var(--r-ctl);
           background: transparent; text-align: left; cursor: pointer; font-size: 15px; color: var(--label); text-decoration: none;
@@ -263,7 +265,8 @@
     .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; gap: 12px;
               padding: calc(6px + env(safe-area-inset-top)) 8px 6px 16px; background: var(--bar);
               backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: .5px solid var(--sep); }
-    .topbar .brand { padding: 0; font-size: 17px; font-weight: 600; }
+    .topbar .brand { padding: 0; }
+    .topbar .brand img { height: 22px; }
     .topbar .profile-btn { flex: none; min-height: 44px; padding: 4px 6px 4px 4px; gap: 8px; }
     .topbar .profile-btn .ph { display: none; }
     .topbar .avatar { width: 32px; height: 32px; }
@@ -318,7 +321,7 @@
 <a class="sr skip" href="#main">Saltar para o conteúdo</a>
 <div class="app">
 <aside class="side" aria-label="Navegação">
-  <div class="brand">Vagas</div>
+  <div class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></div>
   <nav class="nav" id="nav"></nav>
   <div class="bottom">
     <button class="profile-btn" type="button" id="profileBtn" aria-haspopup="dialog" aria-controls="modal"></button>
@@ -333,7 +336,7 @@
 </div>
 
 <div class="content">
-  <div class="topbar"><span class="brand">Vagas</span><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div>
+  <div class="topbar"><span class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></span><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div>
   <header class="wrap"><h1 id="h1">Vagas</h1><div class="sub" id="sub">A carregar…</div></header>
   <main class="wrap" id="main"></main>
   <nav class="tabs" id="tabs" aria-label="Secções"></nav>
@@ -751,7 +754,7 @@ function select(pid) {
   if (!profiles.some(p => p.id === pid)) pid = profiles[0].id;
   current = pid; store.set("vagas-perfil", pid);
   data = viewFor(pid); marks = store.get(markKey(pid), {}); seen = store.get(seenKey(pid), {});
-  document.title = profile().name ? `Vagas de ${profile().name}` : "Vagas";
+  document.title = profile().name ? `JobTracker de ${profile().name}` : "JobTracker";
   filters.tema = filters.fonte = filters.local = "";
   go(page);
 }

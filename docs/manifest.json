@@ -1,6 +1,6 @@
 {
-  "name": "Vagas para ti",
-  "short_name": "Vagas",
+  "name": "JobTracker",
+  "short_name": "JobTracker",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#f2f2f7",
