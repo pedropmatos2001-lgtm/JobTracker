@@ -587,6 +587,8 @@ def fetch_linkedin(src, session, env, sleep=time.sleep):
                       "f_TPR": f"r{hours * 3600}", "start": start}
             if src.get("geo_id"):
                 params["geoId"] = src["geo_id"]
+            if src.get("remote"):
+                params["f_WT"] = "2"             # só vagas 100% remotas
             try:
                 r = http(session, "GET", f"{LI_BASE}/jobs-guest/jobs/api/seeMoreJobPostings/search",
                          params=params, headers=LI_HEADERS, tries=2)
@@ -602,6 +604,9 @@ def fetch_linkedin(src, session, env, sleep=time.sleep):
                     errors.append(f"«{q}»: página sem vagas (bloqueio?)")
                 break
             fresh = [j for j in page if j.url not in seen]
+            if src.get("remote"):
+                for j in fresh:
+                    j.remote = True
             if src.get("_company_rx"):      # pesquisa por empresa: fica só com vagas dessas empresas
                 for j in fresh:
                     seen.add(j.url)

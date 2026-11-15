@@ -211,7 +211,7 @@ profiles:
     name: Maria
     former_ids: [marta]              # antes chamava-se Marta: herda o que já tinha visto
     headline: "Política, assuntos europeus e direitos fundamentais"
-    tags: ["Assessoria política", "Consultoria ao setor público", "Assuntos europeus", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
+    tags: ["Assessoria política", "Políticas públicas e avaliação", "Assuntos europeus", "Consultoria ao setor público", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
     ntfy_env: NTFY_TOPIC_MARIA
@@ -249,6 +249,8 @@ profiles:
         strong:
           - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
           - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
+          - {label: "Avaliação e monitorização de políticas", examples: ["monitoring & evaluation", "avaliação de impacto", "policy appraisal", "análise de políticas"], pattern: "monitoring (and|&) evaluation|\\bM&E\\b|\\bMEAL\\b|impact evaluation|avalia[çc][ãa]o de impacto|policy (appraisal|evaluation|assessment)|avalia[çc][ãa]o de pol[íi]ticas|programme evaluation|avalia[çc][ãa]o de programas|evidence[- ]based polic|pol[íi]ticas baseadas em evid[êe]ncia|\\bPlanAPP\\b|prospetiva|foresight"}
+          - {label: "Desenvolvimento e políticas de emprego", examples: ["desenvolvimento internacional", "políticas de emprego", "OIT", "economia do desenvolvimento"], pattern: "development econom|economia do desenvolvimento|labou?r market polic|pol[íi]ticas (ativas )?de emprego|mercado de trabalho|informal (labou?r|economy|employment)|economia informal|\\bILO\\b|\\bOIT\\b|social protection|prote[çc][ãa]o social|poverty reduction|redu[çc][ãa]o da pobreza|\\bSDGs?\\b|\\bODS\\b|sustainable development goals|objetivos de desenvolvimento sustent[áa]vel"}
           - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament"}
           - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b"}
@@ -376,6 +378,12 @@ sources:
       - "EU institutions consultant"
       - "grant manager"
       - "proposal writer"
+      - "monitoring and evaluation"
+      - "impact evaluation"
+      - "policy analyst"
+      - "avaliação de políticas públicas"
+      - "think tank"
+      - "development economist"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias
@@ -387,6 +395,26 @@ sources:
     location: Portugal
     hours: 168
     max_per_query: 25
+
+  # Vagas 100% remotas na UE (LinkedIn com o filtro "remoto"): sobretudo para a Maria. A regra de zona aceita
+  # remoto quando a vaga diz Europa/UE/Portugal; vagas remotas presas a outro país ficam de fora.
+  - type: linkedin
+    name: "LinkedIn (remoto UE)"
+    location: "European Union"
+    remote: true
+    hours: 168
+    max_per_query: 25
+    queries:
+      - "EU affairs"
+      - "public affairs"
+      - "policy analyst"
+      - "policy officer"
+      - "EU funded projects"
+      - "grant manager"
+      - "monitoring and evaluation"
+      - "human rights"
+      - "advocacy officer"
+      - "parliamentary"
 
   # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
   - type: indeed

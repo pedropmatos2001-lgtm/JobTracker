@@ -20,7 +20,7 @@ class FakeSession:
         self.responses, self.calls = list(responses), []
 
     def request(self, method, url, **kw):
-        self.calls.append((method, url))
+        self.calls.append((method, url, kw))
         r = self.responses.pop(0)
         if isinstance(r, Exception):
             raise r
@@ -422,3 +422,10 @@ def test_parse_eu_agencies_only_open_calls():
     emsa = sources.parse_emsa(_fx("emsa.html"), {"name": "EMSA", "company": "EMSA"}, "https://www.emsa.europa.eu/jobs/vacancies.html")
     assert [j.title for j in emsa] == ["Officer - Decarbonisation of Shipping (FGIV)", "Officer - Ship Safety and Accident Investigation (SNE)"]
     assert "26.11.2026" in emsa[0].description
+
+
+def test_linkedin_remote_source_sets_filter_and_marks_jobs_remote():
+    s = FakeSession(Resp(text=_fx("linkedin_search.html")))
+    jobs = sources.fetch_linkedin({"queries": ["EU affairs"], "location": "European Union", "remote": True}, s, {}, sleep=lambda x: None)
+    assert jobs and all(j.remote for j in jobs)
+    assert s.calls[0][2]["params"]["f_WT"] == "2"

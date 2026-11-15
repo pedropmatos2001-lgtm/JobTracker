@@ -318,3 +318,22 @@ def test_maria_eu_projects_like_big4_teams():
     ]:
         v = evaluate(job(title, desc, company="Deloitte"), maria, t)
         assert v.include and "Projetos europeus e cooperação" in v.themes, (title, v.themes, v.excluded_by)
+
+
+def test_maria_master_themes_and_remote_eu_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc, location="Lisboa, Portugal", remote=None):
+        return Job(source="linkedin", company="X", title=title, url="u", location=location, posted="2026-11-14",
+                   description=desc + " 2 years of experience.", remote=remote)
+    v = evaluate(job("Monitoring & Evaluation Officer", "Impact evaluation of labour market policies and social protection programmes."), maria, t)
+    assert v.include and {"Avaliação e monitorização de políticas", "Desenvolvimento e políticas de emprego"} <= set(v.themes)
+    assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                        location="European Union", remote=True), maria, t).include
+    assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                            location="Brussels, Belgium"), maria, t).include      # presencial fora de Portugal: não
