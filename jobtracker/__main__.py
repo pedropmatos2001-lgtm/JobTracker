@@ -152,12 +152,20 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
     # Reavaliar: volta a avaliar com as regras atuais tudo o que ainda está na janela de recolha.
     # Mantém a data em que cada vaga foi vista e não volta a avisar quem já tinha avaliado a vaga.
     silent = state.setdefault("silent", {})
-    if str(env.get("REEVALUATE", "")).lower() in ("1", "true", "yes", "sim"):
+    # Regras mudaram (config.yaml)? Volta a avaliar tudo sozinho: uma vaga excluída pelas regras antigas
+    # não pode ficar perdida só porque já tinha sido vista.
+    import hashlib
+    rules_hash = hashlib.sha1(json.dumps([[p["id"], p["cfg"]] for p in profiles], sort_keys=True, default=str,
+                                         ensure_ascii=False).encode()).hexdigest()[:12]
+    rules_changed = bool(state.get("rules_hash")) and state.get("rules_hash") != rules_hash
+    state["rules_hash"] = rules_hash
+    if rules_changed or str(env.get("REEVALUATE", "")).lower() in ("1", "true", "yes", "sim"):
         first_pid = profiles[0]["id"]
         for u, m in state["seen"].items():
             silent[u] = {"ev": m.get("ev") or [first_pid], "first_seen": m.get("first_seen", today.isoformat())}
         state["seen"], state["matches"] = {}, []
-        report.append(f"reavaliação: {len(silent)} vagas vistas voltam a ser avaliadas com as regras atuais, sem novos avisos")
+        report.append(("regras mudaram: " if rules_changed else "reavaliação: ") +
+                      f"{len(silent)} vagas vistas voltam a ser avaliadas com as regras atuais, sem novos avisos")
     cutoff = (today.toordinal() - 30)
     for u in [u for u, m in silent.items() if date.fromisoformat(m["first_seen"]).toordinal() < cutoff]:
         silent.pop(u)
