@@ -210,7 +210,8 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         pat = pat_of(item)
         rx = re.compile(pat, re.I)
         if rx.search(theme_text):
-            strong_pts += 3
+            pts = item.get("points", 3) if isinstance(item, dict) else 3     # temas prioritários valem mais
+            strong_pts += pts
             n_themes += 1
             if len({m.group(0).lower() for m in rx.finditer(theme_text)}) >= 2:
                 deep_theme = True                     # o mesmo tema com várias provas diferentes
@@ -220,6 +221,15 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
             v.reasons.append(f"+ {label_of(item) or pat}")
             if label_of(item):
                 v.themes.append(label_of(item))
+    # Funções genéricas (ex.: business analyst) contam como tema quando a empresa é uma das empresas-alvo
+    # (consultoras): o título diz o papel, a empresa diz o contexto.
+    role_rx = cfg.get("target_role_titles")
+    if role_rx and not title_theme and target_company(job, cfg) and re.search(role_rx, job.title or "", re.I):
+        strong_pts += 3
+        n_themes += 1
+        title_theme = True
+        v.reasons.append("+ função de consultoria numa consultora-alvo")
+        v.themes.append(cfg.get("target_role_label", "Consultoria"))
     score += min(strong_pts, kw.get("strong_cap", 14))
     med = sum(1 for pat in kw.get("medium", []) if re.search(pat_of(pat), text, re.I))
     score += min(med, kw.get("medium_cap", 4))

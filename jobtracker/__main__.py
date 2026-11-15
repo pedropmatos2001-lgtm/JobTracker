@@ -4,6 +4,7 @@ import json
 import os
 import re
 import sys
+import time
 import unicodedata
 from datetime import date, datetime, timezone
 
@@ -171,10 +172,17 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         silent.pop(u)
 
     # 1) recolher — uma fonte avariada nunca derruba as outras
+    # Tempo máximo da execução (o GitHub cancela o workflow no limite e aí nada fica guardado):
+    # passado o tempo, o que falta fica para a execução seguinte e o que já se fez é publicado.
+    t0, limit = time.monotonic(), float(env.get("RUN_BUDGET_MIN") or cfg.get("run_budget_min", 70)) * 60
+    over = lambda share=1.0: time.monotonic() - t0 > limit * share
     for src in cfg.get("sources", []):
         if src.get("enabled") is False:
             continue
         name = src.get("name") or src.get("type")
+        if over(0.55):                          # recolha a meio do tempo: guarda tempo para avaliar
+            report.append(f"{name}: adiada para a próxima execução (tempo)")
+            continue
         h = state["health"].setdefault(name, {"fail_streak": 0, "last_ok": ""})
         ctx = {**src, "_known": state["seen"].keys(), "_cursor": state["cursors"].get(name)}
         rot = ""
@@ -256,7 +264,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         if sources.needs_detail(j) and is_li and li_fail >= 3:
             j.partial = True                  # LinkedIn está a limitar: avalia só pelo cartão (título)
         elif sources.needs_detail(j):
-            if budget <= 0:
+            if budget <= 0 or over():
                 continue                      # fica por ver; tenta na próxima execução
             budget -= 1
             orig = j

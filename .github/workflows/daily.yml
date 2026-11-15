@@ -22,7 +22,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     environment: GERAL          # os segredos estão neste Environment
-    timeout-minutes: 30
+    timeout-minutes: 90          # o tracker para sozinho aos 70 min e publica; isto é só a rede de segurança
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
