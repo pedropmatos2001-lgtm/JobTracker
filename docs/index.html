@@ -53,7 +53,10 @@
   .side { position: sticky; top: 0; height: 100dvh; overflow: hidden auto; background: var(--side); border-right: .5px solid var(--sep);
           backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
           padding: 24px 12px 12px; display: flex; flex-direction: column; min-width: 0; }
-  .brand { padding: 4px 10px 24px; line-height: 0; }
+  .brand { display: block; width: fit-content; padding: 4px 10px 24px; line-height: 0; border-radius: var(--r-ctl); }
+  .brand:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  @media (hover: hover) { .brand:hover img { opacity: .75; } }
+  .brand img { transition: opacity 150ms var(--ease-out); }
   .brand img { display: block; height: 26px; width: auto; }
   :root[data-theme="dark"] .brand img { filter: invert(1); }
   .nav { display: grid; gap: 2px; }
@@ -339,7 +342,7 @@
 <a class="sr skip" href="#main">Saltar para o conteúdo</a>
 <div class="app">
 <aside class="side" aria-label="Navegação">
-  <div class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></div>
+  <a class="brand" href="#" aria-label="JobTracker: ir para o Início"><img src="logo.png" alt="" width="541" height="92"></a>
   <nav class="nav" id="nav"></nav>
   <div class="bottom">
     <button class="profile-btn" type="button" id="profileBtn" aria-haspopup="dialog" aria-controls="modal"></button>
@@ -354,7 +357,7 @@
 </div>
 
 <div class="content">
-  <div class="topbar"><span class="brand"><img src="logo.png" alt="JobTracker" width="541" height="92"></span><div class="tb-right"><button class="icon-btn sync-btn" type="button" id="mSync"></button><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div></div>
+  <div class="topbar"><a class="brand" href="#" aria-label="JobTracker: ir para o Início"><img src="logo.png" alt="" width="541" height="92"></a><div class="tb-right"><button class="icon-btn sync-btn" type="button" id="mSync"></button><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div></div>
   <header class="wrap"><div class="hrow"><div class="htext"><h1 id="h1">Vagas</h1><div class="sub" id="sub">A carregar…</div></div><div class="sync"><span class="sync-at" id="syncAt" aria-live="polite"></span><button class="icon-btn sync-btn" type="button" id="dSync"></button></div></div></header>
   <main class="wrap" id="main"></main>
   <nav class="tabs" id="tabs" aria-label="Secções"></nav>
@@ -922,6 +925,8 @@ function applyData(d) {
   current = profiles.some(p => p.id === pid) ? pid : profiles[0].id;
   select(current); paintSync();
 }
+// o logótipo leva ao Início do perfil atual
+document.querySelectorAll(".brand").forEach(a => a.addEventListener("click", e => { e.preventDefault(); if (profiles.length) go("home"); }));
 $("mSync").onclick = runSync; $("dSync").onclick = runSync; paintSync();
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(applyData).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar a página."; });
 addEventListener("hashchange", () => { const h = readUrl(); if (!profiles.length) return;
