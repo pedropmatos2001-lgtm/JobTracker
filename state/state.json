@@ -1,7 +1,7 @@
 {
  "health": {
   "Adzuna": {
-   "fail_streak": 0,
+   "fail_streak": 1,
    "last_ok": ""
   },
   "EDP (Lisboa)": {
@@ -17,8 +17,8 @@
    "last_ok": ""
   },
   "Greenvolt": {
-   "fail_streak": 1,
-   "last_ok": ""
+   "fail_streak": 0,
+   "last_ok": "2026-11-15"
   },
   "LIPOR": {
    "fail_streak": 1,
@@ -39,6 +39,208 @@
  },
  "matches": [],
  "seen": {
+  "https://apply.workable.com/greenvolt/j/00DF71E41B": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Boston, United States)"
+  },
+  "https://apply.workable.com/greenvolt/j/0100F2AB8E": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Bordeaux, France)"
+  },
+  "https://apply.workable.com/greenvolt/j/04689250D6": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/0510DF84E0": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/0AE55A6BA8": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Warsaw, Poland)"
+  },
+  "https://apply.workable.com/greenvolt/j/11E7E3BD87": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Milan, Italy)"
+  },
+  "https://apply.workable.com/greenvolt/j/178A24934E": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Paris, France)"
+  },
+  "https://apply.workable.com/greenvolt/j/1CBBA5840C": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Waterford, Ireland)"
+  },
+  "https://apply.workable.com/greenvolt/j/1D4096FE1E": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 24 dias"
+  },
+  "https://apply.workable.com/greenvolt/j/23955E2D97": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/254CA003B9": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Paris, France)"
+  },
+  "https://apply.workable.com/greenvolt/j/2611F593C9": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/26B699FE29": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/2962D8C918": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Budapest, Hungary)"
+  },
+  "https://apply.workable.com/greenvolt/j/2A2987F15D": {
+   "first_seen": "2026-11-15",
+   "score": 8,
+   "why": ""
+  },
+  "https://apply.workable.com/greenvolt/j/37FC213DF8": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/39EDCC7ACE": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/3EEABDB812": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Tokyo, Japan)"
+  },
+  "https://apply.workable.com/greenvolt/j/4271EF16FC": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/555F83F90D": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Boston, United States)"
+  },
+  "https://apply.workable.com/greenvolt/j/63B96FCC2F": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/64ED46A16C": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
+  "https://apply.workable.com/greenvolt/j/710386B98C": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/74CAFAD834": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Paris, France)"
+  },
+  "https://apply.workable.com/greenvolt/j/752D769F31": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Lyon, France)"
+  },
+  "https://apply.workable.com/greenvolt/j/7723A2C170": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/7CECC4C647": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://apply.workable.com/greenvolt/j/81AD91E121": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/8C35CC1EAE": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/9342913852": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Waterford, Ireland)"
+  },
+  "https://apply.workable.com/greenvolt/j/97B8BEDE35": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://apply.workable.com/greenvolt/j/9DADA21878": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/A3730040E4": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://apply.workable.com/greenvolt/j/ABF67E5023": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/AE66E5ACF7": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://apply.workable.com/greenvolt/j/B555EFA016": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://apply.workable.com/greenvolt/j/B5C9B0385F": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de)"
+  },
+  "https://apply.workable.com/greenvolt/j/B7EEC4EC3A": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 24 dias"
+  },
+  "https://apply.workable.com/greenvolt/j/B8977AD215": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 24 dias"
+  },
+  "https://apply.workable.com/greenvolt/j/BBF861F399": {
+   "first_seen": "2026-11-15",
+   "why": "publicada há 16 dias"
+  },
+  "https://apply.workable.com/greenvolt/j/C5073948B8": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/CE0719C40A": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/D5A072EA91": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/D848ECD67F": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Waterford, Ireland)"
+  },
+  "https://apply.workable.com/greenvolt/j/D89CD8D51E": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/DBC5FFE471": {
+   "first_seen": "2026-11-15",
+   "score": 3,
+   "why": "pontuação 3 abaixo de 6"
+  },
+  "https://apply.workable.com/greenvolt/j/DFCA6A54DB": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/E35D5E8718": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Madrid, Spain)"
+  },
+  "https://apply.workable.com/greenvolt/j/ED1F4F0003": {
+   "first_seen": "2026-11-15",
+   "why": "local fora do alvo (Waterford, Ireland)"
+  },
+  "https://apply.workable.com/greenvolt/j/F329A5959E": {
+   "first_seen": "2026-11-15",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
   "https://job-boards.eu.greenhouse.io/systemiq/jobs/4830762101": {
    "first_seen": "2026-11-15",
    "why": "local fora do alvo (London, UK)"
