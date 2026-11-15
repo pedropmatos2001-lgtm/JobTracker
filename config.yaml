@@ -99,7 +99,7 @@ profiles:
 
   - id: marta
     name: Marta
-    headline: "Políticas públicas · Assuntos europeus · Incentivos e fundos"
+    headline: "Políticas públicas, assuntos europeus e fundos"
     tags: ["Políticas públicas", "Assuntos europeus", "Fundos e incentivos", "Horizon Europe", "SIFIDE"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""

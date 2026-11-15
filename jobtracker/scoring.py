@@ -71,6 +71,7 @@ class Verdict:
     score: int = 0
     reasons: list = field(default_factory=list)   # porque passou/pontuou
     flags: list = field(default_factory=list)     # riscos a confirmar
+    themes: list = field(default_factory=list)    # temas fortes que a vaga cumpre (rótulos legíveis)
     excluded_by: str = ""
 
 
@@ -158,6 +159,8 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
             if rx.search(job.title):
                 strong_pts += 2
             v.reasons.append(f"+ {label_of(item) or pat}")
+            if label_of(item):
+                v.themes.append(label_of(item))
     score += min(strong_pts, kw.get("strong_cap", 14))
     med = sum(1 for pat in kw.get("medium", []) if re.search(pat_of(pat), text, re.I))
     score += min(med, kw.get("medium_cap", 4))

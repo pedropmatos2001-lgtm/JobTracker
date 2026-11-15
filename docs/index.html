@@ -11,23 +11,23 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Vagas</title>
 <style>
-  /* Estilo Apple: tipo de letra do sistema, cinzentos neutros e um único azul. */
   :root {
     color-scheme: light;
-    --bg: #ffffff; --side: #f5f5f7; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.08); --hover: rgba(0,0,0,.04);
-    --label: #1d1d1f; --label-2: #6e6e73; --label-3: #86868b; --sep: rgba(60,60,67,.16);
-    --blue: #0071e3; --green: #248a3d; --orange: #b25000; --red: #d70015;
-    --surface: #ffffff; --bar: rgba(255,255,255,.82); --topbar: rgba(245,245,247,.86); --modal: rgba(255,255,255,.96);
-    --seg-on: #ffffff; --current: rgba(0,0,0,.06); --avatar-bg: #1d1d1f; --avatar-fg: #ffffff; --card-line: rgba(0,0,0,.06);
+    --bg: #f5f5f7; --side: #fbfbfd; --surface: #ffffff; --fill: rgba(118,118,128,.12); --fill-2: rgba(118,118,128,.07); --hover: rgba(0,0,0,.04);
+    --label: #1d1d1f; --label-2: #6e6e73; --label-3: #86868b; --sep: rgba(60,60,67,.14);
+    --blue: #0071e3; --blue-soft: rgba(0,113,227,.08); --green: #1d7d39; --green-soft: rgba(36,138,61,.1); --orange: #b25000;
+    --bar: rgba(245,245,247,.8); --modal: rgba(255,255,255,.97); --seg-on: #ffffff; --current: rgba(0,0,0,.055);
+    --avatar-bg: #1d1d1f; --avatar-fg: #ffffff; --card-shadow: 0 1px 2px rgba(0,0,0,.04), 0 0 0 .5px rgba(0,0,0,.06);
+    --card-hover: 0 8px 24px rgba(0,0,0,.08), 0 0 0 .5px rgba(0,0,0,.06);
     --motion-100: 100ms; --motion-150: 150ms; --motion-200: 200ms; --motion-300: 300ms;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
   }
   :root[data-theme="dark"] { color-scheme: dark;
-    --bg: #000000; --side: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.18); --hover: rgba(255,255,255,.06);
-    --label: #f5f5f7; --label-2: #a1a1a6; --label-3: #8e8e93; --sep: rgba(84,84,88,.55);
-    --blue: #0a84ff; --green: #30d158; --orange: #ff9f0a; --red: #ff453a;
-    --surface: #1c1c1e; --bar: rgba(0,0,0,.72); --topbar: rgba(28,28,30,.86); --modal: rgba(44,44,46,.96);
-    --seg-on: #636366; --current: rgba(255,255,255,.08); --avatar-bg: #f5f5f7; --avatar-fg: #1d1d1f; --card-line: rgba(255,255,255,.06); }
+    --bg: #000000; --side: #161617; --surface: #1c1c1e; --fill: rgba(118,118,128,.24); --fill-2: rgba(118,118,128,.16); --hover: rgba(255,255,255,.06);
+    --label: #f5f5f7; --label-2: #a1a1a6; --label-3: #8e8e93; --sep: rgba(84,84,88,.5);
+    --blue: #2997ff; --blue-soft: rgba(41,151,255,.14); --green: #30d158; --green-soft: rgba(48,209,88,.14); --orange: #ff9f0a;
+    --bar: rgba(0,0,0,.72); --modal: rgba(44,44,46,.97); --seg-on: #636366; --current: rgba(255,255,255,.08);
+    --avatar-bg: #f5f5f7; --avatar-fg: #1d1d1f; --card-shadow: 0 0 0 .5px rgba(255,255,255,.08); --card-hover: 0 8px 24px rgba(0,0,0,.5), 0 0 0 .5px rgba(255,255,255,.12); }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--label); -webkit-font-smoothing: antialiased;
@@ -35,190 +35,178 @@
   button, input, select { font: inherit; color: inherit; letter-spacing: inherit; }
   a { color: var(--blue); }
   svg { flex: none; }
-  .wrap { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 32px; }
 
   /* ---------- barra lateral ---------- */
-  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; }
-  .side { position: sticky; top: 0; height: 100vh; overflow-y: auto; overflow-x: hidden; background: var(--side); border-right: .5px solid var(--sep);
-          padding: 20px 10px 10px; display: flex; flex-direction: column; min-width: 0; }
-  .brand { font-size: 15px; font-weight: 600; padding: 2px 10px 18px; letter-spacing: -.02em; }
-  .sect { font-size: 11px; font-weight: 500; color: var(--label-3); padding: 14px 10px 6px; }
-  .nav { display: grid; gap: 1px; }
-  .item { position: relative; display: flex; align-items: center; gap: 10px; width: 100%; min-height: 34px; padding: 6px 10px; border: 0; border-radius: 8px;
+  .app { display: grid; grid-template-columns: 240px minmax(0, 1fr); min-height: 100vh; }
+  .side { position: sticky; top: 0; height: 100vh; overflow: hidden auto; background: var(--side); border-right: .5px solid var(--sep);
+          padding: 22px 12px 12px; display: flex; flex-direction: column; min-width: 0; }
+  .brand { font-size: 19px; font-weight: 700; padding: 0 10px 20px; letter-spacing: -.03em; }
+  .nav { display: grid; gap: 2px; }
+  .nav + .nav { margin-top: 18px; }
+  .item { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 36px; padding: 7px 10px; border: 0; border-radius: 9px;
           background: transparent; text-align: left; cursor: pointer; font-size: 14px; color: var(--label); text-decoration: none;
           transition: background-color var(--motion-150) var(--ease-out); }
   .item svg { color: var(--label-2); }
   .item:hover { background: var(--hover); }
-  .item[aria-current=page] { background: var(--current); font-weight: 500; }
-  .item[aria-current=page]::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; border-radius: 2px; background: var(--blue); }
-  .item .n { margin-left: auto; font-size: 12px; color: var(--label-3); font-variant-numeric: tabular-nums; }
-  .bottom { margin-top: auto; border-top: .5px solid var(--sep); padding-top: 10px; display: grid; gap: 1px; }
-  .me { display: flex; align-items: center; gap: 10px; padding: 8px 10px 10px; min-width: 0; }
-  .avatar { flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--avatar-bg); color: var(--avatar-fg);
-            font-weight: 600; font-size: 12px; letter-spacing: 0; }
-  .me .pinfo, .pitem .pinfo { min-width: 0; flex: 1; }
+  .item[aria-current=page] { background: var(--current); font-weight: 600; }
+  .item[aria-current=page] svg { color: var(--blue); }
+  .item .n { margin-left: auto; font-size: 12px; color: var(--label-3); font-variant-numeric: tabular-nums; font-weight: 400; }
+  .bottom { margin-top: auto; display: grid; gap: 2px; padding-top: 10px; border-top: .5px solid var(--sep); }
+  .profile-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 8px 10px;
+                 border-radius: 10px; cursor: pointer; text-align: left; min-height: 52px; transition: background-color var(--motion-150) var(--ease-out); }
+  .profile-btn:hover { background: var(--hover); }
+  .profile-btn .chev { color: var(--label-3); margin-left: auto; }
+  .avatar { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--avatar-bg); color: var(--avatar-fg);
+            font-weight: 600; font-size: 13px; letter-spacing: 0; }
+  .pinfo { min-width: 0; }
   .pn { font-size: 14px; font-weight: 600; line-height: 1.25; }
   .ph { font-size: 12px; color: var(--label-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  /* ---------- janela "Trocar de perfil" ---------- */
-  .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.18); opacity: 0; pointer-events: none;
-           transition: opacity var(--motion-150) var(--ease-in); }
+  /* ---------- janela de perfis ---------- */
+  .scrim { position: fixed; inset: 0; z-index: 30; background: rgba(0,0,0,.2); opacity: 0; pointer-events: none; transition: opacity var(--motion-150) var(--ease-in); }
   .scrim.open { opacity: 1; pointer-events: auto; transition: opacity var(--motion-200) var(--ease-out); }
-  .modal { position: fixed; z-index: 31; left: 50%; top: 50%; width: min(420px, calc(100vw - 32px)); background: var(--modal);
-           backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px); border-radius: 16px; padding: 18px 12px 12px;
-           box-shadow: 0 24px 60px rgba(0,0,0,.18), 0 0 0 .5px rgba(0,0,0,.08);
+  .modal { position: fixed; z-index: 31; left: 50%; top: 50%; width: min(380px, calc(100vw - 32px)); background: var(--modal);
+           backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px); border-radius: 18px; padding: 20px 12px 12px;
+           box-shadow: 0 24px 60px rgba(0,0,0,.2), 0 0 0 .5px rgba(0,0,0,.08);
            opacity: 0; visibility: hidden; transform: translate(-50%, -48%) scale(.97); pointer-events: none;
            transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in), visibility 0s linear var(--motion-150); }
   .modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%); pointer-events: auto;
                 transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out), visibility 0s; }
-  .modal h2 { font-size: 17px; font-weight: 600; margin: 0 8px 2px; }
-  .modal p { font-size: 13px; color: var(--label-2); margin: 0 8px 12px; }
-  .plist { display: grid; gap: 2px; }
-  .pitem { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 10px; border-radius: 10px;
-           text-align: left; cursor: pointer; min-height: 56px; transition: background-color var(--motion-100) var(--ease-out); }
+  .modal h2 { font-size: 17px; font-weight: 600; margin: 0 10px 12px; }
+  .plist { display: grid; gap: 4px; }
+  .pitem { display: flex; align-items: center; gap: 12px; width: 100%; min-width: 0; border: 0; background: transparent; padding: 10px; border-radius: 12px;
+           text-align: left; cursor: pointer; min-height: 60px; transition: background-color var(--motion-100) var(--ease-out); }
   .pitem:hover, .pitem:focus-visible { background: var(--hover); }
-  .pitem .count { font-size: 12px; color: var(--label-2); font-variant-numeric: tabular-nums; }
+  .pitem[aria-current=true] { background: var(--blue-soft); }
+  .pitem .avatar { width: 40px; height: 40px; font-size: 14px; }
+  .pitem .pinfo { flex: 1; }
   .pitem .tick { color: var(--blue); visibility: hidden; }
   .pitem[aria-current=true] .tick { visibility: visible; }
-  .pitem .avatar { width: 36px; height: 36px; font-size: 13px; }
-  .mfoot { display: flex; justify-content: space-between; align-items: center; border-top: .5px solid var(--sep); margin-top: 8px; padding: 10px 8px 0; }
-  .mfoot a, .mfoot button { font-size: 14px; text-decoration: none; border: 0; background: transparent; color: var(--blue); cursor: pointer; padding: 6px 0; }
 
-  /* ---------- conteúdo ---------- */
-  header.wrap { padding-top: 48px; padding-bottom: 4px; }
-  h1 { font-size: 34px; line-height: 1.12; font-weight: 700; letter-spacing: -.03em; margin: 0; }
-  h1.swap { animation: fade var(--motion-200) var(--ease-out); }
-  .sub { color: var(--label-2); font-size: 15px; margin-top: 6px; }
-  .bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(1.8) blur(20px);
-         -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid transparent; transition: border-color var(--motion-150) var(--ease-out); }
+  /* ---------- cabeçalho e filtros ---------- */
+  header.wrap { padding-top: 52px; padding-bottom: 6px; }
+  .eyebrow { font-size: 13px; font-weight: 600; color: var(--label-2); margin-bottom: 6px; }
+  h1 { font-size: 40px; line-height: 1.1; font-weight: 700; letter-spacing: -.035em; margin: 0; }
+  h1.swap, .eyebrow.swap { animation: fade var(--motion-200) var(--ease-out); }
+  .sub { color: var(--label-2); font-size: 17px; margin-top: 8px; letter-spacing: -.015em; }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--bar); backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px);
+         border-bottom: .5px solid transparent; transition: border-color var(--motion-150) var(--ease-out); }
   .bar.scrolled { border-bottom-color: var(--sep); }
-  .bar .wrap { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 16px; padding-bottom: 12px; }
+  .bar .wrap { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 18px; padding-bottom: 14px; }
   .search { position: relative; flex: 1 1 240px; }
-  .search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--label-3); }
-  input[type=search] { width: 100%; padding: 8px 12px 8px 32px; border: 0; border-radius: 9px; background: var(--fill); outline: none; font-size: 14px;
+  .search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--label-3); }
+  input[type=search] { width: 100%; padding: 9px 12px 9px 34px; border: 0; border-radius: 10px; background: var(--fill); outline: none; font-size: 15px;
                        -webkit-appearance: none; appearance: none; }
   input[type=search]::placeholder { color: var(--label-3); }
   input[type=search]:focus { box-shadow: 0 0 0 3px rgba(0,113,227,.25); }
-  .seg { display: inline-flex; background: var(--fill); border-radius: 9px; padding: 2px; }
-  .seg button { border: 0; background: transparent; font-size: 13px; font-weight: 500; padding: 5px 12px; border-radius: 7px; cursor: pointer;
+  .seg { display: inline-flex; background: var(--fill); border-radius: 10px; padding: 2px; }
+  .seg button { border: 0; background: transparent; font-size: 13px; font-weight: 500; padding: 6px 14px; border-radius: 8px; cursor: pointer;
                 transition: background-color var(--motion-150) var(--ease-out), box-shadow var(--motion-150) var(--ease-out); }
   .seg button[aria-pressed=true] { background: var(--seg-on); box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 0 0 .5px rgba(0,0,0,.04); }
   .select { position: relative; }
-  .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: 9px; padding: 6px 28px 6px 12px;
+  .select select { -webkit-appearance: none; appearance: none; border: 0; background: var(--fill); border-radius: 10px; padding: 7px 30px 7px 12px;
                    font-size: 13px; font-weight: 500; cursor: pointer; }
-  .select svg { position: absolute; right: 9px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
-  .mviews { display: none; }
+  .select svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--label-2); }
 
-  main { padding-bottom: 56px; }
-  .group-label { font-size: 13px; font-weight: 600; color: var(--label); padding: 24px 0 2px; }
-  .group-label:first-child { padding-top: 8px; }
-  .list { display: grid; }
-
-  /* uma vaga = uma linha */
-  .job { position: relative; display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; gap: 14px; align-items: start; padding: 14px 4px 14px 0;
-         border-bottom: .5px solid var(--sep); }
-  .job.done { opacity: .5; }
+  /* ---------- vagas ---------- */
+  main { padding-bottom: 64px; }
+  .day { font-size: 20px; font-weight: 700; letter-spacing: -.025em; margin: 30px 0 12px; }
+  .day:first-child { margin-top: 14px; }
+  .list { display: grid; gap: 12px; }
+  .job { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 16px; padding: 18px 20px; background: var(--surface);
+         border-radius: 18px; box-shadow: var(--card-shadow);
+         transition: box-shadow var(--motion-200) var(--ease-out), transform var(--motion-200) var(--ease-out); }
+  @media (hover: hover) { .job:hover { box-shadow: var(--card-hover); transform: translateY(-2px); } }
   .job.enter { animation: rise var(--motion-300) var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 30ms); }
-  .job.leaving { opacity: 0; transform: translateX(-8px); transition: opacity var(--motion-150) var(--ease-in), transform var(--motion-150) var(--ease-in); }
-  .logo { width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
-          font-weight: 600; font-size: 13px; letter-spacing: 0; margin-top: 1px; }
+  .logo { width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
+          font-weight: 700; font-size: 17px; letter-spacing: -.02em; overflow: hidden; box-shadow: inset 0 0 0 .5px var(--sep); }
+  .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
   .jt { min-width: 0; }
-  .title { display: block; font-size: 15px; font-weight: 600; line-height: 1.33; color: var(--label); text-decoration: none; }
-  .title::after { content: ""; position: absolute; inset: 0; }               /* a linha toda abre a vaga */
-  .job:hover .title { color: var(--blue); }
+  .toprow { display: flex; align-items: flex-start; gap: 12px; justify-content: space-between; }
+  .title { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--label); text-decoration: none; letter-spacing: -.02em; }
+  .title::after { content: ""; position: absolute; inset: 0; border-radius: 18px; }
   .title:focus-visible { outline: none; }
-  .job:has(.title:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 6px; }
-  .l2 { font-size: 14px; color: var(--label-2); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .l3 { font-size: 12px; color: var(--label-3); margin-top: 3px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .dot-new { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
-  .warn { color: var(--orange); }
-  .acts { position: relative; z-index: 1; display: flex; align-items: center; gap: 2px; }
-  .icon { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--label-3); display: grid; place-items: center;
-          cursor: pointer; transition: background-color var(--motion-150) var(--ease-out), color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
-  .icon:hover { background: var(--hover); color: var(--label); }
-  .icon:active { transform: scale(.92); }
-  .icon.on { color: var(--green); }
+  .job:has(.title:focus-visible) { box-shadow: 0 0 0 3px var(--blue); }
+  .company { font-size: 15px; color: var(--label); margin-top: 3px; }
+  .meta { font-size: 13px; color: var(--label-2); margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+  .meta span { display: inline-flex; align-items: center; gap: 5px; }
+  .meta svg { color: var(--label-3); }
+  .fit { flex: none; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+  .fit.high, .themes .fit.high { background: var(--green-soft); color: var(--green); }
+  .fit.good, .themes .fit.good { background: var(--blue-soft); color: var(--blue); }
+  .themes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .themes .fit-m { display: none; }
+  .themes span { font-size: 12px; font-weight: 500; color: var(--label-2); background: var(--fill-2); border-radius: 7px; padding: 4px 9px; }
+  .warn { font-size: 12px; color: var(--orange); margin-top: 10px; }
+  .new { color: var(--blue); font-weight: 600; }
+  .empty { text-align: center; padding: 72px 20px; color: var(--label-2); background: var(--surface); border-radius: 18px; box-shadow: var(--card-shadow); margin-top: 14px; }
+  .empty b { display: block; color: var(--label); font-size: 19px; font-weight: 600; margin-bottom: 6px; letter-spacing: -.02em; }
 
-  /* definições: grupos de linhas, como nas Definições do iOS/macOS */
-  .settings { display: grid; gap: 28px; padding-top: 20px; }
-  .settings.enter { animation: rise var(--motion-300) var(--ease-out) backwards; }
-  .sgroup h3 { font-size: 17px; font-weight: 600; margin: 0 0 10px; letter-spacing: -.02em; }
-  .scard { background: var(--surface); border-radius: 14px; box-shadow: 0 0 0 .5px var(--sep), 0 1px 2px var(--card-line); overflow: hidden; }
-  .srow { display: flex; align-items: center; gap: 16px; padding: 14px 16px; min-height: 60px; }
+  /* ---------- páginas de regras e definições ---------- */
+  .page { display: grid; gap: 30px; padding-top: 18px; }
+  .page.enter { animation: rise var(--motion-300) var(--ease-out) backwards; }
+  .sgroup h3 { font-size: 20px; font-weight: 700; margin: 0 0 12px; letter-spacing: -.025em; }
+  .scard { background: var(--surface); border-radius: 18px; box-shadow: var(--card-shadow); overflow: hidden; }
+  .srow { display: flex; align-items: center; gap: 16px; padding: 16px 20px; min-height: 64px; }
   .srow + .srow { border-top: .5px solid var(--sep); }
-  .srow .st { flex: 1; min-width: 0; }
-  .srow .st b { display: block; font-size: 15px; font-weight: 500; }
-  .srow .st span { display: block; font-size: 13px; color: var(--label-2); margin-top: 1px; }
-  .srow .sv { text-align: right; font-size: 14px; color: var(--label-2); flex: none; }
-  .srow .sv b { display: block; color: var(--label); font-weight: 600; }
-  button.srow { width: 100%; border: 0; background: transparent; text-align: left; cursor: pointer; transition: background-color var(--motion-150) var(--ease-out); }
-  button.srow:hover { background: var(--hover); }
-  .pill { border: .5px solid var(--sep); background: var(--surface); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500;
-          cursor: pointer; text-decoration: none; color: var(--label); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-          transition: background-color var(--motion-150) var(--ease-out), transform var(--motion-100) var(--ease-out); }
-  .pill:hover { background: var(--hover); }
+  .st { flex: 1; min-width: 0; }
+  .st b { display: block; font-size: 15px; font-weight: 500; }
+  .st span { display: block; font-size: 13px; color: var(--label-2); margin-top: 2px; }
+  .sv { flex: none; text-align: right; font-size: 15px; color: var(--label-2); font-variant-numeric: tabular-nums; }
+  .sv.strong { color: var(--label); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .chips span { font-size: 13px; color: var(--label); background: var(--fill-2); border-radius: 8px; padding: 5px 10px; }
+  .pill { border: 0; background: var(--blue); color: #fff; border-radius: 999px; padding: 9px 18px; font-size: 14px; font-weight: 500; cursor: pointer;
+          text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+          transition: transform var(--motion-100) var(--ease-out), filter var(--motion-150) var(--ease-out); }
+  .pill:hover { filter: brightness(1.08); }
   .pill:active { transform: scale(.97); }
-  .pill.danger { color: var(--red); }
-  .pill.dark { background: var(--label); color: var(--bg); border-color: transparent; }
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .chips span { font-size: 12px; color: var(--label-2); background: var(--fill-2); border-radius: 6px; padding: 3px 8px; }
-  .srcrow { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; font-size: 13px; padding: 2px 0; }
-  .srcrow .ok { color: var(--label-2); } .srcrow .bad { color: var(--red); }
-  .back { border: 0; background: transparent; color: var(--label); font-size: 13px; font-weight: 500; cursor: pointer; padding: 6px 0; display: inline-flex; gap: 6px; align-items: center; }
-  .prow-acts { display: flex; gap: 8px; align-items: center; }
-  .inuse { color: var(--green); font-size: 14px; font-weight: 500; display: inline-flex; gap: 4px; align-items: center; }
-  .sv .seg { margin: 0; }
-  @media (max-width: 600px) { .srow { flex-wrap: wrap; } .srow .sv { text-align: left; } }
+  .src { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 3px 0; }
+  .src .ok { color: var(--label-2); } .src .bad { color: var(--orange); }
+  .note { font-size: 13px; color: var(--label-2); margin: 10px 4px 0; }
 
-  .empty { text-align: center; padding: 64px 20px; color: var(--label-2); }
-  .empty b { display: block; color: var(--label); font-size: 17px; font-weight: 600; margin-bottom: 4px; }
-  footer { color: var(--label-3); font-size: 12px; text-align: center; padding: 0 16px 32px; }
-
-  .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 20; display: flex; align-items: center; gap: 14px;
-           background: rgba(29,29,31,.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); color: #fff; border-radius: 14px;
-           padding: 8px 8px 8px 16px; font-size: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.2);
-           transform: translate(-50%, 12px); opacity: 0; pointer-events: none;
-           transition: transform var(--motion-150) var(--ease-in), opacity var(--motion-150) var(--ease-in); }
-  .toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto;
-                transition: transform var(--motion-200) var(--ease-out), opacity var(--motion-200) var(--ease-out); }
-  .toast button { border: 0; background: transparent; color: #64b5ff; font-weight: 600; padding: 0 10px; min-height: 36px; cursor: pointer; border-radius: 8px; }
-
-  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
   :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  @media (pointer: coarse) {
-    .seg button, .select select, .item, .mfoot a, .mfoot button, .toast button { min-height: 44px; }
-    .icon { width: 44px; height: 44px; }
-  }
+  @media (pointer: coarse) { .seg button, .select select, .item { min-height: 44px; } }
 
-  /* telemóvel: barra lateral vira barra de topo; vistas passam para um seletor */
-  .topbar { display: none; }
+  /* ---------- telemóvel: barra de topo e separadores em baixo ---------- */
+  .topbar, .tabs { display: none; }
   @media (max-width: 900px) {
     .app { display: block; }
     .side { display: none; }
-    .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; gap: 12px;
-              padding: 6px 12px 6px 16px; background: var(--topbar); backdrop-filter: saturate(1.8) blur(20px);
-              -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid var(--sep); }
-    .topbar .brand { padding: 0; }
-    .topbar button { display: flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 4px; border-radius: 999px; min-height: 44px; cursor: pointer; font-size: 14px; font-weight: 500; }
+    .topbar { display: flex; position: sticky; top: 0; z-index: 10; align-items: center; justify-content: space-between; padding: 6px 10px 6px 16px;
+              background: var(--bar); backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px); border-bottom: .5px solid var(--sep); }
+    .topbar .brand { padding: 0; font-size: 17px; }
+    .topbar .profile-btn { width: auto; min-height: 44px; padding: 4px 6px; gap: 8px; }
+    .topbar .profile-btn .ph { display: none; }
+    .tabs { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+            background: var(--bar); backdrop-filter: saturate(1.8) blur(20px); -webkit-backdrop-filter: saturate(1.8) blur(20px);
+            border-top: .5px solid var(--sep); padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); }
+    .tabs button { border: 0; background: transparent; display: grid; justify-items: center; gap: 2px; padding: 6px 0; min-height: 50px; cursor: pointer;
+                   font-size: 10px; font-weight: 500; color: var(--label-3); }
+    .tabs button[aria-current=page] { color: var(--blue); }
     .bar { top: 57px; }
-    .mviews { display: inline-flex; }
-    header.wrap { padding-top: 20px; }
-    h1 { font-size: 30px; }
+    header.wrap { padding-top: 22px; }
+    h1 { font-size: 32px; }
     .wrap { padding: 0 16px; }
+    main { padding-bottom: 100px; }
+    .job { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 16px; }
+    .logo { width: 44px; height: 44px; font-size: 15px; border-radius: 10px; }
+    .toprow .fit { display: none; }
+    .themes .fit-m { display: inline-block; }
     .modal { left: 8px; right: 8px; top: auto; bottom: calc(8px + env(safe-area-inset-bottom)); width: auto; transform: translateY(110%); }
     .modal.open { transform: none; transition: opacity var(--motion-200) var(--ease-out), transform var(--motion-300) var(--ease-out), visibility 0s; }
-    .job { grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; }
-    .logo { width: 32px; height: 32px; font-size: 12px; }
+    .srow { flex-wrap: wrap; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .job.enter, h1.swap { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
-    .job.leaving { transform: none; transition: opacity var(--motion-100) ease; }
-    .icon:active { transform: none; }
+    .job.enter, .page.enter, h1.swap, .eyebrow.swap { animation: fade var(--motion-150) ease backwards; animation-delay: 0ms; }
+    .job:hover { transform: none; }
+    .pill:active { transform: none; }
     .modal, .modal.open { transform: translate(-50%, -50%); transition: opacity var(--motion-100) ease, visibility 0s; }
-    .toast, .toast.show { transform: translate(-50%, 0); transition: opacity var(--motion-100) ease; }
   }
   @media (prefers-reduced-motion: reduce) and (max-width: 900px) { .modal, .modal.open { transform: none; } }
 </style>
@@ -227,55 +215,45 @@
 <div class="app">
 <aside class="side" aria-label="Navegação">
   <div class="brand">Vagas</div>
-  <div class="sect">Vagas</div>
-  <nav class="nav" id="views"></nav>
-  <div class="sect">Perfil</div>
-  <nav class="nav" id="pnav"></nav>
+  <nav class="nav" id="nav1"></nav>
+  <nav class="nav" id="nav2"></nav>
   <div class="bottom">
-    <div class="me" id="me"></div>
-    <button class="item" type="button" id="switchBtn" aria-haspopup="dialog" aria-controls="modal">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg>Trocar de perfil</button>
-    <button class="item" type="button" id="settings">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Definições</button>
+    <button class="profile-btn" type="button" id="profileBtn" aria-haspopup="dialog" aria-controls="modal"></button>
   </div>
 </aside>
 
 <div class="scrim" id="scrim"></div>
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-  <h2 id="mTitle">Trocar de perfil</h2>
-  <p>Cada perfil tem as suas regras, vagas e notificações.</p>
+  <h2 id="mTitle">Perfis</h2>
   <div class="plist" id="plist"></div>
-  <div class="mfoot"><a id="addProfile" target="_blank" rel="noopener">Adicionar perfil…</a><button type="button" id="mClose">Fechar</button></div>
 </div>
 
 <div class="content">
-  <div class="topbar"><span class="brand">Vagas</span><span style="display:flex;gap:2px"><button type="button" id="mSwitch" aria-haspopup="dialog" aria-controls="modal"></button><button type="button" id="mSettings" aria-label="Definições"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></span></div>
+  <div class="topbar"><span class="brand">Vagas</span><button class="profile-btn" type="button" id="mProfileBtn" aria-haspopup="dialog" aria-controls="modal"></button></div>
   <header class="wrap">
+    <div class="eyebrow" id="eyebrow"></div>
     <h1 id="h1">Vagas</h1>
-    <div class="sub" id="sub">A carregar…</div>
+    <div class="sub" id="sub">A carregar</div>
   </header>
-  <div class="bar">
+  <div class="bar" id="bar">
     <div class="wrap">
       <div class="search">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <input type="search" id="q" placeholder="Pesquisar" aria-label="Pesquisar título, empresa ou local">
       </div>
-      <span class="select mviews"><select id="mviews" aria-label="Vista"></select>
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
       <div class="seg" id="days" role="group" aria-label="Período">
-        <button data-d="7" aria-pressed="true">7 dias</button>
-        <button data-d="30">30 dias</button>
-        <button data-d="9999">Tudo</button>
+        <button type="button" data-d="7" aria-pressed="true">7 dias</button>
+        <button type="button" data-d="30">30 dias</button>
+        <button type="button" data-d="9999">Tudo</button>
       </div>
-      <span class="select"><select id="src" aria-label="Fonte"></select>
+      <span class="select" id="srcWrap"><select id="src" aria-label="Fonte"></select>
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
     </div>
   </div>
   <main class="wrap"><div id="list"></div></main>
-  <footer>Atualiza-se sozinho duas vezes por dia · Portugal continental</footer>
+  <nav class="tabs" id="tabs" aria-label="Secções"></nav>
 </div>
 </div>
-<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastUndo" type="button">Anular</button></div>
 
 <script>
 const store = {
@@ -283,253 +261,220 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} },
 };
 const $ = id => document.getElementById(id);
-// aspeto: Dia / Noite / Automático (segue o sistema)
-const mq = matchMedia("(prefers-color-scheme: dark)");
-function applyTheme() { const t = store.get("vagas-tema", "auto"); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t;
-  document.querySelector('meta[name="theme-color"]').content = document.documentElement.dataset.theme === "dark" ? "#1c1c1e" : "#f5f5f7"; }
-applyTheme(); mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme);
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const svg = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
-const I = (d, w = 16) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const I = (d, w = 17) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 const ICON = {
-  all: I('<path d="M4 6h16M4 12h16M4 18h10"/>'),
-  new: I('<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>'),
-  applied: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>'),
-  hidden: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>'),
-  cv: I('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'),
-  rules: I('<path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/>'),
-  check: I('<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>', 20),
-  hide: I('<path d="M3 3l18 18"/><path d="M10.6 5.1A10 10 0 0 1 12 5c5 0 9 4.5 10 7-.4 1-1.2 2.3-2.4 3.5M6.3 6.3C4.3 7.6 2.8 9.6 2 12c1 2.5 5 7 10 7 1.7 0 3.3-.5 4.7-1.3"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>', 20),
+  new: I('<path d="M3 13l2.6-7.2A2 2 0 0 1 7.5 4.5h9a2 2 0 0 1 1.9 1.3L21 13v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 13h5l1.5 2.5h5L16 13h5"/>'),
+  all: I('<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7M3 12.5h18"/>'),
+  rules: I('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>'),
+  settings: I('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),
+  pin: I('<path d="M12 21s-6-5.3-6-10a6 6 0 1 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>', 14),
+  clock: I('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', 14),
+  globe: I('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>', 14),
+  chev: '<svg class="chev" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg>',
   tick: '<svg class="tick" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>',
-  chev: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
+  ext: I('<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>', 15),
 };
-// ligação para editar as regras no GitHub (a página está em <utilizador>.github.io/<repo>/)
 const repoEdit = (() => { const u = location.hostname.split(".")[0], r = location.pathname.split("/")[1];
   return location.hostname.endsWith("github.io") && r ? `https://github.com/${u}/${r}/edit/main/config.yaml` : ""; })();
+
+// aspeto: Claro, Escuro ou Sistema
+const mq = matchMedia("(prefers-color-scheme: dark)");
+function applyTheme() { const t = store.get("vagas-tema", "auto"); document.documentElement.dataset.theme = t === "auto" ? (mq.matches ? "dark" : "light") : t; }
+applyTheme(); (mq.addEventListener ? mq.addEventListener("change", applyTheme) : mq.addListener(applyTheme));
 
 const SRC = { linkedin: "LinkedIn", indeed: "Indeed", bep: "Emprego público", remotive: "Remoto" };
 const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Site da empresa";
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
-const VIEWS = [
-  { id: "all", label: "Todas as vagas", icon: ICON.all },
-  { id: "new", label: "Novas hoje", icon: ICON.new },
-  { id: "applied", label: "Candidatadas", icon: ICON.applied },
-  { id: "hidden", label: "Escondidas", icon: ICON.hidden },
+const PAGES = [
+  { id: "new", label: "Novas hoje", icon: ICON.new, nav: 1 },
+  { id: "all", label: "Todas as vagas", icon: ICON.all, nav: 1 },
+  { id: "rules", label: "Ajustar regras", icon: ICON.rules, nav: 2 },
+  { id: "settings", label: "Definições", icon: ICON.settings, nav: 2 },
 ];
 
-let profiles = [], current = "", marks = {}, all = [], data = [], updated = "", tracker = {};
-let view = "all", days = 7, src = "Todas", animateNext = true, toastTimer = null, undo = null;
-const markKey = pid => "vagas-estado:" + pid;
-const save = () => store.set(markKey(current), marks);
+let profiles = [], current = "", all = [], data = [], updated = "", tracker = {};
+let page = "new", days = 7, src = "Todas", animateNext = true;
 
 const ageDays = iso => Math.round((new Date(updated + "T00:00:00") - new Date((iso || updated) + "T00:00:00")) / 864e5);
 const fmtDay = iso => { const a = ageDays(iso); if (a === 0) return "Hoje"; if (a === 1) return "Ontem";
   const s = new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { weekday: "long", day: "numeric", month: "long" }); return s[0].toUpperCase() + s.slice(1); };
-const ago = iso => { const a = ageDays(iso); return a <= 0 ? "hoje" : a === 1 ? "há 1 dia" : `há ${a} dias`; };
+const ago = iso => { const a = ageDays(iso); return a <= 0 ? "Publicada hoje" : a === 1 ? "Publicada ontem" : `Publicada há ${a} dias`; };
+const dateLong = iso => new Date(iso + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
+const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
 
 function viewFor(pid) {
   const first = profiles[0] && profiles[0].id;
   return all.filter(m => m.profiles ? pid in m.profiles : pid === first).map(m => {
     const pp = (m.profiles || {})[pid] || {};
-    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit };
+    return { ...m, score: pp.score ?? m.score, flags: pp.flags ?? m.flags, fit: pp.fit ?? m.fit, themes: pp.themes || [] };
   });
 }
-const counts = () => ({
-  all: data.filter(m => !marks[m.url]).length,
-  new: data.filter(m => !marks[m.url] && m.first_seen === updated).length,
-  applied: data.filter(m => marks[m.url] === "aplicada").length,
-  hidden: data.filter(m => marks[m.url] === "escondida").length,
-});
-const freshFor = p => { const ms = store.get(markKey(p.id), {}); return viewFor(p.id).filter(m => m.first_seen === updated && !ms[m.url]).length; };
-const avatarOf = (p, cls = "avatar") => { const a = el("span", cls, initials(p.name || p.id)); a.setAttribute("aria-hidden", "true"); return a; };
+const newCount = () => data.filter(m => m.first_seen === updated).length;
+const avatarOf = p => { const a = el("span", "avatar", initials(p.name || p.id)); a.setAttribute("aria-hidden", "true"); return a; };
+const profile = () => profiles.find(x => x.id === current) || {};
 
-function toast(msg, onUndo) {
-  $("toastMsg").textContent = msg; undo = onUndo; $("toastUndo").style.display = onUndo ? "" : "none"; $("toast").classList.add("show");
-  clearTimeout(toastTimer); toastTimer = setTimeout(() => $("toast").classList.remove("show"), 4000);
-}
-$("toastUndo").onclick = () => { if (undo) undo(); undo = null; $("toast").classList.remove("show"); };
-
-function refreshChrome() { renderNav(); if (view !== "settings" && view !== "people") updateSub(); }
-function updateSub() {
-  const c = counts(), when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
-  $("sub").textContent = `${c.new} ${c.new === 1 ? "nova" : "novas"} hoje · ${c.all} por ver · atualizado a ${when}`;
-}
-
+// ---------- navegação ----------
 function renderNav() {
-  const c = counts();
-  const nav = $("views"); nav.textContent = "";
-  for (const v of VIEWS) {
-    const b = el("button", "item"); b.type = "button"; b.append(svg(v.icon), document.createTextNode(v.label));
-    if (c[v.id]) b.append(el("span", "n", c[v.id]));
-    if (v.id === view) b.setAttribute("aria-current", "page");
-    b.onclick = () => setView(v.id);
-    nav.append(b);
+  const counts = { new: newCount(), all: data.length };
+  for (const n of [1, 2]) {
+    const nav = $("nav" + n); nav.textContent = "";
+    for (const pg of PAGES.filter(x => x.nav === n)) {
+      const b = el("button", "item"); b.type = "button"; b.append(svg(pg.icon), document.createTextNode(pg.label));
+      if (counts[pg.id] != null) b.append(el("span", "n", counts[pg.id]));
+      if (pg.id === page) b.setAttribute("aria-current", "page");
+      b.onclick = () => go(pg.id);
+      nav.append(b);
+    }
   }
-  const sel = $("mviews"); sel.textContent = "";
-  for (const v of VIEWS) { const o = el("option", null, `${v.label}${c[v.id] ? ` (${c[v.id]})` : ""}`); o.value = v.id; o.selected = v.id === view; sel.append(o); }
-
-  const p = profiles.find(x => x.id === current) || {};
-  const pnav = $("pnav"); pnav.textContent = "";
-  if (p.cv_url) { const a = el("a", "item"); a.href = p.cv_url; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.cv), document.createTextNode("Ver CV")); pnav.append(a); }
-  if (repoEdit) { const a = el("a", "item"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(svg(ICON.rules), document.createTextNode("Ajustar regras")); pnav.append(a); }
-  pnav.previousElementSibling.style.display = pnav.children.length ? "" : "none";
-
-  const me = $("me"); me.textContent = "";
-  const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
-  me.append(avatarOf(p), info);
-  const ms = $("mSwitch"); ms.textContent = ""; ms.append(avatarOf(p), document.createTextNode(p.name || "Perfil"), svg(ICON.chev));
-  ms.setAttribute("aria-label", `Perfil: ${p.name || "o meu perfil"}. Trocar de perfil`);
-
-  if (view === "settings" || view === "people") $("settings").setAttribute("aria-current", "page"); else $("settings").removeAttribute("aria-current");
-  if (repoEdit) $("addProfile").href = repoEdit; else $("addProfile").style.display = "none";
+  const tabs = $("tabs"); tabs.textContent = "";
+  for (const pg of PAGES) {
+    const b = el("button"); b.type = "button"; b.append(svg(pg.icon.replace(/width="17" height="17"/, 'width="22" height="22"')),
+      el("span", null, pg.id === "new" ? "Novas" : pg.id === "all" ? "Todas" : pg.id === "rules" ? "Regras" : "Definições"));
+    if (pg.id === page) b.setAttribute("aria-current", "page");
+    b.onclick = () => go(pg.id); tabs.append(b);
+  }
+  const p = profile();
+  for (const id of ["profileBtn", "mProfileBtn"]) {
+    const b = $(id); b.textContent = "";
+    const info = el("span", "pinfo"); info.append(el("div", "pn", p.name || "Perfil"), el("div", "ph", p.headline || ""));
+    b.append(avatarOf(p), info, svg(ICON.chev));
+    b.setAttribute("aria-label", `Perfil de ${p.name || "utilizador"}. Trocar de perfil`);
+    b.style.display = profiles.length > 1 ? "" : "none";
+  }
 }
 
+function setHeader() {
+  const p = profile(), n = newCount(), who = p.name || "";
+  const titles = { new: "Novas hoje", all: "Todas as vagas", rules: "Ajustar regras", settings: "Definições" };
+  $("eyebrow").textContent = who ? `Perfil de ${who}` : "";
+  $("h1").textContent = titles[page];
+  $("sub").textContent = {
+    new: n ? `${plural(n, "vaga nova", "vagas novas")} desde a última recolha, a ${dateLong(updated)}.` : `Sem vagas novas na recolha de ${dateLong(updated)}.`,
+    all: `${plural(data.length, "vaga guardada", "vagas guardadas")} que passaram as regras deste perfil.`,
+    rules: "O que conta para uma vaga chegar até ti.",
+    settings: "Aspeto da página, recolha e notificações.",
+  }[page];
+  for (const id of ["h1", "eyebrow"]) { $(id).classList.remove("swap"); void $(id).offsetWidth; $(id).classList.add("swap"); }
+}
+
+function go(id, push = true) {
+  page = id; animateNext = true;
+  if (push) history.replaceState(null, "", `#${current}/${id}`);
+  renderNav(); setHeader(); render(); scrollTo(0, 0);
+}
+
+// ---------- vagas ----------
+function fitLabel(m) {
+  const s = m.fit != null ? m.fit / 5 : m.score;
+  return s >= 15 ? ["Encaixe muito alto", "high"] : s >= 11 ? ["Bom encaixe", "good"] : null;
+}
 function card(m) {
-  const row = el("article", "job" + (marks[m.url] ? " done" : ""));
-  const logo = el("div", "logo", initials(m.company)); logo.setAttribute("aria-hidden", "true");
+  const a0 = el("article", "job");
+  const logo = el("div", "logo"); logo.setAttribute("aria-hidden", "true");
+  if (m.logo) { const img = new Image(); img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer"; img.src = m.logo;
+    img.onerror = () => { logo.textContent = initials(m.company); }; logo.append(img); }
+  else logo.textContent = initials(m.company);
   const t = el("div", "jt");
+  const top = el("div", "toprow");
   const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
-  const l3 = el("div", "l3");
-  if (m.first_seen === updated && !marks[m.url]) { const d = el("span", "dot-new"); d.title = "Nova"; l3.append(d); }
-  l3.append(el("span", null, `${srcOf(m)} · publicada ${ago(m.posted || m.first_seen)}`));
-  const w = (m.flags || []).find(f => !/sem salário indicado|não indica anos|não confirma/.test(f));
-  if (w) l3.append(el("span", "warn", "· " + w));
-  t.append(a, el("div", "l2", [m.company, m.location].filter(Boolean).join(" · ")), l3);
-  const acts = el("div", "acts");
-  const mk = (val, label, icon) => {
-    const on = marks[m.url] === val;
-    const b = el("button", "icon" + (on ? " on" : "")); b.type = "button"; b.append(svg(icon));
-    b.title = on ? `Anular: ${label}` : label; b.setAttribute("aria-label", b.title); b.setAttribute("aria-pressed", on);
-    b.onclick = () => {
-      const prev = marks[m.url];
-      if (on) delete marks[m.url]; else marks[m.url] = val;
-      save(); refreshChrome();
-      const restore = () => { if (prev) marks[m.url] = prev; else delete marks[m.url]; save(); refreshChrome(); render(); };
-      toast(on ? "Marcação anulada" : val === "aplicada" ? "Marcada como candidatada" : "Vaga escondida", restore);
-      row.classList.add("leaving"); setTimeout(render, 150);
-    };
-    return b;
-  };
-  acts.append(mk("aplicada", "Candidatei-me", ICON.check), mk("escondida", "Esconder", ICON.hide));
-  row.append(logo, t, acts);
-  return row;
-}
-
-function rowsForView() {
-  const q = $("q").value.trim().toLowerCase();
-  return data.filter(m => view === "applied" ? marks[m.url] === "aplicada" : view === "hidden" ? marks[m.url] === "escondida" : !marks[m.url])
-    .filter(m => view !== "new" || m.first_seen === updated)
-    .filter(m => view !== "all" || ageDays(m.first_seen) < days)
-    .filter(m => src === "Todas" || srcOf(m) === src)
-    .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
+  top.append(a);
+  const f = fitLabel(m); if (f) top.append(el("span", "fit " + f[1], f[0]));
+  t.append(top, el("div", "company", m.company || ""));
+  const meta = el("div", "meta");
+  if (m.location) { const s = el("span"); s.append(svg(ICON.pin), document.createTextNode(m.location.replace(/, Portugal$/, ""))); meta.append(s); }
+  const d = el("span"); d.append(svg(ICON.clock), document.createTextNode(ago(m.posted || m.first_seen))); meta.append(d);
+  const so = el("span"); so.append(svg(ICON.globe), document.createTextNode(srcOf(m))); meta.append(so);
+  if (m.first_seen === updated && page !== "new") meta.append(el("span", "new", "Nova"));
+  t.append(meta);
+  const th = el("div", "themes"); (m.themes || []).forEach(x => th.append(el("span", null, x)));
+  if (f) th.append(el("span", "fit fit-m " + f[1], f[0]));        // no telemóvel a etiqueta vem para aqui
+  if (th.children.length) t.append(th);
+  const w = (m.flags || []).find(x => /anos|língua|lingua|holand|alem|franc/.test(x) && !/não indica anos/.test(x));
+  if (w) t.append(el("div", "warn", w[0].toUpperCase() + w.slice(1)));
+  a0.append(logo, t);
+  return a0;
 }
 function render() {
-  const inSettings = view === "settings" || view === "people";
-  document.querySelector(".bar").style.display = inSettings ? "none" : "";
-  if (inSettings) return renderSettings();
-  $("days").style.display = view === "all" ? "" : "none";
+  const isList = page === "new" || page === "all";
+  $("bar").style.display = isList ? "" : "none";
+  $("days").style.display = page === "all" ? "" : "none";
+  $("srcWrap").style.display = page === "all" ? "" : "none";
   const box = $("list"); box.textContent = "";
-  const rows = rowsForView();
+  if (page === "rules") return renderRules(box);
+  if (page === "settings") return renderSettings(box);
+  const q = $("q").value.trim().toLowerCase();
+  const rows = data.filter(m => page === "new" ? m.first_seen === updated : ageDays(m.first_seen) < days)
+    .filter(m => page === "new" || src === "Todas" || srcOf(m) === src)
+    .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
   if (!rows.length) {
-    const who = (profiles.find(x => x.id === current) || {}).name;
-    const msg = { all: data.length ? ["Sem resultados", "Experimenta alargar o período ou limpar a pesquisa."]
-                    : [who ? `Ainda sem vagas para ${who}` : "Ainda sem vagas", "As primeiras aparecem depois da próxima recolha (≈07:15 ou 16:15)."],
-                  new: ["Nada de novo hoje", "As vagas novas aparecem aqui depois de cada recolha."],
-                  applied: ["Ainda sem candidaturas", "Marca uma vaga com ✓ para a guardar aqui."],
-                  hidden: ["Nenhuma vaga escondida", "As vagas que esconderes ficam aqui, caso mudes de ideias."] }[view];
-    const e = el("div", "empty"); e.append(el("b", null, msg[0]), document.createTextNode(msg[1])); box.append(e); return;
+    const e = el("div", "empty");
+    const msg = q ? ["Sem resultados", "Experimenta outra pesquisa."]
+      : page === "new" ? ["Nada de novo hoje", "Quando houver vagas novas, aparecem aqui e recebes uma notificação."]
+      : ["Ainda sem vagas", "As primeiras aparecem depois da próxima recolha."];
+    e.append(el("b", null, msg[0]), document.createTextNode(msg[1])); box.append(e); return;
   }
-  let day = null, list = null, i = 0;
   const animate = animateNext; animateNext = false;
+  let day = null, list = null, i = 0;
   for (const m of rows) {
-    if (m.first_seen !== day) { day = m.first_seen; box.append(el("div", "group-label", fmtDay(day))); list = el("div", "list"); box.append(list); }
+    if (page === "all" && m.first_seen !== day) { day = m.first_seen; box.append(el("h2", "day", fmtDay(day))); list = null; }
+    if (!list) { list = el("div", "list"); box.append(list); }
     const c = card(m);
-    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }   // 30 ms por linha, máx. ~200 ms
+    if (animate) { c.classList.add("enter"); c.style.setProperty("--i", Math.min(i++, 6)); }
     list.append(c);
   }
 }
-function setView(v) {
-  const was = view; view = v; animateNext = true;
-  if (v === "settings" || v === "people") { if (location.hash !== "#definicoes") history.pushState(null, "", "#definicoes"); }
-  else if (was === "settings" || was === "people") history.replaceState(null, "", "#" + current);
-  setHeader(); renderNav(); render(); scrollTo(0, 0);
-}
-function setHeader() {
-  const p = profiles.find(x => x.id === current);
-  if (view === "settings") { $("h1").textContent = "Definições"; $("sub").textContent = "Perfil em uso, aspeto, como funciona o tracker e os dados guardados neste dispositivo."; }
-  else if (view === "people") { $("h1").textContent = "Perfis"; $("sub").textContent = "Cada perfil tem as suas regras, vagas e notificações. A escolha fica guardada neste dispositivo."; }
-  else { $("h1").textContent = p && p.name && profiles.length > 1 ? `Vagas para ${p.name}` : "Vagas"; updateSub(); }
-}
 
-// ---------- página de definições
+// ---------- regras e definições ----------
 const row = (title, desc, right) => { const r = el("div", "srow"); const t = el("div", "st"); t.append(el("b", null, title));
   if (desc) t.append(el("span", null, desc)); r.append(t); if (right) r.append(right); return r; };
-const pill = (label, cls, onclick) => { const b = el("button", "pill" + (cls ? " " + cls : ""), label); b.type = "button"; if (onclick) b.onclick = onclick; return b; };
-const linkPill = (label, href) => { const a = el("a", "pill", label); a.href = href; a.target = "_blank"; a.rel = "noopener"; return a; };
-const group = (title, ...rows) => { const g = el("section", "sgroup"); g.append(el("h3", null, title)); const c = el("div", "scard"); c.append(...rows); g.append(c); return g; };
-function renderSettings() {
-  const box = $("list"); box.textContent = "";
-  const wrap = el("div", "settings" + (animateNext ? " enter" : "")); animateNext = false;
-  const p = profiles.find(x => x.id === current) || {};
-  if (view === "people") {
-    const back = el("button", "back", "← Voltar às definições"); back.type = "button"; back.onclick = () => setView("settings"); wrap.append(back);
-    const rows = profiles.map(q => {
-      const v = el("div", "prow-acts");
-      if (q.id === current) v.append(el("span", "inuse", "✓ Em uso")); else v.append(pill("Usar", "", () => { select(q.id); setView("people"); }));
-      const r = row(q.name || q.id, q.headline || "", v); r.prepend(avatarOf(q)); return r;
-    });
-    wrap.append(group(`${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}`, ...rows));
-    wrap.append(group("Acrescentar perfil",
-      row("Como acrescentar", "Copia o bloco de um perfil em «profiles:» no config.yaml, muda o nome, as regras e o tópico ntfy, e cria esse segredo no GitHub (Environment GERAL).",
-          repoEdit ? linkPill("Abrir config.yaml", repoEdit) : null),
-      row("Privacidade", "O repositório é público: nunca ponhas contactos ou o CV no config.yaml. Usa «cv_url» com uma ligação privada.")));
-    box.append(wrap); return;
+const group = (title, ...rows) => { const g = el("section", "sgroup"); if (title) g.append(el("h3", null, title)); const c = el("div", "scard"); c.append(...rows.filter(Boolean)); g.append(c); return g; };
+const pageWrap = () => { const w = el("div", "page" + (animateNext ? " enter" : "")); animateNext = false; return w; };
+function renderRules(box) {
+  const p = profile(), r = p.rules || {}, w = pageWrap();
+  const themes = row("Temas que contam mais", "Cada tema encontrado na vaga soma pontos. No título, soma mais.");
+  const ch = el("div", "chips"); (r.strong || []).forEach(x => ch.append(el("span", null, x))); themes.querySelector(".st").append(ch);
+  const bonus = (r.bonus || []).length ? row("Bónus", "Pontos extra pelo tipo de entidade.") : null;
+  if (bonus) { const b = el("div", "chips"); r.bonus.forEach(x => b.append(el("span", null, x[0].toUpperCase() + x.slice(1)))); bonus.querySelector(".st").append(b); }
+  w.append(group("Temas", themes, bonus));
+  const y = r.years || {};
+  w.append(group("Filtros",
+    row("Pontuação mínima", "Abaixo disto, a vaga não chega até ti.", el("span", "sv strong", `${r.min_score ?? "-"} pontos`)),
+    row("Experiência pedida", "Vagas que pedem mais ou menos anos ficam de fora.", el("span", "sv strong", `${y.min ?? 0} a ${y.max ?? "-"} anos`)),
+    row("Idade máxima da vaga", null, el("span", "sv strong", `${r.max_age_days ?? "-"} dias`)),
+    r.min_salary_eur ? row("Salário mínimo", "Só conta quando a vaga publica o salário.", el("span", "sv strong", `${r.min_salary_eur.toLocaleString("pt-PT")} €`)) : null,
+    row("Zona", "Portugal continental e remoto aceite em Portugal.", el("span", "sv strong", "Portugal"))));
+  if (repoEdit) {
+    const a = el("a", "pill"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(document.createTextNode("Editar regras"), svg(ICON.ext));
+    const g = group(null, row("Alterar estas regras", "Abre a configuração no GitHub. As mudanças contam a partir da recolha seguinte.", a)); w.append(g);
   }
-  const r = p.rules || {};
-  // Conta
-  const who = el("div", "prow-acts"); const nm = el("div", "sv"); nm.append(el("b", null, p.name || "O meu perfil"));
-  who.append(nm, pill("Trocar de perfil", "", e => openModal(e)));
-  const manage = el("button", "srow"); manage.type = "button";
-  const mt = el("div", "st"); mt.append(el("b", null, "Gerir perfis")); manage.append(mt, el("span", "sv", `${profiles.length} ${profiles.length === 1 ? "perfil" : "perfis"}  ›`));
-  manage.onclick = () => setView("people");
-  wrap.append(group("Conta", row("Perfil em uso", "As vagas, as notificações e as marcações são deste perfil.", who), manage));
-  // Preferências
+  box.append(w);
+}
+function renderSettings(box) {
+  const p = profile(), w = pageWrap();
   const seg = el("div", "seg"); const cur = store.get("vagas-tema", "auto");
-  for (const [k, lab] of [["light", "Dia"], ["dark", "Noite"], ["auto", "Automático"]]) {
+  for (const [k, lab] of [["light", "Claro"], ["dark", "Escuro"], ["auto", "Sistema"]]) {
     const b = el("button", null, lab); b.type = "button"; b.setAttribute("aria-pressed", k === cur);
     b.onclick = () => { store.set("vagas-tema", k); applyTheme(); seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b)); };
     seg.append(b);
   }
-  wrap.append(group("Preferências", row("Aspeto", "Com «Automático», a página segue o tema do dispositivo.", seg)));
-  // Tracker
-  const srcBox = el("div");
+  w.append(group("Aspeto", row("Tema", "Sistema segue o tema do teu dispositivo.", seg)));
+  const fontes = row("Fontes", null); const lst = el("div");
   for (const s of tracker.sources || []) {
-    const line = el("div", "srcrow"); line.append(el("span", null, s.name + (s.queries ? ` · ${s.queries} pesquisas` : "")));
-    const st = s.status || "sem dados"; line.append(el("span", /ERRO/.test(st) ? "bad" : "ok", st.replace(/^ok, /, ""))); srcBox.append(line);
+    const st = s.status || "";
+    const line = el("div", "src"); line.append(el("span", null, s.name));
+    line.append(el("span", /ERRO/.test(st) ? "bad" : "ok", /ERRO/.test(st) ? "Com erro" : st.replace(/^ok, /, "").replace(/ \(.*\)$/, "") || "Sem dados"));
+    lst.append(line);
   }
-  const fontes = row("Fontes", null); fontes.querySelector(".st").append(srcBox);
-  const yrs = r.years ? `${r.years.min ?? 0}–${r.years.max} anos de experiência pedidos` : "";
-  const rules = row(`Regras de ${p.name || "este perfil"}`,
-    [`Fasquia: ${r.min_score} pontos`, yrs, `vagas com até ${r.max_age_days} dias`, r.min_salary_eur ? `salário publicado ≥ ${r.min_salary_eur.toLocaleString("pt-PT")} €` : ""].filter(Boolean).join(" · "),
-    repoEdit ? linkPill("Ajustar regras", repoEdit) : null);
-  const chips = el("div", "chips"); (r.strong || []).forEach(x => chips.append(el("span", null, x))); (r.bonus || []).forEach(x => chips.append(el("span", null, "bónus: " + x)));
-  rules.querySelector(".st").append(chips);
-  const when = new Date(updated + "T00:00:00").toLocaleDateString("pt-PT", { day: "numeric", month: "long" });
-  const rec = el("div", "sv"); rec.append(el("b", null, "Última recolha"), document.createTextNode(when));
-  wrap.append(group("Tracker",
-    row("Recolha automática", tracker.schedule || "Todos os dias, duas vezes", rec),
-    fontes, rules,
-    row("Notificações", `App ntfy: cada perfil recebe só as suas vagas novas, uma vez.${p.channel ? "" : " Este perfil ainda não tem canal."}`)));
-  // Dados
-  const nApplied = Object.values(marks).filter(v => v === "aplicada").length, nHidden = Object.values(marks).filter(v => v === "escondida").length;
-  wrap.append(group("Dados neste dispositivo",
-    row("Marcações", `${nApplied} candidatadas e ${nHidden} escondidas, guardadas só neste dispositivo e neste perfil.`,
-        pill("Limpar", "danger", () => { if (!confirm(`Limpar as marcações de ${p.name || "este perfil"}?`)) return;
-          marks = {}; save(); refreshChrome(); render(); toast("Marcações limpas", null); }))));
-  wrap.append(group("Versão", row("Vagas", `Dados de ${when} · página estática no GitHub Pages, sem custos.`)));
-  box.append(wrap);
+  fontes.querySelector(".st").append(lst);
+  w.append(group("Recolha",
+    row("Horário", tracker.schedule || "Todos os dias, duas vezes", el("span", "sv", `Última a ${dateLong(updated)}`)),
+    fontes));
+  w.append(group("Notificações",
+    row(`Notificações de ${p.name || "este perfil"}`, p.channel ? "Na app ntfy, só com as vagas novas deste perfil e uma única vez por vaga." : "Este perfil ainda não tem canal ntfy.")));
+  box.append(w);
 }
-$("mviews").onchange = e => setView(e.target.value);
 
 function buildSources() {
   const sel = $("src"); sel.textContent = "";
@@ -540,17 +485,15 @@ function buildSources() {
 }
 $("src").onchange = e => { src = e.target.value; animateNext = true; render(); };
 
-// ---- janela "Trocar de perfil" (Esc, clique fora, setas; foco volta ao botão)
+// ---------- janela de perfis ----------
 let opener = null;
 function openModal(e) {
   opener = e.currentTarget;
   const list = $("plist"); list.textContent = "";
   for (const p of profiles) {
     const b = el("button", "pitem"); b.type = "button"; b.setAttribute("aria-current", p.id === current);
-    const i = el("span", "pinfo"); i.append(el("div", "pn", p.name || "O meu perfil"), el("div", "ph", p.headline || ""));
-    b.append(avatarOf(p), i);
-    const n = freshFor(p); if (n) b.append(el("span", "count", `${n} ${n === 1 ? "nova" : "novas"}`));
-    b.append(svg(ICON.tick));
+    const i = el("span", "pinfo"); i.append(el("div", "pn", p.name || p.id), el("div", "ph", p.headline || ""));
+    b.append(avatarOf(p), i, svg(ICON.tick));
     b.onclick = () => { closeModal(true); select(p.id); };
     list.append(b);
   }
@@ -562,55 +505,42 @@ function closeModal(restore) {
   $("modal").classList.remove("open"); $("scrim").classList.remove("open");
   if (restore && opener) opener.focus();
 }
-$("switchBtn").onclick = openModal; $("mSwitch").onclick = openModal;
-$("scrim").onclick = () => closeModal(true); $("mClose").onclick = () => closeModal(true);
+$("profileBtn").onclick = openModal; $("mProfileBtn").onclick = openModal; $("scrim").onclick = () => closeModal(true);
 document.addEventListener("keydown", e => {
   if (!$("modal").classList.contains("open")) return;
-  const items = [...$("modal").querySelectorAll(".pitem, .mfoot a, .mfoot button")].filter(x => x.offsetParent);
+  const items = [...$("modal").querySelectorAll(".pitem")];
   const i = items.indexOf(document.activeElement);
   if (e.key === "Escape") { e.preventDefault(); closeModal(true); }
-  else if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
-  else if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
-  else if (e.key === "Tab") { e.preventDefault(); items[(i + (e.shiftKey ? -1 : 1) + items.length) % items.length].focus(); }
+  else if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+  else if (e.key === "ArrowUp" || (e.key === "Tab" && e.shiftKey)) { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
 });
 
-function select(pid, fromHash) {
+function select(pid, toPage) {
   if (!profiles.some(p => p.id === pid)) pid = profiles[0].id;
-  const changed = pid !== current;
   current = pid; store.set("vagas-perfil", pid);
-  if (!fromHash && location.hash.slice(1) !== pid) history.replaceState(null, "", "#" + pid);
-  marks = store.get(markKey(pid), {});
   data = viewFor(pid);
-  const p = profiles.find(x => x.id === pid);
-  if (changed) { $("h1").classList.remove("swap"); void $("h1").offsetWidth; $("h1").classList.add("swap"); }
-  document.title = p && p.name ? `Vagas · ${p.name}` : "Vagas";
-  src = "Todas"; animateNext = true;
-  refreshChrome(); setHeader(); buildSources(); render();
+  if (toPage) page = toPage;
+  document.title = profile().name ? `Vagas de ${profile().name}` : "Vagas";
+  src = "Todas"; buildSources(); go(page);
 }
 
+function fromHash() { const [pid, pg] = location.hash.slice(1).split("/"); return { pid, pg: PAGES.some(x => x.id === pg) ? pg : null }; }
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
   updated = d.updated; tracker = d.tracker || {};
   profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];
   all = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") ||
     ((b.fit ?? b.score * 5) - (a.fit ?? a.score * 5)));
-  const legacy = store.get("vagas-estado", null);          // marcações antigas passam para o primeiro perfil
-  if (legacy && !store.get(markKey(profiles[0].id), null)) store.set(markKey(profiles[0].id), legacy);
-  if (profiles.length < 2) { $("switchBtn").style.display = "none"; $("mSwitch").style.display = "none"; }
-  if (location.hash === "#definicoes") view = "settings";
-  select(location.hash === "#definicoes" ? store.get("vagas-perfil", profiles[0].id) : (location.hash.slice(1) || store.get("vagas-perfil", profiles[0].id)), true);
-}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar."; });
+  const h = fromHash();
+  const pid = h.pid || store.get("vagas-perfil", profiles[0].id);
+  const first = viewFor(profiles.some(p => p.id === pid) ? pid : profiles[0].id);
+  select(pid, h.pg || (first.some(m => m.first_seen === updated) ? "new" : "all"));
+}).catch(() => { $("sub").textContent = "Não foi possível carregar as vagas. Tenta recarregar a página."; });
 
 document.querySelectorAll("#days button").forEach(b => b.onclick = () => {
   document.querySelectorAll("#days button").forEach(x => x.setAttribute("aria-pressed", x === b)); days = +b.dataset.d; animateNext = true; render(); });
 $("q").addEventListener("input", render);
-addEventListener("hashchange", () => { if (!profiles.length) return;
-  if (location.hash === "#definicoes") { if (view !== "settings" && view !== "people") setView("settings"); return; }
-  if (view === "settings" || view === "people") { view = "all"; }
-  select(location.hash.slice(1), true); });
-$("settings").onclick = () => setView("settings");
-$("mSettings").onclick = () => setView(view === "settings" ? "all" : "settings");
-const bar = document.querySelector(".bar");
-addEventListener("scroll", () => bar.classList.toggle("scrolled", scrollY > 90), { passive: true });
+addEventListener("hashchange", () => { const h = fromHash(); if (profiles.length && h.pid && (h.pid !== current || (h.pg && h.pg !== page))) select(h.pid, h.pg || page); });
+addEventListener("scroll", () => $("bar").classList.toggle("scrolled", scrollY > 120), { passive: true });
 </script>
 </body>
 </html>

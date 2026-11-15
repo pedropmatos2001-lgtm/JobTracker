@@ -242,11 +242,12 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
         if prev is not None:                   # já está na página (outro perfil): acrescenta este perfil
             prev.setdefault("profiles", {first_id: {"score": prev.get("score"), "flags": prev.get("flags", [])}})
             for pid, (v, jd) in hits.items():
-                prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
+                prev["profiles"][pid] = {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
+                                         **({"fit": jd["fit"]} if jd else {})}
             continue
         entry = {**j.to_dict(), "score": first_v.score, "flags": first_v.flags[:4], "first_seen": today.isoformat(),
-                 "profiles": {pid: {"score": v.score, "flags": v.flags[:4], **({"fit": jd["fit"]} if jd else {})}
-                              for pid, (v, jd) in hits.items()}}
+                 "profiles": {pid: {"score": v.score, "flags": v.flags[:4], "themes": v.themes[:3],
+                                    **({"fit": jd["fit"]} if jd else {})} for pid, (v, jd) in hits.items()}}
         if not pub:
             entry.update({"reasons": first_v.reasons[:6], "judge": first_jd})
         elif first_jd:
@@ -323,7 +324,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                                     "queries": len(s.get("queries") or []), "status": next(
                                         (r.split(": ", 1)[1] for r in report if r.startswith((s.get("name") or "") + ": ")), "")}
                                    for s in cfg.get("sources", []) if s.get("enabled") is not False],
-                       "schedule": cfg.get("schedule_text", "Todos os dias, ≈07:15 e ≈16:15 (hora UTC)"),
+                       "schedule": cfg.get("schedule_text", "Todos os dias, por volta das 7h15 e das 16h15"),
                        "stats": stats}
             json.dump({"updated": today.isoformat(), "profiles": [p["public"] for p in profiles], "tracker": tracker,
                        "matches": state["matches"]}, f, ensure_ascii=False)

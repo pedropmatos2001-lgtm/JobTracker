@@ -122,3 +122,9 @@ def test_new_profile_gets_jobs_already_seen_by_others(tmp_path):
     sent.clear()
     run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
     assert sent == []
+
+
+def test_page_entry_has_matched_themes(tmp_path):
+    _, _, docs = go(cfg2(), [OPS], tmp_path)
+    th = docs["matches"][0]["profiles"]["pedro"]["themes"]
+    assert th and all("|" not in t for t in th) and len(th) <= 3
