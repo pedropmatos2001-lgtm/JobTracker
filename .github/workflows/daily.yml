@@ -15,6 +15,7 @@ concurrency:
 jobs:
   run:
     runs-on: ubuntu-latest
+    environment: GERAL          # os segredos estão neste Environment
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
