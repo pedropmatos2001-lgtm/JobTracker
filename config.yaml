@@ -182,7 +182,7 @@ profiles:
     name: Maria
     former_ids: [marta]              # antes chamava-se Marta: herda o que já tinha visto
     headline: "Política, assuntos europeus e direitos fundamentais"
-    tags: ["Assessoria política", "Assuntos europeus", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
+    tags: ["Assessoria política", "Consultoria ao setor público", "Assuntos europeus", "Direitos fundamentais", "Estado de direito", "Sociedade civil", "Setor público", "Projetos europeus"]
     languages: ["Português", "Inglês C1", "Espanhol B2"]
     cv_url: ""
     ntfy_env: NTFY_TOPIC_MARIA
@@ -190,7 +190,13 @@ profiles:
     profile_env: CANDIDATE_PROFILE_MARIA
     rules:
       sector_bonus: {}                            # o bónus de utilities é só do Pedro
-      target_companies: []                        # as empresas-alvo também
+      target_companies:                           # as do Pedro não contam para a Maria; estas são dela
+        - sector: "Consultoria (Big4)"
+          companies:
+            - {name: "Deloitte", match: "\\bDeloitte\\b"}
+            - {name: "EY", match: "\\bEY\\b|Ernst ?(&|and) ?Young"}
+            - {name: "PwC", match: "\\bPwC\\b|PricewaterhouseCoopers"}
+            - {name: "KPMG", match: "\\bKPMG\\b"}
       require_theme: true                         # só passam vagas com pelo menos um dos temas abaixo
       min_score: 4                                # com require_theme, basta um tema forte e algum contexto
       years: {min: 0, stretch_from: 4, max: 5}   # cerca de 3 anos de experiência
@@ -209,6 +215,7 @@ profiles:
         strong:
           - {label: "Setor público", examples: ["administração pública", "ministério", "câmara municipal", "instituto público"], pattern: "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"}
           - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
+          - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
           - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|\\bMEP\\b"}
           - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b"}
@@ -326,6 +333,9 @@ sources:
       - "rule of law"
       - "fundamental rights"
       - "migration policy"
+      - "Government and Public Services"
+      - "public sector consulting"
+      - "consultora setor público"
 
   # Empresas-alvo do Pedro (lista em target_companies): uma pesquisa por empresa, só com vagas dessa empresa.
   # Em rotação: 24 empresas por recolha, por isso cada uma é vista a cada dia e meio; a janela de 7 dias

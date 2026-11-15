@@ -185,9 +185,20 @@ def test_company_source_rotates_and_keeps_only_target_companies():
     c = cfg2()
     src = {"companies_from": "target_companies", "per_run": 24}
     seen, d = [], date(2026, 11, 18)
-    for i in range(3):
+    for i in range(4):
         q, note = company_queries(src, c, date.fromordinal(d.toordinal() + i // 2), i % 2 == 0)
-        assert len(q) == 24 and "de 72" in note
+        assert q and "de 76" in note
         seen += q
-    assert len(set(seen)) == 72                         # em 3 recolhas (dia e meio) passa por todas
+    assert len(set(seen)) == 76                         # 72 do Pedro + 4 Big4 da Maria, em 4 recolhas (2 dias)
 
+
+
+def test_big4_and_gps_count_for_maria_not_pedro():
+    from datetime import date
+    from jobtracker.scoring import evaluate, target_company
+    ps = {p["id"]: p["cfg"] for p in build_profiles(cfg2())}
+    j = mk("Consultora – Government & Public Services (GPS)", "2 anos de experiência. Consultoria ao setor público: "
+           "modernização da administração pública e fundos europeus para ministérios.", company="Deloitte")
+    assert target_company(j, ps["maria"]) == "Deloitte" and target_company(j, ps["pedro"]) == ""
+    v = evaluate(j, ps["maria"], date(2026, 11, 18))
+    assert v.include and "Consultoria ao setor público" in v.themes
