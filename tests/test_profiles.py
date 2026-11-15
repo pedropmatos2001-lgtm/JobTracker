@@ -26,7 +26,7 @@ OPS = mk("Operations Excellence Manager", "4 years of experience. Process improv
 POLICY = mk("Policy Analyst – EU Affairs", "3 years of experience. Public policy analysis, European Parliament "
             "monitoring, Horizon Europe funding applications. Stakeholder management.", company="Think Tank")
 BOTH = mk("Gestor de Fundos Europeus e Sustentabilidade", "3 anos de experiência. Administração pública: candidaturas a fundos, "
-          "Portugal 2030, sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
+          "Portugal 2030, cooperação internacional, sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
 
 
 def go(cfg, jobs, tmp_path, env=None):
@@ -181,16 +181,19 @@ def test_target_companies_get_bonus_only_for_pedro():
 
 def test_company_source_rotates_and_keeps_only_target_companies():
     from datetime import date
-    from jobtracker.__main__ import company_queries
+    from jobtracker.__main__ import all_target_companies, company_queries
     c = cfg2()
+    total = len(all_target_companies(c))               # empresas-alvo do Pedro + Big4 da Maria
+    assert total > 90
     src = {"companies_from": "target_companies", "per_run": 24}
     seen, d = [], date(2026, 11, 18)
-    for i in range(4):
+    runs = -(-total // 24)
+    for i in range(runs):
         q, note = company_queries(src, c, date.fromordinal(d.toordinal() + i // 2), i % 2 == 0)
-        assert q and "de 76" in note
+        assert q and f"de {total}" in note
         seen += q
-    assert len(set(seen)) == 76                         # 72 do Pedro + 4 Big4 da Maria, em 4 recolhas (2 dias)
-
+    assert len(set(seen)) == total                      # passa por todas antes da janela de 7 dias acabar
+    assert runs / 2 < 7
 
 
 def test_big4_and_gps_count_for_maria_not_pedro():
@@ -202,3 +205,18 @@ def test_big4_and_gps_count_for_maria_not_pedro():
     assert target_company(j, ps["maria"]) == "Deloitte" and target_company(j, ps["pedro"]) == ""
     v = evaluate(j, ps["maria"], date(2026, 11, 18))
     assert v.include and "Consultoria ao setor público" in v.themes
+
+
+def test_pedro_skips_big4_but_gets_other_consultancies():
+    from datetime import date
+    from jobtracker.scoring import evaluate, target_company
+    ps = {p["id"]: p["cfg"] for p in build_profiles(cfg2())}
+    t = date(2026, 11, 18)
+    desc = ("4 years of experience. Public sector consulting: operating model, process improvement and EU funds "
+            "for ministries; sustainability strategy.")
+    big4 = mk("Senior Consultant – Government & Public Services", desc, company="KPMG Portugal")
+    assert evaluate(big4, ps["pedro"], t).excluded_by == "empresa excluída deste perfil"
+    other = mk("Senior Consultant – Public Sector", desc, company="Sia Partners")
+    v = evaluate(other, ps["pedro"], t)
+    assert v.include and target_company(other, ps["pedro"]) == "Sia Partners"
+    assert evaluate(big4, ps["maria"], t).excluded_by != "empresa excluída deste perfil"

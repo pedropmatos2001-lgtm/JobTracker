@@ -43,7 +43,8 @@ def _human(pattern):
 def rules_summary(pcfg):
     """Resumo das regras de um perfil, sem nada pessoal, para a página de definições."""
     kw = pcfg.get("keywords", {})
-    return {"require_theme": bool(pcfg.get("require_theme")), "min_score": pcfg.get("min_score"), "years": pcfg.get("years"), "max_age_days": pcfg.get("max_age_days"),
+    return {"company_exclude": pcfg.get("company_exclude_label") or "",
+            "require_theme": bool(pcfg.get("require_theme")), "min_score": pcfg.get("min_score"), "years": pcfg.get("years"), "max_age_days": pcfg.get("max_age_days"),
             "min_salary_eur": pcfg.get("min_salary_eur"),
             "strong": [x for x in (label_of(p) or _human(pat_of(p)) for p in kw.get("strong", [])) if x],
             "medium": [x for x in (label_of(p) or _human(pat_of(p)) for p in kw.get("medium", [])) if x],

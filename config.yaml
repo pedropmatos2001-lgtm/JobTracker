@@ -4,7 +4,10 @@
 # Fasquia salarial (EUR brutos/ano). Pode ser substituída pelo segredo MIN_SALARY_EUR.
 # Vagas com salário PUBLICADO abaixo disto são excluídas. Vagas sem salário
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
-min_salary_eur: 35000
+min_salary_eur: 30000          # Pedro: só muda por pelo menos 30 000 € brutos por ano (conta quando a vaga publica o salário)
+# Empresas que nunca interessam ao Pedro: já trabalha na Deloitte (GPS), e mudar para outra Big4 não é subir.
+company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b"
+company_exclude_label: "Deloitte, EY, PwC e KPMG"
 
 min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
@@ -65,7 +68,7 @@ keywords:
     - "stakeholder"
     - "public sector|setor p[úu]blico|government|munic[íi]pi|c[âa]mara municipal|autarquia"
   negative:                # -3 cada
-    - "commission|comiss[ãa]o|cold call|quota"
+    - "(sales|on|plus|\\+) commissions?\\b|commission[- ]based|comiss[õo]es (de vendas|sobre vendas)|comiss[ãa]o de vendas|cold call|sales quota"
     - "call center|contact center"
 
 # Empresas e setores que preferes (utilities, energia, água, resíduos): +4 pelo nome da empresa ou título.
@@ -153,6 +156,31 @@ target_companies:
       - "Urbaser"
       - {name: "Mota-Engil Ambiente e Serviços", match: "Mota-?Engil Ambiente"}
       - "Ecodeal"
+  - sector: "Consultoria (fora das Big4)"
+    companies:
+      - "Accenture"
+      - {name: "McKinsey", match: "McKinsey"}
+      - {name: "Boston Consulting Group", match: "Boston Consulting|\\bBCG\\b"}
+      - {name: "Bain", match: "\\bBain\\b"}
+      - "Roland Berger"
+      - {name: "Kearney", match: "\\bKearney\\b"}
+      - "Oliver Wyman"
+      - {name: "Capgemini", match: "Capgemini"}
+      - {name: "NTT Data", match: "NTT ?DATA"}
+      - "Sia Partners"
+      - {name: "Minsait", match: "Minsait|\\bIndra\\b"}
+      - "Quaternaire"
+      - {name: "Augusto Mateus & Associados", match: "Augusto Mateus"}
+      - {name: "CEDRU", match: "\\bCEDRU\\b"}
+      - "Ecorys"
+      - "Ramboll"
+      - "Arcadis"
+      - {name: "WSP", match: "\\bWSP\\b"}
+      - {name: "ERM", match: "\\bERM\\b|Environmental Resources Management"}
+      - "Sweco"
+      - "Systemiq"
+      - "South Pole"
+      - {name: "Get2C", match: "Get2C"}
   - sector: "Engenharia, consultoria e indústria"
     companies:
       - {name: "Quadrante", match: "\\bQuadrante\\b"}
@@ -190,6 +218,9 @@ profiles:
     profile_env: CANDIDATE_PROFILE_MARIA
     rules:
       sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      min_salary_eur: 0                           # a Maria não tem salário mínimo
+      company_exclude: ""                         # a exclusão das Big4 é só do Pedro
+      company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
         - sector: "Consultoria (Big4)"
           companies:
@@ -210,29 +241,31 @@ profiles:
         - "business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center"
         - "motorista|driver|operador|operator|t[ée]c\\.|technician|manuten[çc][ãa]o|enfermeir|m[ée]dic[oa]\\b|professor|docente"
         - "incentivos? (fiscais|financeiros)|tax incentive|\\bSIFIDE\\b|consultor[a]? de incentivos|incentive consult|tax (consultant|advisor|manager)"
+        - "teacher|professor[a]?|docente|educador[a]?|educa[çc][ãa]o de inf[âa]ncia|ensino|explicador[a]?|tutor\\b|formador[a]?|trainer|auxiliar de a[çc][ãa]o educativa|creche|jardim de inf[âa]ncia|babysit|\\bama\\b|monitor[a]? de"
+        - "turismo|modelador|\\bMEP\\b|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento"
       keywords:
         strong_cap: 14
         strong:
-          - {label: "Setor público", examples: ["administração pública", "ministério", "câmara municipal", "instituto público"], pattern: "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"}
           - {label: "Políticas públicas", examples: ["políticas públicas", "policy officer", "avaliação de políticas", "regulação"], pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate|research)|analista de pol[íi]ticas|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|policy making|policymak|think tank"}
           - {label: "Consultoria ao setor público", examples: ["Government & Public Services (GPS)", "public sector consulting", "consultoria à administração pública"], pattern: "government (and|&) public (services|sector)|\\bGPS\\b|public sector (consult|advisory|practice|transformation)|consultor[a]? (do|para o|no) setor p[úu]blico|consultoria (ao|para o) setor p[úu]blico|consultoria (à|a) administra[çc][ãa]o p[úu]blica|govtech|e-?government|governo digital|digital government"}
-          - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|\\bMEP\\b"}
+          - {label: "Assessoria política e parlamentar", examples: ["assessora parlamentar", "parliamentary assistant", "political advisor", "adjunta de gabinete"], pattern: "parliamentary (assistant|advisor|adviser|officer|researcher)|assistente parlamentar|assessor[a]? (parlamentar|pol[íi]tic|de gabinete|do gabinete|ministerial|jur[íi]dic[oa] parlamentar)|adjunt[oa] (de|do) gabinete|gabinete (do|da) (ministr|secret[áa]ri|presid)|grupo parlamentar|political (advisor|adviser|assistant)|policy adviser to|\\bLIBE\\b|committee on civil liberties|eurodeputad|member of the european parliament"}
           - {label: "Liberdades, justiça e Estado de direito", examples: ["Estado de direito", "direitos fundamentais", "migração e asilo", "combate à discriminação"], pattern: "rule of law|estado de direito|civil liberties|liberdades c[íi]vicas|direitos, liberdades e garantias|democracy|democracia|justice and home affairs|justi[çc]a e assuntos internos|anti-?discrimination|antidiscrimina|combate [àa] discrimina|\\bLGBTI|racism|racismo|hate speech|discurso de [óo]dio|migration polic|pol[íi]ticas? de migra|asylum polic|pol[íi]tica de asilo|fundamental rights agency|ag[êe]ncia dos direitos fundamentais|\\bEDPS\\b|data protection supervisor|\\bCNPD\\b|provedor[a]? de justi[çc]a|ombudsman"}
           - {label: "Sociedade civil e associações", examples: ["ONG", "sociedade civil", "advocacy officer", "associação de defesa"], pattern: "civil society|sociedade civil|\\bNGOs?\\b|\\bONGs?\\b|non-governmental|n[ãa]o governamenta|advocacy (officer|manager|coordinator|specialist|lead)|t[ée]cnic[oa] de advocacy|associa[çc][ãa]o (de defesa|c[íi]vica|de direitos|de apoio)|terceiro setor|third sector|plataforma portuguesa das ongd|\\bONGD\\b"}
-          - {label: "Assuntos europeus", examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|uni[ãa]o europeia|european union|\\bEU\\b institutions|institui[çc][õo]es europeias|brussels|bruxelas|\\bMEP\\b|eurodeputad"}
+          - {label: "Assuntos europeus", examples: ["EU affairs", "public affairs", "Parlamento Europeu", "Comissão Europeia"], pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission|\\bEU (institutions|policy|policies|legislation|law)\\b|institui[çc][õo]es europeias|pol[íi]ticas europeias|legisla[çc][ãa]o europeia|member of the european parliament|eurodeputad"}
           - {label: "Projetos europeus e cooperação", examples: ["projetos europeus", "Erasmus+", "Interreg", "cooperação internacional"], pattern: "eu[- ]funded project|projetos? europeus?|european projects?|horizon europe|erasmus\\+?|interreg|urbact|life programme|programa life|cerv\\b|gestor[a]? de projetos? europeus?|international cooperation|coopera[çc][ãa]o internacional|cooperação para o desenvolvimento|development cooperation|international development|desenvolvimento internacional"}
           - {label: "Direitos humanos", examples: ["direitos humanos", "direitos fundamentais", "Nações Unidas", "ação humanitária"], pattern: "human rights|direitos humanos|direitos fundamentais|fundamental rights|united nations|na[çc][õo]es unidas|\\bOHCHR|amnistia|amnesty|humanitarian|humanit[áa]ri"}
-          - {label: "Infância e juventude", examples: ["proteção de crianças", "juventude", "UNICEF", "CPCJ"], pattern: "child protection|children'?s rights|direitos da crian[çc]a|prote[çc][ãa]o (de|das) (crian[çc]as|menores)|crian[çc]as e jovens|crian[çc]as em risco|children and young people|safeguarding children|child welfare|\\bunicef|\\bCPCJ|inf[âa]ncia|youth (work|policy|programme|program|organi[sz]ation|participation)|pol[íi]ticas de juventude|associa[çc][ãa]o juvenil"}
+          - {label: "Infância e juventude", examples: ["proteção de crianças", "juventude", "UNICEF", "CPCJ"], pattern: "child protection|children'?s rights|direitos da crian[çc]a|prote[çc][ãa]o (de|das) (crian[çc]as|menores)|prote[çc][ãa]o (à|da) inf[âa]ncia|crian[çc]as e jovens em risco|crian[çc]as em risco|safeguarding children|child welfare|\\bunicef|\\bCPCJ|youth (policy|participation|rights)|pol[íi]ticas de juventude|associa[çc][ãa]o juvenil"}
           - {label: "Igualdade de género", examples: ["igualdade de género", "violência doméstica", "direitos das mulheres"], pattern: "gender equality|igualdade de g[ée]nero|gender mainstreaming|women'?s rights|direitos das mulheres|women'?s empowerment|empoderamento|viol[êe]ncia dom[ée]stica|domestic violence|gender-based violence|viol[êe]ncia de g[ée]nero|\\bCIG\\b|\\bUN Women"}
           - {label: "Inclusão e proteção", examples: ["refugiados", "migrantes", "inclusão social", "apoio a vítimas"], pattern: "refugiad|refugee|asylum|asilo|migrantes|migrants|integra[çc][ãa]o de migrantes|tr[áa]fico de seres humanos|human trafficking|exclus[ãa]o social|inclus[ãa]o social|social inclusion|pobreza|poverty|sem-abrigo|homeless|v[íi]timas de|victims of|\\bAPAV|\\bACNUR|\\bUNHCR|\\bOIM\\b|\\bAIMA\\b"}
         medium:
+          - "setor p[úu]blico|public sector|administra[çc][ãa]o p[úu]blica|public administration|government (agency|department|body|institution)|minist[ée]rio|ministry of|c[âa]mara municipal|munic[íi]pio d|autarquia|instituto p[úu]blico|entidade p[úu]blica|\\bCCDR|assembleia da rep[úu]blica|parlamento|parliament|comiss[ãa]o europeia|european commission|council of europe|conselho da europa"                               # setor público: contexto, sozinho não chega
           - "research|investiga[çc][ãa]o|analyst|analista|project officer|gestor de projeto|project manager"
           - "stakeholder|advocacy|sensibiliza[çc][ãa]o"
           - "fundos europeus|eu funds|grant agreement|candidaturas a programas europeus"
           - "ong\\b|ngo\\b|non-profit|sem fins lucrativos|funda[çc][ãa]o"
           - "power bi|stata|excel"
         negative:
-          - "commission|comiss[ãa]o de vendas|cold call|quota"
+          - "(sales|on|plus|\\+) commissions?\\b|commission[- ]based|comiss[õo]es (de vendas|sobre vendas)|comiss[ãa]o de vendas|cold call|sales quota"
           - "call center|contact center"
           - "incentivos? (fiscais|financeiros|ao investimento)|benef[íi]cios fiscais|tax incentive|\\bSIFIDE\\b|r&d tax|cr[ée]dito fiscal|consultor[a]? de incentivos|incentive consult"
 
