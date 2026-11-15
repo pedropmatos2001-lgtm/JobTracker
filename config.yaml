@@ -51,18 +51,18 @@ keywords:
   strong_cap: 14
   strong:                  # +3 cada (+2 se estiver no título)
     # foco: negócio e operações — processos, organização, modelo operativo
-    - "process (re-?)?engineering|reengenharia|process (excellence|improvement|optimi[sz]ation|manager|owner)|operational excellence|excel[êe]ncia operacional|melhoria (cont[íi]nua|de processos)|otimiza[çc][ãa]o de processos|\\blean\\b|six sigma|bpmn?\\b"
-    - "operating model|modelo operativo|target operating|organi[sz]ational (design|effectiveness|transformation|development)|desenho organizacional|reestrutura[çc][ãa]o|reorganiza|business transformation|transforma[çc][ãa]o (organizacional|do neg[óo]cio)|change management|gest[ãa]o da mudan[çc]a"
-    - "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|asset management|gest[ãa]o de ativos"
+    - {label: "Processos e melhoria contínua", pattern: "process (re-?)?engineering|reengenharia|process (excellence|improvement|optimi[sz]ation|manager|owner)|operational excellence|excel[êe]ncia operacional|melhoria (cont[íi]nua|de processos)|otimiza[çc][ãa]o de processos|\\blean\\b|six sigma|bpmn?\\b"}
+    - {label: "Modelo operativo e organização", pattern: "operating model|modelo operativo|target operating|organi[sz]ational (design|effectiveness|transformation|development)|desenho organizacional|reestrutura[çc][ãa]o|reorganiza|business transformation|transforma[çc][ãa]o (organizacional|do neg[óo]cio)|change management|gest[ãa]o da mudan[çc]a"}
+    - {label: "Gestão de operações", pattern: "operations (manager|management|excellence|lead|analyst|consultant|director)|business operations|gest[ãa]o de opera[çc][õo]es|efici[êe]ncia operacional|operational (efficiency|performance|planning)|asset management|gest[ãa]o de ativos"}
     # setor: sustentabilidade, ambiente e clima
-    - "csrd|esg|\\bgri\\b|tcfd|ghg|sustainab|sustentabilidade|decarboni[sz]|descarboniza|circular economy|economia circular|net[- ]zero|carbon|carbono"
-    - "climate|clim[áa]tic|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|environment(al)?\\b|ambient(e|al)\\b|biodivers|emiss(ions|[õo]es)|iso 14001|\\blca\\b|life cycle assessment"
+    - {label: "Sustentabilidade e ESG", pattern: "csrd|esg|\\bgri\\b|tcfd|ghg|sustainab|sustentabilidade|decarboni[sz]|descarboniza|circular economy|economia circular|net[- ]zero|carbon|carbono"}
+    - {label: "Clima e ambiente", pattern: "climate|clim[áa]tic|altera[çc][õo]es clim[áa]ticas|a[çc][ãa]o clim[áa]tica|environment(al)?\\b|ambient(e|al)\\b|biodivers|emiss(ions|[õo]es)|iso 14001|\\blca\\b|life cycle assessment"}
     # ambiente + tecnologia, smart cities e mobilidade
-    - "smart cit|cidades? inteligentes?|urban (mobility|planning|analytics)|mobilidade|e-?mobility|transporte p[úu]blico|ferrovi|cleantech|climate tech|greentech|environmental (data|technology)|\\bgis\\b|geospatial|georreferenc"
-    - "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"
-    - "pmo|program(me)? manage|transformation (manager|lead|office)"
-    - "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"
-    - "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"
+    - {label: "Smart cities e mobilidade", pattern: "smart cit|cidades? inteligentes?|urban (mobility|planning|analytics)|mobilidade|e-?mobility|transporte p[úu]blico|ferrovi|cleantech|climate tech|greentech|environmental (data|technology)|\\bgis\\b|geospatial|georreferenc"}
+    - {label: "Utilities: energia, água e resíduos", pattern: "utilit|energy transition|transi[çc][ãa]o energ[ée]tica|renewable|renov[áa]vel|electricity|eletricidade|power grid|rede el[ée]trica|distribui[çc][ãa]o de (energia|[áa]gua)|\\bwater\\b|[áa]guas?\\b|saneamento|wastewater|waste management|res[íi]duos"}
+    - {label: "PMO e programas", pattern: "pmo|program(me)? manage|transformation (manager|lead|office)"}
+    - {label: "Fundos europeus", pattern: "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"}
+    - {label: "CCDR e modernização administrativa", pattern: "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|moderniza[çc][ãa]o administrativa|planeamento estrat[ée]gico"}
   medium:                  # +1 cada (tecnologia e IA contam, mas como complemento)
     - "\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|genai|generative ai|ia generativa"
     - "digital transformation|transforma[çc][ãa]o digital|automation|automatiza"
@@ -122,12 +122,12 @@ profiles:
       keywords:
         strong_cap: 14
         strong:
-          - "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate)|analista de pol[íi]ticas"
-          - "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission"
-          - "incentiv|sifide|horizon europe|portugal 2030|\\bPRR\\b|fundos europeus|fundos comunit|eu funds|grant|subven[çc]"
-          - "candidaturas? a (fundos|financiamento|programas|projetos|incentivos)|funding application|grant writing|application reports?|financiamento"
-          - "\\bCCDR|desenvolvimento regional|regional development|international development|desenvolvimento internacional|coopera[çc][ãa]o"
-          - "regulat|regula[çc][ãa]o|legislat|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|impact assessment"
+          - {label: "Políticas públicas", pattern: "public polic|pol[íi]ticas p[úu]blicas|policy (analyst|officer|advisor|adviser|associate)|analista de pol[íi]ticas"}
+          - {label: "Assuntos europeus", pattern: "eu affairs|european affairs|assuntos europeus|public affairs|assuntos p[úu]blicos|government affairs|parlamento europeu|european parliament|comiss[ãa]o europeia|european commission"}
+          - {label: "Incentivos e fundos", pattern: "incentiv|sifide|horizon europe|portugal 2030|\\bPRR\\b|fundos europeus|fundos comunit|eu funds|grant|subven[çc]"}
+          - {label: "Candidaturas a financiamento", pattern: "candidaturas? a (fundos|financiamento|programas|projetos|incentivos)|funding application|grant writing|application reports?|financiamento"}
+          - {label: "Desenvolvimento regional e cooperação", pattern: "\\bCCDR|desenvolvimento regional|regional development|international development|desenvolvimento internacional|coopera[çc][ãa]o"}
+          - {label: "Regulação e avaliação de políticas", pattern: "regulat|regula[çc][ãa]o|legislat|policy evaluation|avalia[çc][ãa]o de pol[íi]ticas|impact assessment"}
         medium:
           - "power bi|stata|excel"
           - "research|investiga[çc][ãa]o|analyst|analista"

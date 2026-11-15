@@ -62,7 +62,8 @@ def test_page_gets_only_public_profile_fields(tmp_path):
     ids = [p["id"] for p in docs["profiles"]]
     assert ids == ["pedro", "marta"]
     for p in docs["profiles"]:
-        assert not ({"ntfy_env", "email_env", "profile_env", "rules", "admin"} & set(p))
+        assert not ({"ntfy_env", "email_env", "profile_env", "admin"} & set(p))
+        assert "keywords" not in p["rules"] and not any("|" in k for k in p["rules"]["strong"])   # só rótulos legíveis
 
 
 def test_source_alerts_go_only_to_admin(tmp_path):
