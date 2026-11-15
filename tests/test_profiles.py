@@ -26,7 +26,7 @@ OPS = mk("Operations Excellence Manager", "4 years of experience. Process improv
 POLICY = mk("Policy Analyst – EU Affairs", "3 years of experience. Public policy analysis, European Parliament "
             "monitoring, Horizon Europe funding applications. Stakeholder management.", company="Think Tank")
 BOTH = mk("Gestor de Fundos Europeus e Sustentabilidade", "3 anos de experiência. Administração pública: candidaturas a fundos, "
-          "Portugal 2030, sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
+          "Portugal 2030, cooperação internacional, sustentabilidade e economia circular, melhoria de processos.", company="CCDR Norte")
 
 
 def go(cfg, jobs, tmp_path, env=None):

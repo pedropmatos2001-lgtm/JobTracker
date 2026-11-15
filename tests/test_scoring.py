@@ -206,7 +206,7 @@ def test_maria_eu_affairs_and_projects_yes_tax_incentives_no():
     def job(title, desc):
         return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
                    description=desc + " 3 anos de experiência.")
-    assert evaluate(job("EU Affairs Account Executive", "Public affairs agency, monitoring the European Parliament and the European Commission."), maria, t).include
+    assert evaluate(job("EU Affairs Consultant", "Public affairs agency, monitoring the European Parliament and the European Commission."), maria, t).include
     assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), maria, t).include
     assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), maria, t).include
     assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), maria, t).include
@@ -258,3 +258,30 @@ def test_maria_gets_libe_style_work_and_not_data_jobs():
     ]:
         v = evaluate(job(title, desc), maria, t)
         assert v.include and theme in v.themes, (title, v.themes, v.excluded_by)
+
+
+def test_maria_no_teachers_nor_generic_public_jobs():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def job(title, desc, company="X"):
+        return Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 2 anos de experiência.")
+    for title, desc in [
+        ("Educadora de Infância (Creche) – Braga", "Educação de infância numa associação, crianças dos 0 aos 3 anos."),
+        ("Maths Teacher - Paternity Cover", "Teach maths to children and young people at an international school."),
+        ("Técnico Superior — Técnico Superior Turismo", "Câmara Municipal: promoção turística do município."),
+        ("Modelador MEP Hidráulica", "Modelação BIM de redes hidráulicas e MEP para projetos na União Europeia."),
+        ("Project Manager (Lisbon- Hybrid)", "Manage IT projects for public sector clients and ministries."),
+        ("Knowledge Analyst – Procurement", "Research procurement practices across the European Union and Brussels offices."),
+    ]:
+        v = evaluate(job(title, desc), maria, t)
+        assert not v.include, (title, v.themes)
+    coke = job("Graduate Public Affairs, Communications and Sustainability",
+               "Support public affairs and engagement with the European Commission and Portuguese government.",
+               company="Coca-Cola Europacific Partners")
+    assert evaluate(coke, maria, t).include
