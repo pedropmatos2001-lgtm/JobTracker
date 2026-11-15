@@ -42,25 +42,25 @@ def test_each_profile_gets_only_its_jobs(tmp_path):
     cfg["click_url"] = "https://exemplo.github.io/JobTracker/"
     r, sent, docs = go(cfg, [OPS, POLICY], tmp_path)
     by = {pid: (t, b, c) for pid, t, b, c in sent}
-    assert set(by) == {"pedro", "marta"}
+    assert set(by) == {"pedro", "maria"}
     assert "Operations Excellence" in by["pedro"][1] and "Policy Analyst" not in by["pedro"][1]
-    assert "Policy Analyst" in by["marta"][1] and "Operations Excellence" not in by["marta"][1]
-    assert by["marta"][0].startswith("Marta: 1 vaga") and by["marta"][2].endswith("#marta")
+    assert "Policy Analyst" in by["maria"][1] and "Operations Excellence" not in by["maria"][1]
+    assert by["maria"][0].startswith("Maria: 1 vaga") and by["maria"][2].endswith("#maria")
     m = {x["title"]: x for x in docs["matches"]}
     assert set(m["Operations Excellence Manager"]["profiles"]) == {"pedro"}
-    assert set(m["Policy Analyst – EU Affairs"]["profiles"]) == {"marta"}
+    assert set(m["Policy Analyst – EU Affairs"]["profiles"]) == {"maria"}
 
 
 def test_job_for_both_is_stored_once_with_both_profiles(tmp_path):
     r, sent, docs = go(cfg2(), [BOTH], tmp_path)
-    assert len(docs["matches"]) == 1 and set(docs["matches"][0]["profiles"]) == {"pedro", "marta"}
-    assert sorted(p for p, *_ in sent) == ["marta", "pedro"]
+    assert len(docs["matches"]) == 1 and set(docs["matches"][0]["profiles"]) == {"pedro", "maria"}
+    assert sorted(p for p, *_ in sent) == ["maria", "pedro"]
 
 
 def test_page_gets_only_public_profile_fields(tmp_path):
     _, _, docs = go(cfg2(), [OPS], tmp_path)
     ids = [p["id"] for p in docs["profiles"]]
-    assert ids == ["pedro", "marta"]
+    assert ids == ["pedro", "maria"]
     for p in docs["profiles"]:
         assert not ({"ntfy_env", "email_env", "profile_env", "admin"} & set(p))
         assert "keywords" not in p["rules"] and not any("|" in k for k in p["rules"]["strong"])   # só rótulos legíveis
@@ -84,19 +84,19 @@ def test_profile_without_own_channel_never_uses_someone_elses(monkeypatch, tmp_p
     monkeypatch.setattr(notify, "send_ntfy", lambda topic, *a, **k: calls.append(topic))
     sp, dd = paths(tmp_path)
     run(cfg2(), {"NTFY_TOPIC": "topico-pedro"}, WED, sp, dd, fetch=lambda s: [POLICY, OPS], detail=lambda j: j)
-    assert calls == ["topico-pedro"]                   # a vaga da Marta não vai para o tópico do Pedro
+    assert calls == ["topico-pedro"]                   # a vaga da Maria não vai para o tópico do Pedro
     calls.clear()
     sp2, dd2 = str(tmp_path / "s2.json"), str(tmp_path / "d2")
-    run(cfg2(), {"NTFY_TOPIC": "topico-pedro", "NTFY_TOPIC_MARTA": "topico-marta"}, WED, sp2, dd2,
+    run(cfg2(), {"NTFY_TOPIC": "topico-pedro", "NTFY_TOPIC_MARIA": "topico-maria"}, WED, sp2, dd2,
         fetch=lambda s: [POLICY, OPS], detail=lambda j: j)
-    assert sorted(calls) == ["topico-marta", "topico-pedro"]
+    assert sorted(calls) == ["topico-maria", "topico-pedro"]
 
 
 def test_rules_are_inherited_and_overridden():
     ps = {p["id"]: p for p in build_profiles(cfg2())}
-    assert ps["pedro"]["cfg"]["keywords"] is not ps["marta"]["cfg"]["keywords"]
-    assert ps["marta"]["cfg"]["max_age_days"] == ps["pedro"]["cfg"]["max_age_days"]   # herdado
-    assert ps["marta"]["cfg"]["years"]["max"] == 5 and ps["pedro"]["admin"] and not ps["marta"]["admin"]
+    assert ps["pedro"]["cfg"]["keywords"] is not ps["maria"]["cfg"]["keywords"]
+    assert ps["maria"]["cfg"]["max_age_days"] == ps["pedro"]["cfg"]["max_age_days"]   # herdado
+    assert ps["maria"]["cfg"]["years"]["max"] == 5 and ps["pedro"]["admin"] and not ps["maria"]["admin"]
 
 
 def test_no_repeats_on_next_run(tmp_path):
@@ -105,7 +105,7 @@ def test_no_repeats_on_next_run(tmp_path):
     send = lambda t, b, c, p=None: sent.append(p["id"]) or ["ok"]
     for _ in range(2):                                  # amanhã: as mesmas vagas continuam no LinkedIn
         run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
-    assert sorted(sent) == ["marta", "pedro"]           # só na primeira vez
+    assert sorted(sent) == ["maria", "pedro"]           # só na primeira vez
 
 
 def test_new_profile_gets_jobs_already_seen_by_others(tmp_path):
@@ -117,8 +117,8 @@ def test_new_profile_gets_jobs_already_seen_by_others(tmp_path):
     run(only_pedro, {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
     assert [p for p, _ in sent] == ["pedro"]
     sent.clear()
-    run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)   # entra a Marta
-    assert [p for p, _ in sent] == ["marta"] and "Policy Analyst" in sent[0][1]
+    run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)   # entra a Maria
+    assert [p for p, _ in sent] == ["maria"] and "Policy Analyst" in sent[0][1]
     sent.clear()
     run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
     assert sent == []
@@ -150,3 +150,44 @@ def test_reevaluate_applies_new_rules_without_new_alerts(tmp_path):
     assert sent == []                                                                  # e não volta a avisar
     run(only_pedro, {}, later, sp, dd, fetch=lambda s: [OPS], detail=lambda j: j, send=send)
     assert sent == [] and len(json.load(open(f"{dd}/jobs.json"))["matches"]) == 1      # não duplica depois
+
+
+def test_renamed_profile_keeps_what_the_old_id_had_seen(tmp_path):
+    sp, dd = paths(tmp_path)
+    old = cfg2()
+    old["profiles"][1] = {**old["profiles"][1], "id": "marta", "name": "Marta"}
+    old["profiles"][1].pop("former_ids", None)
+    sent = []
+    send = lambda t, b, c, p=None: sent.append(p["id"]) or ["ok"]
+    run(old, {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
+    assert sorted(sent) == ["marta", "pedro"]
+    sent.clear()
+    run(cfg2(), {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)   # agora Maria
+    assert sent == []                                   # a Maria não volta a receber o que a Marta já tinha visto
+    docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
+    assert {"maria"} <= set(p for m in docs["matches"] for p in m["profiles"])
+    assert "marta" not in json.dumps(docs)
+
+
+def test_target_companies_get_bonus_only_for_pedro():
+    from datetime import date
+    from jobtracker.scoring import evaluate, target_company
+    ps = {p["id"]: p["cfg"] for p in build_profiles(cfg2())}
+    j = mk("Process Manager", "Melhoria de processos.", company="Turbogás - Produtora Energética, S.A.")
+    assert target_company(j, ps["pedro"]) == "Turbogás"
+    assert target_company(j, ps["maria"]) == ""
+    assert any("empresa-alvo" in r for r in evaluate(j, ps["pedro"], date(2026, 11, 18)).reasons)
+
+
+def test_company_source_rotates_and_keeps_only_target_companies():
+    from datetime import date
+    from jobtracker.__main__ import company_queries
+    c = cfg2()
+    src = {"companies_from": "target_companies", "per_run": 24}
+    seen, d = [], date(2026, 11, 18)
+    for i in range(3):
+        q, note = company_queries(src, c, date.fromordinal(d.toordinal() + i // 2), i % 2 == 0)
+        assert len(q) == 24 and "de 72" in note
+        seen += q
+    assert len(set(seen)) == 72                         # em 3 recolhas (dia e meio) passa por todas
+

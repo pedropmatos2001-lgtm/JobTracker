@@ -177,36 +177,63 @@ def test_no_bonus_for_associations_but_utilities_count_for_pedro():
     assert evaluate(Job(company="Águas do Norte", **base), cfg, t).score == plain + cfg["sector_bonus"]["points"]
 
 
-def test_marta_only_gets_public_sector_and_human_rights():
+def test_maria_only_gets_public_sector_and_human_rights():
     import yaml
     from datetime import date
     from jobtracker.__main__ import build_profiles
     from jobtracker.models import Job
     from jobtracker.scoring import evaluate
-    marta = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["marta"]["cfg"]
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
     t = date(2026, 11, 15)
     def job(title, desc):
         return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
                    description=desc + " 3 anos de experiência.")
-    assert evaluate(job("Técnica de Proteção de Crianças e Jovens", "Projeto de proteção de crianças em situação de risco."), marta, t).include
-    assert evaluate(job("Project Officer – Gender Equality", "Programa de combate à violência doméstica e igualdade de género."), marta, t).include
-    assert evaluate(job("Policy Officer", "Public policy analysis for the Ministry, public administration reform."), marta, t).include
-    v = evaluate(job("Consultora de Incentivos", "SIFIDE, Portugal 2030, candidaturas a incentivos para empresas."), marta, t)
+    assert evaluate(job("Técnica de Proteção de Crianças e Jovens", "Projeto de proteção de crianças em situação de risco."), maria, t).include
+    assert evaluate(job("Project Officer – Gender Equality", "Programa de combate à violência doméstica e igualdade de género."), maria, t).include
+    assert evaluate(job("Policy Officer", "Public policy analysis for the Ministry, public administration reform."), maria, t).include
+    v = evaluate(job("Consultora de Incentivos", "SIFIDE, Portugal 2030, candidaturas a incentivos para empresas."), maria, t)
     assert not v.include                 # incentivos fiscais ficam de fora (pelo título ou por falta de temas)
 
 
-def test_marta_eu_affairs_and_projects_yes_tax_incentives_no():
+def test_maria_eu_affairs_and_projects_yes_tax_incentives_no():
     import yaml
     from datetime import date
     from jobtracker.__main__ import build_profiles
     from jobtracker.models import Job
     from jobtracker.scoring import evaluate
-    marta = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["marta"]["cfg"]
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
     t = date(2026, 11, 15)
     def job(title, desc):
         return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
                    description=desc + " 3 anos de experiência.")
-    assert evaluate(job("EU Affairs Account Executive", "Public affairs agency, monitoring the European Parliament and the European Commission."), marta, t).include
-    assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), marta, t).include
-    assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), marta, t).include
-    assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), marta, t).include
+    assert evaluate(job("EU Affairs Account Executive", "Public affairs agency, monitoring the European Parliament and the European Commission."), maria, t).include
+    assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), maria, t).include
+    assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), maria, t).include
+    assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), maria, t).include
+
+
+def test_boilerplate_does_not_make_corporate_jobs_reach_maria():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    eeo = (" We are an equal opportunity employer and value diversity. All qualified applicants will receive consideration "
+           "regardless of gender, age or disability. We're committed to gender equality and women in leadership.")
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 3 years of experience." + eeo)
+    for title, desc in [
+        ("HR Business Analyst & Automation", "Analyse HR processes and automate workflows with Power BI and Excel. Stakeholder management."),
+        ("Strategic Digital Consultant – Data & AI", "Drive data strategy for the energy business. Mentor young talent and youth hires."),
+        ("Associate Manager, Rim Data Maintenance", "Regulatory affairs data maintenance, legislation tracking for pharmaceutical products."),
+        ("Information Security Automation Analyst", "Automate security controls; migration of systems to the cloud; protect vulnerable assets."),
+        ("Operational Excellence Manager", "Lean, process improvement and operating model for manufacturing sites."),
+    ]:
+        v = evaluate(job(title, desc), maria, t)
+        assert not v.include, (title, v.themes)
+    ok = evaluate(job("Graduate Public Affairs, Communications and Sustainability",
+                      "Monitor EU affairs and the European Commission, engage with public sector stakeholders."), maria, t)
+    assert ok.include and "Assuntos europeus" in ok.themes

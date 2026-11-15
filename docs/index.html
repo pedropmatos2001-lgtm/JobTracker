@@ -177,7 +177,10 @@
   .job.applied { opacity: .62; }
   .logo { width: 48px; height: 48px; border-radius: 11px; display: grid; place-items: center; background: var(--fill-2); color: var(--label-2);
           font-weight: 700; font-size: 16px; letter-spacing: -.02em; overflow: hidden; box-shadow: inset 0 0 0 .5px var(--sep); }
-  .logo img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .logo.img { background: #fff; }
+  .logo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; border-radius: inherit; }
+  .logo img.fav { padding: 9px; }
+  .mini-logo img { padding: 3px; } .mini-logo img.fav { padding: 6px; }
   .jt { min-width: 0; }
   .title-row { display: flex; align-items: baseline; gap: 8px; }
   .title { font-size: 17px; font-weight: 600; line-height: 1.3; color: var(--label); text-decoration: none; letter-spacing: -.02em; }
@@ -399,6 +402,7 @@ const placeOf = m => (m.location || "").replace(/, Portugal$/, "").split(",")[0]
 const initials = s => (s || "?").replace(/\(.*?\)/g, "").trim().split(/\s+/).slice(0, 2).map(w => w[0]).join("").toUpperCase() || "?";
 let profiles = [], current = "", all = [], data = [], updated = "", tracker = {};
 let page = "home", marks = {}, filters = { v: "novas", tema: "", fonte: "", local: "", dias: "7", q: "" };
+const RENAMED = { marta: "maria" };   // perfis que mudaram de id: ligações e dados antigos passam para o novo
 const markKey = pid => "vagas-candidaturas:" + pid, seenKey = pid => "vagas-vistas:" + pid;
 const day0 = iso => new Date((iso || updated) + "T00:00:00");
 const ageDays = iso => Math.round((day0(updated) - day0(iso)) / 864e5);
@@ -490,14 +494,19 @@ function readUrl() {
   const [pid, pg] = location.hash.slice(1).split("/");
   const q = new URLSearchParams(location.search);
   for (const k of Object.keys(filters)) if (q.get(k)) filters[k] = q.get(k);
-  return { pid, pg: PAGES.some(x => x.id === pg) ? pg : null };
+  return { pid: RENAMED[pid] || pid, pg: PAGES.some(x => x.id === pg) ? pg : null };
 }
 
 // ---------- cartão de vaga ----------
 function logoOf(m, cls = "logo") {
   const d = el("div", cls); d.setAttribute("aria-hidden", "true");
-  if (m.logo) { const img = new Image(); img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer"; img.src = m.logo;
-    img.onerror = () => { d.textContent = initials(m.company); }; d.append(img); }
+  const src = m.logo || (m.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(m.domain)}&sz=128` : "");
+  const fallback = () => { d.classList.remove("img"); d.textContent = initials(m.company); };
+  if (src) { const img = new Image(); img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer";
+    if (!m.logo) img.className = "fav";
+    // ícone do site: o genérico (globo de 16px) quando o site não tem ícone fica como iniciais
+    img.onload = () => { if (!m.logo && img.naturalWidth < 32) fallback(); };
+    img.onerror = fallback; img.src = src; d.classList.add("img"); d.append(img); }
   else d.textContent = initials(m.company);
   return d;
 }
@@ -691,6 +700,12 @@ function renderRules(main) {
   main.append(el("p", "note", "Cada tema encontrado no texto da vaga soma 3 pontos, ou 5 se estiver no título." +
     (r.require_theme ? " Uma vaga sem nenhum destes temas fica sempre de fora." : "")));
   if ((r.bonus || []).length) { main.append(el("h2", "sec", "Bónus")); main.append(group(...r.bonus.map(b => row(b[0].toUpperCase() + b.slice(1), "Pontos extra pelo setor da empresa.")))); }
+  const comps = (r.companies || []).filter(g => g.names.length);
+  if (comps.length) {
+    main.append(el("h2", "sec", "Empresas-alvo"));
+    main.append(group(...comps.map(g => row(g.sector, g.names.join(", "), rv(String(g.names.length))))));
+    main.append(el("p", "note", "Pesquisadas uma a uma no LinkedIn, à vez, e com bónus de setor em qualquer fonte. A vaga tem de bater com os temas na mesma."));
+  }
   main.append(el("h2", "sec", "Filtros"));
   main.append(group(
     row("Pontuação mínima", "Abaixo disto, a vaga não chega até ti.", rv(`${r.min_score ?? "-"} pontos`, true)),
@@ -705,6 +720,10 @@ function renderRules(main) {
 function renderSettings(main) {
   const p = profile();
   header("Definições", "Aspeto da página, recolha e notificações.");
+  main.append(el("h2", "sec", "Perfil"));
+  let cv = null;
+  if (p.cv_url) { cv = el("a", "btn ghost"); cv.href = p.cv_url; cv.target = "_blank"; cv.rel = "noopener"; cv.append(document.createTextNode("Abrir"), svg(I(P.ext, 16))); }
+  main.append(group(row("Currículo", p.cv_url ? `PDF de ${p.name || "este perfil"}, numa ligação privada.` : "Ainda sem currículo associado.", cv)));
   main.append(el("h2", "sec", "Aspeto"));
   const wrap = el("span", "select"); const sel = el("select"); sel.id = "themeSel"; sel.setAttribute("aria-label", "Aspeto");
   for (const [k, lab] of [["light", "Claro"], ["dark", "Escuro"], ["auto", "Igual ao dispositivo"]]) { const o = el("option", null, lab); o.value = k; o.selected = theme() === k; sel.append(o); }
@@ -759,6 +778,10 @@ function select(pid) {
   go(page);
 }
 
+for (const [o, n] of Object.entries(RENAMED)) for (const k of [markKey, seenKey]) {
+  try { const v = localStorage.getItem(k(o)); if (v != null && localStorage.getItem(k(n)) == null) localStorage.setItem(k(n), v); localStorage.removeItem(k(o)); } catch (e) {}
+}
+if (RENAMED[store.get("vagas-perfil", "")]) store.set("vagas-perfil", RENAMED[store.get("vagas-perfil", "")]);
 fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
   updated = d.updated; tracker = d.tracker || {};
   profiles = (d.profiles && d.profiles.length) ? d.profiles : [{ id: "eu", name: "" }];

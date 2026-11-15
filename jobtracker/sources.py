@@ -14,6 +14,8 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 import requests
 
+from . import logos
+
 from .models import Job
 from .scoring import strip_html
 
@@ -600,6 +602,15 @@ def fetch_linkedin(src, session, env, sleep=time.sleep):
                     errors.append(f"«{q}»: página sem vagas (bloqueio?)")
                 break
             fresh = [j for j in page if j.url not in seen]
+            if src.get("_company_rx"):      # pesquisa por empresa: fica só com vagas dessas empresas
+                for j in fresh:
+                    seen.add(j.url)
+                n_page, fresh = len(fresh), [j for j in fresh if re.search(src["_company_rx"], j.company or "", re.I)]
+                out += fresh
+                if not n_page or len(page) < 10:
+                    break
+                start += len(page)
+                continue
             for j in fresh:
                 seen.add(j.url)
             out += fresh
@@ -676,7 +687,8 @@ def parse_jobspy_rows(rows, source="indeed"):
             salary_min=_annual_eur(val(r, "min_amount"), iv, cur),
             salary_max=_annual_eur(val(r, "max_amount"), iv, cur),
             remote=bool(val(r, "is_remote")) or None,
-            logo=str(val(r, "company_logo") or "") if str(val(r, "company_logo") or "").startswith("https://") else ""))
+            logo=str(val(r, "company_logo") or "") if str(val(r, "company_logo") or "").startswith("https://") else "",
+            domain=logos.domain_of(str(val(r, "company_url_direct") or ""))))
     return jobs
 
 

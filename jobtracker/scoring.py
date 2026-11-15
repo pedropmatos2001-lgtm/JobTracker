@@ -1,6 +1,7 @@
 """Filtros e pontuação. Tudo aqui é determinístico e testável sem rede."""
 import html
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
 from typing import Optional
@@ -88,6 +89,39 @@ def _rx(patterns):
     return [re.compile(p, re.I) for p in patterns or []]
 
 
+def company_rx(c):
+    """Regex de uma empresa-alvo: o `match` dado, ou o nome com acentos e hífenes tolerantes."""
+    if isinstance(c, dict) and c.get("match"):
+        return c["match"]
+    name = c["name"] if isinstance(c, dict) else c
+    out = []
+    for ch in name:
+        base = unicodedata.normalize("NFD", ch)[0]
+        if ch in " -":
+            out.append(r"[\s-]?")
+        elif base != ch:
+            out.append(f"[{re.escape(ch)}{re.escape(base)}]")
+        else:
+            out.append(re.escape(ch))
+    return r"\b" + "".join(out) + r"\b"
+
+
+def target_companies(cfg):
+    """[(nome, setor, regex)] das empresas-alvo do perfil."""
+    out = []
+    for g in cfg.get("target_companies") or []:
+        for c in g.get("companies") or []:
+            out.append((c["name"] if isinstance(c, dict) else c, g.get("sector", ""), company_rx(c)))
+    return out
+
+
+def target_company(job, cfg):
+    for name, _, rx in target_companies(cfg):
+        if re.search(rx, job.company or "", re.I):
+            return name
+    return ""
+
+
 def cheap_filter(job: Job, cfg: dict, today: date) -> str:
     """Filtros baratos (antes de ir buscar o detalhe). Devolve motivo de exclusão ou ''."""
     title = job.title or ""
@@ -113,6 +147,21 @@ def cheap_filter(job: Job, cfg: dict, today: date) -> str:
     if d and (today - d).days > max_age:
         return f"publicada há {(today - d).days} dias"
     return ""
+
+
+# Frases-padrão dos anúncios (igualdade de oportunidades, diversidade, privacidade) não dizem nada sobre o
+# trabalho e fazem disparar temas como "igualdade de género" em quase todas as vagas. Saem antes de procurar temas.
+BOILERPLATE = re.compile(
+    r"equal (employment )?opportunit|without regard to|regardless of|irrespective of|discriminat|diversity|diverse workforce|"
+    r"inclusive (workplace|culture|environment)|we('| a)re committed to|we celebrate|we welcome applications|"
+    r"reasonable accommodation|veteran|disabilit|igualdade de oportunidades|independentemente d|sem discrimina|"
+    r"diversidade|inclus(ivo|iva|ão) (e|no) (ambiente|local)|privacy|privacidade|personal data|dados pessoais|"
+    r"benefits|benef[íi]cios|we offer|oferecemos|parental leave|licen[çc]a parental", re.I)
+
+
+def job_text_for_themes(job):
+    parts = re.split(r"(?<=[.!?])\s+|\n+", job.description or "")
+    return f"{job.title}\n" + " ".join(x for x in parts if not BOILERPLATE.search(x))
 
 
 def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
@@ -151,10 +200,11 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     kw = cfg.get("keywords", {})
     score = 0
     strong_pts = 0
+    theme_text = job_text_for_themes(job)
     for item in kw.get("strong", []):
         pat = pat_of(item)
         rx = re.compile(pat, re.I)
-        if rx.search(text):
+        if rx.search(theme_text):
             strong_pts += 3
             if rx.search(job.title):
                 strong_pts += 2
@@ -180,7 +230,11 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         score += org.get("points", 5)
         v.reasons.append("entidade do tipo associação / cluster / CoLAB / centro tecnológico")
     sec = cfg.get("sector_bonus") or {}
-    if sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
+    tc = target_company(job, cfg)
+    if tc:
+        score += sec.get("points", 4)
+        v.reasons.append(f"empresa-alvo ({tc})")
+    elif sec.get("pattern") and re.search(sec["pattern"], f"{job.company}\n{job.title}", re.I):
         score += sec.get("points", 4)
         v.reasons.append("empresa/setor preferido (utilities, energia, água, resíduos)")
 
