@@ -6,6 +6,7 @@ e NÃO foram chamados ao vivo durante o desenvolvimento (a rede do ambiente de
 desenvolvimento estava bloqueada). A primeira execução real mostra, por fonte,
 se respondeu; uma fonte avariada nunca derruba as outras.
 """
+import html
 import re
 import time
 from datetime import datetime, timezone
@@ -439,7 +440,52 @@ def parse_recruitee(data, company, name):
 
 def fetch_recruitee(src, session, env):
     c = src["company"]
-    return parse_recruitee(get_json(session, "GET", f"https://{c}.recruitee.com/api/offers/"), c, src.get("name"))
+    host = src.get("host") or f"{c}.recruitee.com"          # domínio próprio (ex.: careers.unu.edu)
+    data = get_json(session, "GET", f"https://{host}/api/offers/")
+    if src.get("country"):                                  # só ofertas desse país (código ISO, ex.: PT)
+        data = {"offers": [o for o in (data or {}).get("offers", []) or []
+                           if (o.get("country_code") or "").upper() == src["country"].upper()]}
+    return parse_recruitee(data, c, src.get("name"))
+
+
+# ---------- RSS genérico (ex.: ReliefWeb, lista de vagas sem local fixo) ----------
+
+def parse_rss_jobs(xml_text, src):
+    import xml.etree.ElementTree as ET
+    from email.utils import parsedate_to_datetime
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError:
+        raise SourceError("RSS inválido")
+    jobs = []
+    for it in root.iter("item"):
+        title, link = (it.findtext("title") or "").strip(), (it.findtext("link") or "").strip()
+        if not title or not link:
+            continue
+        try:
+            posted = parsedate_to_datetime(it.findtext("pubDate") or "").date().isoformat()
+        except (TypeError, ValueError):
+            posted = ""
+        desc = strip_html(it.findtext("description") or "")
+        raw = it.findtext("description") or ""
+        org = ""                                       # "Organization: X" num bloco do HTML da descrição
+        parts = [x.strip() for x in re.split(r"<[^>]+>", html.unescape(raw)) if x.strip()]
+        for k, part in enumerate(parts):
+            m = re.match(r"(?:Organi[sz]ation|Organiza[çc][ãa]o|Source)\s*:?\s*(.*)$", part, re.I)
+            if m:
+                org = (m.group(1) or (parts[k + 1] if k + 1 < len(parts) else "")).strip()[:80]
+                break
+        jobs.append(Job(source=f"rss:{src['name']}", company=org or src.get("company") or src["name"], title=title,
+                        url=clean_url(link), location=src.get("location", ""), description=desc, posted=posted,
+                        remote=True if src.get("remote") else None))
+    return jobs
+
+
+def fetch_rss(src, session, env):
+    r = http(session, "GET", src["url"])
+    if r.status_code != 200:
+        raise SourceError(f"{urlsplit(src['url']).netloc}: HTTP {r.status_code}")
+    return parse_rss_jobs(r.text, src)
 
 
 # ---------- JSON-LD JobPosting (qualquer página de vaga que o Google indexe) ----------
@@ -921,7 +967,7 @@ FETCHERS = {
     "page_watch": fetch_page_watch,
     "workday": fetch_workday, "personio": fetch_personio, "teamtailor": fetch_teamtailor,
     "recruitee": fetch_recruitee, "linkedin": fetch_linkedin, "indeed": fetch_indeed,
-    "bep": fetch_bep, "ongd": fetch_ongd, "eu_agency": fetch_eu_agency,
+    "bep": fetch_bep, "ongd": fetch_ongd, "eu_agency": fetch_eu_agency, "rss": fetch_rss,
 }
 
 

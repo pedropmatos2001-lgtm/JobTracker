@@ -474,6 +474,37 @@ sources:
     layout: emsa
     url: "https://www.emsa.europa.eu/jobs/vacancies.html"
 
+  # --- Organizações internacionais em Portugal e vagas remotas (sobretudo para a Maria) ---
+  # UNjobs agrega as vagas da ONU e de organizações internacionais com local de trabalho em Portugal
+  # (OIM Lisboa, AKDN, KAICIID, ILO, MSF…). Página simples: as ligações /vacancies/<n> são as vagas.
+  - type: page_watch
+    name: "UNjobs (Portugal)"
+    url: "https://unjobs.org/duty_stations/portugal"
+    url_regex: "/vacancies/\\d"
+    link_regex: "."
+    location: "Portugal"
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # Universidade das Nações Unidas (UNU-EGOV, Guimarães): Recruitee com domínio próprio, só ofertas em Portugal.
+  - type: recruitee
+    name: "UNU (Guimarães)"
+    company: "unu"
+    host: "careers.unu.edu"
+    country: "PT"
+  # ReliefWeb: vagas sem local fixo (remoto, roster) em ONU, ONG e organizações internacionais. RSS público.
+  - type: rss
+    name: "ReliefWeb (remoto)"
+    url: "https://reliefweb.int/jobs/rss.xml?view=unspecified-location"
+    location: "Remote"
+    remote: true
+    title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
+  # EuroBrussels: assuntos europeus, public affairs e ONG em Bruxelas; aqui só a lista de vagas remotas.
+  - type: page_watch
+    name: "EuroBrussels (remoto)"
+    url: "https://www.eurobrussels.com/jobs/remote"
+    url_regex: "/job_display/\\d+"
+    link_regex: "."
+    location: "Remote, Europe"
+
   # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
   # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o
   # último número visto fica em state.json. Madeira e Açores são excluídos automaticamente.

@@ -429,3 +429,16 @@ def test_linkedin_remote_source_sets_filter_and_marks_jobs_remote():
     jobs = sources.fetch_linkedin({"queries": ["EU affairs"], "location": "European Union", "remote": True}, s, {}, sleep=lambda x: None)
     assert jobs and all(j.remote for j in jobs)
     assert s.calls[0][2]["params"]["f_WT"] == "2"
+
+
+def test_rss_jobs_and_recruitee_country_filter():
+    xml = ("<rss><channel><item><title>Policy Officer – Migration and Asylum</title><link>https://reliefweb.int/job/1</link>"
+           "<pubDate>Fri, 13 Nov 2026 10:00:00 +0000</pubDate><description>&lt;p&gt;Organization: IOM&lt;/p&gt; Remote</description></item>"
+           "<item><title></title><link>x</link></item></channel></rss>")
+    jobs = sources.parse_rss_jobs(xml, {"name": "ReliefWeb (remoto)", "location": "Remote", "remote": True})
+    assert [(j.title, j.company, j.remote, j.posted) for j in jobs] == [("Policy Officer – Migration and Asylum", "IOM", True, "2026-11-13")]
+    data = {"offers": [{"title": "EGOV Researcher", "careers_url": "https://careers.unu.edu/o/a", "country_code": "PT", "location": "Guimarães"},
+                       {"title": "Tokyo Officer", "careers_url": "https://careers.unu.edu/o/b", "country_code": "JP"}]}
+    s = FakeSession(Resp(data=data))
+    jobs = sources.fetch_recruitee({"company": "unu", "host": "careers.unu.edu", "country": "PT", "name": "UNU"}, s, {})
+    assert [j.title for j in jobs] == ["EGOV Researcher"] and s.calls[0][1] == "https://careers.unu.edu/api/offers/"
