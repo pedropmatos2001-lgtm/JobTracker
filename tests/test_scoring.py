@@ -210,3 +210,30 @@ def test_maria_eu_affairs_and_projects_yes_tax_incentives_no():
     assert evaluate(job("Project Officer", "Management of EU-funded projects (Erasmus+, Interreg) and international cooperation."), maria, t).include
     assert not evaluate(job("Consultora de Incentivos Fiscais", "SIFIDE e benefícios fiscais para empresas."), maria, t).include
     assert not evaluate(job("Analista", "Candidaturas a incentivos financeiros ao investimento, SIFIDE e crédito fiscal."), maria, t).include
+
+
+def test_boilerplate_does_not_make_corporate_jobs_reach_maria():
+    import yaml
+    from datetime import date
+    from jobtracker.__main__ import build_profiles
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    eeo = (" We are an equal opportunity employer and value diversity. All qualified applicants will receive consideration "
+           "regardless of gender, age or disability. We're committed to gender equality and women in leadership.")
+    def job(title, desc):
+        return Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Portugal", posted="2026-11-14",
+                   description=desc + " 3 years of experience." + eeo)
+    for title, desc in [
+        ("HR Business Analyst & Automation", "Analyse HR processes and automate workflows with Power BI and Excel. Stakeholder management."),
+        ("Strategic Digital Consultant – Data & AI", "Drive data strategy for the energy business. Mentor young talent and youth hires."),
+        ("Associate Manager, Rim Data Maintenance", "Regulatory affairs data maintenance, legislation tracking for pharmaceutical products."),
+        ("Information Security Automation Analyst", "Automate security controls; migration of systems to the cloud; protect vulnerable assets."),
+        ("Operational Excellence Manager", "Lean, process improvement and operating model for manufacturing sites."),
+    ]:
+        v = evaluate(job(title, desc), maria, t)
+        assert not v.include, (title, v.themes)
+    ok = evaluate(job("Graduate Public Affairs, Communications and Sustainability",
+                      "Monitor EU affairs and the European Commission, engage with public sector stakeholders."), maria, t)
+    assert ok.include and "Assuntos europeus" in ok.themes

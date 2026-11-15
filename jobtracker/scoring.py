@@ -149,6 +149,21 @@ def cheap_filter(job: Job, cfg: dict, today: date) -> str:
     return ""
 
 
+# Frases-padrão dos anúncios (igualdade de oportunidades, diversidade, privacidade) não dizem nada sobre o
+# trabalho e fazem disparar temas como "igualdade de género" em quase todas as vagas. Saem antes de procurar temas.
+BOILERPLATE = re.compile(
+    r"equal (employment )?opportunit|without regard to|regardless of|irrespective of|discriminat|diversity|diverse workforce|"
+    r"inclusive (workplace|culture|environment)|we('| a)re committed to|we celebrate|we welcome applications|"
+    r"reasonable accommodation|veteran|disabilit|igualdade de oportunidades|independentemente d|sem discrimina|"
+    r"diversidade|inclus(ivo|iva|ão) (e|no) (ambiente|local)|privacy|privacidade|personal data|dados pessoais|"
+    r"benefits|benef[íi]cios|we offer|oferecemos|parental leave|licen[çc]a parental", re.I)
+
+
+def job_text_for_themes(job):
+    parts = re.split(r"(?<=[.!?])\s+|\n+", job.description or "")
+    return f"{job.title}\n" + " ".join(x for x in parts if not BOILERPLATE.search(x))
+
+
 def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     why = cheap_filter(job, cfg, today)
     if why:
@@ -185,10 +200,11 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     kw = cfg.get("keywords", {})
     score = 0
     strong_pts = 0
+    theme_text = job_text_for_themes(job)
     for item in kw.get("strong", []):
         pat = pat_of(item)
         rx = re.compile(pat, re.I)
-        if rx.search(text):
+        if rx.search(theme_text):
             strong_pts += 3
             if rx.search(job.title):
                 strong_pts += 2
