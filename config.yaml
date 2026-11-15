@@ -513,7 +513,9 @@ sources:
     name: "Plataforma ONGD"
     title_exclude: "farmac|m[ée]dic[oa]s?\\b|doctor|enfermeir|nurse|parteir|midwife|cirurgi|surgeon|anestesi|laborat|log[íi]stic|logistician|supply|aprovisionamento|acquisition officer|procurement|compras|motorista|driver|mec[âa]nic|mechanic|eletricist|electrician|canaliz|water and sanitation|watsan|t[ée]cnic[oa] de (manuten|obra)|contabil|accountant|tesour|\\bfinance officer\\b|\\bIT\\b|inform[áa]tic|nutricion|psic[óo]log|fisioterap|volunt[áa]ri|volunteer"
   # Agências da UE com sede em Lisboa: poucas vagas por ano, mas são instituições europeias.
+  # Desligada: o site da EUDA recusa pedidos automáticos (HTTP 403). Não se contorna; ver à mão em euda.europa.eu/about/jobs_en.
   - type: eu_agency
+    enabled: false
     name: "EUDA (agência europeia, Lisboa)"
     company: "EUDA"
     layout: euda
@@ -541,7 +543,10 @@ sources:
     host: "careers.unu.edu"
     country: "PT"
   # ReliefWeb: vagas sem local fixo (remoto, roster) em ONU, ONG e organizações internacionais. RSS público.
+  # Desligada: o ReliefWeb bloqueia leitores automáticos do RSS (HTTP 202, proteção anti-robô). O caminho certo é a
+  # API oficial (api.reliefweb.int/v2/jobs), que exige pedir um "appname" aprovado em apidoc.reliefweb.int.
   - type: rss
+    enabled: false
     name: "ReliefWeb (remoto)"
     url: "https://reliefweb.int/jobs/rss.xml?view=unspecified-location"
     location: "Remote"
