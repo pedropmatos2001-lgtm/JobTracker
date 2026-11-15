@@ -201,6 +201,10 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
         v.flags.append(f"candidaturas até {job.extra['deadline']}")
 
     v.score = score
+    if cfg.get("require_theme") and not strong_pts:
+        v.include = False
+        v.excluded_by = "sem nenhum dos temas do perfil"
+        return v
     floor_score = (job.extra or {}).get("min_score", cfg.get("min_score", 6))
     if score < floor_score:
         v.include = False
