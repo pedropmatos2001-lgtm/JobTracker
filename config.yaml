@@ -58,7 +58,7 @@ public_repo: true          # repositório público: sem matches, kits nem notas 
 # --- juiz de IA ------------------------------------------------------------
 # Precisa do segredo ANTHROPIC_API_KEY. Sem ele, o tracker usa só as palavras-chave.
 judge:
-  enabled: true
+  enabled: false                   # desligado: o juiz usa a API paga. Sem juiz, só palavras-chave (grátis)
   model: "claude-sonnet-5-5"
   candidate_file: "candidate.example.md"   # só serve de modelo; o perfil real vem do segredo CANDIDATE_PROFILE
   min_fit: 55                      # abaixo disto não te avisa
@@ -103,6 +103,15 @@ sources:
   - type: page_watch
     name: EDP (Lisboa)
     url: "https://jobs.edp.com/search/?q=&locationsearch=Lisboa&locale=pt_PT"
+    link_regex: "."
+    url_regex: "/job/"
+    location: "Lisboa"
+
+  # Lightsource bp (renováveis, Lisboa): mesmo portal SuccessFactors da EDP (/job/Local-Titulo/ID/).
+  # Endereço da pesquisa por analogia com o da EDP; se der 0 ligações, o tracker avisa.
+  - type: page_watch
+    name: Lightsource bp (Lisboa)
+    url: "https://careers.lightsourcebp.com/search/?q=&locationsearch=Lisbon"
     link_regex: "."
     url_regex: "/job/"
     location: "Lisboa"
