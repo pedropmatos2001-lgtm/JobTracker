@@ -24,6 +24,7 @@ locations:
   remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
 
 title_exclude:
+  - "candidatura espont[âa]nea|spontaneous application"
   - "intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate"
   - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
   - "sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de"
@@ -108,13 +109,28 @@ sources:
     location: "Lisboa"
 
   # Lightsource bp (renováveis, Lisboa): mesmo portal SuccessFactors da EDP (/job/Local-Titulo/ID/).
-  # Endereço da pesquisa por analogia com o da EDP; se der 0 ligações, o tracker avisa.
+  # Confirmado em 15 nov. 2026: a pesquisa lista 2 vagas em Lisboa com ligações /job/.
   - type: page_watch
     name: Lightsource bp (Lisboa)
     url: "https://careers.lightsourcebp.com/search/?q=&locationsearch=Lisbon"
     link_regex: "."
     url_regex: "/job/"
     location: "Lisboa"
+
+  # Galp: portal jobs.galp.com (mesmo modelo da EDP; vagas em /job/Local-Titulo/ID/). Confirmado em 15 nov. 2026.
+  - type: page_watch
+    name: Galp (Lisboa)
+    url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Lisboa"
+    link_regex: "."
+    url_regex: "/job/"
+    location: "Lisboa"
+
+  - type: page_watch
+    name: Galp (Porto)
+    url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Porto"
+    link_regex: "."
+    url_regex: "/job/"
+    location: "Porto"
 
   # Porto Ambiente: lista as vagas em PDF na página de recrutamento (confirmado).
   - type: page_watch
