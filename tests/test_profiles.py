@@ -284,3 +284,15 @@ def test_source_limited_to_one_profile(tmp_path):
     assert "pedro" not in sent
     run(c, {}, WED, sp, dd, fetch=lambda s: [both], detail=lambda j: j, send=lambda t, b, cl, p=None: sent.append(p["id"]) or ["ok"])
     assert "pedro" not in sent                                   # nunca fica "por avaliar" para o Pedro
+
+
+def test_same_job_in_general_and_profile_only_sources(tmp_path):
+    """A mesma vaga numa fonte geral e numa fonte só da Maria (em qualquer ordem) não pode rebentar e vale para todos."""
+    for order in (["geral", "maria"], ["maria", "geral"]):
+        sp, dd = paths(tmp_path / order[0])
+        c = cfg2()
+        c["sources"] = [{"type": "x", "name": n, **({"profiles": ["maria"]} if n == "maria" else {})} for n in order]
+        run(c, {}, WED, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=lambda *a, **k: ["ok"])
+        docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
+        titles = {m["title"]: set(m["profiles"]) for m in docs["matches"]}
+        assert "pedro" in titles["Operations Excellence Manager"], order
