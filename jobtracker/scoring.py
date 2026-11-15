@@ -159,7 +159,8 @@ BOILERPLATE = re.compile(
     r"inclusive (workplace|culture|environment)|we('| a)re committed to|we celebrate|we welcome applications|"
     r"reasonable accommodation|veteran|disabilit|igualdade de oportunidades|independentemente d|sem discrimina|"
     r"diversidade|inclus(ivo|iva|ão) (e|no) (ambiente|local)|privacy|privacidade|personal data|dados pessoais|"
-    r"benefits|benef[íi]cios|we offer|oferecemos|parental leave|licen[çc]a parental", re.I)
+    r"benefits|benef[íi]cios|we offer|oferecemos|parental leave|licen[çc]a parental|"
+    r"cofinanciad|co-financiad|co-funded by|cofinanced", re.I)
 
 
 def job_text_for_themes(job):
@@ -204,13 +205,18 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     score = 0
     strong_pts = 0
     theme_text = job_text_for_themes(job)
+    n_themes, title_theme, deep_theme = 0, False, False
     for item in kw.get("strong", []):
         pat = pat_of(item)
         rx = re.compile(pat, re.I)
         if rx.search(theme_text):
             strong_pts += 3
+            n_themes += 1
+            if len({m.group(0).lower() for m in rx.finditer(theme_text)}) >= 2:
+                deep_theme = True                     # o mesmo tema com várias provas diferentes
             if rx.search(job.title):
                 strong_pts += 2
+                title_theme = True
             v.reasons.append(f"+ {label_of(item) or pat}")
             if label_of(item):
                 v.themes.append(label_of(item))
@@ -261,6 +267,12 @@ def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     if cfg.get("require_theme") and not strong_pts:
         v.include = False
         v.excluded_by = "sem nenhum dos temas do perfil"
+        return v
+    # Foco: um tema solto numa frase do anúncio (rodapé "cofinanciado por…", "foresight", "assistance") não chega.
+    # A vaga tem de ter um tema no título ou pelo menos dois temas diferentes na descrição.
+    if cfg.get("theme_focus") and not title_theme and n_themes < 2 and not deep_theme:
+        v.include = False
+        v.excluded_by = "só um tema, e não no título: a vaga não é sobre isso"
         return v
     floor_score = (job.extra or {}).get("min_score", cfg.get("min_score", 6))
     if score < floor_score:

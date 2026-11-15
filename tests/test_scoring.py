@@ -403,3 +403,27 @@ def test_maria_mep_assistant_is_not_excluded():
                      url="u", location="Lisboa, Portugal", posted="2026-11-14",
                      description="Support the MEP on LIBE committee files and EU affairs. 2 years of experience."), maria, date(2026, 11, 15))
     assert v.include, (v.excluded_by, v.themes)
+
+
+def test_maria_needs_theme_in_title_or_two_themes():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 15)
+    def ev(title, desc, company="X"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-14", description=desc + " 2 anos de experiência."), maria, t)
+    for title, desc in [
+        ("Team Lead Roadside Assistance 24/7 Cockpit", "Lead the team; policy assessment of customer cases; stakeholder management."),
+        ("Mechanical Project Manager - Industry", "Projects for clients including the European Commission headquarters building."),
+        ("Administrativa/o - Fiel de Armazém", "Faturação e gestão de stock. Projeto cofinanciado: projetos europeus Portugal 2030."),
+        ("Public Policy Economist (AI Training)", "Train AI models on public policy questions."),
+    ]:
+        assert not ev(title, desc).include, title
+    for title, desc in [
+        ("Public Policy Analyst (Junior)", "Policy analysis for public sector clients."),
+        ("Graduate Public Affairs, Communications and Sustainability", "Stakeholder engagement and communications."),
+        ("Coordenador(a) de Projetos", "ONG de direitos humanos: gestão de projetos europeus e advocacy junto da sociedade civil."),
+    ]:
+        v = ev(title, desc)
+        assert v.include, (title, v.excluded_by, v.themes)
