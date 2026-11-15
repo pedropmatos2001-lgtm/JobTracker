@@ -6,13 +6,13 @@
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
 min_salary_eur: 35000
 
-min_score: 6               # pontuação mínima para avisar
-max_per_alert: 5           # máximo de vagas por notificação
+min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
+max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
 max_age_days: 14           # ignora vagas publicadas há mais tempo
-max_detail_fetches: 60     # limite diário de páginas de detalhe
+max_detail_fetches: 120    # limite por execução de páginas de detalhe (o resto fica para a seguinte)
 alert_after_failures: 3    # avisa se uma fonte falhar N dias seguidos
 heartbeat_weekday: 0       # 0=segunda: se não houver vagas, manda "estou vivo"
-click_url: ""              # opcional: URL da página PWA (GitHub Pages)
+click_url: "https://pedropmatos2001-lgtm.github.io/JobTracker/"   # página com todas as vagas (GitHub Pages)
 
 years:                     # anos de experiência pedidos (extraídos do texto)
   min: 3                   # abaixo disto = provável nível júnior -> exclui
@@ -20,17 +20,32 @@ years:                     # anos de experiência pedidos (extraídos do texto)
   max: 6                   # acima disto -> exclui
 
 locations:
-  allow: "portugal|lisbo|porto|oeiras|amadora|alfragide|cascais|braga|coimbra|set[úu]bal|aveiro|faro|funchal"
+  # só Portugal continental (Madeira e Açores excluídos de propósito)
+  allow: "portugal|lisbo|porto|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
+  exclude: "madeira|funchal|porto santo|a[çc]ores|azores|ponta delgada|angra do hero|horta\\b|\\bRA[AM]\\b"
   remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
 
 title_exclude:
   - "candidatura espont[âa]nea|spontaneous application"
   - "intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate"
   - "software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b"
+  # perfis técnicos / de TI (o teu perfil é transformação, processos, ESG, PMO, fundos):
+  - "\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|arquitet[oa]\\b|scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|infrastructure|infraestrutura"
+  - "\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors"
+  - "product (manager|owner|ops|development)|product management"
+  - "\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar"
+  - "account manager|business development|comercial|customer (service|support)|apoio ao cliente|speaker"
+  - "t[ée]c\\.|t[ée]cnico (de|superior de manuten)|technician|manuten[çc][ãa]o|operador|operator"
   - "sales|vendas|account executive|recruiter|driver|motorista|assistente|t[ée]cnico de"
 
-senior_title: "senior|sénior|manager|lead|head|principal|director|diretor"
+senior_title: "senior|sénior|manager|lead|head|principal|director|diretor|dirigente|chefe de (divis|equipa|projeto)"
 senior_bonus: 2
+
+# Associações, clusters de competitividade, CoLABs, centros tecnológicos e agências: valem pontos
+# extra só pelo tipo de entidade (vê-se no nome da empresa ou no título).
+org_bonus:
+  points: 5                      # associação + 1 tema forte já chega à fasquia
+  pattern: "associa[çc][ãa]o|association|\\bcluster|confedera[çc][ãa]o|federa[çc][ãa]o|\\bBCSD|\\bCoLAB|laborat[óo]rio colaborativo|centro tecnol[óo]gico|centro de interface|ag[êe]ncia (para|de|nacional|regional)|funda[çc][ãa]o|\\bINESC|\\bINEGI|\\bCEiiA|\\bISQ\\b|\\bPRODUTECH|\\bENERGYIN|smart energy|\\bAEP\\b|\\bCIP\\b|\\bAIP\\b|\\bANI\\b|\\bADENE|\\bAPREN|\\bACAP\\b|c[âa]mara de com[ée]rcio|business council|\\bNGO\\b|\\bONG\\b"
 
 keywords:
   strong_cap: 14
@@ -40,9 +55,10 @@ keywords:
     - "operating model|modelo operativo|target operating"
     - "csrd|esg|sustainab|sustentabilidade|decarbon|circular economy|economia circular|climate"
     - "pmo|program(me)? manage|transformation (manager|lead|office)"
-    - "eu funds|fundos europeus|horizon europe|portugal 2030|funding application|candidaturas"
+    - "eu funds|fundos europeus|fundos comunit|horizon europe|portugal 2030|\\bPRR\\b|plano de recupera|funding application|candidaturas? a (fundos|financiamento|programas|projetos)"
+    - "\\bCCDR|comiss[ãa]o de coordena[çc][ãa]o e desenvolvimento regional|desenvolvimento regional|pol[íi]ticas p[úu]blicas|planeamento estrat[ée]gico"
     - "energy transition|transição energética|renewable|renov[áa]vel"
-    - "digital transformation|transformação digital|process improvement|melhoria de processos|automation|automatiza"
+    - "digital transformation|transformação digital|process improvement|melhoria de processos|business transformation"
   medium:                  # +1 cada
     - "\\bAI\\b|artificial intelligence|inteligência artificial|machine learning"
     - "strategy|estratégia"
@@ -72,6 +88,80 @@ radar_weekday: 4                   # sexta-feira: resumo semanal
 # Cada fonte falha sozinha, sem afetar as outras. Para adicionar empresas, vê o README
 # (como descobrir o "token" da página de carreiras de cada uma).
 sources:
+  # --- Agregadores: cobrem TODAS as empresas em Portugal (não precisas de saber que existem) ---
+  # LinkedIn: pesquisa pública (sem login, não usa a tua conta). Cada pesquisa traz até 50 vagas
+  # publicadas nas últimas 72 h; as repetidas entre pesquisas e entre fontes contam uma vez.
+  - type: linkedin
+    name: LinkedIn
+    location: Portugal
+    hours: 72
+    max_per_query: 50
+    queries:
+      - "sustainability"
+      - "sustentabilidade"
+      - "ESG"
+      - "CSRD"
+      - "AI transformation"
+      - "generative AI consultant"
+      - "digital transformation"
+      - "transformação digital"
+      - "process improvement"
+      - "operational excellence"
+      - "business transformation"
+      - "operating model"
+      - "PMO"
+      - "program manager"
+      - "strategy consultant"
+      - "energy transition"
+      - "fundos europeus"
+      - "public sector consultant"
+      - "associação"
+      - "cluster"
+      - "cluster manager"
+      - "laboratório colaborativo"
+      - "centro tecnológico"
+      - "gestor de projetos europeus"
+      - "european projects manager"
+      - "innovation manager"
+
+  # Indeed Portugal (via biblioteca JobSpy). Apanha muitas vagas que não estão no LinkedIn.
+  - type: indeed
+    name: Indeed
+    country: portugal
+    hours: 72
+    max_per_query: 50
+    queries:
+      - "sustainability"
+      - "sustentabilidade"
+      - "ESG"
+      - "transformação digital"
+      - "digital transformation"
+      - "AI"
+      - "melhoria de processos"
+      - "process improvement"
+      - "PMO"
+      - "gestor de projeto"
+      - "consultor estratégia"
+      - "energia renovável"
+      - "fundos europeus"
+      - "associação"
+      - "cluster"
+      - "projetos europeus"
+      - "gestor de inovação"
+
+  # --- Setor público: Bolsa de Emprego Público (governo central, CCDR, institutos, câmaras) ---
+  # Lê cada oferta nova pelo número sequencial. start_id só serve na 1.ª execução; depois o
+  # último número visto fica em state.json. Madeira e Açores são excluídos automaticamente.
+  - type: bep
+    name: BEP (emprego público)
+    start_id: 156850                 # ≈ ofertas publicadas a partir de ~12 nov. 2026
+    careers: "t[ée]cnico superior|dirigente|dire[çc][ãa]o|chefe|especialista|inspe[ct]tor|consultor|cargos n[ãa]o inseridos"
+    # Mobilidade e concursos internos são só para quem já tem vínculo à função pública.
+    # Se um dia tiveres vínculo, apaga esta linha.
+    exclude_types: "mobilidade|concurso interno|regulariza"
+    min_score: 3                     # basta 1 tema forte (CCDR, fundos europeus, sustentabilidade, transformação digital…)
+
+  # --- Empresas específicas (feeds próprios; apanham vagas que às vezes não vão para o LinkedIn) ---
   - type: workable
     name: Greenvolt
     account: greenvolt            # visto em apply.workable.com/greenvolt/...
@@ -118,7 +208,9 @@ sources:
     location: "Lisboa"
 
   # Galp: portal jobs.galp.com (mesmo modelo da EDP; vagas em /job/Local-Titulo/ID/). Confirmado em 15 nov. 2026.
+  # Galp desligada: o portal carrega as vagas por JavaScript (0 ligações). As vagas da Galp chegam pelo LinkedIn.
   - type: page_watch
+    enabled: false
     name: Galp (Lisboa)
     url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Lisboa"
     link_regex: "."
@@ -126,6 +218,7 @@ sources:
     location: "Lisboa"
 
   - type: page_watch
+    enabled: false
     name: Galp (Porto)
     url: "https://jobs.galp.com/search/?createNewAlert=false&q=&locationsearch=Porto"
     link_regex: "."

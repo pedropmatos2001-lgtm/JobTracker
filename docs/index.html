@@ -6,40 +6,120 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Vagas">
 <meta name="theme-color" content="#1E3A2E">
+<meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <title>Vagas</title>
 <style>
-  :root { color-scheme: light dark; --ink:#1b1f1c; --mute:#5d655f; --line:#d9ddd6; --bg:#f7f7f3; --card:#fff; --accent:#1E3A2E; --warn:#8a5a00; }
-  @media (prefers-color-scheme: dark) { :root { --ink:#eef1ec; --mute:#a2aaa3; --line:#2c332e; --bg:#101411; --card:#171c18; --accent:#9fc3ab; --warn:#e0b25a; } }
+  :root { color-scheme: light dark; --ink:#1b1f1c; --mute:#5d655f; --line:#d9ddd6; --bg:#f7f7f3; --card:#fff; --accent:#1E3A2E; --warn:#8a5a00; --new:#1f6f43; --chip:#eceee8; }
+  @media (prefers-color-scheme: dark) { :root { --ink:#eef1ec; --mute:#a2aaa3; --line:#2c332e; --bg:#101411; --card:#171c18; --accent:#9fc3ab; --warn:#e0b25a; --new:#7fd1a2; --chip:#222923; } }
+  * { box-sizing:border-box; }
   body { margin:0; font:16px/1.45 -apple-system, system-ui, sans-serif; background:var(--bg); color:var(--ink); padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom); }
-  header { padding:20px 16px 8px; } h1 { font-size:22px; margin:0 0 2px; } .sub { color:var(--mute); font-size:14px; }
-  ul { list-style:none; margin:0; padding:8px 12px 32px; display:grid; gap:10px; max-width:720px; margin-inline:auto; }
-  li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
-  a { color:var(--accent); font-weight:600; text-decoration:none; } .meta { color:var(--mute); font-size:14px; margin-top:2px; }
-  .flag { color:var(--warn); font-size:13px; margin-top:6px; } .score { float:right; color:var(--mute); font-size:13px; }
+  .wrap { max-width:760px; margin:0 auto; padding:0 16px; }
+  header { padding:20px 0 8px; } h1 { font-size:22px; margin:0 0 2px; } .sub { color:var(--mute); font-size:14px; }
+  .bar { position:sticky; top:0; z-index:2; background:var(--bg); padding:8px 0 10px; border-bottom:1px solid var(--line); display:grid; gap:8px; }
+  input[type=search] { width:100%; font:inherit; padding:9px 12px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); }
+  .chips { display:flex; gap:6px; flex-wrap:wrap; }
+  .chip { font:inherit; font-size:14px; padding:5px 11px; border-radius:999px; border:1px solid var(--line); background:var(--chip); color:var(--ink); cursor:pointer; }
+  .chip[aria-pressed=true] { background:var(--accent); color:var(--bg); border-color:var(--accent); }
+  ul { list-style:none; margin:0; padding:12px 0 40px; display:grid; gap:10px; }
+  li.job { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  li.job.done { opacity:.55; }
+  a.t { color:var(--accent); font-weight:600; text-decoration:none; } a.t:hover { text-decoration:underline; }
+  .meta { color:var(--mute); font-size:14px; margin-top:2px; }
+  .flag { color:var(--warn); font-size:13px; margin-top:6px; }
+  .top { display:flex; gap:8px; align-items:baseline; justify-content:space-between; }
+  .score { color:var(--mute); font-size:13px; white-space:nowrap; }
+  .badge { font-size:12px; font-weight:600; color:var(--new); margin-right:6px; }
+  .acts { display:flex; gap:8px; margin-top:8px; }
+  .acts button { font:inherit; font-size:13px; padding:4px 10px; border-radius:6px; border:1px solid var(--line); background:transparent; color:var(--mute); cursor:pointer; }
   .empty { text-align:center; color:var(--mute); padding:40px 16px; }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 </style>
 </head>
 <body>
-<header><h1>Vagas para ti</h1><div class="sub" id="sub">A carregar…</div></header>
-<ul id="list"></ul>
+<div class="wrap">
+  <header><h1>Vagas para ti</h1><div class="sub" id="sub">A carregar…</div></header>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Filtrar por título, empresa ou local" aria-label="Filtrar vagas">
+    <div class="chips" id="days" role="group" aria-label="Período">
+      <button class="chip" data-d="1">Hoje</button>
+      <button class="chip" data-d="7" aria-pressed="true">7 dias</button>
+      <button class="chip" data-d="30">30 dias</button>
+      <button class="chip" data-d="9999">Tudo</button>
+    </div>
+    <div class="chips" id="srcs" role="group" aria-label="Fonte"></div>
+    <div class="chips" role="group" aria-label="Estado">
+      <button class="chip" id="showDone" aria-pressed="false">Mostrar escondidas e candidatadas</button>
+    </div>
+  </div>
+  <ul id="list"></ul>
+</div>
 <script>
-fetch("jobs.json", {cache:"no-store"}).then(r => r.json()).then(d => {
-  const ms = d.matches || [], ul = document.getElementById("list");
-  document.getElementById("sub").textContent = "Atualizado a " + d.updated + " · " + ms.length + " vaga(s) guardadas";
-  if (!ms.length) { ul.innerHTML = '<li class="empty">Ainda sem vagas que passem a fasquia.</li>'; return; }
-  for (const m of ms) {
-    const li = document.createElement("li");
-    const a = document.createElement("a"); a.href = m.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = m.title;
-    const sc = document.createElement("span"); sc.className = "score"; sc.textContent = m.score + " pts";
+const KEY = "vagas-estado";
+let marks = {};
+try { marks = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(marks)); } catch (e) {} };
+const SRC = { linkedin: "LinkedIn", indeed: "Indeed", page: "Sites de empresas", workable: "Sites de empresas",
+  greenhouse: "Sites de empresas", lever: "Sites de empresas", smartrecruiters: "Sites de empresas", workday: "Sites de empresas",
+  personio: "Sites de empresas", teamtailor: "Sites de empresas", recruitee: "Sites de empresas", remotive: "Remoto" };
+const srcOf = m => SRC[(m.source || "").split(":")[0]] || "Outras";
+let data = [], updated = "", days = 7, src = "Todas", showDone = false;
+
+function daysAgo(iso) { const d = new Date(iso + "T00:00:00"); return Math.floor((new Date(updated + "T00:00:00") - d) / 864e5); }
+
+function render() {
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const ul = document.getElementById("list"); ul.textContent = "";
+  const rows = data.filter(m => daysAgo(m.first_seen) < days)
+    .filter(m => src === "Todas" || srcOf(m) === src)
+    .filter(m => showDone || !marks[m.url])
+    .filter(m => !q || [m.title, m.company, m.location].join(" ").toLowerCase().includes(q));
+  if (!rows.length) { const li = document.createElement("li"); li.className = "empty"; li.textContent = data.length ? "Nada com estes filtros." : "Ainda sem vagas que passem a fasquia."; ul.append(li); return; }
+  for (const m of rows) {
+    const li = document.createElement("li"); li.className = "job" + (marks[m.url] ? " done" : "");
+    const top = document.createElement("div"); top.className = "top";
+    const left = document.createElement("div");
+    if (m.first_seen === updated) { const b = document.createElement("span"); b.className = "badge"; b.textContent = "NOVA"; left.append(b); }
+    const a = document.createElement("a"); a.className = "t"; a.href = m.url; a.target = "_blank"; a.rel = "noopener"; a.textContent = m.title; left.append(a);
+    const sc = document.createElement("span"); sc.className = "score"; sc.textContent = m.fit != null ? "fit " + m.fit : m.score + " pts";
+    top.append(left, sc);
     const meta = document.createElement("div"); meta.className = "meta";
-    meta.textContent = [m.company, m.location, "visto a " + m.first_seen].filter(Boolean).join(" · ");
-    li.append(sc, a, meta);
+    meta.textContent = [m.company, m.location, srcOf(m), "vista a " + m.first_seen].filter(Boolean).join(" · ");
+    li.append(top, meta);
     if (m.flags && m.flags.length) { const f = document.createElement("div"); f.className = "flag"; f.textContent = "⚠ " + m.flags.slice(0, 3).join("; "); li.append(f); }
-    ul.append(li);
+    const acts = document.createElement("div"); acts.className = "acts";
+    const mk = (label, val) => { const b = document.createElement("button"); b.textContent = marks[m.url] === val ? "Desfazer" : label;
+      b.onclick = () => { if (marks[m.url] === val) delete marks[m.url]; else marks[m.url] = val; save(); render(); }; return b; };
+    acts.append(mk("Candidatei-me", "aplicada"), mk("Esconder", "escondida"));
+    if (marks[m.url]) { const s = document.createElement("span"); s.className = "score"; s.textContent = marks[m.url]; acts.append(s); }
+    li.append(acts); ul.append(li);
   }
+}
+
+function chipGroup(id, onPick) {
+  document.getElementById(id).addEventListener("click", e => {
+    const b = e.target.closest(".chip"); if (!b) return;
+    for (const c of e.currentTarget.querySelectorAll(".chip")) c.setAttribute("aria-pressed", c === b);
+    onPick(b); render();
+  });
+}
+
+fetch("jobs.json", { cache: "no-store" }).then(r => r.json()).then(d => {
+  data = (d.matches || []).slice().sort((a, b) => (b.first_seen || "").localeCompare(a.first_seen || "") || (b.fit ?? b.score * 5) - (a.fit ?? a.score * 5));
+  updated = d.updated;
+  const today = data.filter(m => m.first_seen === updated).length;
+  document.getElementById("sub").textContent = `Atualizado a ${updated} · ${today} nova(s) hoje · ${data.length} guardada(s)`;
+  const names = ["Todas", ...new Set(data.map(srcOf))];
+  const box = document.getElementById("srcs");
+  for (const n of names) { const b = document.createElement("button"); b.className = "chip"; b.textContent = n; b.setAttribute("aria-pressed", n === "Todas"); box.append(b); }
+  render();
 }).catch(() => { document.getElementById("sub").textContent = "Sem dados ainda: corre o fluxo uma vez."; });
+
+chipGroup("days", b => { days = +b.dataset.d; });
+chipGroup("srcs", b => { src = b.textContent; });
+document.getElementById("showDone").onclick = e => { showDone = !showDone; e.currentTarget.setAttribute("aria-pressed", showDone); render(); };
+document.getElementById("q").addEventListener("input", render);
 </script>
 </body>
 </html>

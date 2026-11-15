@@ -132,3 +132,48 @@ def test_partial_and_unverified_flags(cfg):
 
 def test_strip_html_handles_escaped_markup():
     assert strip_html("&lt;p&gt;Hello &amp;amp; welcome&lt;/p&gt;") == "Hello & welcome"
+
+
+def test_islands_excluded_even_if_portugal():
+    import yaml
+    from datetime import date
+    from jobtracker.models import Job
+    from jobtracker.scoring import cheap_filter
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    j = Job(source="linkedin", company="X", title="ESG Manager", url="u", location="Funchal, Madeira, Portugal")
+    assert "local excluído" in cheap_filter(j, cfg, date(2026, 11, 15))
+    j.location = "Ponta Delgada, Azores, Portugal"
+    assert "local excluído" in cheap_filter(j, cfg, date(2026, 11, 15))
+    j.location = "Évora, Portugal"
+    assert cheap_filter(j, cfg, date(2026, 11, 15)) == ""
+
+
+def test_bep_ccdr_offer_passes_with_one_strong_theme():
+    import yaml
+    from datetime import date
+    from jobtracker import sources
+    from jobtracker.scoring import evaluate
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    src = next(s for s in cfg["sources"] if s["type"] == "bep")
+    with open("tests/fixtures/bep_detail.html", encoding="utf-8") as f:
+        d = sources.parse_bep_detail(f.read(), 1)
+    v = evaluate(sources.bep_to_job(d, src, today=date(2026, 11, 15)), cfg, date(2026, 11, 15))
+    assert v.include and any("remuneração" in x for x in v.flags) and any("candidaturas até" in x for x in v.flags)
+
+
+def test_associations_and_clusters_get_bonus():
+    import yaml
+    from datetime import date
+    from jobtracker.models import Job
+    from jobtracker.scoring import evaluate
+    cfg = yaml.safe_load(open("config.yaml", encoding="utf-8"))
+    desc = "Gestão de projetos europeus Horizon Europe. 4 anos de experiência."
+    base = dict(source="linkedin", title="Gestor de Projetos", url="u", location="Porto, Portugal",
+                posted="2026-11-14", description=desc)
+    t = date(2026, 11, 15)
+    plain = evaluate(Job(company="Empresa Qualquer", **base), cfg, t)
+    for org in ["Associação Smart Energy", "PRODUTECH - Cluster das Tecnologias de Produção",
+                "BCSD Portugal", "VORTEX CoLAB", "AEP - Associação Empresarial de Portugal"]:
+        v = evaluate(Job(company=org, **base), cfg, t)
+        assert v.score == plain.score + cfg["org_bonus"]["points"], org
+    assert not plain.include and evaluate(Job(company="BCSD Portugal", **base), cfg, t).include

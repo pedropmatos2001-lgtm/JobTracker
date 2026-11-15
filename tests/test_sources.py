@@ -259,3 +259,136 @@ def test_http_backs_off_on_429(monkeypatch):
             return R(429 if len(calls) < 3 else 200)
     r = sources.http(S(), "GET", "https://x.test/")
     assert r.status_code == 200 and len(calls) == 3 and min(waits) >= 8
+
+
+# ---------- LinkedIn ----------
+
+def _fx(name):
+    with open(f"tests/fixtures/{name}", encoding="utf-8") as f:
+        return f.read()
+
+
+def test_parse_linkedin_cards():
+    a, b = sources.parse_linkedin_cards(_fx("linkedin_search.html"))
+    assert a.title == "Sustainability Manager" and a.company == "ACME Energia"
+    assert a.url == "https://www.linkedin.com/jobs/view/4051234567" and a.location == "Lisbon, Lisbon, Portugal"
+    assert a.posted == "2026-11-14" and a.extra == {"linkedin_id": "4051234567"} and not a.description
+    assert b.url.endswith("/4059999999") and b.remote is True     # id tirado do endereço quando falta o urn
+    assert sources.needs_detail(a)
+
+
+def test_parse_linkedin_detail_and_closed():
+    desc, closed, level = sources.parse_linkedin_detail(_fx("linkedin_detail.html"))
+    assert "4+ years of experience" in desc and "CSRD" in desc and not closed and level == "Mid-Senior level"
+    _, closed, _ = sources.parse_linkedin_detail('<figure class="closed-job"><figcaption>No longer accepting applications</figcaption></figure>')
+    assert closed
+
+
+def test_fetch_linkedin_paginates_and_dedupes():
+    page = _fx("linkedin_search.html")
+    s = FakeSession(Resp(text=page), Resp(text=page))         # 2 pesquisas devolvem as mesmas 2 vagas
+    jobs = sources.fetch_linkedin({"queries": ["esg", "pmo"]}, s, {}, sleep=lambda x: None)
+    assert len(jobs) == 2 and "f_TPR=" not in s.calls[0][1]    # parâmetros vão em params, não no URL
+    assert jobs.note == ""
+
+
+def test_fetch_linkedin_keeps_partial_results_when_throttled():
+    page = _fx("linkedin_search.html")
+    s = FakeSession(Resp(text=page), Resp(status=429), Resp(status=429))
+    jobs = sources.fetch_linkedin({"queries": ["esg", "pmo"]}, s, {}, sleep=lambda x: None)
+    assert len(jobs) == 2 and "parcial" in jobs.note
+
+
+def test_fetch_linkedin_all_blocked_is_an_error():
+    s = FakeSession(Resp(status=429), Resp(status=429), Resp(status=429), Resp(status=429))
+    with pytest.raises(sources.SourceError):
+        sources.fetch_linkedin({"queries": ["esg", "pmo", "x"]}, s, {}, sleep=lambda x: None)
+
+
+def test_fetch_linkedin_detail():
+    j = sources.parse_linkedin_cards(_fx("linkedin_search.html"))[0]
+    out = sources.fetch_linkedin_detail(j, FakeSession(Resp(text=_fx("linkedin_detail.html"))), sleep=lambda x: None)
+    assert "CSRD" in out.description and out.extra["level"] == "Mid-Senior level"
+    j2 = sources.parse_linkedin_cards(_fx("linkedin_search.html"))[0]
+    assert sources.fetch_linkedin_detail(j2, FakeSession(Resp(status=404), Resp(status=404)), sleep=lambda x: None) is None
+    j3 = sources.parse_linkedin_cards(_fx("linkedin_search.html"))[0]
+    with pytest.raises(sources.SourceError):      # página sem descrição = bloqueio, não "fechada"
+        sources.fetch_linkedin_detail(j3, FakeSession(Resp(text="<html>login</html>")), sleep=lambda x: None)
+
+
+# ---------- Indeed (JobSpy) ----------
+
+def test_parse_jobspy_rows():
+    nan = float("nan")
+    rows = [{"job_url": "https://pt.indeed.com/viewjob?jk=abc", "title": "Gestor de Projeto ESG", "company": "Gama",
+             "location": "Porto, Portugal", "date_posted": "2026-11-13", "description": "**3 anos de experiência**",
+             "interval": "monthly", "min_amount": 2500.0, "max_amount": 3000.0, "currency": "EUR", "is_remote": False},
+            {"job_url": "https://pt.indeed.com/viewjob?jk=def", "title": "Analista", "company": nan, "location": nan,
+             "date_posted": nan, "description": nan, "interval": nan, "min_amount": nan, "max_amount": nan,
+             "currency": nan, "is_remote": nan},
+            {"job_url": nan, "title": "sem link"}]
+    a, b = sources.parse_jobspy_rows(rows)
+    assert a.salary_min == 35000 and a.salary_max == 42000 and a.posted == "2026-11-13" and a.remote is None
+    assert b.company == "" and b.salary_min is None and b.description == ""
+
+
+def test_indeed_skipped_without_library(monkeypatch):
+    import builtins
+    real = builtins.__import__
+    def fake(name, *a, **k):
+        if name == "jobspy":
+            raise ImportError("no")
+        return real(name, *a, **k)
+    monkeypatch.setattr(builtins, "__import__", fake)
+    with pytest.raises(sources.SourceSkipped):
+        sources.fetch_indeed({"queries": ["x"]}, None, {})
+
+
+# ---------- BEP ----------
+
+BEP_SRC = {"name": "BEP", "start_id": 1000, "careers": "t[ée]cnico superior|dire[çc][ãa]o",
+           "exclude_types": "mobilidade|concurso interno", "min_score": 3, "lookback": 0, "max_misses": 3}
+
+
+def test_parse_bep_detail_to_job():
+    from datetime import date
+    d = sources.parse_bep_detail(_fx("bep_detail.html"), 1001)
+    j = sources.bep_to_job(d, BEP_SRC, today=date(2026, 11, 15))
+    assert j.title == "Técnico Superior — Gestão de fundos europeus do Portugal 2030"
+    assert j.company.startswith("Comissão de Coordenação") and j.location == "Porto, Porto, Portugal"
+    assert j.posted == "2026-11-13" and j.extra["deadline"] == "2026-11-27" and "excluded" not in j.extra
+    assert "Licenciatura" in j.description and j.extra["min_score"] == 3
+    assert sources.parse_bep_detail("<html>erro</html>", 1) is None
+
+
+def test_bep_excludes_islands_internal_and_expired():
+    from datetime import date
+    base = sources.parse_bep_detail(_fx("bep_detail.html"), 1001)
+    t = date(2026, 11, 15)
+    assert "continente" in sources.bep_to_job({**base, "distrito": "RAM - Ilha da Madeira"}, BEP_SRC, t).extra["excluded"]
+    assert "tipo" in sources.bep_to_job({**base, "tipo": "Mobilidade Interna"}, BEP_SRC, t).extra["excluded"]
+    assert "prazo" in sources.bep_to_job({**base, "limite": "2026-11-01"}, BEP_SRC, t).extra["excluded"]
+    assert "carreira" in sources.bep_to_job({**base, "carreira": "Assistente Operacional", "categoria": ""}, BEP_SRC, t).extra["excluded"]
+
+
+class BepResp(Resp):
+    def __init__(self, ok, cod):
+        super().__init__(200, text=_fx("bep_detail.html") if ok else "<html>Erro</html>")
+        self.url = sources.BEP_DETAIL.format(cod) if ok else "https://www.bep.gov.pt/pages/erros/ErroGenerico.aspx"
+
+
+def test_fetch_bep_scans_until_misses_and_moves_cursor():
+    # 1001 existe, 1002 ainda não, 1003 existe (buraco na numeração), 1004-1006 não -> pára
+    s = FakeSession(BepResp(True, 1001), BepResp(False, 1002), BepResp(True, 1003),
+                    BepResp(False, 1004), BepResp(False, 1005), BepResp(False, 1006))
+    jobs = sources.fetch_bep(BEP_SRC, s, {}, sleep=lambda x: None)
+    assert [j.url.rsplit("=", 1)[1] for j in jobs] == ["1001", "1003"] and jobs.cursor == {"last": 1003}
+    assert len(s.calls) == 6
+
+
+def test_fetch_bep_skips_known_and_uses_cursor():
+    src = {**BEP_SRC, "_cursor": {"last": 1003}, "lookback": 2,
+           "_known": {sources.BEP_DETAIL.format(1003)}}
+    s = FakeSession(BepResp(True, 1002), BepResp(False, 1004), BepResp(False, 1005), BepResp(False, 1006))
+    jobs = sources.fetch_bep(src, s, {}, sleep=lambda x: None)
+    assert len(jobs) == 1 and jobs.cursor == {"last": 1003} and len(s.calls) == 4   # 1003 não foi pedida

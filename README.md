@@ -1,15 +1,40 @@
 # Tracker de vagas
 
-Corre sozinho todas as manhãs (dias úteis), lê fontes estruturadas, filtra pelo teu perfil e manda uma notificação push para o iPhone (e, se quiseres, email). Não depende do Claude nem de ti teres o portátil ligado.
+Corre sozinho **duas vezes por dia, todos os dias** (≈07:15 e ≈16:15 UTC) no GitHub, procura vagas em **todo o Portugal continental**, filtra pelo teu perfil e:
 
-## Como funciona (6 passos)
+- manda uma **notificação push** (ntfy) com as melhores vagas novas;
+- atualiza uma **página com todas as vagas** (filtros por fonte e data, marcar "candidatei-me"/"esconder").
 
-1. **Recolher**: cada fonte tem um adaptador (Workable, Greenhouse, Lever, SmartRecruiters, Adzuna, Remotive, páginas sem API). Uma fonte avariada nunca derruba as outras.
-2. **Deduplicar**: `state/state.json` guarda o que já viu. Só vagas novas continuam.
-3. **Filtro barato**: título (sem estágios, júnior, engenharia de software), local (Portugal ou remoto elegível), idade (≤ 14 dias).
-4. **Detalhe**: para as que sobram, vai buscar a descrição completa. Se a fonte responder 404, a vaga está fechada e é descartada.
-5. **Pontuação** (em `config.yaml`): palavras-chave do teu CV, nível acima (senior/manager/lead), anos de experiência pedidos (exclui < 3 e > 6; avisa a partir de 5), línguas que não falas (neerlandês, alemão, francês), salário publicado abaixo de 35.000 €.
-6. **Avisar**: máximo 5 vagas por mensagem, com os riscos a confirmar. Se uma fonte falhar 3 dias seguidos, avisa. À segunda-feira, se não houver nada, manda "estou vivo" com o estado das fontes.
+Não depende do Claude nem do teu portátil ligado.
+
+## De onde vêm as vagas
+
+| Fonte | O que cobre | Precisas de escolher empresas? |
+|---|---|---|
+| **LinkedIn** (pesquisa pública, sem login) | quase todas as empresas que recrutam em Portugal | Não |
+| **Indeed Portugal** (biblioteca JobSpy) | muitas vagas que não estão no LinkedIn | Não |
+| **BEP – Bolsa de Emprego Público** | governo central, CCDR, institutos públicos, câmaras | Não |
+| Sites de empresas (EDP, Galp, Greenvolt, …) | vagas que às vezes não vão para o LinkedIn | Sim (opcional) |
+| Remotive | remoto para a Europa | Não |
+
+O LinkedIn é lido pelas páginas públicas que o LinkedIn mostra a quem não tem sessão: **não usa a tua conta**, por isso não há risco de restrição. Se o LinkedIn limitar pedidos vindos do GitHub, o tracker fica com o que já recolheu e avalia o resto só pelo título (avisa "descrição parcial").
+
+Madeira e Açores ficam de fora (`locations.exclude` no `config.yaml`). Na BEP só passam carreiras de técnico superior e cargos de direção, e ficam fora mobilidades e concursos internos (exigem vínculo à função pública). Para mudar isto, edita o bloco `bep` no `config.yaml`.
+
+## Como funciona
+
+1. **Recolher** de todas as fontes. Uma fonte avariada nunca derruba as outras.
+2. **Deduplicar**: pelo endereço e pela dupla empresa + título (a mesma vaga no LinkedIn e no Indeed conta uma vez).
+3. **Filtro barato**: título (sem estágios, júnior, engenharia de software…), local, idade (≤ 14 dias).
+4. **Detalhe**: descrição completa das mais prometedoras primeiro (até 120 por execução; o resto fica para a seguinte).
+5. **Pontuação** (`config.yaml`): palavras-chave do teu perfil, nível, anos pedidos, línguas, salário.
+6. **Avisar**: até 6 vagas na notificação; as restantes ficam na página.
+
+## Página com todas as vagas (GitHub Pages)
+
+Uma vez só: no repositório, *Settings → Pages → Build and deployment → Deploy from a branch → `main` / `/docs` → Save*. A página fica em `https://pedropmatos2001-lgtm.github.io/JobTracker/` (já configurada em `click_url`: tocar na notificação abre-a). No iPhone, abre no Safari → Partilhar → "Adicionar ao ecrã principal".
+
+A página só mostra dados públicos das vagas (título, empresa, local, ligação). O teu perfil, salário e notas do juiz nunca vão para o repositório. As marcações "candidatei-me"/"esconder" ficam guardadas só no teu telemóvel.
 
 ## Instalar (15 minutos)
 
@@ -17,10 +42,9 @@ Corre sozinho todas as manhãs (dias úteis), lê fontes estruturadas, filtra pe
 2. **iPhone**: instala a app **ntfy** (App Store) e subscreve um tópico com nome impossível de adivinhar, por exemplo `vagas-pedro-7f3k9x2q`. Quem souber o nome lê as mensagens; trata-o como uma palavra-passe.
 3. No repositório: *Settings → Secrets and variables → Actions → New repository secret*:
    - `NTFY_TOPIC` = o nome do tópico (obrigatório para o push).
-   - `ADZUNA_APP_ID` e `ADZUNA_APP_KEY` = chaves gratuitas em developer.adzuna.com (sem elas a fonte Adzuna fica "ignorada").
    - Email, se quiseres: `SMTP_HOST`, `SMTP_PORT` (465), `SMTP_USER`, `SMTP_PASS` (no Gmail, uma palavra-passe de aplicação), `EMAIL_TO`.
 4. Separador *Actions* → "Vagas diárias" → **Run workflow**. Vê os registos: cada fonte diz `ok, N vagas` ou o erro.
-5. Opcional, página no ecrã principal do iPhone: *Settings → Pages* → ramo `main`, pasta `/docs`. Isto exige repositório público (ou plano pago), e a lista de critérios em `config.yaml` ficaria visível; se não quiseres isso, ignora este passo e usa só o ntfy.
+5. Página com todas as vagas: ver secção acima.
 
 ## Acrescentar empresas
 
@@ -42,10 +66,11 @@ Em `page_watch`, cada ligação nova é aberta e lida pela marcação JSON-LD `J
 
 ## Limites (a ler)
 
-- **Os formatos das APIs foram escritos pela documentação pública e não foram chamados ao vivo** (o ambiente onde isto foi construído não tinha acesso a essas páginas). Os 76 testes usam respostas simuladas. A primeira execução real é o teste verdadeiro; se uma fonte vier com erro, o registo diz qual e porquê.
-- **LinkedIn não está incluído**: exige sessão e proíbe recolha automática. Usa os alertas do próprio LinkedIn como complemento.
+- **Os formatos das APIs foram escritos pela documentação pública e não foram chamados ao vivo** (o ambiente onde isto foi construído não tinha acesso a essas páginas). Os testes usam respostas simuladas. A primeira execução real é o teste verdadeiro; se uma fonte vier com erro, o registo diz qual e porquê.
+- **LinkedIn e Indeed**: são lidos sem conta, mas os termos de utilização destes sites não preveem recolha automática e podem mudar o formato ou limitar pedidos sem aviso. O registo de cada execução diz quantas vagas veio de cada um; se uma fonte falhar 3 vezes seguidas, recebes aviso.
+- **BEP**: não tem API; o tracker lê cada oferta pelo número sequencial. Se a BEP mudar o endereço das ofertas, a fonte começa a falhar e recebes aviso.
 - Muitas empresas grandes (Big 4, Siemens, EDP) usam sistemas sem API pública. Para essas, `page_watch` funciona só se a página não depender de JavaScript; caso contrário avisa que devolveu 0 ligações.
-- O Adzuna só devolve um excerto da descrição, por isso anos e línguas podem não ser detetados; essas vagas levam o aviso "descrição parcial".
+- O Adzuna não cobre Portugal e está desligado (o adaptador fica no código).
 - Quase nenhuma vaga publica salário. Vagas sem salário passam com o aviso "sem salário indicado".
 
 ## Exemplos de fontes novas (copia para `sources:` do `config.yaml` só depois de confirmares o endereço)

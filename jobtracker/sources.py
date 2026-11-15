@@ -28,6 +28,20 @@ class SourceSkipped(Exception):
     """Fonte desligada de propósito (ex.: falta uma chave)."""
 
 
+class JobList(list):
+    """Lista de vagas com uma nota opcional (ex.: 'parcial: 2 pesquisas falharam') e, para fontes
+    que leem por números sequenciais (BEP), o cursor a guardar no estado."""
+    note = ""
+    cursor = None
+
+
+def with_errors(jobs, errors):
+    out = JobList(jobs)
+    if errors:
+        out.note = f"parcial, {len(errors)} pesquisa(s) falharam ({errors[0]})"
+    return out
+
+
 # ---------- utilitários ----------
 
 def clean_url(u: str) -> str:
@@ -49,11 +63,11 @@ def iso(x) -> str:
     return m.group(0) if m else ""
 
 
-def http(session, method, url, **kw):
+def http(session, method, url, tries=4, **kw):
     kw.setdefault("timeout", 25)
     kw["headers"] = {**UA, **kw.get("headers", {})}
     last = None
-    for i in range(4):
+    for i in range(tries):
         wait = 2 * (i + 1)
         try:
             r = session.request(method, url, **kw)
@@ -70,7 +84,7 @@ def http(session, method, url, **kw):
                     wait = max(wait, 8 * (i + 1))
             else:
                 return r
-        if i < 3:
+        if i < tries - 1:
             time.sleep(wait)
     raise SourceError(f"{urlsplit(url).netloc}: {last}")
 
@@ -489,12 +503,316 @@ def apply_jsonld(job, d, today=None):
     return job
 
 
+# ---------- LinkedIn (pesquisa pública, sem login: cobre todas as empresas) ----------
+# Usa as páginas "guest" que o LinkedIn serve a quem não tem sessão (as mesmas que o Google indexa).
+# Não usa a tua conta, por isso não há risco de a conta ser restringida. O LinkedIn pode limitar
+# pedidos a partir dos servidores do GitHub (HTTP 429): nesse caso fica com o que já recolheu.
+
+LI_BASE = "https://www.linkedin.com"
+LI_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Accept-Language": "pt-PT,pt;q=0.9,en;q=0.8",
+}
+LI_EMPTY = "<!DOCTYPE html>\n\n<!---->"
+
+
+def _soup(html_text):
+    from bs4 import BeautifulSoup
+    return BeautifulSoup(html_text or "", "html.parser")
+
+
+def parse_linkedin_cards(html_text):
+    """Cartões da página de resultados -> list[Job] (sem descrição; vai-se buscar no detalhe)."""
+    jobs = []
+    for card in _soup(html_text).find_all(class_="base-search-card"):
+        jid = str(card.get("data-entity-urn", "")).split(":")[-1]
+        if not jid.isdigit():
+            a = card.find("a", class_="base-card__full-link", href=True)
+            m = re.search(r"-(\d{6,})(?:\?|/|$)", a["href"]) if a else None
+            jid = m.group(1) if m else ""
+        t = card.find(class_="base-search-card__title")
+        c = card.find(class_="base-search-card__subtitle")
+        if not jid or t is None:
+            continue
+        loc = card.find(class_="job-search-card__location")
+        tm = card.find("time")
+        title = t.get_text(" ", strip=True)
+        where = loc.get_text(" ", strip=True) if loc else ""
+        jobs.append(Job(
+            source="linkedin", company=c.get_text(" ", strip=True) if c else "", title=title,
+            url=f"{LI_BASE}/jobs/view/{jid}", location=where,
+            posted=iso(tm.get("datetime")) if tm else "",
+            remote=bool(re.search(r"remot|teletrabalho", f"{title} {where}", re.I)) or None,
+            extra={"linkedin_id": jid}))
+    return jobs
+
+
+def parse_linkedin_detail(html_text):
+    """(descrição, fechada?, nível) a partir da página da vaga."""
+    soup = _soup(html_text)
+    closed = bool(soup.find(class_=re.compile("closed-job")) or
+                  re.search(r"No longer accepting applications|Já não aceita candidaturas", html_text or "", re.I))
+    div = soup.find(class_="show-more-less-html__markup") or soup.find(class_="description__text")
+    desc = div.get_text(" ", strip=True) if div else ""
+    level = ""
+    for li in soup.find_all(class_="description__job-criteria-item"):
+        h = li.find(class_="description__job-criteria-subheader")
+        v = li.find(class_="description__job-criteria-text")
+        if h and v and re.search(r"seniority|antiguidade|nível", h.get_text(), re.I):
+            level = v.get_text(" ", strip=True)
+    return " ".join(desc.split()), closed, level
+
+
+def fetch_linkedin(src, session, env, sleep=time.sleep):
+    queries = src.get("queries") or [src.get("search", "")]
+    hours = int(src.get("hours", 72))
+    max_per_query = int(src.get("max_per_query", 50))
+    out, seen, errors = [], set(), []
+    for qi, q in enumerate(queries):
+        start = 0
+        while start < max_per_query:
+            if qi or start:
+                sleep(float(src.get("delay", 2.0)))
+            params = {"keywords": q, "location": src.get("location", "Portugal"),
+                      "f_TPR": f"r{hours * 3600}", "start": start}
+            if src.get("geo_id"):
+                params["geoId"] = src["geo_id"]
+            try:
+                r = http(session, "GET", f"{LI_BASE}/jobs-guest/jobs/api/seeMoreJobPostings/search",
+                         params=params, headers=LI_HEADERS, tries=2)
+            except SourceError as e:
+                errors.append(f"«{q}»: {e}")
+                break
+            if r.status_code != 200:
+                errors.append(f"«{q}»: HTTP {r.status_code}")
+                break
+            page = parse_linkedin_cards(r.text)
+            if not page:
+                if r.text.strip() and r.text.strip() != LI_EMPTY.strip() and not start:
+                    errors.append(f"«{q}»: página sem vagas (bloqueio?)")
+                break
+            fresh = [j for j in page if j.url not in seen]
+            for j in fresh:
+                seen.add(j.url)
+            out += fresh
+            if not fresh or len(page) < 10:
+                break
+            start += len(page)
+        # bloqueado logo à cabeça em 2 pesquisas seguidas: pára para não piorar o limite
+        if len(errors) >= 2 and not out:
+            break
+    if errors and not out:
+        raise SourceError("; ".join(errors[:3]))
+    return with_errors(out, errors)
+
+
+def fetch_linkedin_detail(job, session, sleep=time.sleep):
+    jid = job.extra["linkedin_id"]
+    sleep(1.5)                                   # ritmo de pessoa, para não levar com limites
+    r = http(session, "GET", f"{LI_BASE}/jobs-guest/jobs/api/jobPosting/{jid}", headers=LI_HEADERS, tries=2)
+    if r.status_code == 404:                     # confirma na página normal antes de dar como fechada
+        r = http(session, "GET", f"{LI_BASE}/jobs/view/{jid}", headers=LI_HEADERS, tries=2)
+        if r.status_code in (404, 410):
+            return None
+    if r.status_code != 200:
+        raise SourceError(f"linkedin detalhe: HTTP {r.status_code}")
+    desc, closed, level = parse_linkedin_detail(r.text)
+    if closed:
+        return None
+    if not desc:
+        raise SourceError("linkedin detalhe: sem descrição (bloqueio ou página mudou)")
+    job.description = desc
+    if level:
+        job.extra["level"] = level
+    return job
+
+
+# ---------- Indeed Portugal (via biblioteca JobSpy, que acompanha as mudanças do Indeed) ----------
+
+def _annual_eur(amount, interval, currency):
+    if amount is None or (currency and str(currency).upper() != "EUR"):
+        return None
+    try:
+        amount = float(amount)
+    except (TypeError, ValueError):
+        return None
+    if amount != amount:                          # NaN
+        return None
+    mult = {"yearly": 1, "monthly": 14, "weekly": 52, "daily": 220, "hourly": 1760}.get(str(interval or "yearly"), None)
+    return amount * mult if mult else None
+
+
+def parse_jobspy_rows(rows, source="indeed"):
+    """rows: list[dict] (DataFrame.to_dict('records') do JobSpy) -> list[Job]."""
+    def val(r, k):
+        v = r.get(k)
+        if v is None:
+            return None
+        try:
+            if v != v:                            # NaN do pandas
+                return None
+        except Exception:
+            pass
+        return v
+    jobs = []
+    for r in rows:
+        url, title = val(r, "job_url"), val(r, "title")
+        if not url or not title:
+            continue
+        iv, cur = val(r, "interval"), val(r, "currency")
+        jobs.append(Job(
+            source=source, company=str(val(r, "company") or ""), title=str(title),
+            url=clean_url(str(url)), location=str(val(r, "location") or ""),
+            description=strip_html(str(val(r, "description") or "")),
+            posted=iso(str(val(r, "date_posted") or "")),
+            salary_min=_annual_eur(val(r, "min_amount"), iv, cur),
+            salary_max=_annual_eur(val(r, "max_amount"), iv, cur),
+            remote=bool(val(r, "is_remote")) or None))
+    return jobs
+
+
+def fetch_indeed(src, session, env):
+    try:
+        from jobspy import scrape_jobs
+    except ImportError as e:
+        raise SourceSkipped(f"biblioteca python-jobspy não instalada ({e})")
+    out, seen, errors = [], set(), []
+    for q in src.get("queries", []):
+        try:
+            df = scrape_jobs(site_name=["indeed"], search_term=q, country_indeed=src.get("country", "portugal"),
+                             location=src.get("location") or None, hours_old=int(src.get("hours", 72)),
+                             results_wanted=int(src.get("max_per_query", 50)), description_format="markdown",
+                             verbose=0)
+        except Exception as e:
+            errors.append(f"«{q}»: {e}")
+            continue
+        for j in parse_jobspy_rows(df.to_dict("records") if df is not None else [], "indeed"):
+            if j.url not in seen:
+                seen.add(j.url)
+                out.append(j)
+    if errors and not out:
+        raise SourceError("; ".join(errors[:3]))
+    return with_errors(out, errors)
+
+
+# ---------- BEP — Bolsa de Emprego Público (administração central, CCDR, institutos, autarquias) ----------
+# Não há API nem RSS. Cada oferta tem um número sequencial (Oferta_Detalhes.aspx?CodOferta=N) e um
+# número inexistente redireciona para a página de erro. O tracker lê os números novos desde o último
+# visto (guardado em state.json) e pára ao fim de várias falhas seguidas.
+
+BEP_DETAIL = "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta={}"
+_BEP_ID = "ctl00_ctl00_FormMasterContentPlaceHolder_ContentPlaceHolder1_"
+ISLANDS = re.compile(r"\bRA[AM]\b|madeira|porto santo|a[çc]ores|azores|funchal|ponta delgada|angra", re.I)
+
+
+def parse_bep_detail(html_text, cod, today=None):
+    """Devolve dict com os campos da oferta, ou None se o número não existir."""
+    from datetime import date
+    soup = _soup(html_text)
+    def f(name):
+        el = soup.find(id=_BEP_ID + name)
+        return " ".join(el.get_text(" ", strip=True).split()) if el else ""
+    code = f("lblNOCodigo")
+    if not code:
+        return None
+    first_row = []
+    tbl = soup.find(id=_BEP_ID + "tblLocaisTrabalho")
+    if tbl:
+        rows = tbl.find_all("tr")
+        if len(rows) > 1:
+            first_row = [" ".join(td.get_text(" ", strip=True).split()) for td in rows[1].find_all("td")]
+    distrito = first_row[5] if len(first_row) > 5 else ""
+    concelho = first_row[6] if len(first_row) > 6 else (first_row[3] if len(first_row) > 3 else "")
+    posto = f("lblNOCarPosto")
+    return {"code": code, "tipo": f("lblNOTipoOferta"), "estado": f("lblNOEstado"), "nivel": f("lblNONivelOrganico"),
+            "organismo": f("lblNOOrganismo"), "carreira": f("lblNOCarreira"), "categoria": f("lblNOCategoria"),
+            "remuneracao": f("lblNORemuneracao"), "posto": posto, "habilitacao": f("lblNOHabLit"),
+            "requisitos": f("lblNOOutrosReqs"), "publicada": iso(f("lblNODataPub")), "limite": iso(f("lblNODataLim")),
+            "distrito": distrito, "concelho": concelho, "url": BEP_DETAIL.format(cod)}
+
+
+def bep_to_job(d, src, today=None):
+    from datetime import date
+    today = today or date.today()
+    headline = re.split(r"(?<=[.;:])\s|\s{2,}| Caracteriza| Descri[çc][ãa]o| Desempenho", d["posto"])[0][:90].strip(" .;:-–")
+    title = d["carreira"] or d["categoria"] or "Oferta BEP"
+    if headline and headline.lower() != title.lower():
+        title = f"{title} — {headline}"
+    where = ", ".join(x for x in (d["concelho"], d["distrito"]) if x)
+    excluded = ""
+    if ISLANDS.search(where):
+        excluded = f"fora do continente ({where})"
+    elif d["estado"] and not re.search(r"ativ", d["estado"], re.I):
+        excluded = f"oferta {d['estado'].lower()}"
+    elif d["limite"] and d["limite"] < today.isoformat():
+        excluded = f"prazo terminou ({d['limite']})"
+    elif src.get("exclude_types") and re.search(src["exclude_types"], d["tipo"], re.I):
+        excluded = f"tipo excluído ({d['tipo']})"
+    elif src.get("careers") and not re.search(src["careers"], f"{d['carreira']} {d['categoria']} {d['tipo']}", re.I):
+        excluded = f"carreira fora do alvo ({d['carreira']})"
+    desc = " ".join(x for x in (d["posto"], d["requisitos"], f"Habilitação: {d['habilitacao']}",
+                                f"Organismo: {d['organismo']} ({d['nivel']})", f"Tipo: {d['tipo']}") if x)
+    extra = {"pay_text": d["remuneracao"], "deadline": d["limite"], "bep_code": d["code"]}
+    if excluded:
+        extra["excluded"] = excluded
+    if src.get("min_score") is not None:
+        extra["min_score"] = src["min_score"]
+    return Job(source="bep", company=d["organismo"] or d["nivel"], title=title, url=d["url"],
+               location=f"{where}, Portugal" if where else "Portugal", description=desc,
+               posted=d["publicada"], extra=extra)
+
+
+def fetch_bep(src, session, env, sleep=time.sleep):
+    known = src.get("_known") or set()
+    cursor = src.get("_cursor") or {}
+    last = int(cursor.get("last") or src.get("start_id", 0))
+    if not last:
+        raise SourceError("falta start_id (um número CodOferta recente) no config.yaml")
+    lookback, max_misses, max_pages = int(src.get("lookback", 40)), int(src.get("max_misses", 40)), int(src.get("max_pages", 250))
+    out, misses, pages, top, errors = [], 0, 0, last, []
+    cod = last - lookback
+    while pages < max_pages:
+        cod += 1
+        if cod > top and misses >= max_misses:
+            break
+        url = BEP_DETAIL.format(cod)
+        if url in known:
+            continue
+        pages += 1
+        if pages > 1:
+            sleep(float(src.get("delay", 0.4)))
+        try:
+            r = http(session, "GET", url, tries=2)
+        except SourceError as e:
+            errors.append(str(e))
+            if len(errors) >= 5:
+                break
+            continue
+        final = str(getattr(r, "url", "") or "")
+        d = parse_bep_detail(r.text, cod) if r.status_code == 200 and "Erro" not in final else None
+        if d is None:
+            if cod > top:
+                misses += 1
+            continue
+        misses = 0
+        top = max(top, cod)
+        out.append(bep_to_job(d, src))
+    if errors and not out and len(errors) >= 5:
+        raise SourceError("; ".join(errors[:3]))
+    res = with_errors(out, errors)
+    res.cursor = {"last": top}
+    return res
+
+
 FETCHERS = {
     "greenhouse": fetch_greenhouse, "lever": fetch_lever, "workable": fetch_workable,
     "smartrecruiters": fetch_smartrecruiters, "adzuna": fetch_adzuna, "remotive": fetch_remotive,
     "page_watch": fetch_page_watch,
     "workday": fetch_workday, "personio": fetch_personio, "teamtailor": fetch_teamtailor,
-    "recruitee": fetch_recruitee,
+    "recruitee": fetch_recruitee, "linkedin": fetch_linkedin, "indeed": fetch_indeed,
+    "bep": fetch_bep,
 }
 
 
@@ -510,6 +828,8 @@ def fetch_source(src, session, env):
 def fetch_detail(job: Job, session):
     """Devolve o Job com descrição completa, ou None se a vaga já fechou (404/410)."""
     ex = job.extra or {}
+    if "linkedin_id" in ex:
+        return fetch_linkedin_detail(job, session)
     if "workable_account" in ex:
         r = http(session, "GET", f"https://apply.workable.com/api/v2/accounts/{ex['workable_account']}/jobs/{ex['shortcode']}")
         if r.status_code in (404, 410):
@@ -551,4 +871,4 @@ def fetch_detail(job: Job, session):
 
 def needs_detail(job: Job) -> bool:
     ex = job.extra or {}
-    return ("workable_account" in ex or "sr_id" in ex or "workday_detail" in ex or ex.get("jsonld")) and not job.description
+    return ("linkedin_id" in ex or "workable_account" in ex or "sr_id" in ex or "workday_detail" in ex or ex.get("jsonld")) and not job.description

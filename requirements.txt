@@ -1,2 +1,4 @@
 requests>=2.31
 pyyaml>=6
+beautifulsoup4>=4.12
+python-jobspy==1.4.1

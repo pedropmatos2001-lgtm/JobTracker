@@ -2,7 +2,8 @@ name: Vagas diárias
 
 on:
   schedule:
-    - cron: "0 7 * * 1-5"      # 07:00 UTC, dias úteis (07:00 em Lisboa no inverno, 08:00 no verão)
+    - cron: "17 7 * * *"       # todos os dias ~07:17 UTC (manhã em Lisboa): execução principal
+    - cron: "17 16 * * *"      # ~16:17 UTC: só avisa se houver vagas novas (LinkedIn premeia quem se candidata cedo)
   workflow_dispatch: {}         # botão "Run workflow" para testar à mão
 
 permissions:
@@ -16,10 +17,10 @@ jobs:
   run:
     runs-on: ubuntu-latest
     environment: GERAL          # os segredos estão neste Environment
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -45,4 +46,7 @@ jobs:
           git config user.name "jobtracker"
           git config user.email "jobtracker@users.noreply.github.com"
           git add state docs
-          git diff --staged --quiet || (git commit -m "estado $(date -u +%F)" && git push)
+          git diff --staged --quiet && exit 0
+          git commit -m "estado $(date -u +%F)"
+          for i in 1 2 3; do git pull --rebase -X theirs && git push && exit 0; sleep 5; done
+          exit 1

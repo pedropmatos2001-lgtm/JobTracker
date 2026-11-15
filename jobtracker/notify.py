@@ -5,19 +5,22 @@ from email.message import EmailMessage
 import requests
 
 
-def build_message(matches, health_alerts, stats):
-    """matches: lista de dicts {job, verdict}. Devolve (título, corpo) em português."""
+def build_message(matches, health_alerts, stats, total=None, page_url=None):
+    """matches: lista de dicts {job, verdict} (as melhores). total: quantas passaram ao todo.
+    Devolve (título, corpo) em português."""
+    total = len(matches) if total is None else total
     if matches:
-        title = f"{len(matches)} vaga(s) nova(s) para ti"
+        title = f"{total} vaga(s) nova(s) para ti"
     else:
         title = "Tracker de vagas: sem novidades"
     lines = []
     for m in matches:
         j, v = m["job"], m["verdict"]
         where = f" ({j.location})" if j.location else ""
+        src = j.source.split(":")[0]
         jd = m.get("judge")
         tag = f"fit {jd['fit']}/100" if jd else f"{v.score} pts"
-        lines.append(f"• {j.title} — {j.company}{where} [{tag}]")
+        lines.append(f"• {j.title} — {j.company}{where} [{tag} · {src}]")
         if jd:
             lines.append(f"  {jd['porque']}")
             if jd["vale_sair"]:
@@ -29,6 +32,12 @@ def build_message(matches, health_alerts, stats):
         if not jd and v.flags:
             lines.append("  ⚠ " + "; ".join(v.flags[:3]))
         lines.append(f"  {j.url}")
+    if total > len(matches):
+        lines.append("")
+        lines.append(f"+ {total - len(matches)} outra(s) na página" + (f": {page_url}" if page_url else "."))
+    elif matches and page_url:
+        lines.append("")
+        lines.append(f"Todas as vagas: {page_url}")
     if health_alerts:
         lines.append("")
         lines.append("Fontes com problemas:")
