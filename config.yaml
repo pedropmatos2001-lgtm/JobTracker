@@ -5,6 +5,9 @@
 # Vagas com salário PUBLICADO abaixo disto são excluídas. Vagas sem salário
 # passam, mas levam o aviso "sem salário indicado" (a maioria não o publica).
 min_salary_eur: 35000
+# Empresas que nunca interessam ao Pedro: já trabalha na Deloitte (GPS), e mudar para outra Big4 não é subir.
+company_exclude: "\\bDeloitte\\b|\\bEY\\b|Ernst ?(&|and) ?Young|\\bPwC\\b|PricewaterhouseCoopers|\\bKPMG\\b"
+company_exclude_label: "Deloitte, EY, PwC e KPMG"
 
 min_score: 7               # pontuação mínima para avisar (com LinkedIn/Indeed há muito volume)
 max_per_alert: 6           # máximo de vagas na notificação (as restantes ficam na página)
@@ -153,6 +156,31 @@ target_companies:
       - "Urbaser"
       - {name: "Mota-Engil Ambiente e Serviços", match: "Mota-?Engil Ambiente"}
       - "Ecodeal"
+  - sector: "Consultoria (fora das Big4)"
+    companies:
+      - "Accenture"
+      - {name: "McKinsey", match: "McKinsey"}
+      - {name: "Boston Consulting Group", match: "Boston Consulting|\\bBCG\\b"}
+      - {name: "Bain", match: "\\bBain\\b"}
+      - "Roland Berger"
+      - {name: "Kearney", match: "\\bKearney\\b"}
+      - "Oliver Wyman"
+      - {name: "Capgemini", match: "Capgemini"}
+      - {name: "NTT Data", match: "NTT ?DATA"}
+      - "Sia Partners"
+      - {name: "Minsait", match: "Minsait|\\bIndra\\b"}
+      - "Quaternaire"
+      - {name: "Augusto Mateus & Associados", match: "Augusto Mateus"}
+      - {name: "CEDRU", match: "\\bCEDRU\\b"}
+      - "Ecorys"
+      - "Ramboll"
+      - "Arcadis"
+      - {name: "WSP", match: "\\bWSP\\b"}
+      - {name: "ERM", match: "\\bERM\\b|Environmental Resources Management"}
+      - "Sweco"
+      - "Systemiq"
+      - "South Pole"
+      - {name: "Get2C", match: "Get2C"}
   - sector: "Engenharia, consultoria e indústria"
     companies:
       - {name: "Quadrante", match: "\\bQuadrante\\b"}
@@ -190,6 +218,8 @@ profiles:
     profile_env: CANDIDATE_PROFILE_MARIA
     rules:
       sector_bonus: {}                            # o bónus de utilities é só do Pedro
+      company_exclude: ""                         # a exclusão das Big4 é só do Pedro
+      company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
         - sector: "Consultoria (Big4)"
           companies:

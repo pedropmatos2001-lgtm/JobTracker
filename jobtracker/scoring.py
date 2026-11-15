@@ -127,6 +127,8 @@ def cheap_filter(job: Job, cfg: dict, today: date) -> str:
     title = job.title or ""
     if (job.extra or {}).get("excluded"):            # a própria fonte já disse porquê (ex.: BEP)
         return job.extra["excluded"]
+    if cfg.get("company_exclude") and re.search(cfg["company_exclude"], job.company or "", re.I):
+        return "empresa excluída deste perfil"
     for rx in _rx(cfg.get("title_exclude")):
         if rx.search(title):
             return f"título excluído ({rx.pattern})"

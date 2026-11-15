@@ -42,6 +42,9 @@ KNOWN_DOMAINS = {
     "kuehne nagel": "kuehne-nagel.com", "dhl": "dhl.com", "maersk": "maersk.com",
     "bp": "bp.com", "shell": "shell.com", "totalenergies": "totalenergies.com", "engie": "engie.com",
     "lightsource bp": "lightsourcebp.com", "voltalia": "voltalia.com", "orsted": "orsted.com", "hyperion": "hyperionrenewables.com",
+    "sia partners": "sia-partners.com", "quaternaire": "quaternaire.pt", "augusto mateus": "augustomateus.pt",
+    "cedru": "cedru.com", "ecorys": "ecorys.com", "ramboll": "ramboll.com", "arcadis": "arcadis.com", "wsp": "wsp.com",
+    "erm": "erm.com", "sweco": "sweco.com", "systemiq": "systemiq.earth", "south pole": "southpole.com", "get2c": "get2c.pt",
     # empresas-alvo do Pedro
     "edp": "edp.com", "edp renovaveis": "edpr.com", "e redes": "e-redes.pt", "edp comercial": "edp.pt",
     "ren": "ren.pt", "redes energeticas nacionais": "ren.pt", "galp": "galp.com", "floene": "floene.pt",
