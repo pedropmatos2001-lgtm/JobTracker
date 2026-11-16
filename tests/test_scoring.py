@@ -619,3 +619,20 @@ def test_maria_public_affairs_title_beats_multi_theme_consulting_and_noise_out()
                   "Oliver Wyman - Social Media Manager", "Portugal com ACNUR | Projeto Face To Face",
                   "Associate Director, Patient Advocacy", "Implementation Associate Consultant"):
         assert not ev(title, "Public policy, EU affairs, human rights and consulting projects.").include, title
+
+
+def test_new_jobs_16_nov_false_positives_out():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    ps = {p["id"]: p["cfg"] for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}
+    t = date(2026, 11, 16)
+    def ev(pid, title, desc="Sustainability, water utilities, public policy and EU affairs. 3 years of experience."):
+        return evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Lisboa, Lisboa, Portugal",
+                            posted="2026-11-15", description=desc), ps[pid], t)
+    for pid in ("pedro", "maria"):
+        assert not ev(pid, "Associate Water Sector Specialist - based in Luxembourg").include
+        assert not ev(pid, "Content Reviewer – Detection Intel (Czech Speakers)").include
+    for title in ("R2R FA Team Leader", "ALM & Structured Funding Analyst (Securitisation & Derivatives)",
+                  "Artwork & Change Management Coordinator"):
+        assert not ev("pedro", title).include, title
+    assert ev("pedro", "Water Projects Manager", "Water utility projects, wastewater and sustainability. 3 anos.").include
