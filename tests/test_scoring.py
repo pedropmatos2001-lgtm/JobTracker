@@ -636,3 +636,19 @@ def test_new_jobs_16_nov_false_positives_out():
                   "Artwork & Change Management Coordinator"):
         assert not ev("pedro", title).include, title
     assert ev("pedro", "Water Projects Manager", "Water utility projects, wastewater and sustainability. 3 anos.").include
+
+
+def test_maria_no_director_level_roles():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    maria = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["maria"]["cfg"]
+    t = date(2026, 11, 16)
+    def ev(title):
+        return evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Bruxelas, Região de Bruxelas, Bélgica",
+                            posted="2026-11-15", description="EU public affairs and public policy for clients. 3 years of experience."),
+                        maria, t)
+    for title in ("Director Government Affairs EU", "Senior Director, Public Affairs", "(Senior) Managing Director - Public Affairs",
+                  "Head of EU Affairs", "VP Public Policy", "Diretora de Assuntos Públicos", "Partner – Public Affairs"):
+        assert not ev(title).include, title
+    for title in ("EU Public Affairs Consultant", "Manager, EU Affairs", "Policy Officer"):
+        assert ev(title).include, title
