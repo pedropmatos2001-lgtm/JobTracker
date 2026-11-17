@@ -396,7 +396,9 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                 made += 1
 
         alerts = health_alerts if p["admin"] else []
-        heartbeat = p["admin"] and main_run and not mine and today.weekday() == cfg.get("heartbeat_weekday", 0)
+        once = state.setdefault("daily_sent", {})          # avisos semanais: no máximo uma vez por dia, mesmo com várias recolhas
+        heartbeat = (p["admin"] and main_run and not mine and today.weekday() == cfg.get("heartbeat_weekday", 0)
+                     and once.get(f"hb:{p['id']}") != today.isoformat())
         t, b = notify.build_message(top, alerts, stats, total=len(mine), page_url=click)
         if len(profiles) > 1 and p["name"]:
             t = f"{p['name']}: {t}" if mine else t
@@ -406,10 +408,14 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             title, body = t, b
         if (mine or alerts or heartbeat) and not dry_run:
             res = send(t, b, click, p)
+            if heartbeat:
+                once[f"hb:{p['id']}"] = today.isoformat()
             report_sent[p["id"]] = res
             if p["admin"] or not channels:
                 channels = res
-        if main_run and not dry_run and today.weekday() == cfg.get("radar_weekday", 4):
+        if (main_run and not dry_run and today.weekday() == cfg.get("radar_weekday", 4)
+                and once.get(f"radar:{p['id']}") != today.isoformat()):
+            once[f"radar:{p['id']}"] = today.isoformat()
             week = [m for m in state["matches"] if p["id"] in (m.get("profiles") or {p["id"]: 1})]
             rt, rb = notify.build_radar(week, today)
             if rb:
@@ -424,7 +430,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
                                     "queries": len(s.get("queries") or []), "status": next(
                                         (r.split(": ", 1)[1] for r in report if r.startswith((s.get("name") or "") + ": ")), "")}
                                    for s in cfg.get("sources", []) if s.get("enabled") is not False],
-                       "schedule": cfg.get("schedule_text", "Todos os dias, por volta das 7h15 e das 16h15"),
+                       "schedule": cfg.get("schedule_text", "Todos os dias, quatro vezes: por volta das 5h45, 10h30, 16h15 e 21h40"),
                        "stats": stats}
             json.dump({"updated": today.isoformat(), "updated_at": datetime.now(timezone.utc).isoformat(timespec="minutes"), "profiles": [p["public"] for p in profiles], "tracker": tracker,
                        "matches": state["matches"]}, f, ensure_ascii=False)
