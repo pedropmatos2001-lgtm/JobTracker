@@ -335,8 +335,8 @@ def test_maria_master_themes_and_remote_eu_jobs():
     assert v.include and {"Avaliação e monitorização de políticas", "Desenvolvimento e políticas de emprego"} <= set(v.themes)
     assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
                         location="European Union", remote=True), maria, t).include
-    assert evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
-                        location="Brussels, Belgium"), maria, t).include          # Bruxelas: só vagas de topo, e esta é
+    assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
+                            location="Brussels, Belgium"), maria, t).include      # Bruxelas presencial/híbrido: não
     assert not evaluate(job("Policy Officer – EU affairs", "Monitor the European Parliament and the European Commission.",
                             location="Madrid, Spain"), maria, t).include          # presencial noutros países: não
 
@@ -585,20 +585,19 @@ def test_maria_digital_rights_is_libe_not_tech():
                             posted="2026-11-10", description="Campaigns. 2 anos."), maria, date(2026, 11, 15)).include
 
 
-def test_maria_brussels_only_for_top_jobs_pedro_never():
+def test_maria_brussels_only_if_fully_remote_pedro_never():
     import yaml
     from jobtracker.__main__ import build_profiles
     ps = {p["id"]: p["cfg"] for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}
     t = date(2026, 11, 15)
-    def ev(pid, title, desc, loc="Brussels, Brussels Region, Belgium"):
+    def ev(pid, title, desc, loc="Brussels, Brussels Region, Belgium", remote=None):
         return evaluate(Job(source="linkedin", company="Flint Global", title=title, url="u", location=loc, posted="2026-11-01",
-                            description=desc + " 2 years of experience."), ps[pid], t)
-    flint = ev("maria", "Consultant - Public Policy and Public Affairs with a focus on EU energy, environment and sustainability policy",
-               "Public affairs and EU policy advice for clients; monitor the European Parliament and the European Commission.")
-    assert flint.include and any("fora de Portugal" in f for f in flint.flags)
-    assert not ev("maria", "Strategy Consultant", "Strategy projects for corporate clients.", ).include   # consultoria genérica em Bruxelas: não
-    assert not ev("maria", "Project Officer", "Management of EU-funded projects (Erasmus+, Interreg).").include   # não é tema de topo
-    assert not ev("pedro", "Sustainability Consultant", "CSRD and decarbonisation for clients.").include      # o Pedro não tem Bruxelas
+                            description=desc + " 2 years of experience.", remote=remote), ps[pid], t)
+    flint = ("Consultant - Public Policy and Public Affairs with a focus on EU energy, environment and sustainability policy",
+             "Public affairs and EU policy advice for clients; monitor the European Parliament and the European Commission.")
+    assert not ev("maria", *flint).include                              # híbrido/presencial em Bruxelas: não
+    assert ev("maria", *flint, remote=True).include                     # 100% remoto (filtro do LinkedIn): sim
+    assert not ev("pedro", "Sustainability Consultant", "CSRD and decarbonisation for clients.").include
     assert not ev("maria", "Public Affairs Manager", "EU affairs.", loc="Porto Alegre, Brazil").include      # Porto Alegre não é Porto
 
 
@@ -645,7 +644,8 @@ def test_maria_no_director_level_roles():
     t = date(2026, 11, 16)
     def ev(title):
         return evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Bruxelas, Região de Bruxelas, Bélgica",
-                            posted="2026-11-15", description="EU public affairs and public policy for clients. 3 years of experience."),
+                            posted="2026-11-15", description="EU public affairs and public policy for clients. 3 years of experience.",
+                            remote=True),
                         maria, t)
     for title in ("Director Government Affairs EU", "Senior Director, Public Affairs", "(Senior) Managing Director - Public Affairs",
                   "Head of EU Affairs", "VP Public Policy", "Diretora de Assuntos Públicos", "Partner – Public Affairs"):

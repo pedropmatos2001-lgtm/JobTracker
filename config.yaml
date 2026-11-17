@@ -240,12 +240,10 @@ profiles:
     rules:
       sector_bonus: {points: 1}                   # o bónus de utilities é só do Pedro; empresas-alvo da Maria só +1 (contexto, não prioridade)
       min_salary_eur: 0                           # a Maria não tem salário mínimo
-      locations:                                  # Portugal continental e remoto; Bruxelas só para vagas de topo
+      locations:                                  # Portugal continental e remoto; Bruxelas só se for 100% remoto
         allow: "portugal|lisbo|porto(?!\\s*alegre)|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
         exclude: "madeira|funchal|porto santo|a[çc]ores|azores|ponta delgada|angra do hero|horta\\b|\\bRA[AM]\\b"
-        remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global"
-        top_only: "brussels|bruxelles|brussel\\b|bruxelas|belgium|b[ée]lgica"
-        top_themes: ["Assuntos europeus", "Assessoria política e parlamentar", "Liberdades, justiça e Estado de direito", "Políticas públicas"]
+        remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global|brussels|bruxelles|brussel\\b|bruxelas|belgium|b[ée]lgica"
       company_exclude: ""                         # a exclusão das Big4 é só do Pedro
       company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
@@ -508,10 +506,12 @@ sources:
       - "assessor"
       - "monitoring and evaluation"
 
-  # Bruxelas, só para a Maria e só para vagas de topo (assuntos europeus, public affairs, assessoria, LIBE, políticas).
+  # Bruxelas, só para a Maria e só vagas 100% remotas (filtro "remoto" do próprio LinkedIn).
+  # Presencial ou híbrido em Bruxelas nunca entra.
   - type: linkedin
-    name: "LinkedIn (Bruxelas, assuntos europeus)"
+    name: "LinkedIn (Bruxelas, só remoto)"
     profiles: [maria]
+    remote: true
     location: "Brussels, Brussels Region, Belgium"
     hours: 720
     max_per_query: 50
