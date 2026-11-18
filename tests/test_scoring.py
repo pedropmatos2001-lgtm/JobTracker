@@ -652,3 +652,16 @@ def test_maria_no_director_level_roles():
         assert not ev(title).include, title
     for title in ("EU Public Affairs Consultant", "Manager, EU Affairs", "Policy Officer"):
         assert ev(title).include, title
+
+
+def test_pedro_no_service_station_or_legal_roles():
+    import yaml
+    from jobtracker.__main__ import build_profiles
+    pedro = {p["id"]: p for p in build_profiles(yaml.safe_load(open("config.yaml", encoding="utf-8")))}["pedro"]["cfg"]
+    t = date(2026, 11, 18)
+    def ev(title, company="repsol"):
+        return evaluate(Job(source="linkedin", company=company, title=title, url="u", location="Lisboa, Portugal",
+                            posted="2026-11-17", description="Energy transition, sustainability and decarbonisation. 3 anos."), pedro, t)
+    assert not ev("Gerente de Área de Serviço Grândola").include
+    assert not ev("Legal Counsel", "Goldenergy").include
+    assert ev("Regulatory Affairs Specialist").include
