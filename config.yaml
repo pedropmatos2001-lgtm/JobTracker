@@ -246,6 +246,7 @@ profiles:
         allow: "portugal|lisbo|porto(?!\\s*alegre)|oeiras|amadora|alfragide|cascais|sintra|loures|braga|guimar|coimbra|set[úu]bal|aveiro|faro|leiria|santar[ée]m|[ée]vora|beja|viseu|guarda|viana|vila real|bragan|castelo branco|portalegre"
         exclude: "madeira|funchal|porto santo|a[çc]ores|azores|ponta delgada|angra do hero|horta\\b|\\bRA[AM]\\b"
         remote_ok: "portugal|europe|europa|emea|eu\\b|worldwide|anywhere|global|brussels|bruxelles|brussel\\b|bruxelas|belgium|b[ée]lgica"
+        remote_verify: "brussel|bruxel|belgi|b[ée]lgica"   # aqui o anúncio tem de dizer 100% remoto (o filtro do LinkedIn falha)
       company_exclude: ""                         # a exclusão das Big4 é só do Pedro
       company_exclude_label: ""
       target_companies:                           # as do Pedro não contam para a Maria; estas são dela
