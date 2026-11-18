@@ -296,3 +296,16 @@ def test_same_job_in_general_and_profile_only_sources(tmp_path):
         docs = json.load(open(f"{dd}/jobs.json", encoding="utf-8"))
         titles = {m["title"]: set(m["profiles"]) for m in docs["matches"]}
         assert "pedro" in titles["Operations Excellence Manager"], order
+
+
+def test_weekly_radar_sent_once_even_with_several_runs_per_day(tmp_path):
+    from datetime import timedelta
+    sp, dd = paths(tmp_path)
+    fri = WED + timedelta(days=2)
+    titles = []
+    send = lambda t, b, c, p=None: titles.append((p["id"], t)) or ["ok"]
+    for _ in range(3):                                   # três recolhas na mesma sexta-feira
+        run(cfg2(), {}, fri, sp, dd, fetch=lambda s: [OPS, POLICY], detail=lambda j: j, send=send)
+    radar = [x for x in titles if "semana" in x[1].lower() or "radar" in x[1].lower()]
+    per_profile = {pid: sum(1 for p, _ in radar if p == pid) for pid in ("pedro", "maria")}
+    assert all(n == 1 for n in per_profile.values()), titles     # exatamente uma vez por perfil
