@@ -171,12 +171,39 @@ def job_text_for_themes(job):
     return f"{job.title}\n" + " ".join(x for x in parts if not BOILERPLATE.search(x))
 
 
+REMOTE_YES = re.compile(r"(fully|100\s*%|full|completely|entirely|permanently)[\s-]*remote|remote[\s-]*(first|only)|"
+                        r"work(ing)? (fully |100% )?remotely|work from anywhere|remote (position|role|job|contract)|"
+                        r"this (is a|role is|position is) (\w+ )?remote|t[ée]l[ée]travail (complet|[àa] 100|int[ée]gral)|"
+                        r"100\s*%\s*t[ée]l[ée]travail|volledig (op afstand|thuis)|teletrabalho (total|a 100|integral)|100\s*%\s*remot", re.I)
+REMOTE_NO = re.compile(r"hybrid|hybride|hybrido|h[íi]brido|on[\s-]?site|in[\s-]office|office[\s-]based|from (our|the) office|"
+                       r"in (our|the) (brussels |bruxelles )?office|\d\s*(\+\s*)?days? (a|per|each) week|"
+                       r"(days?|times) (a|per) week in|pr[ée]sentiel|sur site|kantoor", re.I)
+
+
+def remote_unproven(job: Job, cfg: dict) -> str:
+    """Locais aceites só se a vaga for 100% remota (ex.: Bruxelas para a Maria). O filtro "remoto" do LinkedIn
+    não é de confiança, por isso o próprio anúncio tem de o dizer e não pode falar de híbrido ou escritório."""
+    rx = (cfg.get("locations") or {}).get("remote_verify")
+    loc = job.location or ""
+    if not rx or not re.search(rx, loc, re.I):
+        return ""
+    text = f"{job.title}\n{loc}\n{job.description or ''}"
+    if REMOTE_NO.search(text):
+        return f"{loc}: anúncio fala de híbrido ou escritório"
+    if not REMOTE_YES.search(text):
+        return f"{loc}: só entra se o anúncio disser que é 100% remota"
+    return ""
+
+
 def evaluate(job: Job, cfg: dict, today: date) -> Verdict:
     why = cheap_filter(job, cfg, today)
     if why:
         return Verdict(False, excluded_by=why)
 
     text = f"{job.title}\n{job.description}"
+    why = remote_unproven(job, cfg)
+    if why:
+        return Verdict(False, excluded_by=why)
     v = Verdict(True)
 
     # 1) bloqueios duros

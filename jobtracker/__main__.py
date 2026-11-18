@@ -59,6 +59,11 @@ def rules_summary(pcfg):
                           for g in pcfg.get("target_companies") or []]}
 
 
+def safe_link(url) -> bool:
+    """A página guarda o token do GitHub no browser: um link de vaga nunca pode ser javascript:, data:, etc."""
+    return bool(re.match(r"https?://[^\s]+$", (url or "").strip(), re.I))
+
+
 def build_profiles(cfg):
     """Perfis definidos em config.yaml (`profiles:`). Cada um herda as regras do topo do ficheiro e
     pode substituir qualquer uma em `rules:`. Sem `profiles:`, há um único perfil com as regras do topo."""
@@ -211,6 +216,7 @@ def run(cfg, env, today, state_path, docs_dir, session=None, fetch=None, detail=
             kept = [j for j in jobs if not re.search(src["title_exclude"], j.title or "", re.I)]
             note = "; ".join(x for x in (note, f"{len(jobs) - len(kept)} fora do perfil pelo título" if len(kept) < len(jobs) else "") if x)
             jobs = kept
+        jobs = [j for j in jobs if safe_link(j.url)]   # só links http(s): nada de javascript: ou data: vindos de fontes externas
         report.append(f"{name}: ok, {len(jobs)} vagas" + (f" ({note})" if note else ""))
         for j in jobs:
             all_jobs.setdefault(j.uid, j)

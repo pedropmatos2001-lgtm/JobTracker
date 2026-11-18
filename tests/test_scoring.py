@@ -596,7 +596,10 @@ def test_maria_brussels_only_if_fully_remote_pedro_never():
     flint = ("Consultant - Public Policy and Public Affairs with a focus on EU energy, environment and sustainability policy",
              "Public affairs and EU policy advice for clients; monitor the European Parliament and the European Commission.")
     assert not ev("maria", *flint).include                              # híbrido/presencial em Bruxelas: não
-    assert ev("maria", *flint, remote=True).include                     # 100% remoto (filtro do LinkedIn): sim
+    assert not ev("maria", *flint, remote=True).include                 # só o filtro do LinkedIn não chega
+    assert ev("maria", flint[0], flint[1] + " This is a fully remote position.", remote=True).include
+    assert not ev("maria", flint[0], flint[1] + " Fully remote, with 2 days per week in our Brussels office.", remote=True).include
+    assert not ev("maria", flint[0], flint[1] + " Hybrid working.", remote=True).include
     assert not ev("pedro", "Sustainability Consultant", "CSRD and decarbonisation for clients.").include
     assert not ev("maria", "Public Affairs Manager", "EU affairs.", loc="Porto Alegre, Brazil").include      # Porto Alegre não é Porto
 
@@ -644,7 +647,7 @@ def test_maria_no_director_level_roles():
     t = date(2026, 11, 16)
     def ev(title):
         return evaluate(Job(source="linkedin", company="X", title=title, url="u", location="Bruxelas, Região de Bruxelas, Bélgica",
-                            posted="2026-11-15", description="EU public affairs and public policy for clients. 3 years of experience.",
+                            posted="2026-11-15", description="EU public affairs and public policy for clients. 3 years of experience. Fully remote.",
                             remote=True),
                         maria, t)
     for title in ("Director Government Affairs EU", "Senior Director, Public Affairs", "(Senior) Managing Director - Public Affairs",
@@ -665,3 +668,10 @@ def test_pedro_no_service_station_or_legal_roles():
     assert not ev("Gerente de Área de Serviço Grândola").include
     assert not ev("Legal Counsel", "Goldenergy").include
     assert ev("Regulatory Affairs Specialist").include
+
+
+def test_non_http_links_are_rejected():
+    from jobtracker.__main__ import safe_link
+    for url in ("javascript:alert(document.cookie)", "data:text/html,x", " JaVaScRiPt:x", "", None, "//evil.com"):
+        assert not safe_link(url), url
+    assert safe_link("https://www.linkedin.com/jobs/view/123")
