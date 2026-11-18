@@ -665,3 +665,10 @@ def test_pedro_no_service_station_or_legal_roles():
     assert not ev("Gerente de Área de Serviço Grândola").include
     assert not ev("Legal Counsel", "Goldenergy").include
     assert ev("Regulatory Affairs Specialist").include
+
+
+def test_non_http_links_are_rejected():
+    from jobtracker.__main__ import safe_link
+    for url in ("javascript:alert(document.cookie)", "data:text/html,x", " JaVaScRiPt:x", "", None, "//evil.com"):
+        assert not safe_link(url), url
+    assert safe_link("https://www.linkedin.com/jobs/view/123")

@@ -8,6 +8,8 @@
 <meta name="apple-mobile-web-app-title" content="JobTracker">
 <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1f24" media="(prefers-color-scheme: dark)">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https://api.github.com; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex, nofollow">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -376,6 +378,8 @@ const session = {
   set(k) { try { sessionStorage.setItem(k, "1"); } catch (e) {} },
 };
 const $ = id => document.getElementById(id);
+// Links vindos das fontes só abrem se forem http(s): um "javascript:" numa vaga nunca corre nesta página (onde está o token).
+const safeUrl = u => /^https?:\/\//i.test(String(u || "")) ? String(u) : "#";
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const svg = html => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
 const I = (d, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -470,7 +474,7 @@ function syncRows() {
       try { localStorage.setItem(TOKEN_KEY, v); } catch (e) {} sync.msg = ""; sync.err = false; paintSync(); render({ quiet: true }); };
     f.append(i, b); out.push(r, f);
   }
-  const ext = (txt, href) => { const a = el("a", "btn ghost"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.append(document.createTextNode(txt), svg(I(P.ext, 16))); return a; };
+  const ext = (txt, href) => { const a = el("a", "btn ghost"); a.href = href; a.target = "_blank"; a.rel = "noopener noreferrer"; a.append(document.createTextNode(txt), svg(I(P.ext, 16))); return a; };
   out.push(row("Criar token", "No GitHub: token fine-grained, só para este repositório, com a permissão Actions em leitura e escrita.",
     ext("Abrir", "https://github.com/settings/personal-access-tokens/new")));
   out.push(row("Sem token", "Também podes correr a recolha diretamente no GitHub, em Run workflow.", ext("GitHub", actions)));
@@ -602,7 +606,7 @@ function readUrl() {
 // ---------- cartão de vaga ----------
 function logoOf(m, cls = "logo") {
   const d = el("div", cls); d.setAttribute("aria-hidden", "true");
-  const src = m.logo || (m.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(m.domain)}&sz=128` : "");
+  const src = (m.logo && safeUrl(m.logo) !== "#" ? m.logo : "") || (m.domain ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(m.domain)}&sz=128` : "");
   const fallback = () => { d.classList.remove("img"); d.textContent = initials(m.company); };
   if (src) { const img = new Image(); img.alt = ""; img.loading = "lazy"; img.decoding = "async"; img.referrerPolicy = "no-referrer";
     if (!m.logo) img.className = "fav";
@@ -624,7 +628,7 @@ function card(m) {
     d.onclick = e => { e.stopPropagation(); d.classList.toggle("show"); setTimeout(() => d.classList.remove("show"), 2000); };
     newDot = d;
   }
-  const a = el("a", "title", m.title); a.href = m.url; a.target = "_blank"; a.rel = "noopener";
+  const a = el("a", "title", m.title); a.href = safeUrl(m.url); a.target = "_blank"; a.rel = "noopener noreferrer";
   // abrir a vaga (clique normal ou com o botão do meio) conta como vista: o ponto de nova sai logo
   const open = () => { if (seen[m.url]) return; seen[m.url] = 1; store.set(seenKey(current), seen);
     if (newDot) { newDot.classList.add("out"); setTimeout(() => newDot.remove(), 200); } renderChrome(); };
@@ -827,7 +831,7 @@ function renderRules(main) {
     r.min_salary_eur ? row("Salário mínimo", "Só conta quando a vaga publica o salário.", rv(`${new Intl.NumberFormat("pt-PT").format(r.min_salary_eur)} €`, true)) : null,
     row("Zona", "Portugal continental e remoto aceite a partir de Portugal.", rv("Portugal", true)),
     r.company_exclude ? row("Empresas de fora", r.company_exclude + ". Vagas destas empresas nunca chegam.") : null));
-  if (repoEdit) { const a = el("a", "btn"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener"; a.append(document.createTextNode("Editar regras"), svg(I(P.ext, 16)));
+  if (repoEdit) { const a = el("a", "btn"); a.href = repoEdit; a.target = "_blank"; a.rel = "noopener noreferrer"; a.append(document.createTextNode("Editar regras"), svg(I(P.ext, 16)));
     const w = el("div"); w.style.marginTop = "20px"; w.append(a, el("p", "note", "Abre a configuração no GitHub. As alterações contam a partir da recolha seguinte.")); main.append(w); }
 }
 
@@ -836,7 +840,7 @@ function renderSettings(main) {
   header("Definições", "Aspeto da página, recolha e notificações.");
   main.append(el("h2", "sec", "Perfil"));
   let cv = null;
-  if (p.cv_url) { cv = el("a", "btn ghost"); cv.href = p.cv_url; cv.target = "_blank"; cv.rel = "noopener"; cv.append(document.createTextNode("Abrir"), svg(I(P.ext, 16))); }
+  if (p.cv_url) { cv = el("a", "btn ghost"); cv.href = safeUrl(p.cv_url); cv.target = "_blank"; cv.rel = "noopener"; cv.append(document.createTextNode("Abrir"), svg(I(P.ext, 16))); }
   main.append(group(row("Currículo", p.cv_url ? `PDF de ${p.name || "este perfil"}, numa ligação privada.` : "Ainda sem currículo associado.", cv)));
   main.append(el("h2", "sec", "Aplicação"));
   main.append(group(installRow()));
