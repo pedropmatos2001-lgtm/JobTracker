@@ -5,6 +5,7 @@
   }
  },
  "daily_sent": {
+  "hb:pedro": "2026-11-23",
   "radar:maria": "2026-11-20",
   "radar:pedro": "2026-11-20"
  },
@@ -15,19 +16,19 @@
   },
   "BEP (emprego público)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "EDP (Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "EDP (Porto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "EMSA (agência europeia, Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "EU Careers (agências, Lisboa)": {
    "fail_streak": 1,
@@ -39,7 +40,7 @@
   },
   "EuroBrussels (remoto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "Galp (Lisboa)": {
    "fail_streak": 1,
@@ -51,11 +52,11 @@
   },
   "Greenvolt": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "Indeed": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LIPOR": {
    "fail_streak": 1,
@@ -63,11 +64,11 @@
   },
   "Lightsource bp (Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LinkedIn": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LinkedIn (Bruxelas, assuntos europeus)": {
    "fail_streak": 0,
@@ -75,31 +76,31 @@
   },
   "LinkedIn (Bruxelas, só remoto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LinkedIn (ambiente e sustentabilidade)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LinkedIn (empresas-alvo)": {
-   "fail_streak": 2,
-   "last_ok": "2026-11-22"
+   "fail_streak": 0,
+   "last_ok": "2026-11-23"
   },
   "LinkedIn (política e assuntos europeus)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "LinkedIn (remoto UE)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "Plataforma ONGD": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "Porto Ambiente": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "ReliefWeb (remoto)": {
    "fail_streak": 1,
@@ -107,19 +108,19 @@
   },
   "Remotive": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "Systemiq": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "UNU (Guimarães)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   },
   "UNjobs (Portugal)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-22"
+   "last_ok": "2026-11-23"
   }
  },
  "logos": {
@@ -6895,6 +6896,15 @@
    "k": "instaltejo|engenheiro eletrotecnico energias renovaveis",
    "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
   },
+  "https://pt.indeed.com/viewjob?jk=06ce134e9ccf96c0": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "mo fashion|sales assistant part time reforco inverno",
+   "why": "duplicada noutra fonte"
+  },
   "https://pt.indeed.com/viewjob?jk=078247dd73150a3c": {
    "ev": [
     "maria",
@@ -11008,6 +11018,15 @@
    "k": "air liquide|accounts receivable accountant",
    "why": "duplicada noutra fonte"
   },
+  "https://pt.indeed.com/viewjob?jk=58ecd2ccb433dfdd": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "luza|coordenador conservacao manutencao",
+   "why": "duplicada noutra fonte"
+  },
   "https://pt.indeed.com/viewjob?jk=592035e35736d18b": {
    "ev": [
     "maria",
@@ -11184,6 +11203,15 @@
    "first_seen": "2026-11-19",
    "k": "wipro|techno functional consultant l2",
    "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
+  "https://pt.indeed.com/viewjob?jk=5daec22f234f09dc": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "mo fashion|sales assistant part time reforco inverno",
+   "why": "duplicada noutra fonte"
   },
   "https://pt.indeed.com/viewjob?jk=5dd0d6ee1acbad54": {
    "ev": [
@@ -13128,8 +13156,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=89343deb59c982b9": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-22",
    "k": "celtrade equipamentos industriais|office manager",
@@ -15649,8 +15677,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=b792165a1c5e1b75": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-22",
    "k": "salvador caetano|diretor de operacoes",
@@ -17405,8 +17433,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=e0e303b435cc7e29": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-22",
    "k": "capgemini|angular developer",
@@ -23683,6 +23711,15 @@
    "k": "brg|associate director senior managing consultant",
    "why": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)"
   },
+  "https://www.linkedin.com/jobs/view/4461207442": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "grunenthal|global freight forwarding logistics manager",
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
   "https://www.linkedin.com/jobs/view/4461692974": {
    "ev": [
     "maria",
@@ -26994,6 +27031,15 @@
    "first_seen": "2026-11-15",
    "k": "first digital|senior it risk",
    "why": "título excluído (\\bIT\\b|\\bSAP\\b|\\bERP\\b|\\bCRM\\b|cyber|ciberseguran|data engineer|cloud|infrastructure|infraestrutura|servicenow|oracle|microsoft dynamics|d365)"
+  },
+  "https://www.linkedin.com/jobs/view/4478404553": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "boston consulting|global marketing performance analytics senior specialist",
+   "why": "título excluído (\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery))"
   },
   "https://www.linkedin.com/jobs/view/4478446487": {
    "ev": [
@@ -35940,6 +35986,15 @@
    },
    "score": 9,
    "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4488185715": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "noesis|cloud enterprise applications support engineer",
+   "why": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)"
   },
   "https://www.linkedin.com/jobs/view/4488199061": {
    "ev": [
@@ -54073,6 +54128,15 @@
    "score": 6,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
   },
+  "https://www.linkedin.com/jobs/view/4492059636": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "mariano shoes|tecnico administrativo e de apoio a gestao",
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
   "https://www.linkedin.com/jobs/view/4492060128": {
    "ev": [
     "maria",
@@ -55238,6 +55302,15 @@
    "k": "nielseniq|fullstack software engineer",
    "why": "duplicada noutra fonte"
   },
+  "https://www.linkedin.com/jobs/view/4492192983": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "stadtverwaltung andernach|sachbearbeiter im bereich fordermittel und projektmanagement",
+   "why": "local fora do alvo (Andernach, Renânia-Palatinado, Alemanha)"
+  },
   "https://www.linkedin.com/jobs/view/4492194360": {
    "ev": [
     "maria",
@@ -55619,10 +55692,19 @@
    "k": "inovflow business solutions|consultor funcional erp",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
-  "https://www.linkedin.com/jobs/view/4492373050": {
+  "https://www.linkedin.com/jobs/view/4492371263": {
    "ev": [
     "pedro",
     "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "tps engenharia e construcao|tecnico de planeamento valias tecnicas para concursos publicos e privados amarante",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4492373050": {
+   "ev": [
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-22",
    "k": "universo|fraud strategy manager",
@@ -57936,6 +58018,19 @@
    "score": 0,
    "why": "Bruxelas, Região de Bruxelas, Bélgica: só entra se o anúncio disser que é 100% remota"
   },
+  "https://www.linkedin.com/jobs/view/4492847544": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "norauto|responsavel de caixa e mercadorias grande porto",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)"
+   },
+   "score": 1,
+   "why": "sem nenhum dos temas do perfil (pontuação 1)"
+  },
   "https://www.linkedin.com/jobs/view/4492848590": {
    "ev": [
     "maria",
@@ -58756,6 +58851,15 @@
    "first_seen": "2026-11-20",
    "k": "boston consulting|passionate about project change management join our service excellence team",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4492931660": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "rhj|administration payroll assistant",
+   "why": "título excluído (\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar)"
   },
   "https://www.linkedin.com/jobs/view/4492931795": {
    "ev": [
@@ -59607,6 +59711,15 @@
    "k": "fidelidade|strategic business developer multicare",
    "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
+  "https://www.linkedin.com/jobs/view/4492981616": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "hays|bi data analytics",
+   "why": "título excluído (\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery))"
+  },
   "https://www.linkedin.com/jobs/view/4492982257": {
    "ev": [
     "maria",
@@ -60307,6 +60420,15 @@
    "k": "agris|gestor de projeto i d agris torres vedras",
    "why": "duplicada noutra fonte"
   },
+  "https://www.linkedin.com/jobs/view/4493372372": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "eficacia|engenheiro mecanico projetetista",
+   "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
+  },
   "https://www.linkedin.com/jobs/view/4493380101": {
    "ev": [
     "maria",
@@ -60330,6 +60452,42 @@
    "k": "fribila frio industrial|orcamentista comercial",
    "why": "título excluído (account manager|key account|\\bKAM\\b|business development|comercial|commercial (manager|director|lead|analyst|specialist|officer|executive|coordinator)|customer (service|support|success)|apoio ao cliente|speaker)"
   },
+  "https://www.linkedin.com/jobs/view/4493390132": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "abesra alpedriz|assistente social",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente)"
+   },
+   "score": 0,
+   "why": "título excluído (sales|vendas|account executive|recruiter|driver|motorista|assistente)"
+  },
+  "https://www.linkedin.com/jobs/view/4493398241": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "vrije universiteit brussel|projectleider manager",
+   "per": {
+    "maria": "Ixelles, Bélgica: só entra se o anúncio disser que é 100% remota"
+   },
+   "score": 0,
+   "why": "Ixelles, Bélgica: só entra se o anúncio disser que é 100% remota"
+  },
+  "https://www.linkedin.com/jobs/view/4493399241": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "agris|gestor de projeto i d agris torres vedras",
+   "why": "duplicada noutra fonte"
+  },
   "https://www.linkedin.com/jobs/view/4493502187": {
    "ev": [
     "maria",
@@ -60338,6 +60496,28 @@
    "first_seen": "2026-11-22",
    "k": "lightsource bp|environmental planner",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4493502926": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "tdcx|trust safety specialist with french italian",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
+  },
+  "https://www.linkedin.com/jobs/view/4493507161": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "adentis|cloud data platform engineer azure ai ml microsoft fabric",
+   "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
   },
   "https://www.linkedin.com/jobs/view/4493509424": {
    "ev": [
@@ -60362,6 +60542,20 @@
    "k": "adentis|business analyst process improvement ai tools",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
+  "https://www.linkedin.com/jobs/view/4493510532": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "tdcx|trust safety agent with spanish portuguese",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
+   },
+   "score": 0,
+   "why": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
+  },
   "https://www.linkedin.com/jobs/view/4493511389": {
    "ev": [
     "maria",
@@ -60376,6 +60570,15 @@
    "score": 0,
    "why": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
   },
+  "https://www.linkedin.com/jobs/view/4493512448": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "bending spoons|ai privacy counsel",
+   "why": "duplicada noutra fonte"
+  },
   "https://www.linkedin.com/jobs/view/4493528013": {
    "ev": [
     "maria",
@@ -60389,6 +60592,15 @@
    },
    "score": 4,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4493530943": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-23",
+   "k": "ignite|czech speaking content moderator",
+   "why": "duplicada noutra fonte"
   },
   "https://www.portoambiente.pt/files/uploads/cms/Anúncio_Jurídico_2026.pdf": {
    "ev": [
