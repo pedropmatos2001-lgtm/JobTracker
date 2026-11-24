@@ -1,7 +1,7 @@
 {
  "cursors": {
   "BEP (emprego público)": {
-   "last": 157250
+   "last": 157251
   }
  },
  "daily_sent": {
@@ -16,19 +16,19 @@
   },
   "BEP (emprego público)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "EDP (Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "EDP (Porto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "EMSA (agência europeia, Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "EU Careers (agências, Lisboa)": {
    "fail_streak": 1,
@@ -40,7 +40,7 @@
   },
   "EuroBrussels (remoto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "Galp (Lisboa)": {
    "fail_streak": 1,
@@ -52,11 +52,11 @@
   },
   "Greenvolt": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "Indeed": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LIPOR": {
    "fail_streak": 1,
@@ -64,11 +64,11 @@
   },
   "Lightsource bp (Lisboa)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn (Bruxelas, assuntos europeus)": {
    "fail_streak": 0,
@@ -76,31 +76,31 @@
   },
   "LinkedIn (Bruxelas, só remoto)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn (ambiente e sustentabilidade)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn (empresas-alvo)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn (política e assuntos europeus)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "LinkedIn (remoto UE)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "Plataforma ONGD": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "Porto Ambiente": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "ReliefWeb (remoto)": {
    "fail_streak": 1,
@@ -108,19 +108,19 @@
   },
   "Remotive": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "Systemiq": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "UNU (Guimarães)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   },
   "UNjobs (Portugal)": {
    "fail_streak": 0,
-   "last_ok": "2026-11-23"
+   "last_ok": "2026-11-24"
   }
  },
  "logos": {
@@ -175,6 +175,7 @@
   "baseyard": "https://media.licdn.com/dms/image/v2/D4D0BAQFbXLcbIESvEA/company-logo_100_100/B4DaD7WW5gJ4AI-/0/1790923337569/baseyard_logo?e=2147483647&v=beta&t=AnUdoXxc-u9tZdLj7uX5n6sq_9VKc8k8YfAAATuaKcI",
   "be great consulting": "https://media.licdn.com/dms/image/v2/C4D0BAQGXyXwQHQiaRw/company-logo_100_100/company-logo_100_100/0/1637596001001/be_great_consulting_logo?e=2147483647&v=beta&t=N3KLSH6AQVr6aktjf44CNINzPb8o6ujvUyWRYbCG7U0",
   "beira labor": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/818e0580f1226be61ef5fbcdfe92003b",
+  "biotask biotecnologia": "https://static.licdn.com/aero-v1/sc/h/6puxblwmhnodu6fjircz4dn4h",
   "bip": "https://media.licdn.com/dms/image/v2/D4E0BAQHlErKku60UCg/company-logo_100_100/B4EaCBtjbbIUAI-/0/1788882597934/bip_portugal_logo?e=2147483647&v=beta&t=9tF2J9Zr4dmQHXyJaKkTwiOYDz-6PAYveX5xhVBm0gw",
   "black white engineering": "https://media.licdn.com/dms/image/v2/D4D0BAQFnhetvYSWGJQ/company-logo_100_100/company-logo_100_100/0/1734518988876/black__white_engineering_logo?e=2147483647&v=beta&t=4IBI35PtU9osbq9GTwnBFPVltjKo0J5LaN4VQjFlz1A",
   "bling energy": "https://media.licdn.com/dms/image/v2/D4D0BAQEEIAtW3aRD5Q/company-logo_100_100/company-logo_100_100/0/1683790035078/bling_energy_logo?e=2147483647&v=beta&t=Rj97jlIZcfm_OyTFOmsi2OJXKtUo1CeTNbYX_E0H4XU",
@@ -188,6 +189,7 @@
   "bridgebio": "https://media.licdn.com/dms/image/v2/D4E0BAQFAmziaudU6-g/company-logo_100_100/B4EZwM3aQFH4AQ-/0/1769742378366/bridgebio_logo?e=2147483647&v=beta&t=zyCWth5hgegeujPy6g-zJVcHkje7lZRnKwll_GEUFac",
   "brunswick": "https://media.licdn.com/dms/image/v2/D4E0BAQE95NzZc41_pg/company-logo_100_100/B4EZZhXw3OHoAY-/0/1745390341969/brunswick_group_logo?e=2147483647&v=beta&t=AoXDOb0iKVBlQb_zlCfghOvU_AancSslA-9Sed6Om5A",
   "burson": "https://media.licdn.com/dms/image/v2/D4E0BAQGebNfV4yWV4w/company-logo_100_100/company-logo_100_100/0/1718262846973?e=2147483647&v=beta&t=-JPmYBBjHP4FqNMD1yWXwd9oBpa79Fc5J_UMz3Rdj0E",
+  "byd": "https://media.licdn.com/dms/image/v2/C4D0BAQGO-icP1bbfrQ/company-logo_100_100/company-logo_100_100/0/1663775295992/bydeurope_logo?e=2147483647&v=beta&t=hG20DMygvG4M256Fcb9mExrCe08EhC0kAAVyoX_Pkig",
   "cactus communications": "https://media.licdn.com/dms/image/v2/C560BAQE9nXtM4dWbDQ/company-logo_100_100/company-logo_100_100/0/1630664146041/cactus_communications_logo?e=2147483647&v=beta&t=bTqsPUkC9umIYaLca0bxV1iXxX5_6yZzOkI_Dux72q4",
   "camara municipal de sesimbra": "https://static.licdn.com/aero-v1/sc/h/6puxblwmhnodu6fjircz4dn4h",
   "campofrio food": "https://media.licdn.com/dms/image/v2/C4E0BAQGbgto4ntzAfQ/company-logo_100_100/company-logo_100_100/0/1652441118536/campofrio_food_group_logo?e=2147483647&v=beta&t=57-LjvX2dOUFZ1njykGkxvzIPUUm7kAGWqKVkrx6g3U",
@@ -384,6 +386,7 @@
   "ntt data europe latam": "https://media.licdn.com/dms/image/v2/D4D0BAQFG34xYbx2GNg/company-logo_100_100/B4DZfAFqW2HMAY-/0/1751274399497/ntt_data_europe_latam_logo?e=2147483647&v=beta&t=FEWxhtYh7ZdmrqSxUjfRa2Bfnq8ngvMuxeKOgxyU0iw",
   "ntu international a s": "https://media.licdn.com/dms/image/v2/C4D0BAQFDRv4Mhi6ZMA/company-logo_100_100/company-logo_100_100/0/1631345844278?e=2147483647&v=beta&t=zdiTS9f7agA6zASPg_Y11NNVjTzMOi0e5twYLfpLpjs",
   "numa": "https://media.licdn.com/dms/image/v2/D4E0BAQGZcvorTao3HQ/company-logo_100_100/company-logo_100_100/0/1720081728519/numa_stays_logo?e=2147483647&v=beta&t=TWXzcb5acTuBP6rFjXkgZGRDWT7EHSygNvNJfqhryww",
+  "obt": "https://media.licdn.com/dms/image/v2/D4D0BAQGvbKLYlnd0sg/company-logo_100_100/B4DZpyEtClIAAU-/0/1762850427457/obt_shipping_ltd__logo?e=2147483647&v=beta&t=3lIvs8nowTD5gc8Lw5OPqHDWUhrJfGXLW7TbGKbRVsQ",
   "ofilingua": "https://media.licdn.com/dms/image/v2/D4E0BAQF-lMpe7tdXTg/company-logo_100_100/B4EZ4QzSEMHQAQ-/0/1778398339979/ofilingua_sl_logo?e=2147483647&v=beta&t=7c_o1IXknyLT4d6afhJTrFVFZ67z4K3Dh20nC0bVZu0",
   "ogma industria aeronautica de": "https://media.licdn.com/dms/image/v2/C4E0BAQH_YeiPYpq5vQ/company-logo_100_100-alternative/company-logo_100_100-alternative/0/1630625230911/ogma_indstria_aeronutica_de_portugal_sa_logo?e=2147483647&v=beta&t=2myw2sairwB5T3WUn8rU05UJxk-QU0UDerwCIEiIpeo",
   "oliver wyman": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/70042b9c033becfcdb08cf2013decb34",
@@ -502,6 +505,212 @@
   "ypo": "https://media.licdn.com/dms/image/v2/C4D0BAQHJuDBnid45Ow/company-logo_100_100/company-logo_100_100/0/1630573619086/ypoglobal_logo?e=2147483647&v=beta&t=gWwwvlzwuLRd8G_KXI3-FQZax9tDM752niW4eCtAO5o"
  },
  "matches": [
+  {
+   "company": "BioTask, Biotecnologia Lda.",
+   "domain": "",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Faro e Região",
+   "logo": "https://static.licdn.com/aero-v1/sc/h/6puxblwmhnodu6fjircz4dn4h",
+   "partial": false,
+   "posted": "2026-11-23",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "não indica anos de experiência",
+      "sem salário indicado"
+     ],
+     "score": 12,
+     "themes": [
+      "Clima e ambiente",
+      "Utilities: energia, água e resíduos"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 12,
+   "source": "linkedin",
+   "title": "Técnico de ambiente",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4493919642"
+  },
+  {
+   "company": "OBT Group",
+   "domain": "",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "2 sinal(is) negativo(s) (vendas/comissões/etc.)",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa e Região",
+   "logo": "https://media.licdn.com/dms/image/v2/D4D0BAQGvbKLYlnd0sg/company-logo_100_100/B4DZpyEtClIAAU-/0/1762850427457/obt_shipping_ltd__logo?e=2147483647&v=beta&t=3lIvs8nowTD5gc8Lw5OPqHDWUhrJfGXLW7TbGKbRVsQ",
+   "partial": false,
+   "posted": "2026-11-19",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "2 sinal(is) negativo(s) (vendas/comissões/etc.)",
+      "sem salário indicado"
+     ],
+     "score": 10,
+     "themes": [
+      "Processos e melhoria contínua",
+      "Modelo operativo e organização",
+      "Gestão de operações"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Agency Manager - Guinea Bissau",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4492295506"
+  },
+  {
+   "company": "BYD EUROPE",
+   "domain": "",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "pede 5+ anos: esticado para o teu perfil",
+    "sem salário indicado"
+   ],
+   "location": "Lisboa, Lisboa, Portugal",
+   "logo": "https://media.licdn.com/dms/image/v2/C4D0BAQGO-icP1bbfrQ/company-logo_100_100/company-logo_100_100/0/1663775295992/bydeurope_logo?e=2147483647&v=beta&t=hG20DMygvG4M256Fcb9mExrCe08EhC0kAAVyoX_Pkig",
+   "partial": false,
+   "posted": "2026-11-24",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "pede 5+ anos: esticado para o teu perfil",
+      "sem salário indicado"
+     ],
+     "score": 9,
+     "themes": [
+      "Processos e melhoria contínua",
+      "Gestão de operações"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 9,
+   "source": "linkedin",
+   "title": "Dealer Network Development Specialist- Lisbon",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4492663462"
+  },
+  {
+   "company": "GenSun PVS",
+   "domain": "",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Montijo, Setúbal, Portugal",
+   "logo": "https://media.licdn.com/dms/image/v2/D4D0BAQHc0JAxc2fxCg/company-logo_100_100/company-logo_100_100/0/1712230333507/gensunpvspt_logo?e=2147483647&v=beta&t=9fnSIgV5t2LZIUMRqVSD4ZfmwzeLYUm6ktI8PbQJcMA",
+   "partial": false,
+   "posted": "2026-11-18",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "não indica anos de experiência",
+      "sem salário indicado"
+     ],
+     "score": 10,
+     "themes": [
+      "Sustentabilidade e ESG",
+      "Utilities: energia, água e resíduos"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "linkedin",
+   "title": "Contract Manager / Gestor(a) de Contratos (M/F)",
+   "unverified": false,
+   "url": "https://www.linkedin.com/jobs/view/4469907848"
+  },
+  {
+   "company": "EDP",
+   "domain": "edp.com",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Coimbra, P06, Portugal",
+   "logo": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/f6561614ebb53e4d7acc274ce676c1d0",
+   "partial": false,
+   "posted": "2026-11-24",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "não indica anos de experiência",
+      "sem salário indicado"
+     ],
+     "score": 10,
+     "themes": [
+      "Smart cities e mobilidade",
+      "Utilities: energia, água e resíduos"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 10,
+   "source": "indeed",
+   "title": "Sistemas Digitais e Comunicações Centro",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=bd4693615ea6a2e0"
+  },
+  {
+   "company": "EDP",
+   "domain": "edp.com",
+   "first_seen": "2026-11-24",
+   "flags": [
+    "não indica anos de experiência",
+    "sem salário indicado"
+   ],
+   "location": "Porto, P13, Portugal",
+   "logo": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/f6561614ebb53e4d7acc274ce676c1d0",
+   "partial": false,
+   "posted": "2026-11-24",
+   "profiles": {
+    "pedro": {
+     "flags": [
+      "não indica anos de experiência",
+      "sem salário indicado"
+     ],
+     "score": 13,
+     "themes": [
+      "Processos e melhoria contínua",
+      "Smart cities e mobilidade",
+      "Utilities: energia, água e resíduos"
+     ]
+    }
+   },
+   "remote": null,
+   "salary_max": null,
+   "salary_min": null,
+   "score": 13,
+   "source": "indeed",
+   "title": "Subestações-Engenharia Norte",
+   "unverified": false,
+   "url": "https://pt.indeed.com/viewjob?jk=2772e6bdda9ce077"
+  },
   {
    "company": "BIP Portugal",
    "domain": "",
@@ -5451,221 +5660,6 @@
    "title": "Continuous Improvement | Lisboa",
    "unverified": false,
    "url": "https://www.linkedin.com/jobs/view/4490863748"
-  },
-  {
-   "company": "Michael Page",
-   "domain": "",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "não indica anos de experiência",
-    "sem salário indicado"
-   ],
-   "location": "Lisboa, Lisboa, Portugal",
-   "logo": "https://media.licdn.com/dms/image/v2/D4E0BAQFyjMa9qVfGhg/company-logo_100_100/B4EZ994QccJIAI-/0/1784523327479/michael_page_logo?e=2147483647&v=beta&t=iKlhQNCtUy4M7WkAWZaLrsmC1xI5tqCi8LMuzvFuFKE",
-   "partial": false,
-   "posted": "2026-11-18",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "não indica anos de experiência",
-      "sem salário indicado"
-     ],
-     "score": 7,
-     "themes": [
-      "Processos e melhoria contínua"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 7,
-   "source": "linkedin",
-   "title": "General Manager - Automotive Retail | Lisboa",
-   "unverified": false,
-   "url": "https://www.linkedin.com/jobs/view/4490878321"
-  },
-  {
-   "company": "ENGIE Hidroelétricas do Douro",
-   "domain": "",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "menciona holandês/alemão/francês: confirmar se é obrigatório",
-    "sem salário indicado"
-   ],
-   "location": "Lisboa, Lisboa, Portugal",
-   "logo": "https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/6c27efde32ba1b848dfae07468c80f90",
-   "partial": false,
-   "posted": "2026-11-18",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "menciona holandês/alemão/francês: confirmar se é obrigatório",
-      "sem salário indicado"
-     ],
-     "score": 14,
-     "themes": [
-      "Processos e melhoria contínua",
-      "Gestão de operações",
-      "Utilities: energia, água e resíduos"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 14,
-   "source": "linkedin",
-   "title": "Gestor de Contrato (M/F/X) - Lisboa",
-   "unverified": false,
-   "url": "https://www.linkedin.com/jobs/view/4492014884"
-  },
-  {
-   "company": "Veolia | Portugal",
-   "domain": "",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "pede 5+ anos: esticado para o teu perfil",
-    "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-    "sem salário indicado"
-   ],
-   "location": "Loures, Lisboa, Portugal",
-   "logo": "https://media.licdn.com/dms/image/v2/D4E0BAQFc2fFZBJdPXw/company-logo_100_100/B4EZniGVnaIQAY-/0/1760434936721/veolia_environnement_logo?e=2147483647&v=beta&t=OvsKe2vUtc8x_jtrxLGMFu7xPtbMBtonc5vyO9V0644",
-   "partial": false,
-   "posted": "2026-11-12",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "pede 5+ anos: esticado para o teu perfil",
-      "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-      "sem salário indicado"
-     ],
-     "score": 14,
-     "themes": [
-      "Processos e melhoria contínua",
-      "Gestão de operações",
-      "Clima e ambiente"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 14,
-   "source": "linkedin",
-   "title": "Responsável de Desenvolvimento de Negócio e Engenharia - Loures",
-   "unverified": false,
-   "url": "https://www.linkedin.com/jobs/view/4490371579"
-  },
-  {
-   "company": "Air Liquide",
-   "domain": "airliquide.com",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "menciona holandês/alemão/francês: confirmar se é obrigatório",
-    "não indica anos de experiência",
-    "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-    "sem salário indicado"
-   ],
-   "location": "Lisboa, P11, Portugal",
-   "logo": "https://media.licdn.com/dms/image/v2/C510BAQF6PhVyWbLl5Q/company-logo_100_100/company-logo_100_100/0/1631349851629?e=2147483647&v=beta&t=5ITviJ7IywZ_EU7C1CveGKpAJjc6S6AYhDrrLf-5GVc",
-   "partial": false,
-   "posted": "2026-11-12",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "menciona holandês/alemão/francês: confirmar se é obrigatório",
-      "não indica anos de experiência",
-      "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-      "sem salário indicado"
-     ],
-     "score": 7,
-     "themes": [
-      "Processos e melhoria contínua",
-      "Modelo operativo e organização",
-      "PMO e programas"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 7,
-   "source": "indeed",
-   "title": "Project Coordinator - Global TA COE transformation enablers",
-   "unverified": false,
-   "url": "https://pt.indeed.com/viewjob?jk=3095e6bd2b441adb"
-  },
-  {
-   "company": "Air Liquide",
-   "domain": "airliquide.com",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "menciona holandês/alemão/francês: confirmar se é obrigatório",
-    "não indica anos de experiência",
-    "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-    "sem salário indicado"
-   ],
-   "location": "Lisboa, P11, Portugal",
-   "logo": "https://media.licdn.com/dms/image/v2/C510BAQF6PhVyWbLl5Q/company-logo_100_100/company-logo_100_100/0/1631349851629?e=2147483647&v=beta&t=5ITviJ7IywZ_EU7C1CveGKpAJjc6S6AYhDrrLf-5GVc",
-   "partial": false,
-   "posted": "2026-11-12",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "menciona holandês/alemão/francês: confirmar se é obrigatório",
-      "não indica anos de experiência",
-      "1 sinal(is) negativo(s) (vendas/comissões/etc.)",
-      "sem salário indicado"
-     ],
-     "score": 7,
-     "themes": [
-      "Processos e melhoria contínua",
-      "Modelo operativo e organização",
-      "PMO e programas"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 7,
-   "source": "indeed",
-   "title": "Project Coordinator - Global TA COE transformation enablers",
-   "unverified": false,
-   "url": "https://pt.indeed.com/viewjob?jk=3095e6bd2b441adb"
-  },
-  {
-   "company": "Transfor",
-   "domain": "",
-   "first_seen": "2026-11-18",
-   "flags": [
-    "sem salário indicado"
-   ],
-   "location": "Lisboa, Portugal",
-   "logo": "https://media.licdn.com/dms/image/v2/C4E0BAQFyzAGt4J1HkA/company-logo_100_100/company-logo_100_100/0/1630642427719/transforgroup_logo?e=2147483647&v=beta&t=V-qCR1MJCP2NzbujstInxhzACLcHS8uDKcOjuD_IAoE",
-   "partial": false,
-   "posted": "2026-10-28",
-   "profiles": {
-    "pedro": {
-     "flags": [
-      "sem salário indicado"
-     ],
-     "score": 10,
-     "themes": [
-      "Sustentabilidade e ESG",
-      "Smart cities e mobilidade"
-     ]
-    }
-   },
-   "remote": null,
-   "salary_max": null,
-   "salary_min": null,
-   "score": 10,
-   "source": "linkedin",
-   "title": "Engenheiro de Projeto - Energias Renováveis (m/f)",
-   "unverified": false,
-   "url": "https://www.linkedin.com/jobs/view/4483848958"
   }
  ],
  "rules_hash": "bdcba1604f31",
@@ -7345,8 +7339,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=0d5bb9a9bc5e5302": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "expleo|lead project manager",
@@ -7393,6 +7387,15 @@
    "k": "capgemini|data engineer",
    "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
+  "https://pt.indeed.com/viewjob?jk=0e55271ed15ed3fc": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "paradox|ai native right hand of the ceo edtech",
+   "why": "duplicada noutra fonte"
+  },
   "https://pt.indeed.com/viewjob?jk=0e6040baee62440a": {
    "ev": [
     "maria",
@@ -7415,6 +7418,15 @@
    },
    "score": 5,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://pt.indeed.com/viewjob?jk=0f13393bfe9c20e1": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "securitas|vigilante condominio privado",
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
   },
   "https://pt.indeed.com/viewjob?jk=0f2debefeeddc9e2": {
    "ev": [
@@ -8572,8 +8584,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=2432473801fcfe57": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "schindler|tecnico comercial de modernizacoes porto",
@@ -8592,6 +8604,15 @@
    },
    "score": 3,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://pt.indeed.com/viewjob?jk=2474e3c229f7a99f": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "smile up|medico dentista implantologista campo alegre",
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
   },
   "https://pt.indeed.com/viewjob?jk=24f2dfdcb340a97b": {
    "ev": [
@@ -8781,6 +8802,20 @@
    },
    "score": 0,
    "why": "salário máximo 16800 abaixo de 30000"
+  },
+  "https://pt.indeed.com/viewjob?jk=2772e6bdda9ce077": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "edp|subestacoes engenharia norte",
+   "per": {
+    "maria": "só um tema, e não no título: a vaga não é sobre isso",
+    "pedro": 13
+   },
+   "score": 13,
+   "why": ""
   },
   "https://pt.indeed.com/viewjob?jk=277a7f3aa4692cdb": {
    "ev": [
@@ -10091,6 +10126,15 @@
    "first_seen": "2026-11-21",
    "k": "auchan|operador a de loja 20h i myauchan c ourique",
    "why": "título excluído ((?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel)"
+  },
+  "https://pt.indeed.com/viewjob?jk=3ddfb128449d5b94": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "edp|gis data integration",
+   "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
   "https://pt.indeed.com/viewjob?jk=3df24857ffaa8cb5": {
    "ev": [
@@ -13080,6 +13124,20 @@
    "k": "vincci hoteles|tecnico de administracao e financeiro hotel vincci bonjardim 4",
    "why": "empresa excluída deste perfil"
   },
+  "https://pt.indeed.com/viewjob?jk=77dcea8690a0c510": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "askblue|scrum master",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 1)"
+   },
+   "score": 1,
+   "why": "sem nenhum dos temas do perfil (pontuação 1)"
+  },
   "https://pt.indeed.com/viewjob?jk=77f5656508cc6033": {
    "ev": [
     "maria",
@@ -13963,6 +14021,15 @@
    "score": 7,
    "why": ""
   },
+  "https://pt.indeed.com/viewjob?jk=89bc0a0dea2101bb": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "salvador caetano|preparador de viaturas",
+   "why": "duplicada noutra fonte"
+  },
   "https://pt.indeed.com/viewjob?jk=8a17fdcc88d62dca": {
    "ev": [
     "maria",
@@ -14115,6 +14182,20 @@
    "score": 9,
    "why": ""
   },
+  "https://pt.indeed.com/viewjob?jk=8caf45970a57e9ff": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "vilanova|team leader vilanova forum castelo branco",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 3)"
+   },
+   "score": 3,
+   "why": "sem nenhum dos temas do perfil (pontuação 3)"
+  },
   "https://pt.indeed.com/viewjob?jk=8cb9cb861b046575": {
    "ev": [
     "maria",
@@ -14250,8 +14331,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=8f431448059afdf0": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "pandora jewelry|seasonal shop assistant",
@@ -14851,6 +14932,15 @@
    "k": "j antonio da silva|operadores de producao metalomecanica braga",
    "why": "título excluído (t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|(?<!environmental )(?<!sustainability )technician|manuten[çc][ãa]o|operador|operator)"
   },
+  "https://pt.indeed.com/viewjob?jk=98a50f12c4ade9d0": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "zurich insurance|data analytic zurich graduate",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
   "https://pt.indeed.com/viewjob?jk=98de23f66539e911": {
    "ev": [
     "maria",
@@ -15284,8 +15374,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=9f7ffedc7253e2a6": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "siemens energy|strategy manager",
@@ -16887,6 +16977,20 @@
    "k": "mo fashion|sales assistant part time reforco inverno",
    "why": "duplicada noutra fonte"
   },
+  "https://pt.indeed.com/viewjob?jk=bd4693615ea6a2e0": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "edp|sistemas digitais e comunicacoes centro",
+   "per": {
+    "maria": "só um tema, e não no título: a vaga não é sobre isso",
+    "pedro": 10
+   },
+   "score": 10,
+   "why": ""
+  },
   "https://pt.indeed.com/viewjob?jk=bd7959e978d8b07b": {
    "ev": [
     "maria",
@@ -17008,8 +17112,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=bed4a5f1d2cd0a41": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "curaleaf international|harvest post harvest leader",
@@ -17491,8 +17595,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=c6672d6af84fcab5": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "schindler|tecnico comercial de modernizacoes lisboa",
@@ -18391,8 +18495,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=daab1c76fd02a606": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "l spot|especialista en busqueda de informacion",
@@ -19853,8 +19957,8 @@
   },
   "https://pt.indeed.com/viewjob?jk=f59681681f378bf8": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "lidl|operador a de loja famalicao av g h delgado 700 875",
@@ -19933,6 +20037,20 @@
    },
    "score": 0,
    "why": "pede 10+ anos de experiência"
+  },
+  "https://pt.indeed.com/viewjob?jk=f6f3318909032c46": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "sacel|vendedor automovel para concessionario em santarem",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 3,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
   },
   "https://pt.indeed.com/viewjob?jk=f76351b945d73746": {
    "ev": [
@@ -20149,6 +20267,20 @@
    },
    "score": 0,
    "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://pt.indeed.com/viewjob?jk=fb6e72db22e9d4a1": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "1840 company|participantes para gravacao de videos de atividades domesticas",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "pede só 1 ano(s): provável nível júnior"
+   },
+   "score": 0,
+   "why": "pede só 1 ano(s): provável nível júnior"
   },
   "https://pt.indeed.com/viewjob?jk=fb88e32b3c577be2": {
    "ev": [
@@ -20369,6 +20501,15 @@
    "first_seen": "2026-11-16",
    "k": "natixis|chapter lead it cib",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
+  },
+  "https://pt.indeed.com/viewjob?jk=ffcf8fea82555a66": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "mo fashion|sales assistant part time reforco inverno",
+   "why": "duplicada noutra fonte"
   },
   "https://pt.indeed.com/viewjob?jk=ffef3221bd3c5a8b": {
    "ev": [
@@ -22336,8 +22477,8 @@
   },
   "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=157249": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "servicos de acao social do instituto politecnico de braganca|tecnico superior funcoes consultivas de estudo planeamento programacao avaliacao e aplicacao de metodos",
@@ -22351,6 +22492,15 @@
    "first_seen": "2026-11-23",
    "k": "universidade aberta|tecnico superior assegurar a gestao e operacionalizacao dos processos de provas e avaliacao dos diferentes",
    "why": "oferta pendente"
+  },
+  "https://www.bep.gov.pt/pages/oferta/Oferta_Detalhes.aspx?CodOferta=157251": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "universidade aberta|tecnico superior assegurar a gestao e operacionalizacao dos processos de provas e avaliacao dos diferentes",
+   "why": "duplicada noutra fonte"
   },
   "https://www.emsa.europa.eu/jobs/vacancies/item/5820-emsa-sne-2026-03.html": {
    "ev": [
@@ -22564,6 +22714,15 @@
    "score": 0,
    "why": "sem nenhum dos temas do perfil (pontuação 0)"
   },
+  "https://www.linkedin.com/jobs/view/4254758147": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "pwc|fund accounting associate",
+   "why": "empresa excluída deste perfil"
+  },
   "https://www.linkedin.com/jobs/view/4262100828": {
    "ev": [
     "maria",
@@ -22773,6 +22932,20 @@
    "first_seen": "2026-11-15",
    "k": "nielseniq|principal data quality specialist",
    "why": "título excluído (\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery))"
+  },
+  "https://www.linkedin.com/jobs/view/4358501410": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "ilunion ccbpo|german or italian speaking technical support agents",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação -2)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 0,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
   },
   "https://www.linkedin.com/jobs/view/4363265324": {
    "ev": [
@@ -23410,6 +23583,15 @@
    "k": "ashby|engineering manager eu",
    "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
   },
+  "https://www.linkedin.com/jobs/view/4412135444": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "adidas|sr manager finance primary data",
+   "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
+  },
   "https://www.linkedin.com/jobs/view/4413128989": {
    "ev": [
     "maria",
@@ -23530,6 +23712,20 @@
    "first_seen": "2026-11-15",
    "k": "rtx|associate director global government relations",
    "why": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4416664943": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "pwc|alternative valuation services manager",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 2)",
+    "pedro": "empresa excluída deste perfil"
+   },
+   "score": 0,
+   "why": "empresa excluída deste perfil"
   },
   "https://www.linkedin.com/jobs/view/4417152571": {
    "ev": [
@@ -23672,6 +23868,15 @@
    "first_seen": "2026-11-19",
    "k": "deloitte|candidatura espontanea",
    "why": "empresa excluída deste perfil"
+  },
+  "https://www.linkedin.com/jobs/view/4422427158": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "efficio|senior software engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
   "https://www.linkedin.com/jobs/view/4422879337": {
    "ev": [
@@ -23863,6 +24068,20 @@
    "k": "boston consulting|global marketing senior director content discoverability",
    "why": "título excluído ((?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel)"
   },
+  "https://www.linkedin.com/jobs/view/4428763342": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-17",
+   "k": "glanua|bim engineer",
+   "per": {
+    "maria": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
+  },
   "https://www.linkedin.com/jobs/view/4429593721": {
    "ev": [
     "maria",
@@ -23984,6 +24203,15 @@
    "first_seen": "2026-11-19",
    "k": "revolut|regulatory compliance manager",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4433248040": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "emagine|consultor funcional sap fi co",
+   "why": "título excluído (\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors)"
   },
   "https://www.linkedin.com/jobs/view/4433682089": {
    "ev": [
@@ -24379,6 +24607,20 @@
    },
    "score": 4,
    "why": "sem nenhum dos temas do perfil (pontuação 4)"
+  },
+  "https://www.linkedin.com/jobs/view/4440969656": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "between|contract manager administrador a de subcontratos oil gas",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 2)"
+   },
+   "score": 2,
+   "why": "sem nenhum dos temas do perfil (pontuação 2)"
   },
   "https://www.linkedin.com/jobs/view/4441258268": {
    "ev": [
@@ -24848,6 +25090,15 @@
    "k": "mutualites libres onafhankelijke ziekenfondsen|security architect",
    "why": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)"
   },
+  "https://www.linkedin.com/jobs/view/4449676275": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "deloitte|enterprise network architect",
+   "why": "empresa excluída deste perfil"
+  },
   "https://www.linkedin.com/jobs/view/4449678208": {
    "ev": [
     "maria",
@@ -24856,6 +25107,33 @@
    "first_seen": "2026-11-21",
    "k": "deloitte|cybersecurity senior consultant",
    "why": "empresa excluída deste perfil"
+  },
+  "https://www.linkedin.com/jobs/view/4449679189": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "deloitte|senior enterprise network architect",
+   "why": "empresa excluída deste perfil"
+  },
+  "https://www.linkedin.com/jobs/view/4449682172": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "deloitte|senior enterprise network architect",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4449687113": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "deloitte|enterprise network architect",
+   "why": "duplicada noutra fonte"
   },
   "https://www.linkedin.com/jobs/view/4450092754": {
    "ev": [
@@ -26797,6 +27075,20 @@
    "score": 4,
    "why": "sem nenhum dos temas do perfil (pontuação 4)"
   },
+  "https://www.linkedin.com/jobs/view/4469907848": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "gensun pvs|contract manager gestor de contratos",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": 10
+   },
+   "score": 10,
+   "why": ""
+  },
   "https://www.linkedin.com/jobs/view/4469909501": {
    "ev": [
     "maria",
@@ -28343,6 +28635,15 @@
    "first_seen": "2026-11-17",
    "k": "critical software|senior product manager railway",
    "why": "título excluído (product (manager|owner|ops|development)|product management)"
+  },
+  "https://www.linkedin.com/jobs/view/4476171587": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "critical software|senior product manager railway",
+   "why": "duplicada noutra fonte"
   },
   "https://www.linkedin.com/jobs/view/4476176564": {
    "ev": [
@@ -35634,6 +35935,15 @@
    "k": "a casa e sua|comercial imobiliario ovar s m feira",
    "why": "título excluído (business development|comercial|vendas|sales|customer (service|support)|apoio ao cliente|call center)"
   },
+  "https://www.linkedin.com/jobs/view/4486142941": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "interdisciplinary transformation university|project controller and grant manager",
+   "why": "local fora do alvo (Linz, Alta Áustria, Áustria)"
+  },
   "https://www.linkedin.com/jobs/view/4486143921": {
    "ev": [
     "maria",
@@ -37795,6 +38105,19 @@
    "first_seen": "2026-11-15",
    "k": "wooclap|stage content marketing",
    "why": "título excluído (turismo|modelador|hidr[áa]ulic|product manager|marketing|investiga[çc][ãa]o e desenvolvimento|moderator|modera[çc][ãa]o de conte[úu]do|moderador[a]? de conte|dubbing|dobragem|annotator|data label|ai training|ai trainer|treino de ia)"
+  },
+  "https://www.linkedin.com/jobs/view/4487903879": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "claranet|service desk team leader",
+   "per": {
+    "pedro": "sem nenhum dos temas do perfil (pontuação 4)"
+   },
+   "score": 4,
+   "why": "sem nenhum dos temas do perfil (pontuação 4)"
   },
   "https://www.linkedin.com/jobs/view/4487903990": {
    "ev": [
@@ -42702,8 +43025,8 @@
   },
   "https://www.linkedin.com/jobs/view/4489777449": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "spektrum|delivery of tactical communications training",
@@ -46005,6 +46328,15 @@
    "k": "veolia|assistente comercial residuos loures",
    "why": "título excluído (account manager|key account|\\bKAM\\b|business development|comercial|commercial (manager|director|lead|analyst|specialist|officer|executive|coordinator)|customer (service|support|success)|apoio ao cliente|speaker)"
   },
+  "https://www.linkedin.com/jobs/view/4490439744": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "influencer hero|integration consultant influencer marketing",
+   "why": "título excluído ((?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel)"
+  },
   "https://www.linkedin.com/jobs/view/4490440172": {
    "ev": [
     "maria",
@@ -48657,6 +48989,20 @@
    "first_seen": "2026-11-18",
    "k": "gsm green sm|head of external relations",
    "why": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4490872505": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "decskill|business analyst",
+   "per": {
+    "maria": "pede 10+ anos de experiência",
+    "pedro": "pede 10+ anos de experiência"
+   },
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
   },
   "https://www.linkedin.com/jobs/view/4490872678": {
    "ev": [
@@ -52298,6 +52644,15 @@
    "k": "philip morris international|sr manager tech product ai",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
+  "https://www.linkedin.com/jobs/view/4491586468": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "qibit|industry 4 0 application manager sap",
+   "why": "título excluído (\\bSAP\\b|dynamics 365|salesforce|servicenow|power platform|successfactors)"
+  },
   "https://www.linkedin.com/jobs/view/4491587189": {
    "ev": [
     "maria",
@@ -52702,8 +53057,8 @@
   },
   "https://www.linkedin.com/jobs/view/4491611853": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "primeit|business analyst",
@@ -52836,6 +53191,20 @@
    "first_seen": "2026-11-19",
    "k": "ivsz hungarian association of digital companies|policy officer",
    "why": "local fora do alvo (Budapeste, Hungria)"
+  },
+  "https://www.linkedin.com/jobs/view/4491623195": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "huild|coordenador de fiscalizacao gestao de obra",
+   "per": {
+    "maria": "título excluído (\\btax\\b|fiscal|impostos|\\biva\\b|\\bvat\\b|transfer pricing|pre[çc]os de transfer|contabil|accounting|accountant|auditor|\\baudit\\b|auditoria|assurance|payroll|processamento salarial|actuar|tesouraria|treasury)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 4,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
   },
   "https://www.linkedin.com/jobs/view/4491624576": {
    "ev": [
@@ -55047,6 +55416,15 @@
    "k": "leroy merlin|incentives technician and corporate affairs",
    "why": "título excluído (t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|(?<!environmental )(?<!sustainability )technician|manuten[çc][ãa]o|operador|operator)"
   },
+  "https://www.linkedin.com/jobs/view/4491925873": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "uphill health|clinical deployment strategist",
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
   "https://www.linkedin.com/jobs/view/4491925932": {
    "ev": [
     "maria",
@@ -55992,6 +56370,33 @@
    },
    "score": 0,
    "why": "Bruxelas, Região de Bruxelas, Bélgica: anúncio fala de híbrido ou escritório"
+  },
+  "https://www.linkedin.com/jobs/view/4492025727": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "nonviolent peaceforce|eu policy and advocacy manager",
+   "per": {
+    "maria": "Bruxelas, Região de Bruxelas, Bélgica: só entra se o anúncio disser que é 100% remota"
+   },
+   "score": 0,
+   "why": "Bruxelas, Região de Bruxelas, Bélgica: só entra se o anúncio disser que é 100% remota"
+  },
+  "https://www.linkedin.com/jobs/view/4492026192": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "experis|project engineer structural mep lisboa",
+   "per": {
+    "maria": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
   },
   "https://www.linkedin.com/jobs/view/4492026712": {
    "ev": [
@@ -58115,6 +58520,20 @@
    "k": "edp|automation ai and data engineer expert",
    "why": "duplicada noutra fonte"
   },
+  "https://www.linkedin.com/jobs/view/4492295506": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "obt|agency manager guinea bissau",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": 10
+   },
+   "score": 10,
+   "why": ""
+  },
   "https://www.linkedin.com/jobs/view/4492299843": {
    "ev": [
     "maria",
@@ -58141,6 +58560,20 @@
    "first_seen": "2026-11-21",
    "k": "acciona|especialista de sistemas de informacao dados e integracoes",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
+  },
+  "https://www.linkedin.com/jobs/view/4492311001": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "confiarte|conselheiro a de beleza",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
   },
   "https://www.linkedin.com/jobs/view/4492313383": {
    "ev": [
@@ -58311,6 +58744,15 @@
    "score": 0,
    "why": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
   },
+  "https://www.linkedin.com/jobs/view/4492385627": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "michael page|electrical design engineer",
+   "why": "duplicada noutra fonte"
+  },
   "https://www.linkedin.com/jobs/view/4492385765": {
    "ev": [
     "maria",
@@ -58396,6 +58838,20 @@
    },
    "score": 3,
    "why": "sem nenhum dos temas do perfil (pontuação 3)"
+  },
+  "https://www.linkedin.com/jobs/view/4492390721": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "closer consulting|business analyst",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação -1)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação -2)"
+   },
+   "score": -2,
+   "why": "sem nenhum dos temas do perfil (pontuação -2)"
   },
   "https://www.linkedin.com/jobs/view/4492391226": {
    "ev": [
@@ -58486,8 +58942,8 @@
   },
   "https://www.linkedin.com/jobs/view/4492396438": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "rumos|application support analyst",
@@ -58501,6 +58957,15 @@
    "first_seen": "2026-11-23",
    "k": "referencia veterinaria|enfermeiro veterinario",
    "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4492397317": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "forvis mazars in|tax consultant porto",
+   "why": "título excluído (\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar)"
   },
   "https://www.linkedin.com/jobs/view/4492399644": {
    "ev": [
@@ -60424,6 +60889,20 @@
    "k": "euro funding|junior project manager i d i",
    "why": "local fora do alvo (Barcelona, Catalunha, Espanha)"
   },
+  "https://www.linkedin.com/jobs/view/4492609968": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quadrante|team leader fire safety",
+   "per": {
+    "maria": "pede 10+ anos de experiência",
+    "pedro": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
+   },
+   "score": 0,
+   "why": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
+  },
   "https://www.linkedin.com/jobs/view/4492611265": {
    "ev": [
     "maria",
@@ -60561,6 +61040,15 @@
    "k": "decskill|cybersecurity analyst",
    "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
+  "https://www.linkedin.com/jobs/view/4492624529": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "cwpower|engenheiro eletrotecnico ou de energias renovaveis coimbra lisboa beja",
+   "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
+  },
   "https://www.linkedin.com/jobs/view/4492625248": {
    "ev": [
     "maria",
@@ -60661,6 +61149,15 @@
    "k": "inscale|mobile application developer",
    "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
+  "https://www.linkedin.com/jobs/view/4492631583": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quanteam|senior java fullstack developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
   "https://www.linkedin.com/jobs/view/4492632338": {
    "ev": [
     "maria",
@@ -60700,8 +61197,8 @@
   },
   "https://www.linkedin.com/jobs/view/4492640364": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "smart consulting|candidatura espontanea",
@@ -60709,21 +61206,53 @@
   },
   "https://www.linkedin.com/jobs/view/4492641244": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "powerdot|customer support specialist",
    "why": "duplicada noutra fonte"
   },
+  "https://www.linkedin.com/jobs/view/4492641716": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quadrante|client manager buildings",
+   "per": {
+    "maria": "só um tema, e não no título: a vaga não é sobre isso",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 10,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
   "https://www.linkedin.com/jobs/view/4492642103": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "siemens healthineers|regional travel lead emea",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4492642760": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "agroparistech|gestionnaire administratif et financier du projet pea3 shift kf",
+   "why": "local fora do alvo (Palaiseau, Ilha de França, França)"
+  },
+  "https://www.linkedin.com/jobs/view/4492646201": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "orange business|data governance consultant start in q1 2027 fr nl en",
+   "why": "título excluído (\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|gen ?ai|chat ?bots?|\\bdata\\b(?! protection)|(?<!prote[çc][ãa]o de )dados\\b|analytics|\\bBI\\b|power bi|digital(?! rights)|tecnolog|technolog|\\btech\\b|automa[çc][ãa]o|automation|\\bRPA\\b|crypto|blockchain|information security|sistemas de informa|information systems|\\bprodut(o|os)\\b digita|product (manager|owner|delivery))"
   },
   "https://www.linkedin.com/jobs/view/4492646408": {
    "ev": [
@@ -60742,6 +61271,34 @@
    "first_seen": "2026-11-23",
    "k": "caisse nationale de solidarite pour l autonomie|charge e de mission expertise institutionnelle et politiques publiques h f",
    "why": "local fora do alvo (Paris, Ilha de França, França)"
+  },
+  "https://www.linkedin.com/jobs/view/4492647479": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "adecco permanent recruitment|south area manager medicina geral e familiar ginecologia",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 3)"
+   },
+   "score": 3,
+   "why": "sem nenhum dos temas do perfil (pontuação 3)"
+  },
+  "https://www.linkedin.com/jobs/view/4492651345": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quadrante|expert electrical engineer electrical installations",
+   "per": {
+    "maria": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)",
+    "pedro": "pede 10+ anos de experiência"
+   },
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
   },
   "https://www.linkedin.com/jobs/view/4492651498": {
    "ev": [
@@ -60784,6 +61341,29 @@
    "k": "mota engil|engenheiro eletrotecnico energias renovaveis alverca do ribatejo",
    "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
   },
+  "https://www.linkedin.com/jobs/view/4492656016": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quadrante|senior electrical engineer electrical installations",
+   "per": {
+    "maria": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)",
+    "pedro": "pede 8+ anos de experiência"
+   },
+   "score": 0,
+   "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4492656034": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "quadrante|senior architect",
+   "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
+  },
   "https://www.linkedin.com/jobs/view/4492656172": {
    "ev": [
     "maria",
@@ -60798,6 +61378,15 @@
    "score": 8,
    "why": ""
   },
+  "https://www.linkedin.com/jobs/view/4492657590": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "jeune afrique|journaliste politique sahel",
+   "why": "local fora do alvo (Paris, Ilha de França, França)"
+  },
   "https://www.linkedin.com/jobs/view/4492659084": {
    "ev": [
     "maria",
@@ -60806,6 +61395,29 @@
    "first_seen": "2026-11-23",
    "k": "mota engil|operador de etar regiao autonoma da madeira",
    "why": "título excluído (t[ée]c\\.|t[ée]cnic[oa]s? (de |superior de )?(manuten|instala|eletric|el[ée]tric|frio|avac|hvac|redes|inform[áa]tic|suporte|apoio|helpdesk|loja|vendas|comercial|obra civil|laborat)|(?<!environmental )(?<!sustainability )technician|manuten[çc][ãa]o|operador|operator)"
+  },
+  "https://www.linkedin.com/jobs/view/4492659255": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "capgemini engineering|cybersecurity assessment specialist",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4492663462": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "byd europe|dealer network development specialist lisbon",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 2)",
+    "pedro": 9
+   },
+   "score": 9,
+   "why": ""
   },
   "https://www.linkedin.com/jobs/view/4492700802": {
    "ev": [
@@ -60947,6 +61559,15 @@
    "first_seen": "2026-11-20",
    "k": "mckinsey company|executive assistant italian speaker",
    "why": "título excluído (based in (?!portugal|lisbo|porto|remote|remot)\\w|content reviewer|\\breviewer\\b|(czech|german|french|italian|dutch|polish|nordic|swedish|danish|finnish|norwegian|hungarian|greek|turkish|arabic|hebrew|japanese|korean|chinese|russian|ukrainian|romanian|bulgarian|slovak) (speakers?|speaking))"
+  },
+  "https://www.linkedin.com/jobs/view/4492751656": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "capgemini|talent acquisition business partner",
+   "why": "duplicada noutra fonte"
   },
   "https://www.linkedin.com/jobs/view/4492766773": {
    "ev": [
@@ -61336,8 +61957,8 @@
   },
   "https://www.linkedin.com/jobs/view/4492841818": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "infraestruturas de|engenheiro civil inspecao e diagnostico de vias rodoviarios almada ou coimbra",
@@ -61475,6 +62096,20 @@
    },
    "score": 1,
    "why": "sem nenhum dos temas do perfil (pontuação 1)"
+  },
+  "https://www.linkedin.com/jobs/view/4492848552": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "pinto cruz|engenheiro eletrotecnico eletromecanico senior seixal",
+   "per": {
+    "maria": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 6,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
   },
   "https://www.linkedin.com/jobs/view/4492848590": {
    "ev": [
@@ -62248,6 +62883,15 @@
    "score": 0,
    "why": "sem nenhum dos temas do perfil (pontuação 0)"
   },
+  "https://www.linkedin.com/jobs/view/4492926061": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "ivy partners|finance master data analyst",
+   "why": "duplicada noutra fonte"
+  },
   "https://www.linkedin.com/jobs/view/4492926646": {
    "ev": [
     "maria",
@@ -62641,6 +63285,15 @@
    },
    "score": 2,
    "why": "sem nenhum dos temas do perfil (pontuação 2)"
+  },
+  "https://www.linkedin.com/jobs/view/4492945570": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "we are meta|application security engineer",
+   "why": "título excluído ((software|data|devops|cloud|machine learning|ml|ai|backend|back-end|frontend|front-end|full ?stack|qa|test|network|systems|platform|security|mobile|embedded|firmware|hardware|electronics|mechanical|process automation|plc|automation|reliability|production|manufacturing|quality) engineer|engenheir[oa]s? (de )?(software|inform[áa]tic|dados|redes|sistemas|mec[âa]nic|eletr[óo]nic|eletrot[ée]cnic|produ[çc][ãa]o|qualidade|automa[çc][ãa]o|civil|de obra|estruturas)|architect\\b|arquitet[oa]\\b|(?<!environmental )(?<!climate )scientist|full ?stack|back-?end|front-?end|\\bQA\\b|tester|tech lead|programador|site reliability|(\\bIT|\\bICT|cloud|network|tech|technology|digital|data|server) infrastructure|infrastructure (engineer|architect|administrator|operations|support)|infraestruturas? (tecnol|inform[áa]tic|de TI|cloud|de redes))"
   },
   "https://www.linkedin.com/jobs/view/4492945931": {
    "ev": [
@@ -63083,6 +63736,20 @@
    "score": 2,
    "why": "sem nenhum dos temas do perfil (pontuação 2)"
   },
+  "https://www.linkedin.com/jobs/view/4492971536": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "capgemini|senior talent acquisiton business partner",
+   "per": {
+    "maria": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 5)"
+   },
+   "score": 5,
+   "why": "sem nenhum dos temas do perfil (pontuação 5)"
+  },
   "https://www.linkedin.com/jobs/view/4492971540": {
    "ev": [
     "maria",
@@ -63489,6 +64156,15 @@
    "k": "bolttech|senior product manager",
    "why": "título excluído (product (manager|owner|ops|development)|product management)"
   },
+  "https://www.linkedin.com/jobs/view/4493190729": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "adentis|mid level java full stack developer french speaker",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
+  },
   "https://www.linkedin.com/jobs/view/4493194691": {
    "ev": [
     "maria",
@@ -63579,6 +64255,20 @@
    "first_seen": "2026-11-21",
    "k": "capgemini|arquiteto de modernizacao aplicacional",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4493230783": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "syneos health|sponsor dedicated site contracts specialist ii sr home based",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
   },
   "https://www.linkedin.com/jobs/view/4493233336": {
    "ev": [
@@ -63769,6 +64459,15 @@
     "pedro": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
    },
    "score": 0,
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4493288509": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "arquiconsult|junior erp consultant",
    "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
   },
   "https://www.linkedin.com/jobs/view/4493289281": {
@@ -64269,6 +64968,19 @@
    "k": "sonia de almeida|romanian or lithuanian or czech speakers content moderator",
    "why": "título excluído (based in (?!portugal|lisbo|porto|remote|remot)\\w|content reviewer|\\breviewer\\b|(czech|german|french|italian|dutch|polish|nordic|swedish|danish|finnish|norwegian|hungarian|greek|turkish|arabic|hebrew|japanese|korean|chinese|russian|ukrainian|romanian|bulgarian|slovak) (speakers?|speaking))"
   },
+  "https://www.linkedin.com/jobs/view/4493619537": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "pe global|mechanical commissioning lead",
+   "per": {
+    "maria": "pede 7+ anos de experiência"
+   },
+   "score": 0,
+   "why": "pede 7+ anos de experiência"
+  },
   "https://www.linkedin.com/jobs/view/4493619901": {
    "ev": [
     "maria",
@@ -64615,6 +65327,15 @@
    },
    "score": 18,
    "why": ""
+  },
+  "https://www.linkedin.com/jobs/view/4493643073": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "servier france|social impact lead",
+   "why": "local fora do alvo (Suresnes, Ilha de França, França)"
   },
   "https://www.linkedin.com/jobs/view/4493643557": {
    "ev": [
@@ -65100,6 +65821,15 @@
    "k": "inocos cosmetics|responsavel de marketing",
    "why": "título excluído ((?<!carbon )(?<!ghg )(?<!emissions )accounting|contabil|risk analyst|marketing|atendedor|loja\\b|store\\b|chefe de turno|shift (lead|supervisor)|\\bturnos?\\b|\\bshifts?\\b|commercial excellence|content operations|hospitality|hotel)"
   },
+  "https://www.linkedin.com/jobs/view/4493671068": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "felps lisboa|splunk engineer soc tools automation",
+   "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
+  },
   "https://www.linkedin.com/jobs/view/4493671427": {
    "ev": [
     "maria",
@@ -65120,8 +65850,8 @@
   },
   "https://www.linkedin.com/jobs/view/4493673853": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "eiquem|talent acquisition specialist lisbonne vie cdi",
@@ -65177,6 +65907,20 @@
    "score": 1,
    "why": "sem nenhum dos temas do perfil (pontuação 1)"
   },
+  "https://www.linkedin.com/jobs/view/4493679155": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "tm2 llc|senior manager engineering",
+   "per": {
+    "maria": "pede 10+ anos de experiência",
+    "pedro": "pede 10+ anos de experiência"
+   },
+   "score": 0,
+   "why": "pede 10+ anos de experiência"
+  },
   "https://www.linkedin.com/jobs/view/4493679371": {
    "ev": [
     "maria",
@@ -65199,6 +65943,47 @@
    "k": "eiquem|comercial tecnico a itinerante porto contrato sem termo",
    "why": "título excluído (account manager|key account|\\bKAM\\b|business development|comercial|commercial (manager|director|lead|analyst|specialist|officer|executive|coordinator)|customer (service|support|success)|apoio ao cliente|speaker)"
   },
+  "https://www.linkedin.com/jobs/view/4493680359": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "projsul arquitectura e engenharia|engenheiro a civil junior projectos",
+   "why": "título excluído (software|developer|devops|\\bengineer\\b|engenheir[oa]s?\\b|architect\\b|programador|full ?stack|\\bQA\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4493681340": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "edelman|associate vice president health public government affairs",
+   "why": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4493681491": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "psa sines|accounting specialist",
+   "why": "título excluído (\\btax\\b|fiscal|impostos|\\biva\\b|\\bvat\\b|transfer pricing|pre[çc]os de transfer|contabil|accounting|accountant|auditor|\\baudit\\b|auditoria|assurance|payroll|processamento salarial|actuar|tesouraria|treasury)"
+  },
+  "https://www.linkedin.com/jobs/view/4493682669": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "link linkroad|business analyst",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 4,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
   "https://www.linkedin.com/jobs/view/4493685620": {
    "ev": [
     "maria",
@@ -65212,6 +65997,15 @@
    },
    "score": 6,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4493685626": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "the walt disney company|media research data analyst",
+   "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
   },
   "https://www.linkedin.com/jobs/view/4493686021": {
    "ev": [
@@ -65235,6 +66029,15 @@
    "first_seen": "2026-11-23",
    "k": "capalo ai|business development manager",
    "why": "título excluído (account manager|key account|\\bKAM\\b|business development|comercial|commercial (manager|director|lead|analyst|specialist|officer|executive|coordinator)|customer (service|support|success)|apoio ao cliente|speaker)"
+  },
+  "https://www.linkedin.com/jobs/view/4493689381": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "mckinsey company|senior accountant",
+   "why": "título excluído (\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar)"
   },
   "https://www.linkedin.com/jobs/view/4493689419": {
    "ev": [
@@ -65394,6 +66197,20 @@
    "k": "avec human resources services|content moderator romanian speaker",
    "why": "título excluído (based in (?!portugal|lisbo|porto|remote|remot)\\w|content reviewer|\\breviewer\\b|(czech|german|french|italian|dutch|polish|nordic|swedish|danish|finnish|norwegian|hungarian|greek|turkish|arabic|hebrew|japanese|korean|chinese|russian|ukrainian|romanian|bulgarian|slovak) (speakers?|speaking))"
   },
+  "https://www.linkedin.com/jobs/view/4493763221": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "komodo consulting|business analyst",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação -2)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 2,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
   "https://www.linkedin.com/jobs/view/4493766612": {
    "ev": [
     "maria",
@@ -65425,6 +66242,15 @@
    },
    "score": -3,
    "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4493771606": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "cts|lead ai software engineer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
   "https://www.linkedin.com/jobs/view/4493774094": {
    "ev": [
@@ -65526,6 +66352,29 @@
    "k": "rijksuniversiteit groningen|programmamanager bestedingen uef",
    "why": "local fora do alvo (Gróninga, Gróninga, Países Baixos)"
   },
+  "https://www.linkedin.com/jobs/view/4493798058": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "it people innovation|senior prudential solvency project lead",
+   "per": {
+    "maria": "exige língua que não falas: «French: Fluent»",
+    "pedro": "exige língua que não falas: «French: Fluent»"
+   },
+   "score": 0,
+   "why": "exige língua que não falas: «French: Fluent»"
+  },
+  "https://www.linkedin.com/jobs/view/4493902453": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "luther rechtsanwaltsgesellschaft mbh|referendar brussel",
+   "why": "duplicada noutra fonte"
+  },
   "https://www.linkedin.com/jobs/view/4493903813": {
    "ev": [
     "maria",
@@ -65577,10 +66426,19 @@
    "score": 2,
    "why": "sem nenhum dos temas do perfil (pontuação 2)"
   },
-  "https://www.linkedin.com/jobs/view/4493918384": {
+  "https://www.linkedin.com/jobs/view/4493910691": {
    "ev": [
     "pedro",
     "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "volkswagen digital solutions|data engineer",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4493918384": {
+   "ev": [
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "volkswagen digital solutions|data engineer",
@@ -65595,14 +66453,65 @@
    "k": "productlife|public affairs consultant",
    "why": "local fora do alvo (La Madeleine, Altos de França, França)"
   },
+  "https://www.linkedin.com/jobs/view/4493919642": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "biotask biotecnologia|tecnico de ambiente",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": 12
+   },
+   "score": 12,
+   "why": ""
+  },
   "https://www.linkedin.com/jobs/view/4493925115": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "bosch|preventive quality engineer fmea data analytics",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4493934269": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "acc motors ltd|vendedor",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
+  },
+  "https://www.linkedin.com/jobs/view/4493935898": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "agris|gestor de projeto i d agris torres vedras",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4493938618": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "ambisig ambiente e sistemas de informacao geografica|advogado in house contratacao publica",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "título excluído ([áa]rea de servi[çc]o|posto de (abastecimento|combust)|service station|petrol station|gas station|legal counsel|\\bjurist|advogad|lawyer|solicitor|paralegal)"
+   },
+   "score": 0,
+   "why": "título excluído ([áa]rea de servi[çc]o|posto de (abastecimento|combust)|service station|petrol station|gas station|legal counsel|\\bjurist|advogad|lawyer|solicitor|paralegal)"
   },
   "https://www.linkedin.com/jobs/view/4494003816": {
    "ev": [
@@ -65679,8 +66588,8 @@
   },
   "https://www.linkedin.com/jobs/view/4494009786": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "quantivos|spanish content moderator lisbon",
@@ -65730,6 +66639,15 @@
    },
    "score": 0,
    "why": "pede 8+ anos de experiência"
+  },
+  "https://www.linkedin.com/jobs/view/4494024937": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "siemens energy|fullstack developer",
+   "why": "título excluído (software engineer|developer|devops|data engineer|ml engineer|engenheiro de software|sre\\b)"
   },
   "https://www.linkedin.com/jobs/view/4494024949": {
    "ev": [
@@ -65791,6 +66709,34 @@
    "k": "regeringskansliet|handlaggare till enheten for internationella relationer arbeta med forsvars och sakerhetspolitiska fragor",
    "why": "local fora do alvo (Estocolmo, Município de Stockholm, Suécia)"
   },
+  "https://www.linkedin.com/jobs/view/4494033276": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "adentis|business analyst",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 2,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4494033409": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "iqvia|international project support coordinator",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 2)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
+  },
   "https://www.linkedin.com/jobs/view/4494033482": {
    "ev": [
     "maria",
@@ -65830,12 +66776,21 @@
   },
   "https://www.linkedin.com/jobs/view/4494040657": {
    "ev": [
-    "pedro",
-    "maria"
+    "maria",
+    "pedro"
    ],
    "first_seen": "2026-11-23",
    "k": "tiktok|quality training specialist live monetization lisbon german speaker",
    "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494044039": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "siemens energy|global payroll process lead",
+   "why": "título excluído (\\btax\\b|payroll|auditor|controller|accountant|contabil|insurance broker|actuar)"
   },
   "https://www.linkedin.com/jobs/view/4494056369": {
    "ev": [
@@ -65883,6 +66838,144 @@
    "k": "fondation sante service|charge de mission donnees et performance villeneuve la garenne",
    "why": "local fora do alvo (Villeneuve-la-Garenne, Ilha de França, França)"
   },
+  "https://www.linkedin.com/jobs/view/4494067797": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "era buarcos|agente imobiliario",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494068801": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "fcc construccion|eng civil estudos e propostas porto",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 4,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4494069720": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "avec human resources services|french speaker sql support helpdesk remote from",
+   "why": "título excluído (based in (?!portugal|lisbo|porto|remote|remot)\\w|content reviewer|\\breviewer\\b|(czech|german|french|italian|dutch|polish|nordic|swedish|danish|finnish|norwegian|hungarian|greek|turkish|arabic|hebrew|japanese|korean|chinese|russian|ukrainian|romanian|bulgarian|slovak) (speakers?|speaking))"
+  },
+  "https://www.linkedin.com/jobs/view/4494069840": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "fcc construccion|eng civil estudos e propostas lisboa",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 4,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4494072721": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "era buarcos|agente imobiliario",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494074581": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "zurich insurance company ltd|data analytic zurich graduate",
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
+  "https://www.linkedin.com/jobs/view/4494074644": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "era oliveira de azemeis|consultor imobiliario sjm oaz",
+   "why": "local excluído (São João da Madeira, Aveiro, Portugal)"
+  },
+  "https://www.linkedin.com/jobs/view/4494076595": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "integer consulting|delivery lead architecture coordatination",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação -2)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação -1)"
+   },
+   "score": -1,
+   "why": "sem nenhum dos temas do perfil (pontuação -1)"
+  },
+  "https://www.linkedin.com/jobs/view/4494077451": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "fcc construccion|diretor de obra alentejo",
+   "per": {
+    "maria": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)",
+    "pedro": "só um tema, e não no título: a vaga não é sobre isso"
+   },
+   "score": 3,
+   "why": "só um tema, e não no título: a vaga não é sobre isso"
+  },
+  "https://www.linkedin.com/jobs/view/4494077497": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "ecoambiente|cantoneiro zona de oliveira de azemeis",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+   },
+   "score": 0,
+   "why": "título excluído ((?<!moderniza[çc][ãa]o )(?<!simplifica[çc][ãa]o )(?<!reforma )administrativ|back[- ]?office|\\bKYC\\b|\\bAML\\b|rece[çc]ionist|receptionist|front ?office|secret[áa]ri[oa]\\b|auxiliar|ajudante|operacional de|assistente (de )?(loja|armaz|cozinha|limpeza|geral)|fiel de armaz|armaz[ée]m|log[íi]stic|warehouse|picking|gestor[a]? de frota|fleet|centro de sa[úu]de|unidade de (sa[úu]de|cuidados)|cl[íi]nic|hospital|farm[áa]cia|enfermag|enfermeir|m[ée]dic[oa]\\b|dentist|fisioterap|cuidador|lar de idosos|golfe|golf|hotel|restaura|cozinh|limpeza|seguran[çc]a privada|vigilante|call ?cent|contact ?cent|customer care|talent acquisition|recruit|recrutador|recrutamento|headhunt|facility manager|manager facility|facilities (manager|coordinator|technician)|telco|telecom|\\bS/?4\\b|\\bHANA\\b|cegid|\\bPHC\\b|primavera|consultor funcional|functional consultant|engineering manager|oper[áa]ri|servente|indiferenciad|cantoneir|eletricista|canalizador|serralheir|soldador|jardineir|condutor|pedreir|calceteir|carpinteir|\\bBig ?(4|Four)\\b)"
+  },
+  "https://www.linkedin.com/jobs/view/4494077776": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "bling energy|project manager ops scale up de energia solar",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494079401": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "zurich insurance company ltd|operational excellence zurich graduate",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 1)",
+    "pedro": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+   },
+   "score": 0,
+   "why": "título excluído (intern\\b|internship|est[áa]gi|trainee|junior|júnior|graduate)"
+  },
   "https://www.linkedin.com/jobs/view/4494080017": {
    "ev": [
     "maria",
@@ -65896,6 +66989,84 @@
    },
    "score": 0,
    "why": "título excluído (seguran[çc]a|safety|\\bQ?HS?SEQ?\\b|\\bQ?EHS\\b|(?-i:\\bSHEQ?\\b)|\\bQAS\\b|\\bQSA\\b|\\bSSA\\b|occupational health|sa[úu]de ocupacional|sa[úu]de no trabalho|\\bSST\\b|\\bSHST\\b|higiene e seguran|preven[çc][ãa]o de riscos|risk prevention)"
+  },
+  "https://www.linkedin.com/jobs/view/4494082226": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "wondercom|novo projeto lisboa energias empresarial",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 4)"
+   },
+   "score": 4,
+   "why": "sem nenhum dos temas do perfil (pontuação 4)"
+  },
+  "https://www.linkedin.com/jobs/view/4494086359": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "boston consulting|global people data tech projects senior manager",
+   "why": "título excluído (\\bIT\\b|\\bAI\\b|artificial intelligence|intelig[êe]ncia artificial|machine learning|\\bML\\b|chat ?bots?|gen ?ai\\b|(?-i:\\bIA\\b)|(?-i:\\bTI\\b)|\\bTIC\\b|\\bICT\\b|\\bdata\\b|\\bdados\\b|analytics|\\bBI\\b|business intelligence|crypto|blockchain|cyber|ciberseguran|information security|observability|\\bD365\\b|\\bERP\\b|\\bCRM\\b|eQMS|digital product|tech & ai|\\btech\\b|workplace specialist|sistemas e tecnologias de informa|sistemas de informa[çc][ãa]o|information systems|tecnologias? de informa|information technology|\\bsoftware\\b|\\bcloud\\b|\\bRPA\\b|low[- ]?code|outsystems|\\boracle\\b|workday|\\bIoT\\b|digital (transformation|consultant|consulting|solutions|strategy|marketing)|transforma[çc][ãa]o digital|consultor[a]? digital)"
+  },
+  "https://www.linkedin.com/jobs/view/4494088130": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "delnext|strategic planning and delivery manager ceo office",
+   "per": {
+    "maria": "título excluído (director|diretor[a]?\\b|directora|dire[çc][ãa]o (geral|executiva)|head of|\\bhead\\b|managing director|\\bVP\\b|vice[- ]president|vice[- ]presidente|\\bchief\\b|\\bC[EOFT]O\\b|\\bpartner\\b|s[óo]ci[oa]\\b)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 4)"
+   },
+   "score": 4,
+   "why": "sem nenhum dos temas do perfil (pontuação 4)"
+  },
+  "https://www.linkedin.com/jobs/view/4494089141": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "bling energy|solar advisor scale up de energia solar",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494090026": {
+   "ev": [
+    "maria",
+    "pedro"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "era buarcos|agente imobiliario",
+   "per": {
+    "maria": "sem nenhum dos temas do perfil (pontuação 0)",
+    "pedro": "sem nenhum dos temas do perfil (pontuação 0)"
+   },
+   "score": 0,
+   "why": "sem nenhum dos temas do perfil (pontuação 0)"
+  },
+  "https://www.linkedin.com/jobs/view/4494094115": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "siemens energy|ai strategy enablement innovation lead",
+   "why": "duplicada noutra fonte"
+  },
+  "https://www.linkedin.com/jobs/view/4494094556": {
+   "ev": [
+    "pedro",
+    "maria"
+   ],
+   "first_seen": "2026-11-24",
+   "k": "bling energy|customer support scale up de energia solar",
+   "why": "duplicada noutra fonte"
   },
   "https://www.portoambiente.pt/files/uploads/cms/Anúncio_Jurídico_2026.pdf": {
    "ev": [
@@ -71669,13 +72840,6 @@
     "pedro"
    ],
    "first_seen": "2026-11-15"
-  },
-  "https://www.linkedin.com/jobs/view/4428763342": {
-   "ev": [
-    "maria",
-    "pedro"
-   ],
-   "first_seen": "2026-11-17"
   },
   "https://www.linkedin.com/jobs/view/4430145957": {
    "ev": [
